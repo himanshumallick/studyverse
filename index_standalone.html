@@ -26,8 +26,8 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      background-color: var(--bg-primary) !important;
-      color: var(--text-primary) !important;
+      background-color: #030712 !important;
+      color: #f8fafc !important;
       font-family: var(--font-sans);
       overflow-x: hidden;
       scroll-behavior: smooth;
@@ -36,31 +36,34 @@
 
     a { text-decoration: none; color: inherit; }
 
-    /* 3D Motion Canvas Background */
-    #bg-3d-canvas {
+    /* 21st.dev Style Pure CSS 3D Motion Background Orbs */
+    .bg-motion-container {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      overflow: hidden;
+    }
+    .motion-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.45;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 450px; height: 450px; background: rgba(56, 189, 248, 0.2); top: -100px; left: -100px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(99, 102, 241, 0.22); top: 40%; right: -150px; animation-delay: -4s; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(168, 85, 247, 0.18); bottom: -100px; left: 25%; animation-delay: -8s; }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(0px) translateX(0px) scale(1); }
+      50% { transform: translateY(40px) translateX(30px) scale(1.08); }
+      100% { transform: translateY(-30px) translateX(-40px) scale(0.95); }
     }
 
     .site-wrapper {
       position: relative;
       z-index: 10;
-    }
-
-    /* Ambient Glow Orbs */
-    .ambient-glow {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: rgba(99, 102, 241, 0.12);
-      filter: blur(120px);
-      border-radius: 50%;
-      top: -100px;
-      left: -100px;
-      z-index: 1;
-      pointer-events: none;
     }
 
     /* Sticky Glass Navigation */
@@ -70,7 +73,7 @@
       left: 0;
       width: 100%;
       z-index: 100;
-      background: rgba(3, 7, 18, 0.8);
+      background: rgba(3, 7, 18, 0.82);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
     }
@@ -119,11 +122,6 @@
       text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -208,7 +206,7 @@
       flex-wrap: wrap;
     }
 
-    /* 3D Interactive Hero Showcase */
+    /* Holographic 3D Showcase Card */
     .hero-showcase {
       perspective: 1000px;
     }
@@ -219,7 +217,6 @@
       border-radius: 24px;
       padding: 30px;
       box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(56, 189, 248, 0.15);
-      transform-style: preserve-3d;
       transition: transform 0.2s ease-out;
     }
     .showcase-header {
@@ -301,8 +298,6 @@
       flex-direction: column;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
     }
     .class-card.featured {
       border-color: rgba(56, 189, 248, 0.5);
@@ -351,9 +346,12 @@
 </head>
 <body>
 
-  <!-- Background 3D Three.js Motion Graphics Canvas -->
-  <canvas id="bg-3d-canvas"></canvas>
-  <div class="ambient-glow"></div>
+  <!-- Pure CSS 3D Motion Orbs (Guaranteed No White Screen) -->
+  <div class="bg-motion-container">
+    <div class="motion-orb orb-1"></div>
+    <div class="motion-orb orb-2"></div>
+    <div class="motion-orb orb-3"></div>
+  </div>
 
   <div class="site-wrapper">
     <!-- Header Navigation -->
@@ -370,7 +368,7 @@
           <a href="#resources" class="nav-link">Notes Library</a>
           <a href="#practice" class="nav-link">Practice Zone</a>
         </nav>
-        <div class="nav-actions">
+        <div>
           <a href="#classes" class="btn btn-primary">Class 10 Hub →</a>
         </div>
       </div>
@@ -395,11 +393,11 @@
           </p>
           <div class="hero-cta">
             <a href="#classes" class="btn btn-primary">Explore Classes →</a>
-            <a href="#resources" class="btn btn-glass">Browse Notes Library ✦</a>
+            <a href="#classes" class="btn btn-glass">Browse Notes Library ✦</a>
           </div>
         </div>
 
-        <!-- 3D Holographic Showcase Card -->
+        <!-- Holographic Showcase Card -->
         <div class="hero-showcase">
           <div class="showcase-card" id="tilt-card">
             <div class="showcase-header">
@@ -438,7 +436,7 @@
             <div class="class-num">09</div>
             <h3 class="class-title">Class 9 Foundation Hub</h3>
             <p class="class-desc">Core concepts in Motion, Force, Atoms & Molecules, and Number Systems to build a strong base.</p>
-            <span style="color:var(--accent-cyan); font-size:0.85srem; font-weight:700; margin-top:auto;">View Roadmap →</span>
+            <span style="color:var(--accent-cyan); font-size:0.85rem; font-weight:700; margin-top:auto;">View Roadmap →</span>
           </div>
 
           <div class="class-card" onclick="alert('Class 11 STEM roadmap is active!')">
@@ -462,82 +460,19 @@
     <footer class="site-footer">
       <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div>© 2026 STUDYVERSE. Designed for CBSE Class 10 Students in India.</div>
-        <div style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.8rem;">● 3D Motion Engine Active</div>
+        <div style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.8rem;">● 3D Motion Glow Active</div>
       </div>
     </footer>
   </div>
 
-  <!-- Three.js Library for 3D Background Motion Graphics -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // 3D Three.js Floating Books & Particles Animation
-    const canvas = document.getElementById('bg-3d-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const group = new THREE.Group();
-    scene.add(group);
-
-    const geo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
-    const materials = [
-      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }),
-      new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })
-    ];
-
-    const books = [];
-    for (let i = 0; i < 7; i++) {
-      const mesh = new THREE.Mesh(geo, materials);
-      mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 5 - 2);
-      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-      group.add(mesh);
-      books.push(mesh);
-    }
-
-    scene.add(new THREE.AmbientLight(0xffffff, 1.3));
-    const pLight = new THREE.PointLight(0x38bdf8, 3, 50);
-    pLight.position.set(5, 5, 5);
-    scene.add(pLight);
-
-    camera.position.z = 6;
-
-    let mouseX = 0, mouseY = 0;
-    window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
-    });
-
-    function animate() {
-      requestAnimationFrame(animate);
-      camera.position.x += (mouseX - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY - camera.position.y) * 0.05;
-
-      books.forEach((b, idx) => {
-        b.rotation.x += 0.003 * (idx % 2 === 0 ? 1 : -1);
-        b.rotation.y += 0.004;
-      });
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Interactive 3D Tilt for Hero Showcase Card
+    // Smooth 3D Tilt Effect on Mouse Move
     const card = document.getElementById('tilt-card');
     document.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      card.style.transform = `rotateX(${-y * 0.05}deg) rotateY(${x * 0.05}deg) translateY(-4px)`;
+      card.style.transform = `rotateX(${-y * 0.04}deg) rotateY(${x * 0.04}deg) translateY(-4px)`;
     });
   </script>
 </body>
