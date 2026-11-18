@@ -1,1 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBSE Class 11 Hub — STUDYVERSE</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --bg-primary: #030712;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
+      --border-subtle: rgba(99, 102, 241, 0.25);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background-color: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    #bg-3d-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .site-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 40px;
+    }
+    .brand-logo { font-weight: 800; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo)); display: grid; place-items: center; color: #fff; }
+    .brand-logo span { color: var(--accent-cyan); }
+
+    .back-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-cyan); }
+
+    .page-header { margin-bottom: 40px; }
+    .page-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; margin-bottom: 10px; }
+    .gradient-text { background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-desc { color: var(--text-secondary); font-size: 1.05rem; }
+
+    /* Subjects Grid */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+    .subject-card {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .subject-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.18);
+    }
+    .subject-icon { font-size: 2.2rem; margin-bottom: 16px; display: block; }
+    .subject-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .subject-sub { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; }
+
+    /* Chapters Box */
+    .chapters-section {
+      display: none;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 28px;
+      padding: 36px;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .chapters-section.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chapter-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .chapter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 22px;
+      border-radius: 16px;
+      transition: 0.2s;
+    }
+    .chapter-item:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .chapter-name { font-weight: 700; font-size: 1rem; color: #fff; margin-top: 2px; }
+    
+    .download-btn {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .download-btn:hover { opacity: 0.9; transform: scale(1.03); box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg-3d-canvas"></canvas>
+
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="brand-logo" onclick="window.location.href='index.html'">
+        <div class="brand-icon">⚡</div>
+        STUDY<span>VERSE</span>
+      </div>
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </header>
+
+    <main>
+      <div class="page-header">
+        <h1 class="page-title"><span class="gradient-text">CBSE Class 11</span> Hub</h1>
+        <p class="page-desc">Select a subject below to explore advanced science & math modules and download revision notes.</p>
+      </div>
+
+      <!-- 4 Subject Cards -->
+      <div class="subjects-grid" id="subjectsGrid">
+        
+        <div class="subject-card" onclick="openSubject('physics')">
+          <span class="subject-icon">⚛️</span>
+          <h2 class="subject-title">Physics</h2>
+          <p class="subject-sub">Mechanics, Thermodynamics & Waves</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
+        </div>
+
+        <div class="subject-card" onclick="openSubject('chemistry')">
+          <span class="subject-icon">⚗️</span>
+          <h2 class="subject-title">Chemistry</h2>
+          <p class="subject-sub">Physical, Organic & Inorganic Modules</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
+        </div>
+
+        <div class="subject-card" onclick="openSubject('maths')">
+          <span class="subject-icon">📈</span>
+          <h2 class="subject-title">Mathematics</h2>
+          <p class="subject-sub">Calculus, Algebra & Coordinate Geometry</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
+        </div>
+
+        <div class="subject-card" onclick="openSubject('biology')">
+          <span class="subject-icon">🧬</span>
+          <h2 class="subject-title">Biology</h2>
+          <p class="subject-sub">Botany & Zoology Modules</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
+        </div>
+
+      </div>
+
+      <!-- Dynamic Chapters Box -->
+      <div class="chapters-section" id="chaptersSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase; font-weight: 700;">Selected Subject</span>
+            <h2 id="subjectHeading" style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 4px;">Subject Name</h2>
+          </div>
+          <button class="back-btn" onclick="closeChapters()">← Back to Subjects</button>
+        </div>
+
+        <div class="chapter-list" id="chapterListContainer"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Three.js Background Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('bg-3d-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const geo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
+    const materials = [
+      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }),
+      new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })
+    ];
+
+    const books = [];
+    for (let i = 0; i < 6; i++) {
+      const mesh = new THREE.Mesh(geo, materials);
+      mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 5 - 2);
+      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      group.add(mesh);
+      books.push(mesh);
+    }
+
+    scene.add(new THREE.AmbientLight(0xffffff, 1.3));
+    const pLight = new THREE.PointLight(0x38bdf8, 3, 50);
+    pLight.position.set(5, 5, 5);
+    scene.add(pLight);
+
+    camera.position.z = 6;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      books.forEach((b, idx) => {
+        b.rotation.x += 0.003 * (idx % 2 === 0 ? 1 : -1);
+        b.rotation.y += 0.004;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Complete CBSE Class 11 Syllabus Chapters Data
+    const subjectData = {
+      physics: {
+        title: "Physics (Vol. 1 & 2)",
+        chapters: [
+          { name: "Chapter 1: Units and Measurements", pdfUrl: "#" },
+          { name: "Chapter 2: Motion in a Straight Line", pdfUrl: "#" },
+          { name: "Chapter 3: Motion in a Plane", pdfUrl: "#" },
+          { name: "Chapter 4: Laws of Motion", pdfUrl: "#" },
+          { name: "Chapter 5: Work, Energy and Power", pdfUrl: "#" },
+          { name: "Chapter 6: System of Particles and Rotational Motion", pdfUrl: "#" },
+          { name: "Chapter 7: Gravitation", pdfUrl: "#" },
+          { name: "Chapter 8: Mechanical Properties of Solids", pdfUrl: "#" },
+          { name: "Chapter 9: Mechanical Properties of Fluids", pdfUrl: "#" },
+          { name: "Chapter 10: Thermal Properties of Matter", pdfUrl: "#" },
+          { name: "Chapter 11: Thermodynamics", pdfUrl: "#" },
+          { name: "Chapter 12: Kinetic Theory", pdfUrl: "#" },
+          { name: "Chapter 13: Oscillations", pdfUrl: "#" },
+          { name: "Chapter 14: Waves", pdfUrl: "#" }
+        ]
+      },
+      chemistry: {
+        title: "Chemistry (Physical, Organic & Inorganic)",
+        chapters: [
+          { name: "Chapter 1: Some Basic Concepts of Chemistry", pdfUrl: "#" },
+          { name: "Chapter 2: Structure of Atom", pdfUrl: "#" },
+          { name: "Chapter 3: Classification of Elements and Periodicity in Properties", pdfUrl: "#" },
+          { name: "Chapter 4: Chemical Bonding and Molecular Structure", pdfUrl: "#" },
+          { name: "Chapter 5: Chemical Thermodynamics", pdfUrl: "#" },
+          { name: "Chapter 6: Equilibrium", pdfUrl: "#" },
+          { name: "Chapter 7: Redox Reactions", pdfUrl: "#" },
+          { name: "Chapter 8: Organic Chemistry – Some Basic Principles and Techniques", pdfUrl: "#" },
+          { name: "Chapter 9: Hydrocarbons", pdfUrl: "#" }
+        ]
+      },
+      maths: {
+        title: "Mathematics",
+        chapters: [
+          { name: "Chapter 1: Sets", pdfUrl: "#" },
+          { name: "Chapter 2: Relations and Functions", pdfUrl: "#" },
+          { name: "Chapter 3: Trigonometric Functions", pdfUrl: "#" },
+          { name: "Chapter 4: Complex Numbers and Quadratic Equations", pdfUrl: "#" },
+          { name: "Chapter 5: Linear Inequalities", pdfUrl: "#" },
+          { name: "Chapter 6: Permutations and Combinations", pdfUrl: "#" },
+          { name: "Chapter 7: Binomial Theorem", pdfUrl: "#" },
+          { name: "Chapter 8: Sequence and Series", pdfUrl: "#" },
+          { name: "Chapter 9: Straight Lines", pdfUrl: "#" },
+          { name: "Chapter 10: Conic Sections", pdfUrl: "#" },
+          { name: "Chapter 11: Introduction to Three Dimensional Geometry", pdfUrl: "#" },
+          { name: "Chapter 12: Limits and Derivatives", pdfUrl: "#" },
+          { name: "Chapter 13: Statistics", pdfUrl: "#" },
+          { name: "Chapter 14: Probability", pdfUrl: "#" }
+        ]
+      },
+      biology: {
+        title: "Biology (Botany & Zoology)",
+        chapters: [
+          { name: "Chapter 1: The Living World", pdfUrl: "#" },
+          { name: "Chapter 2: Biological Classification", pdfUrl: "#" },
+          { name: "Chapter 3: Plant Kingdom", pdfUrl: "#" },
+          { name: "Chapter 4: Animal Kingdom", pdfUrl: "#" },
+          { name: "Chapter 5: Morphology of Flowering Plants", pdfUrl: "#" },
+          { name: "Chapter 6: Anatomy of Flowering Plants", pdfUrl: "#" },
+          { name: "Chapter 7: Structural Organisation in Animals", pdfUrl: "#" },
+          { name: "Chapter 8: Cell: The Unit of Life", pdfUrl: "#" },
+          { name: "Chapter 9: Biomolecules", pdfUrl: "#" },
+          { name: "Chapter 10: Cell Cycle and Cell Division", pdfUrl: "#" },
+          { name: "Chapter 11: Photosynthesis in Higher Plants", pdfUrl: "#" },
+          { name: "Chapter 12: Respiration in Plants", pdfUrl: "#" },
+          { name: "Chapter 13: Plant Growth and Development", pdfUrl: "#" },
+          { name: "Chapter 14: Breathing and Exchange of Gases", pdfUrl: "#" },
+          { name: "Chapter 15: Body Fluids and Circulation", pdfUrl: "#" },
+          { name: "Chapter 16: Excretory Products and their Elimination", pdfUrl: "#" },
+          { name: "Chapter 17: Locomotion and Movement", pdfUrl: "#" },
+          { name: "Chapter 18: Neural Control and Coordination", pdfUrl: "#" },
+          { name: "Chapter 19: Chemical Coordination and Integration", pdfUrl: "#" }
+        ]
+      }
+    };
+
+    function openSubject(subjectKey) {
+      const data = subjectData[subjectKey];
+      document.getElementById('subjectHeading').textContent = data.title;
+      
+      const container = document.getElementById('chapterListContainer');
+      container.innerHTML = data.chapters.map((ch, idx) => `
+        <div class="chapter-item">
+          <div>
+            <span style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">MODULE ${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+            <div class="chapter-name">${ch.name}</div>
+          </div>
+          <a href="${ch.pdfUrl}" target="_blank" class="download-btn">
+            📥 Download PDF
+          </a>
+        </div>
+      `).join('');
+
+      document.getElementById('subjectsGrid').style.display = 'none';
+      document.getElementById('chaptersSection').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeChapters() {
+      document.getElementById('chaptersSection').classList.remove('active');
+      document.getElementById('subjectsGrid').style.display = 'grid';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
