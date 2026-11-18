@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #05070e;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDYVERSE — Your Universe of Learning | CBSE Class 10</title>
+  <meta name="description" content="A futuristic, premium educational platform for CBSE Class 10 students. Visual revision notes, interactive formula sheets, mind maps, and practice questions.">
+  
+  <!-- Preconnect to Google Fonts for Ultra-Fast Typography Rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Core Design System & Stylesheets (Explicit Relative Paths) -->
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/animations.css">
+  <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body style="background-color: #05070e; color: #f8fafc; min-height: 100vh; margin: 0;">
+
+  <!-- Ambient Cosmic Lighting (Lightweight pure CSS, zero WebGL overhead) -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-orb orb-1 animate-glow-pulse"></div>
+    <div class="ambient-orb orb-2 animate-glow-pulse" style="animation-delay: -2s;"></div>
+    <div class="ambient-orb orb-3 animate-glow-pulse" style="animation-delay: -4s;"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="top-announcement">
+    <span class="live-badge">
+      <span class="live-dot"></span>
+      LIVE
+    </span>
+    <span>CBSE Class 10 Board Exam Accelerator 2025-26 is now active!</span>
+    <a href="#class-10-hub">Explore Class 10 Hub &rarr;</a>
+  </div>
+
+  <!-- 2. Sticky Glass Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-logo" aria-label="STUDYVERSE Home">
+        <div class="brand-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
+            <circle cx="19" cy="8" r="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="logo-main">STUDY<span>VERSE</span></span>
+          <span class="logo-sub">CBSE Class 10 Hub</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#classes" class="nav-link">Classes</a>
+        <a href="#subjects" class="nav-link">Subjects</a>
+        <a href="#featured-resources" class="nav-link">Notes Library</a>
+        <a href="#quick-revision" class="nav-link">Formula Sheets</a>
+        <a href="#practice-zone" class="nav-link">Practice Zone</a>
+        <a href="#why-studyverse" class="nav-link">About</a>
+      </nav>
+
+      <!-- Nav Actions (Search, Lang, CTA) -->
+      <div class="nav-actions">
+        <!-- Universal Spotlight Search Trigger -->
+        <button class="search-trigger-btn" aria-label="Search resources">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-text">Search</span>
+          <span class="search-kbd">Ctrl K</span>
+        </button>
+
+        <!-- English / Hindi Language Switcher -->
+        <div class="lang-switcher" role="group" aria-label="Language Switcher">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="hi">हिं</button>
+        </div>
+
+        <!-- Class 10 Portal CTA -->
+        <a href="#class-10-hub" class="btn btn-sm btn-primary">
+          <span>Class 10 Portal</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav" aria-label="Mobile Navigation">
+    <a href="#hero" class="mobile-nav-link active">Home</a>
+    <a href="#classes" class="mobile-nav-link">Explore Classes</a>
+    <a href="#subjects" class="mobile-nav-link">Subjects Hub</a>
+    <a href="#featured-resources" class="mobile-nav-link">Notes Library</a>
+    <a href="#quick-revision" class="mobile-nav-link">Formula Sheets & Mind Maps</a>
+    <a href="#practice-zone" class="mobile-nav-link">Practice Zone</a>
+    <a href="#faq" class="mobile-nav-link">Student FAQ</a>
+    <div style="margin-top: auto; padding-top: 20px;">
+      <a href="#class-10-hub" class="btn btn-primary" style="width: 100%;">Enter Class 10 Dashboard &rarr;</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- 3. HERO SECTION (Visually Impressive & 3D CSS Effects) -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-grid">
+        
+        <!-- Left: Headline, Value Proposition & CTAs -->
+        <div class="hero-content">
+          <div class="hero-badge-pill">
+            <span class="live-dot"></span>
+            <span>⚡ Next-Gen CBSE Learning Platform • Class 10 Special</span>
+          </div>
+
+          <h1 class="hero-title">
+            Your Universe of Learning.
+            <span class="title-accent gradient-text">Master Class 10 CBSE</span>
+            with Superhuman Clarity.
+          </h1>
+
+          <p class="hero-description">
+            Ditch 800-page bulky textbooks. Access laser-focused visual revision notes, interactive formula sheets, curated board question banks, and chapter mind maps — engineered for CBSE Class 10 toppers.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#featured-resources" class="btn btn-lg btn-primary">
+              <span>Explore Resources</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <a href="#practice-zone" class="btn btn-lg btn-glass">
+              <span>Try Practice Zone ✦</span>
+            </a>
+          </div>
+
+          <!-- Micro Metrics & Trust Badges -->
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-value">16+</span>
+              <span class="metric-label">Chapters Mapped</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">Free for Students</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">2025-26</span>
+              <span class="metric-label">CBSE Pattern</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">4.9★</span>
+              <span class="metric-label">Student Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3D Floating Study Cards Composition (Pure Lightweight CSS Transforms) -->
+        <div class="hero-showcase">
+          <div class="showcase-stage">
+            
+            <!-- Floating Orbit Card 1: Maths Quadratic Formula -->
+            <div class="floating-card card-math-float animate-float-slow">
+              <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px;">📐 Quadratic Formula</div>
+              <div class="math-formula">x = (-b &plusmn; &radic;(b&sup2; - 4ac)) / 2a</div>
+              <div style="font-size: 0.65rem; color: #34d399; margin-top: 4px;">D &gt; 0 &rarr; 2 Real Distinct Roots</div>
+            </div>
+
+            <!-- Central Holographic Hub Card -->
+            <div class="holo-main-card">
+              <div class="holo-header">
+                <span class="holo-tag">
+                  <span class="live-dot"></span>
+                  HIGH YIELD CHAPTER
+                </span>
+                <span class="holo-code">PHYSICS • 086</span>
+              </div>
+
+              <h2 class="holo-title">Light: Reflection & Refraction</h2>
+              <p class="holo-subtitle">Complete Optical Ray Diagrams & Sign Convention</p>
+
+              <!-- Interactive Visual Preview Box -->
+              <div class="holo-visual-preview">
+                <div class="formula-display">
+                  <span>1/f = 1/v - 1/u</span>
+                  <span class="formula-divider">|</span>
+                  <span>m = v/u = h'/h</span>
+                </div>
+
+                <div class="ray-diagram-wireframe">
+                  <svg viewBox="0 0 340 70" fill="none">
+                    <!-- Principal Axis -->
+                    <line x1="10" y1="35" x2="330" y2="35" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <!-- Convex Lens -->
+                    <path d="M 170 8 Q 185 35 170 62 Q 155 35 170 8" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2"/>
+                    <!-- Optical Center & Focus Points -->
+                    <circle cx="170" cy="35" r="2.5" fill="#38bdf8"/>
+                    <circle cx="110" cy="35" r="2" fill="#a855f7"/>
+                    <circle cx="230" cy="35" r="2" fill="#a855f7"/>
+                    <text x="108" y="47" font-size="8" fill="#a855f7" font-family="monospace">F1</text>
+                    <text x="228" y="47" font-size="8" fill="#a855f7" font-family="monospace">F2</text>
+                    <text x="167" y="47" font-size="8" fill="#38bdf8" font-family="monospace">O</text>
+                    <!-- Incident Light Ray -->
+                    <path d="M 50 18 L 170 18 L 230 35 L 300 50" stroke="#f43f5e" stroke-width="1.5"/>
+                    <path d="M 50 18 L 170 35 L 300 52" stroke="#38bdf8" stroke-width="1.5"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="holo-footer">
+                <div class="holo-stats">
+                  <span>🎯 8 Marks in Board Exam</span>
+                  <span>•</span>
+                  <span>12 Pages Notes</span>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="window.previewRecentResource('Light: Complete Ray Diagrams', 'Science (Physics)', '8 Marks')">
+                  <span>Quick View</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Floating Orbit Card 2: Daily Streak -->
+            <div class="floating-card card-streak-float animate-float-reverse">
+              <span class="streak-icon">🔥</span>
+              <div class="streak-text">
+                <strong>7-Day Study Streak</strong>
+                <span>CBSE 10 Preparation Pace: Top 1%</span>
+              </div>
+            </div>
+
+            <!-- Floating Orbit Card 3: AI Elective Badge -->
+            <div class="floating-card card-ai-float animate-float-slight">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4Z"></path>
+              </svg>
+              <span>AI Code 417 • Computer Vision</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. POPULAR CLASSES SECTION -->
+    <section id="classes" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Academic Spectrum</span>
+          <h2 class="section-title">Explore by Class</h2>
+          <p class="section-subtitle">
+            Tailored learning universes built specifically for Indian school curricula, starting with CBSE Class 10.
+          </p>
+        </div>
+
+        <div class="classes-grid" id="class-10-hub">
+          
+          <!-- Class 10 (Flagship Active Hub) -->
+          <div class="class-card featured shimmer-hover">
+            <span class="class-number">10</span>
+            <h3 class="class-title">CBSE Class 10 Board Accelerator</h3>
+            <p class="class-desc">
+              Comprehensive preparation hub featuring 6 subjects, 80+ chapter revision modules, formula decks, and board blueprints.
+            </p>
+            <ul class="class-features-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Maths, Science, SST, English, Hindi, AI (417)</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Latest CBSE 2024-25 & 2025-26 Rationalized Syllabus</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Instant PDF previews with downloadable mind maps</span>
+              </li>
+            </ul>
+            <a href="#subjects" class="btn btn-primary" style="margin-top: auto;">
+              <span>Enter Class 10 Universe &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Class 9 (Foundation Tier) -->
+          <div class="class-card">
+            <span class="class-number">09</span>
+            <h3 class="class-title">Class 9 Foundation Hub</h3>
+            <p class="class-desc">
+              Core concepts in Motion, Force, Atoms & Molecules, Number Systems, and Cell Biology to build an unshakeable base.
+            </p>
+            <div style="margin-top: auto;">
+              <span class="badge badge-cyan" style="margin-bottom: 12px;">IN DEVELOPMENT</span>
+              <button class="btn btn-glass" style="width: 100%;" onclick="showToast('Class 9 Foundation Hub is currently on our active rollout roadmap!')">
+                <span>View Syllabus Roadmap</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Class 11 (Senior Secondary) -->
+          <div class="class-card">
+            <span class="class-number">11</span>
+            <h3 class="class-title">Class 11 STEM & Commerce</h3>
+            <p class="class-desc">
+              Advanced Physics, Chemistry, Calculus, Accountancy, and Economics modules designed for competitive excellence.
+            </p>
+            <div style="margin-top: auto;">
+              <span class="badge badge-violet" style="margin-bottom: 12px;">ROADMAP 2025</span>
+              <button class="btn btn-glass" style="width: 100%;" onclick="showToast('Class 11 Science & Commerce Hub roadmap is active!')">
+                <span>Notify When Live</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Class 12 (Board Champions) -->
+          <div class="class-card">
+            <span class="class-number">12</span>
+            <h3 class="class-title">Class 12 Board Champions</h3>
+            <p class="class-desc">
+              High-frequency board questions, 10-year trend analyses, and quick formula capsules for CBSE Class 12.
+            </p>
+            <div style="margin-top: auto;">
+              <span class="badge badge-amber" style="margin-bottom: 12px;">ROADMAP 2025</span>
+              <button class="btn btn-glass" style="width: 100%;" onclick="showToast('Class 12 Hub will roll out following the Class 10 flagship season!')">
+                <span>Notify When Live</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BROWSE BY SUBJECT SECTION (Dynamic from subjects.js) -->
+    <section id="subjects" class="section" style="background: rgba(11, 15, 28, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag violet">Curriculum Matrix</span>
+          <h2 class="section-title">CBSE Class 10 Subjects Hub</h2>
+          <p class="section-subtitle">
+            Explore meticulously organized chapters, chapter-wise notes, formula sheets, and examiner-highlighted board questions.
+          </p>
+        </div>
+
+        <!-- Rendered dynamically by home.js for clean modular architecture -->
+        <div class="grid-3" id="subjects-grid"></div>
+
+      </div>
+    </section>
+
+    <!-- 6. FEATURED STUDY RESOURCES (Top Picks with Realistic PDF Preview) -->
+    <section id="featured-resources" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">High Yield Picks</span>
+          <h2 class="section-title">Featured Board Exam Resources</h2>
+          <p class="section-subtitle">
+            Hand-curated revision capsules, comprehensive diagrams, and all-chapter formula cheat-sheets.
+          </p>
+        </div>
+
+        <!-- Rendered dynamically from resources.js -->
+        <div class="grid-2" id="featured-resources-grid"></div>
+
+      </div>
+    </section>
+
+    <!-- 7. RECENTLY ADDED RESOURCES & BOARD UPDATES -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="glass-card" style="padding: var(--space-2xl);">
+          <div class="flex items-center justify-between" style="margin-bottom: var(--space-lg); flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span class="badge badge-cyan" style="margin-bottom: 6px;">LIVE FEED</span>
+              <h3 style="font-size: 1.45rem;">Recently Added & Updated Resources</h3>
+            </div>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Updated continuously for CBSE 2024-25 / 2025-26</span>
+          </div>
+
+          <div id="recent-resources-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WHY STUDYVERSE (Modern Architecture vs Traditional Coaching) -->
+    <section id="why-studyverse" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">The Futuristic Edge</span>
+          <h2 class="section-title">Why STUDYVERSE is Different</h2>
+          <p class="section-subtitle">
+            Designed from the ground up for modern students who value their time, clarity, and board exam results.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          
+          <!-- Traditional Platforms Column -->
+          <div class="comparison-column comparison-old">
+            <h3 style="font-size: 1.25rem; color: #f87171; display: flex; align-items: center; gap: 8px;">
+              <span>✕</span> Traditional Coaching Portals
+            </h3>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✕</div>
+              <div class="comparison-text">
+                <h4>800-Page Bulky Textbooks</h4>
+                <p>Dense walls of monotonous black-and-white text that cause cognitive fatigue before exam night.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✕</div>
+              <div class="comparison-text">
+                <h4>Paywalls & Intrusive Ads</h4>
+                <p>Aggressive popup ads, locked sample papers, and forced subscription plans targeting stressed students.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✕</div>
+              <div class="comparison-text">
+                <h4>Slow, Bloated Websites</h4>
+                <p>Heavy platforms that lag and freeze on budget laptops, burning battery and memory.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✕</div>
+              <div class="comparison-text">
+                <h4>Outdated Syllabus Content</h4>
+                <p>Includes topics deleted by NCERT years ago, wasting valuable student study hours.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STUDYVERSE Futuristic Column -->
+          <div class="comparison-column comparison-new shimmer-hover">
+            <h3 style="font-size: 1.25rem; color: var(--accent-cyan-bright); display: flex; align-items: center; gap: 8px;">
+              <span>✦</span> The STUDYVERSE Experience
+            </h3>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✓</div>
+              <div class="comparison-text">
+                <h4>Visual Concept Architecture</h4>
+                <p>Mind maps, flowcharts, annotated ray diagrams, and color-coded formula chips for rapid retention.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✓</div>
+              <div class="comparison-text">
+                <h4>100% Free & Open Access</h4>
+                <p>Zero paywalls, zero locked PDF tricks, zero ads. High-grade education accessible to all.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✓</div>
+              <div class="comparison-text">
+                <h4>Ultra-Lightweight & Zero Lag</h4>
+                <p>Loads in under 50 milliseconds. Smooth 60 FPS performance even on 4GB RAM & dual-core PCs.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">✓</div>
+              <div class="comparison-text">
+                <h4>Strictly CBSE Board Aligned</h4>
+                <p>Filtered 100% strictly according to the latest rationalized syllabus and marking scheme.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. QUICK REVISION TABBED SUITE -->
+    <section id="quick-revision" class="section" style="background: rgba(11, 15, 28, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag violet">Speed Prep</span>
+          <h2 class="section-title">10-Minute Rapid Revision Suite</h2>
+          <p class="section-subtitle">
+            Switch between essential formulas, concept snapshots, examiner traps, and memory mnemonics.
+          </p>
+        </div>
+
+        <div class="revision-tabs-container">
+          
+          <!-- Tab Headers -->
+          <div class="revision-tab-headers" role="tablist">
+            <button class="rev-tab-btn active" data-tab="formulas">📐 Essential Formulas</button>
+            <button class="rev-tab-btn" data-tab="concepts">⚡ Key Concept Snapshots</button>
+            <button class="rev-tab-btn" data-tab="traps">⚠️ Examiner's Traps</button>
+            <button class="rev-tab-btn" data-tab="mnemonics">🧠 Memory Hacks</button>
+          </div>
+
+          <!-- Tab Content 1: Formulas -->
+          <div class="rev-tab-content active" id="tab-formulas">
+            <div class="formula-cards-grid">
+              
+              <div class="formula-card-item">
+                <div class="formula-name">Quadratic Formula</div>
+                <div class="formula-equation">x = (-b &plusmn; &radic;D) / 2a</div>
+                <div class="formula-notes">Where Discriminant D = b&sup2; - 4ac. Determines nature of roots.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Arithmetic Progression</div>
+                <div class="formula-equation">a<sub>n</sub> = a + (n-1)d</div>
+                <div class="formula-notes">Sum of n terms: S<sub>n</sub> = n/2 &times; [2a + (n-1)d]</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Mirror Formula & Magnification</div>
+                <div class="formula-equation">1/f = 1/v + 1/u</div>
+                <div class="formula-notes">m = -v/u = h'/h. Note: Lens formula uses 1/v - 1/u.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Ohm's Law & Resistance</div>
+                <div class="formula-equation">V = I &times; R</div>
+                <div class="formula-notes">R = &rho; &times; (l / A). Resistance depends on length and area.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Electric Power</div>
+                <div class="formula-equation">P = V &times; I = I&sup2;R = V&sup2;/R</div>
+                <div class="formula-notes">Commercial unit of energy: 1 kWh = 3.6 &times; 10<sup>6</sup> Joules.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Trigonometric Identity</div>
+                <div class="formula-equation">sin&sup2;&theta; + cos&sup2;&theta; = 1</div>
+                <div class="formula-notes">1 + tan&sup2;&theta; = sec&sup2;&theta; and 1 + cot&sup2;&theta; = cosec&sup2;&theta;.</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Concept Snapshots -->
+          <div class="rev-tab-content" id="tab-concepts">
+            <div class="grid-2">
+              <div class="glass-card">
+                <span class="badge badge-cyan" style="margin-bottom: 8px;">CHEMISTRY</span>
+                <h4 style="margin-bottom: 6px;">Redox Reactions Simplified</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Oxidation is Loss of electrons (or addition of Oxygen/removal of Hydrogen). Reduction is Gain of electrons. The substance getting oxidised is the reducing agent!
+                </p>
+              </div>
+              <div class="glass-card">
+                <span class="badge badge-violet" style="margin-bottom: 8px;">BIOLOGY</span>
+                <h4 style="margin-bottom: 6px;">Double Circulation in Human Heart</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Blood goes through the heart twice in one complete cardiac cycle: Pulmonary Circulation (Heart &rarr; Lungs &rarr; Heart) and Systemic Circulation (Heart &rarr; Body Organs &rarr; Heart).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 3: Examiner's Traps -->
+          <div class="rev-tab-content" id="tab-traps">
+            <div class="grid-2">
+              <div class="glass-card" style="border-left: 3px solid #ef4444;">
+                <span class="badge badge-amber" style="margin-bottom: 8px;">COMMON PITFALL #1</span>
+                <h4 style="margin-bottom: 6px;">Sign Convention in Optics</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Object distance <code style="color: #38bdf8;">u</code> is <strong>always negative</strong> in Cartesian sign convention. Many students forget this and get reversed focal length values!
+                </p>
+              </div>
+              <div class="glass-card" style="border-left: 3px solid #ef4444;">
+                <span class="badge badge-amber" style="margin-bottom: 8px;">COMMON PITFALL #2</span>
+                <h4 style="margin-bottom: 6px;">Linear Equations: Consistency Check</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Parallel lines (a<sub>1</sub>/a<sub>2</sub> = b<sub>1</sub>/b<sub>2</sub> &ne; c<sub>1</sub>/c<sub>2</sub>) have NO solution and are <strong>Inconsistent</strong>. Coincident lines are Dependent Consistent.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 4: Memory Mnemonics -->
+          <div class="rev-tab-content" id="tab-mnemonics">
+            <div class="grid-2">
+              <div class="glass-card" style="border-left: 3px solid #10b981;">
+                <span class="badge badge-emerald" style="margin-bottom: 8px;">MNEMONIC #1</span>
+                <h4 style="margin-bottom: 6px;">Reactivity Series of Metals</h4>
+                <p style="font-size: 0.95rem; font-family: var(--font-mono); color: #34d399; margin-bottom: 6px;">
+                  "Please Stop Calling Me A Careless Zebra Instead Try Learning How Copper Saves Gold"
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                  K (Potassium), Na (Sodium), Ca, Mg, Al, C, Zn, Fe, Sn, Pb, H, Cu, Ag, Au.
+                </p>
+              </div>
+              <div class="glass-card" style="border-left: 3px solid #10b981;">
+                <span class="badge badge-emerald" style="margin-bottom: 8px;">MNEMONIC #2</span>
+                <h4 style="margin-bottom: 6px;">Trigonometry Ratios (Sin, Cos, Tan)</h4>
+                <p style="font-size: 0.95rem; font-family: var(--font-mono); color: #34d399; margin-bottom: 6px;">
+                  "Some People Have Curly Brown Hair Through Proper Brushing"
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                  Sin = P/H, Cos = B/H, Tan = P/B.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. INTERACTIVE PRACTICE ZONE TEASER WIDGET -->
+    <section id="practice-zone" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Interactive Practice</span>
+          <h2 class="section-title">Test Your Board Readiness</h2>
+          <p class="section-subtitle">
+            Try this authentic CBSE Class 10 board question right now and get immediate intelligent feedback.
+          </p>
+        </div>
+
+        <div class="practice-teaser-box">
+          
+          <div class="practice-teaser-header">
+            <div class="practice-meta-tags">
+              <span class="badge badge-cyan">SCIENCE • PHYSICS</span>
+              <span class="badge badge-violet">LIGHT: REFLECTION</span>
+            </div>
+            <span style="font-size: 0.825rem; color: #fbbf24; font-weight: 600;">★ High Frequency Board MCQ</span>
+          </div>
+
+          <div class="practice-question-text" id="practice-question">
+            Loading question...
+          </div>
+
+          <div class="practice-options-grid" id="practice-options">
+            <!-- Rendered by home.js -->
+          </div>
+
+          <div class="practice-feedback" id="practice-feedback">
+            <!-- Feedback populated on option click -->
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 12px;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">100+ Board Questions with step-by-step marking schemes available</span>
+            <button class="btn btn-sm btn-glass" onclick="showToast('Practice Zone Full Suite: 100+ questions loaded!')">
+              <span>Explore All 100+ Practice Questions &rarr;</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. STUDENT-FRIENDLY PLATFORM ADVANTAGES -->
+    <section class="section" style="background: rgba(11, 15, 28, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag violet">Designed for Students</span>
+          <h2 class="section-title">Engineered for Stress-Free Study</h2>
+          <p class="section-subtitle">
+            Every feature is crafted to support late-night revisions, low-bandwidth internet, and high recall.
+          </p>
+        </div>
+
+        <div class="grid-4">
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🌙</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Late Night Eye Care</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">Deep midnight navy palette reduces eye fatigue during intense late-night board revision sessions.</p>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">⚡</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Zero CPU Lag</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">No bloated 3D scripts. Operates at a silky 60 FPS even on entry-level dual-core laptops with 4GB RAM.</p>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🌐</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Hindi & English Dual Support</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">Switch between English and Hindi with a single click to grasp complex concepts in your native tongue.</p>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🖨️</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Print & Offline Ready</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">Clean typography and vector diagram assets ensure notes print crisply without wasted printer ink.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. FAQ ACCORDION SECTION -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Common Inquiries</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">
+            Everything you need to know about STUDYVERSE, CBSE Class 10 resources, and our roadmap.
+          </p>
+        </div>
+
+        <div class="faq-list" id="faq-accordion">
+          <!-- Rendered dynamically by home.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. COMMUNITY ORBIT / NEWSLETTER SECTION -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="orbit-banner">
+          <span class="badge badge-violet" style="margin-bottom: 12px;">STUDYVERSE ORBIT 🚀</span>
+          <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 10px;">
+            Join 15,000+ Class 10 Toppers
+          </h2>
+          <p style="max-width: 580px; margin: 0 auto; color: var(--text-secondary); font-size: 1.05rem;">
+            Get weekly high-yield formula capsules, CBSE board date-sheet alerts, and chapter mind maps delivered straight to your inbox.
+          </p>
+
+          <form class="orbit-form" onsubmit="return false;">
+            <input type="email" class="orbit-input" placeholder="Enter your email address..." required aria-label="Student email">
+            <button type="submit" class="btn btn-primary">
+              <span>Join Orbit Free</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+          <div style="font-size: 0.775rem; color: var(--text-dim); margin-top: 12px;">
+            100% Free. No spam, ever. Unsubscribe with one click anytime.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 14. COMPREHENSIVE FUTURISTIC FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Brand Summary -->
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 12px;">
+            <div class="brand-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="logo-main">STUDY<span>VERSE</span></span>
+              <span class="logo-sub">Your Universe of Learning</span>
+            </div>
+          </a>
+          <p>
+            A next-generation, high-speed educational platform engineered to empower CBSE Class 10 school students across India with visual clarity and confidence.
+          </p>
+          <div style="margin-top: 16px; display: flex; gap: 10px;">
+            <span class="badge badge-cyan">CBSE 2024-25 & 2025-26</span>
+            <span class="badge badge-emerald">Free & Open</span>
+          </div>
+        </div>
+
+        <!-- Column 1: Classes & Portals -->
+        <div class="footer-col">
+          <div class="footer-heading">Classes</div>
+          <div class="footer-links">
+            <a href="#class-10-hub">Class 10 Hub (Active)</a>
+            <a href="#classes">Class 9 Foundation</a>
+            <a href="#classes">Class 11 Science</a>
+            <a href="#classes">Class 11 Commerce</a>
+            <a href="#classes">Class 12 Champions</a>
+          </div>
+        </div>
+
+        <!-- Column 2: Class 10 Subjects -->
+        <div class="footer-col">
+          <div class="footer-heading">Subjects</div>
+          <div class="footer-links">
+            <a href="#subjects">Mathematics (041)</a>
+            <a href="#subjects">Science (086)</a>
+            <a href="#subjects">Social Science (087)</a>
+            <a href="#subjects">English Language (184)</a>
+            <a href="#subjects">Hindi Course A & B</a>
+            <a href="#subjects">Artificial Intelligence (417)</a>
+          </div>
+        </div>
+
+        <!-- Column 3: Study Resources -->
+        <div class="footer-col">
+          <div class="footer-heading">Resources</div>
+          <div class="footer-links">
+            <a href="#featured-resources">Notes Library</a>
+            <a href="#quick-revision">Formula Sheets</a>
+            <a href="#featured-resources">Chapter Mind Maps</a>
+            <a href="#practice-zone">Practice Zone</a>
+            <a href="#quick-revision">Examiner Traps</a>
+            <a href="#featured-resources">Board Paper Decks</a>
+          </div>
+        </div>
+
+        <!-- Column 4: Platform & Legal -->
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <div class="footer-links">
+            <a href="#why-studyverse">About Us</a>
+            <a href="#faq">Student FAQ</a>
+            <a href="#faq">Contact Support</a>
+            <a href="javascript:void(0)" onclick="showToast('Privacy Policy: No personal data is tracked or sold.')">Privacy Policy</a>
+            <a href="javascript:void(0)" onclick="showToast('Terms of Service: Free educational use for students.')">Terms & Conditions</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 STUDYVERSE. Designed for CBSE Class 10 Students in India. All rights reserved.
+        </div>
+
+        <div class="footer-system-status">
+          <span class="live-dot" style="background-color: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>
+          <span>All Systems Nominal &bull; Ultra-Low Latency Engine &bull; Zero Lag</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- 15. UNIVERSAL SPOTLIGHT SEARCH MODAL (CTRL + K) -->
+  <div class="search-modal-backdrop" id="search-modal" role="dialog" aria-modal="true" aria-label="Search resources">
+    <div class="search-modal-card">
+      <div class="search-modal-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search chapters, formulas, or subjects (e.g., Quadratic, Light, Life Processes)..." autocomplete="off">
+        <button id="search-modal-close" class="btn btn-sm btn-glass" style="padding: 4px 8px; font-size: 0.75rem;">ESC</button>
+      </div>
+
+      <div class="search-results-list" id="search-results-list">
+        <!-- Filtered items dynamically inserted here -->
+      </div>
+
+      <div class="search-modal-footer">
+        <span>Navigation: Click to view or preview resource</span>
+        <span>Press <kbd style="background: rgba(255,255,255,0.1); padding: 1px 4px; border-radius: 3px;">ESC</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. REALISTIC PDF PREVIEW MODAL -->
+  <div class="pdf-modal-backdrop" id="pdf-modal" role="dialog" aria-modal="true" aria-label="PDF Preview">
+    <div class="pdf-modal-card">
+      <div class="pdf-modal-toolbar">
+        <div class="pdf-modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #ef4444;">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span id="pdf-modal-title-text">Resource Title</span>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn btn-sm btn-primary" id="pdf-download-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download PDF</span>
+          </button>
+          <button class="btn btn-sm btn-glass" id="pdf-modal-close" style="width: 32px; height: 32px; padding: 0;">✕</button>
+        </div>
+      </div>
+
+      <div class="pdf-viewer-content">
+        <div class="mock-pdf-page" id="pdf-mock-page-content">
+          <!-- Populated dynamically by home.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. Interactive Application Engine (Zero-dependency, offline & file:/// compatible) -->
+  <script src="./js/main.js"></script>
+
+</body>
+</html>

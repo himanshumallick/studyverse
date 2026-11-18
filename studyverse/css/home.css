@@ -1,0 +1,711 @@
+/**
+ * STUDYVERSE - Homepage Specific Styles
+ * Modern futuristic layout, 3D floating study cards, and interactive showcase
+ */
+
+/* -------------------------------------------------------------------------- */
+/* 1. HERO SECTION & 3D FLOATING STUDY CARDS                                  */
+/* -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-4xl);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: var(--space-3xl);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  z-index: 2;
+}
+
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--accent-cyan-bright);
+  width: fit-content;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 5.2vw, 4.3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.hero-title .title-accent {
+  display: block;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 580px;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+/* Hero Metrics / Trust Grid */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-sm);
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metric-label {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* 3D Floating Educational Showcase (CSS-Only Transforms) */
+.hero-showcase {
+  position: relative;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.showcase-stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease-out;
+}
+
+/* Central Holographic Hub Card */
+.holo-main-card {
+  position: relative;
+  background: rgba(13, 19, 36, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(56, 189, 248, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  z-index: 5;
+  transition: transform var(--transition-normal);
+}
+
+.holo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.holo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-cyan-bright);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.holo-code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.holo-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.holo-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Interactive Science Preview inside Holo Card */
+.holo-visual-preview {
+  background: #070a14;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.formula-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent-cyan-bright);
+}
+
+.formula-divider {
+  color: var(--text-dim);
+}
+
+.ray-diagram-wireframe {
+  height: 70px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.ray-diagram-wireframe svg {
+  width: 100%;
+  height: 100%;
+}
+
+.holo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.holo-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Orbiting / Floating 3D Cards */
+.floating-card {
+  position: absolute;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  z-index: 6;
+  white-space: nowrap;
+}
+
+.card-math-float {
+  top: -24px;
+  left: -32px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(139, 92, 246, 0.25);
+}
+
+.card-math-float .math-formula {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #c084fc;
+}
+
+.card-streak-float {
+  bottom: -24px;
+  right: -24px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.streak-icon {
+  font-size: 1.35rem;
+}
+
+.streak-text strong {
+  display: block;
+  font-size: 0.875rem;
+  color: #fbbf24;
+}
+
+.streak-text span {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.card-ai-float {
+  bottom: 60px;
+  left: -48px;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #34d399;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. POPULAR CLASSES SECTION                                                 */
+/* -------------------------------------------------------------------------- */
+.classes-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.class-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.class-card.featured {
+  background: linear-gradient(135deg, rgba(14, 23, 47, 0.9), rgba(20, 31, 64, 0.9));
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.2);
+}
+
+.class-card.featured::before {
+  content: 'FLAGSHIP HUB';
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan-bright);
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.class-number {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-xs);
+  background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.class-card.featured .class-number {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.class-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.class-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+  flex-grow: 1;
+}
+
+.class-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-lg);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.class-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.class-features-list li svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-cyan-bright);
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. WHY STUDYVERSE (COMPARISON MATRIX)                                      */
+/* -------------------------------------------------------------------------- */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.comparison-column {
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.comparison-old {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-subtle);
+  opacity: 0.85;
+}
+
+.comparison-new {
+  background: linear-gradient(135deg, rgba(14, 23, 47, 0.9), rgba(18, 28, 58, 0.9));
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.15);
+  position: relative;
+}
+
+.comparison-item {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.comparison-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comparison-old .comparison-icon {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.comparison-new .comparison-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.comparison-text h4 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.comparison-text p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. QUICK REVISION TABBED SUITE                                             */
+/* -------------------------------------------------------------------------- */
+.revision-tabs-container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.revision-tab-headers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: rgba(15, 23, 42, 0.6);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-2xl);
+  overflow-x: auto;
+}
+
+.rev-tab-btn {
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.rev-tab-btn.active {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.rev-tab-content {
+  display: none;
+}
+
+.rev-tab-content.active {
+  display: block;
+}
+
+.formula-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.formula-card-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.formula-card-item:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.formula-name {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--accent-cyan-bright);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.formula-equation {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-cyan-bright);
+}
+
+.formula-notes {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. INTERACTIVE PRACTICE ZONE HOMEPAGE TEASER                               */
+/* -------------------------------------------------------------------------- */
+.practice-teaser-box {
+  background: linear-gradient(135deg, rgba(13, 20, 39, 0.95), rgba(18, 28, 56, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  max-width: 860px;
+  margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.practice-teaser-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.practice-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.practice-question-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.practice-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.option-btn:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.option-btn.correct {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+}
+
+.option-btn.correct .option-letter {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: #ef4444 !important;
+  color: #f87171 !important;
+}
+
+.practice-feedback {
+  display: none;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-subtle);
+  margin-top: var(--space-md);
+}
+
+.practice-feedback.show {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.practice-feedback-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.practice-feedback-explanation {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. NEWSLETTER / COMMUNITY ORBIT                                             */
+/* -------------------------------------------------------------------------- */
+.orbit-banner {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.25) 0%, rgba(15, 23, 42, 0.95) 70%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3xl) var(--space-xl);
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(139, 92, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.orbit-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  max-width: 520px;
+  margin: var(--space-xl) auto 0 auto;
+}
+
+.orbit-input {
+  flex-grow: 1;
+  padding: 14px 20px;
+  border-radius: var(--radius-pill);
+  background: rgba(5, 7, 14, 0.8);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.orbit-input:focus {
+  border-color: var(--accent-cyan-bright);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
