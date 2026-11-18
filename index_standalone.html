@@ -1,0 +1,4288 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="background-color: #05070e;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDYVERSE â€” Your Universe of Learning | CBSE Class 10</title>
+  <meta name="description" content="A futuristic, premium educational platform for CBSE Class 10 students. Visual revision notes, interactive formula sheets, mind maps, and practice questions.">
+  
+  <!-- Preconnect to Google Fonts for Ultra-Fast Typography Rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+/**
+ * STUDYVERSE - Modern Futuristic Design System Variables
+ * Engineered for high-end aesthetic & ultra-low CPU/RAM overhead
+ */
+
+:root {
+  /* Color Palette - Deep Midnight Navy & Cyber Accents */
+  --bg-deep: #05070e;
+  --bg-dark: #090d1a;
+  --bg-card: rgba(15, 23, 42, 0.7);
+  --bg-card-hover: rgba(22, 33, 62, 0.85);
+  --bg-glass: rgba(15, 23, 42, 0.55);
+  --bg-glass-strong: rgba(13, 20, 38, 0.88);
+  --bg-elevated: #111827;
+
+  /* Accent Gradients & Colors */
+  --accent-cyan: #06b6d4;
+  --accent-cyan-bright: #38bdf8;
+  --accent-blue: #3b82f6;
+  --accent-indigo: #6366f1;
+  --accent-violet: #8b5cf6;
+  --accent-purple: #a855f7;
+  --accent-pink: #ec4899;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+
+  /* Radiant Gradients */
+  --gradient-primary: linear-gradient(135deg, #38bdf8 0%, #6366f1 50%, #a855f7 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 50%, #9333ea 100%);
+  --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  --gradient-amber: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --gradient-emerald: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --gradient-card-border: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.3));
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+
+  /* Typography Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-dim: #475569;
+  --text-highlight: #38bdf8;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-glow: rgba(56, 189, 248, 0.4);
+  --border-glow-violet: rgba(139, 92, 246, 0.4);
+
+  /* Shadows & Glows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow-cyan: 0 0 30px rgba(56, 189, 248, 0.22);
+  --shadow-glow-violet: 0 0 35px rgba(139, 92, 246, 0.25);
+  --shadow-glow-card: 0 10px 30px -10px rgba(56, 189, 248, 0.15);
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+  --space-3xl: 5rem;    /* 80px */
+  --space-4xl: 7.5rem;  /* 120px */
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Font Families - Crisp System Fallback Hierarchy */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* Layout Max Widths */
+  --max-width-container: 1280px;
+  --max-width-hero: 1360px;
+  --header-height: 76px;
+
+  /* Transitions - GPU Accelerated Properties Only (transform, opacity) */
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/**
+ * STUDYVERSE - Base Styles & Reset
+ * Ultra-optimized for zero lag & maximum rendering efficiency
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-deep);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+/* Ambient Cosmic Background Lighting - Pure CSS Lightweight Mesh */
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.18;
+  will-change: transform;
+}
+
+.orb-1 {
+  top: -10%;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-violet) 0%, transparent 70%);
+}
+
+.orb-2 {
+  top: 25%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+  opacity: 0.14;
+}
+
+.orb-3 {
+  bottom: 10%;
+  left: 20%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
+  opacity: 0.12;
+}
+
+/* Subtle Geometric Grid Overlay */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at 50% 20%, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 20%, black 40%, transparent 80%);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Custom Futuristic Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060913;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 999px;
+  border: 2px solid #060913;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--max-width-container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--space-3xl) auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.825rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(56, 189, 248, 0.08);
+  color: var(--accent-cyan-bright);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  margin-bottom: var(--space-md);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+.section-tag.violet {
+  background: rgba(139, 92, 246, 0.08);
+  color: #c084fc;
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+}
+
+.section-title {
+  margin-bottom: var(--space-md);
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+}
+
+/* Gradient Text Utilities */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyan {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-pink {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism Surface Classes */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-medium);
+}
+
+.glass-card {
+  background: var(--gradient-glass), var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), var(--shadow-glow-card);
+}
+
+/* Flex & Grid Helpers */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/**
+ * STUDYVERSE - Components Stylesheet
+ * Engineered with high-end glassmorphism, responsive navigation & micro-interactions
+ */
+
+/* -------------------------------------------------------------------------- */
+/* 1. TOP ANNOUNCEMENT BAR                                                    */
+/* -------------------------------------------------------------------------- */
+.top-announcement {
+  background: linear-gradient(90deg, #090d1a 0%, #171d38 50%, #090d1a 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  padding: 8px var(--space-md);
+  text-align: center;
+  position: relative;
+  z-index: 101;
+  color: var(--text-secondary);
+}
+
+.top-announcement a {
+  color: var(--accent-cyan-bright);
+  font-weight: 600;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.top-announcement a:hover {
+  text-decoration: underline;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #34d399;
+  margin-right: 8px;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulse-dot 2s infinite;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. NAVIGATION BAR                                                          */
+/* -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: rgba(5, 7, 14, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.site-header.scrolled {
+  background: rgba(5, 7, 14, 0.94);
+  border-bottom-color: var(--border-medium);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  gap: var(--space-md);
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.brand-icon-wrapper {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.3));
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+.brand-icon-wrapper svg {
+  width: 22px;
+  height: 22px;
+  color: var(--accent-cyan-bright);
+}
+
+.brand-logo .brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-logo .logo-main {
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-logo .logo-main span {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-logo .logo-sub {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Nav Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nav-link {
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+  color: var(--accent-cyan-bright);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent-cyan-bright);
+  box-shadow: 0 0 8px var(--accent-cyan-bright);
+}
+
+/* Nav Actions (Search, Lang, CTA) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.search-trigger-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+}
+
+.search-trigger-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-medium);
+  color: var(--text-secondary);
+}
+
+.search-kbd {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* Language Switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+}
+
+.lang-btn {
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.lang-btn.active {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+.lang-btn:not(.active):hover {
+  color: var(--text-primary);
+}
+
+/* Mobile Menu Button */
+.mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: calc(var(--header-height) + 38px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 7, 14, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 99;
+  padding: var(--space-xl);
+  flex-direction: column;
+  gap: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.mobile-nav.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-link {
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: var(--accent-cyan-bright);
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. BUTTONS & MICRO-INTERACTIONS                                            */
+/* -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.45);
+  background: var(--gradient-primary-hover);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary, .btn-glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover, .btn-glass:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.btn-secondary:active, .btn-glass:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-cyan-bright);
+  color: var(--accent-cyan-bright);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  border-radius: var(--radius-pill);
+}
+
+.btn-icon-only {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. BADGES, CHIPS & STATUS PILLS                                            */
+/* -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.775rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.badge-cyan {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.3);
+  color: #38bdf8;
+}
+
+.badge-violet {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #c084fc;
+}
+
+.badge-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
+
+.badge-amber {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+.badge-pink {
+  background: rgba(236, 72, 153, 0.12);
+  border-color: rgba(236, 72, 153, 0.3);
+  color: #f472b6;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. SUBJECT CARDS & RESOURCE CARDS                                          */
+/* -------------------------------------------------------------------------- */
+.subject-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: hidden;
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-gradient, var(--gradient-primary));
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.subject-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.18);
+}
+
+.subject-card:hover::before {
+  opacity: 1;
+}
+
+.subject-icon-box {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-lg);
+  background: var(--icon-bg, rgba(56, 189, 248, 0.1));
+  border: 1px solid var(--icon-border, rgba(56, 189, 248, 0.25));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+  color: var(--icon-color, var(--accent-cyan-bright));
+}
+
+.subject-icon-box svg {
+  width: 28px;
+  height: 28px;
+}
+
+.subject-name {
+  font-size: 1.35rem;
+  margin-bottom: var(--space-xs);
+}
+
+.subject-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+.subject-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.subject-pill-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+.resource-pill {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+/* Resource Card (Featured Notes, Sheets) */
+.resource-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+.resource-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.resource-type-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.resource-title {
+  font-size: 1.15rem;
+  line-height: 1.35;
+  margin-bottom: var(--space-xs);
+  color: var(--text-primary);
+}
+
+.resource-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+}
+
+.resource-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. FAQ ACCORDION                                                           */
+/* -------------------------------------------------------------------------- */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.faq-item.active {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--accent-cyan-bright);
+  transition: transform var(--transition-normal);
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-out;
+}
+
+.faq-answer-inner {
+  padding: 0 var(--space-lg) var(--space-lg) var(--space-lg);
+  color: var(--text-secondary);
+  font-size: 0.975rem;
+  line-height: 1.7;
+  border-top: 1px solid transparent;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 350px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 7. SPOTLIGHT SEARCH MODAL                                                  */
+/* -------------------------------------------------------------------------- */
+.search-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 100px var(--space-md) var(--space-md) var(--space-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.search-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-modal-card {
+  width: 100%;
+  max-width: 650px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.2);
+  overflow: hidden;
+  transform: scale(0.96);
+  transition: transform var(--transition-fast);
+}
+
+.search-modal-backdrop.open .search-modal-card {
+  transform: scale(1);
+}
+
+.search-modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.search-modal-header svg {
+  width: 22px;
+  height: 22px;
+  color: var(--accent-cyan-bright);
+}
+
+.search-modal-input {
+  width: 100%;
+  font-size: 1.15rem;
+  color: var(--text-primary);
+}
+
+.search-modal-input::placeholder {
+  color: var(--text-dim);
+}
+
+.search-results-list {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: var(--space-sm);
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.search-result-item:hover, .search-result-item.highlighted {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.search-result-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-result-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.search-result-tag {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.search-modal-footer {
+  padding: 10px var(--space-lg);
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 8. PDF PREVIEW MODAL (LIGHTWEIGHT & INTERACTIVE)                           */
+/* -------------------------------------------------------------------------- */
+.pdf-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.pdf-modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pdf-modal-card {
+  width: 100%;
+  max-width: 900px;
+  height: 85vh;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(99, 102, 241, 0.25);
+}
+
+.pdf-modal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pdf-modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdf-viewer-content {
+  flex-grow: 1;
+  background: #080b14;
+  overflow-y: auto;
+  padding: var(--space-xl);
+  display: flex;
+  justify-content: center;
+}
+
+.mock-pdf-page {
+  width: 100%;
+  max-width: 720px;
+  background: #0f172a;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-2xl);
+  color: var(--text-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 9. TOAST NOTIFICATION CONTAINER                                            */
+/* -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glow);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.3);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all var(--transition-normal);
+  pointer-events: auto;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 10. FOOTER                                                                 */
+/* -------------------------------------------------------------------------- */
+.site-footer {
+  background: #04060c;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-2xl);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.footer-brand p {
+  margin-top: var(--space-md);
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  max-width: 340px;
+}
+
+.footer-heading {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent-cyan-bright);
+  transform: translateX(3px);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.footer-system-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+/**
+ * STUDYVERSE - Lightweight GPU-Accelerated Animations
+ * Uses ONLY transform and opacity to maintain 60 FPS on older processors (AMD A6 / 4GB RAM)
+ */
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-1deg);
+  }
+}
+
+@keyframes float-slight {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes cosmic-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Applied Animation Classes */
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 8s ease-in-out infinite;
+}
+
+.animate-float-slight {
+  animation: float-slight 5s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: cosmic-spin 25s linear infinite;
+}
+
+/* Shimmer Highlight Effect on Hover */
+.shimmer-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.shimmer-hover:hover::after {
+  animation: shimmer 1s ease-in-out;
+}
+
+/* Reduced Motion Preference Check */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/**
+ * STUDYVERSE - Homepage Specific Styles
+ * Modern futuristic layout, 3D floating study cards, and interactive showcase
+ */
+
+/* -------------------------------------------------------------------------- */
+/* 1. HERO SECTION & 3D FLOATING STUDY CARDS                                  */
+/* -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-4xl);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: var(--space-3xl);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  z-index: 2;
+}
+
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--accent-cyan-bright);
+  width: fit-content;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 5.2vw, 4.3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.hero-title .title-accent {
+  display: block;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 580px;
+}
+
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+/* Hero Metrics / Trust Grid */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--space-sm);
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metric-label {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* 3D Floating Educational Showcase (CSS-Only Transforms) */
+.hero-showcase {
+  position: relative;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.showcase-stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease-out;
+}
+
+/* Central Holographic Hub Card */
+.holo-main-card {
+  position: relative;
+  background: rgba(13, 19, 36, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(56, 189, 248, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  z-index: 5;
+  transition: transform var(--transition-normal);
+}
+
+.holo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.holo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-cyan-bright);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.holo-code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.holo-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.holo-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Interactive Science Preview inside Holo Card */
+.holo-visual-preview {
+  background: #070a14;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.formula-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent-cyan-bright);
+}
+
+.formula-divider {
+  color: var(--text-dim);
+}
+
+.ray-diagram-wireframe {
+  height: 70px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.ray-diagram-wireframe svg {
+  width: 100%;
+  height: 100%;
+}
+
+.holo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.holo-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Orbiting / Floating 3D Cards */
+.floating-card {
+  position: absolute;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  z-index: 6;
+  white-space: nowrap;
+}
+
+.card-math-float {
+  top: -24px;
+  left: -32px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(139, 92, 246, 0.25);
+}
+
+.card-math-float .math-formula {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #c084fc;
+}
+
+.card-streak-float {
+  bottom: -24px;
+  right: -24px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.streak-icon {
+  font-size: 1.35rem;
+}
+
+.streak-text strong {
+  display: block;
+  font-size: 0.875rem;
+  color: #fbbf24;
+}
+
+.streak-text span {
+  font-size: 0.725rem;
+  color: var(--text-muted);
+}
+
+.card-ai-float {
+  bottom: 60px;
+  left: -48px;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #34d399;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. POPULAR CLASSES SECTION                                                 */
+/* -------------------------------------------------------------------------- */
+.classes-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+.class-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.class-card.featured {
+  background: linear-gradient(135deg, rgba(14, 23, 47, 0.9), rgba(20, 31, 64, 0.9));
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.2);
+}
+
+.class-card.featured::before {
+  content: 'FLAGSHIP HUB';
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan-bright);
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.class-number {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-xs);
+  background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.class-card.featured .class-number {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.class-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.class-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+  flex-grow: 1;
+}
+
+.class-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-lg);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.class-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.class-features-list li svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent-cyan-bright);
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. WHY STUDYVERSE (COMPARISON MATRIX)                                      */
+/* -------------------------------------------------------------------------- */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.comparison-column {
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.comparison-old {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-subtle);
+  opacity: 0.85;
+}
+
+.comparison-new {
+  background: linear-gradient(135deg, rgba(14, 23, 47, 0.9), rgba(18, 28, 58, 0.9));
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.15);
+  position: relative;
+}
+
+.comparison-item {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.comparison-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.comparison-old .comparison-icon {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.comparison-new .comparison-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.comparison-text h4 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.comparison-text p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. QUICK REVISION TABBED SUITE                                             */
+/* -------------------------------------------------------------------------- */
+.revision-tabs-container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.revision-tab-headers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  background: rgba(15, 23, 42, 0.6);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: var(--space-2xl);
+  overflow-x: auto;
+}
+
+.rev-tab-btn {
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.rev-tab-btn.active {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.rev-tab-content {
+  display: none;
+}
+
+.rev-tab-content.active {
+  display: block;
+}
+
+.formula-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.formula-card-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.formula-card-item:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.formula-name {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--accent-cyan-bright);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.formula-equation {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-cyan-bright);
+}
+
+.formula-notes {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. INTERACTIVE PRACTICE ZONE HOMEPAGE TEASER                               */
+/* -------------------------------------------------------------------------- */
+.practice-teaser-box {
+  background: linear-gradient(135deg, rgba(13, 20, 39, 0.95), rgba(18, 28, 56, 0.95));
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  max-width: 860px;
+  margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.practice-teaser-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.practice-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.practice-question-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.practice-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.option-btn:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.option-btn.correct {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+}
+
+.option-btn.correct .option-letter {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.option-btn.incorrect {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: #ef4444 !important;
+  color: #f87171 !important;
+}
+
+.practice-feedback {
+  display: none;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-subtle);
+  margin-top: var(--space-md);
+}
+
+.practice-feedback.show {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.practice-feedback-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.practice-feedback-explanation {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. NEWSLETTER / COMMUNITY ORBIT                                             */
+/* -------------------------------------------------------------------------- */
+.orbit-banner {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.25) 0%, rgba(15, 23, 42, 0.95) 70%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3xl) var(--space-xl);
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(139, 92, 246, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.orbit-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  max-width: 520px;
+  margin: var(--space-xl) auto 0 auto;
+}
+
+.orbit-input {
+  flex-grow: 1;
+  padding: 14px 20px;
+  border-radius: var(--radius-pill);
+  background: rgba(5, 7, 14, 0.8);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.orbit-input:focus {
+  border-color: var(--accent-cyan-bright);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+/**
+ * STUDYVERSE - Responsive Media Queries
+ * Flawless display across Desktops, Laptops, Tablets, and Android smartphones
+ */
+
+@media (max-width: 1200px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+
+  .classes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    text-align: center;
+  }
+
+  .hero-badge-pill {
+    margin: 0 auto;
+  }
+
+  .hero-description {
+    margin: 0 auto;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .hero-metrics {
+    justify-content: center;
+  }
+
+  .hero-showcase {
+    margin-top: var(--space-lg);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 868px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: flex;
+  }
+
+  .search-kbd {
+    display: none;
+  }
+
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .formula-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-4xl: 4.5rem;
+    --space-3xl: 3.5rem;
+  }
+
+  .top-announcement {
+    font-size: 0.775rem;
+  }
+
+  .hero-title {
+    font-size: 2.35rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .orbit-form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .orbit-input, .orbit-form .btn {
+    width: 100%;
+  }
+
+  .card-math-float {
+    left: -10px;
+    top: -30px;
+  }
+
+  .card-streak-float {
+    right: -10px;
+    bottom: -30px;
+  }
+
+  .card-ai-float {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+</style>
+</head>
+<body style="background-color: #05070e; color: #f8fafc; min-height: 100vh; margin: 0;">
+
+  <!-- Ambient Cosmic Lighting (Lightweight pure CSS, zero WebGL overhead) -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-orb orb-1 animate-glow-pulse"></div>
+    <div class="ambient-orb orb-2 animate-glow-pulse" style="animation-delay: -2s;"></div>
+    <div class="ambient-orb orb-3 animate-glow-pulse" style="animation-delay: -4s;"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="top-announcement">
+    <span class="live-badge">
+      <span class="live-dot"></span>
+      LIVE
+    </span>
+    <span>CBSE Class 10 Board Exam Accelerator 2025-26 is now active!</span>
+    <a href="#class-10-hub">Explore Class 10 Hub &rarr;</a>
+  </div>
+
+  <!-- 2. Sticky Glass Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-logo" aria-label="STUDYVERSE Home">
+        <div class="brand-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
+            <circle cx="19" cy="8" r="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="logo-main">STUDY<span>VERSE</span></span>
+          <span class="logo-sub">CBSE Class 10 Hub</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#classes" class="nav-link">Classes</a>
+        <a href="#subjects" class="nav-link">Subjects</a>
+        <a href="#featured-resources" class="nav-link">Notes Library</a>
+        <a href="#quick-revision" class="nav-link">Formula Sheets</a>
+        <a href="#practice-zone" class="nav-link">Practice Zone</a>
+        <a href="#why-studyverse" class="nav-link">About</a>
+      </nav>
+
+      <!-- Nav Actions (Search, Lang, CTA) -->
+      <div class="nav-actions">
+        <!-- Universal Spotlight Search Trigger -->
+        <button class="search-trigger-btn" aria-label="Search resources">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-text">Search</span>
+          <span class="search-kbd">Ctrl K</span>
+        </button>
+
+        <!-- English / Hindi Language Switcher -->
+        <div class="lang-switcher" role="group" aria-label="Language Switcher">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="hi">à¤¹à¤¿à¤‚</button>
+        </div>
+
+        <!-- Class 10 Portal CTA -->
+        <a href="#class-10-hub" class="btn btn-sm btn-primary">
+          <span>Class 10 Portal</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav" aria-label="Mobile Navigation">
+    <a href="#hero" class="mobile-nav-link active">Home</a>
+    <a href="#classes" class="mobile-nav-link">Explore Classes</a>
+    <a href="#subjects" class="mobile-nav-link">Subjects Hub</a>
+    <a href="#featured-resources" class="mobile-nav-link">Notes Library</a>
+    <a href="#quick-revision" class="mobile-nav-link">Formula Sheets & Mind Maps</a>
+    <a href="#practice-zone" class="mobile-nav-link">Practice Zone</a>
+    <a href="#faq" class="mobile-nav-link">Student FAQ</a>
+    <div style="margin-top: auto; padding-top: 20px;">
+      <a href="#class-10-hub" class="btn btn-primary" style="width: 100%;">Enter Class 10 Dashboard &rarr;</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- 3. HERO SECTION (Visually Impressive & 3D CSS Effects) -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-grid">
+        
+        <!-- Left: Headline, Value Proposition & CTAs -->
+        <div class="hero-content">
+          <div class="hero-badge-pill">
+            <span class="live-dot"></span>
+            <span>âš¡ Next-Gen CBSE Learning Platform â€¢ Class 10 Special</span>
+          </div>
+
+          <h1 class="hero-title">
+            Your Universe of Learning.
+            <span class="title-accent gradient-text">Master Class 10 CBSE</span>
+            with Superhuman Clarity.
+          </h1>
+
+          <p class="hero-description">
+            Ditch 800-page bulky textbooks. Access laser-focused visual revision notes, interactive formula sheets, curated board question banks, and chapter mind maps â€” engineered for CBSE Class 10 toppers.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#featured-resources" class="btn btn-lg btn-primary">
+              <span>Explore Resources</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <a href="#practice-zone" class="btn btn-lg btn-glass">
+              <span>Try Practice Zone âœ¦</span>
+            </a>
+          </div>
+
+          <!-- Micro Metrics & Trust Badges -->
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-value">16+</span>
+              <span class="metric-label">Chapters Mapped</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">Free for Students</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">2025-26</span>
+              <span class="metric-label">CBSE Pattern</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">4.9â˜…</span>
+              <span class="metric-label">Student Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 3D Floating Study Cards Composition (Pure Lightweight CSS Transforms) -->
+        <div class="hero-showcase">
+          <div class="showcase-stage">
+            
+            <!-- Floating Orbit Card 1: Maths Quadratic Formula -->
+            <div class="floating-card card-math-float animate-float-slow">
+              <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 2px;">ðŸ“ Quadratic Formula</div>
+              <div class="math-formula">x = (-b &plusmn; &radic;(b&sup2; - 4ac)) / 2a</div>
+              <div style="font-size: 0.65rem; color: #34d399; margin-top: 4px;">D &gt; 0 &rarr; 2 Real Distinct Roots</div>
+            </div>
+
+            <!-- Central Holographic Hub Card -->
+            <div class="holo-main-card">
+              <div class="holo-header">
+                <span class="holo-tag">
+                  <span class="live-dot"></span>
+                  HIGH YIELD CHAPTER
+                </span>
+                <span class="holo-code">PHYSICS â€¢ 086</span>
+              </div>
+
+              <h2 class="holo-title">Light: Reflection & Refraction</h2>
+              <p class="holo-subtitle">Complete Optical Ray Diagrams & Sign Convention</p>
+
+              <!-- Interactive Visual Preview Box -->
+              <div class="holo-visual-preview">
+                <div class="formula-display">
+                  <span>1/f = 1/v - 1/u</span>
+                  <span class="formula-divider">|</span>
+                  <span>m = v/u = h'/h</span>
+                </div>
+
+                <div class="ray-diagram-wireframe">
+                  <svg viewBox="0 0 340 70" fill="none">
+                    <!-- Principal Axis -->
+                    <line x1="10" y1="35" x2="330" y2="35" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <!-- Convex Lens -->
+                    <path d="M 170 8 Q 185 35 170 62 Q 155 35 170 8" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="2"/>
+                    <!-- Optical Center & Focus Points -->
+                    <circle cx="170" cy="35" r="2.5" fill="#38bdf8"/>
+                    <circle cx="110" cy="35" r="2" fill="#a855f7"/>
+                    <circle cx="230" cy="35" r="2" fill="#a855f7"/>
+                    <text x="108" y="47" font-size="8" fill="#a855f7" font-family="monospace">F1</text>
+                    <text x="228" y="47" font-size="8" fill="#a855f7" font-family="monospace">F2</text>
+                    <text x="167" y="47" font-size="8" fill="#38bdf8" font-family="monospace">O</text>
+                    <!-- Incident Light Ray -->
+                    <path d="M 50 18 L 170 18 L 230 35 L 300 50" stroke="#f43f5e" stroke-width="1.5"/>
+                    <path d="M 50 18 L 170 35 L 300 52" stroke="#38bdf8" stroke-width="1.5"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="holo-footer">
+                <div class="holo-stats">
+                  <span>ðŸŽ¯ 8 Marks in Board Exam</span>
+                  <span>â€¢</span>
+                  <span>12 Pages Notes</span>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="window.previewRecentResource('Light: Complete Ray Diagrams', 'Science (Physics)', '8 Marks')">
+                  <span>Quick View</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Floating Orbit Card 2: Daily Streak -->
+            <div class="floating-card card-streak-float animate-float-reverse">
+              <span class="streak-icon">ðŸ”¥</span>
+              <div class="streak-text">
+                <strong>7-Day Study Streak</strong>
+                <span>CBSE 10 Preparation Pace: Top 1%</span>
+              </div>
+            </div>
+
+            <!-- Floating Orbit Card 3: AI Elective Badge -->
+            <div class="floating-card card-ai-float animate-float-slight">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4Z"></path>
+              </svg>
+              <span>AI Code 417 â€¢ Computer Vision</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. POPULAR CLASSES SECTION -->
+    <section id="classes" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Academic Spectrum</span>
+          <h2 class="section-title">Explore by Class</h2>
+          <p class="section-subtitle">
+            Tailored learning universes built specifically for Indian school curricula, starting with CBSE Class 10.
+          </p>
+        </div>
+
+        <div class="classes-grid" id="class-10-hub">
+          
+          <!-- Class 10 (Flagship Active Hub) -->
+          <div class="class-card featured shimmer-hover">
+            <span class="class-number">10</span>
+            <h3 class="class-title">CBSE Class 10 Board Accelerator</h3>
+            <p class="class-desc">
+              Comprehensive preparation hub featuring 6 subjects, 80+ chapter revision modules, formula decks, and board blueprints.
+            </p>
+            <ul class="class-features-list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Maths, Science, SST, English, Hindi, AI (417)</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Latest CBSE 2024-25 & 2025-26 Rationalized Syllabus</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Instant PDF previews with downloadable mind maps</span>
+              </li>
+            </ul>
+            <a href="#subjects" class="btn btn-primary" style="margin-top: auto;">
+              <span>Enter Class 10 Universe &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Class 9 (Foundation Tier) -->
+          <div class="class-card">
+            <span class="class-number">09</span>
+            <h3 class="class-title">Class 9 Foundation Hub</h3>
+            <p class="class-desc">
+              Core concepts in Motion, Force, Atoms & Molecules, Number Systems, and Cell Biology to build an unshakeable base.
+            </p>
+            <div style="margin-top: auto;">
+              <span class="badge badge-cyan" style="margin-bottom: 12px;">IN DEVELOPMENT</span>
+              <button class="btn btn-glass" style="width: 100%;" onclick="showToast('Class 9 Foundation Hub is currently on our active rollout roadmap!')">
+                <span>View Syllabus Roadmap</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Class 11 (Senior Secondary) -->
+          <div class="class-card">
+            <span class="class-number">11</span>
+            <h3 class="class-title">Class 11 STEM & Commerce</h3>
+            <p class="class-desc">
+              Advanced Physics, Chemistry, Calculus, Accountancy, and Economics modules designed for competitive excellence.
+            </p>
+            <div style="margin-top: auto;">
+              <span class="badge badge-violet" style="margin-bottom: 12px;">ROADMAP 2025</span>
+              <button class="btn btn-glass" style="width: 100%;" onclick="showToast('Class 11 Science & Commerce Hub roadmap is active!')">
+                <span>Notify When Live</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Class 12 (Board Champions) -->
+          <div class="class-card">
+            <span class="class-number">12</span>
+            <h3 class="class-title">Class 12 Board Champions</h3>
+            <p class="class-desc">
+              High-frequency board questions, 10-year trend analyses, and quick formula capsules for CBSE Class 12.
+            </p>
+            <div style="margin-top: auto;">
+              <span class="badge badge-amber" style="margin-bottom: 12px;">ROADMAP 2025</span>
+              <button class="btn btn-glass" style="width: 100%;" onclick="showToast('Class 12 Hub will roll out following the Class 10 flagship season!')">
+                <span>Notify When Live</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BROWSE BY SUBJECT SECTION (Dynamic from subjects.js) -->
+    <section id="subjects" class="section" style="background: rgba(11, 15, 28, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag violet">Curriculum Matrix</span>
+          <h2 class="section-title">CBSE Class 10 Subjects Hub</h2>
+          <p class="section-subtitle">
+            Explore meticulously organized chapters, chapter-wise notes, formula sheets, and examiner-highlighted board questions.
+          </p>
+        </div>
+
+        <!-- Rendered dynamically by home.js for clean modular architecture -->
+        <div class="grid-3" id="subjects-grid"></div>
+
+      </div>
+    </section>
+
+    <!-- 6. FEATURED STUDY RESOURCES (Top Picks with Realistic PDF Preview) -->
+    <section id="featured-resources" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">High Yield Picks</span>
+          <h2 class="section-title">Featured Board Exam Resources</h2>
+          <p class="section-subtitle">
+            Hand-curated revision capsules, comprehensive diagrams, and all-chapter formula cheat-sheets.
+          </p>
+        </div>
+
+        <!-- Rendered dynamically from resources.js -->
+        <div class="grid-2" id="featured-resources-grid"></div>
+
+      </div>
+    </section>
+
+    <!-- 7. RECENTLY ADDED RESOURCES & BOARD UPDATES -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="glass-card" style="padding: var(--space-2xl);">
+          <div class="flex items-center justify-between" style="margin-bottom: var(--space-lg); flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span class="badge badge-cyan" style="margin-bottom: 6px;">LIVE FEED</span>
+              <h3 style="font-size: 1.45rem;">Recently Added & Updated Resources</h3>
+            </div>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Updated continuously for CBSE 2024-25 / 2025-26</span>
+          </div>
+
+          <div id="recent-resources-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. WHY STUDYVERSE (Modern Architecture vs Traditional Coaching) -->
+    <section id="why-studyverse" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">The Futuristic Edge</span>
+          <h2 class="section-title">Why STUDYVERSE is Different</h2>
+          <p class="section-subtitle">
+            Designed from the ground up for modern students who value their time, clarity, and board exam results.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          
+          <!-- Traditional Platforms Column -->
+          <div class="comparison-column comparison-old">
+            <h3 style="font-size: 1.25rem; color: #f87171; display: flex; align-items: center; gap: 8px;">
+              <span>âœ•</span> Traditional Coaching Portals
+            </h3>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ•</div>
+              <div class="comparison-text">
+                <h4>800-Page Bulky Textbooks</h4>
+                <p>Dense walls of monotonous black-and-white text that cause cognitive fatigue before exam night.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ•</div>
+              <div class="comparison-text">
+                <h4>Paywalls & Intrusive Ads</h4>
+                <p>Aggressive popup ads, locked sample papers, and forced subscription plans targeting stressed students.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ•</div>
+              <div class="comparison-text">
+                <h4>Slow, Bloated Websites</h4>
+                <p>Heavy platforms that lag and freeze on budget laptops, burning battery and memory.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ•</div>
+              <div class="comparison-text">
+                <h4>Outdated Syllabus Content</h4>
+                <p>Includes topics deleted by NCERT years ago, wasting valuable student study hours.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STUDYVERSE Futuristic Column -->
+          <div class="comparison-column comparison-new shimmer-hover">
+            <h3 style="font-size: 1.25rem; color: var(--accent-cyan-bright); display: flex; align-items: center; gap: 8px;">
+              <span>âœ¦</span> The STUDYVERSE Experience
+            </h3>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ“</div>
+              <div class="comparison-text">
+                <h4>Visual Concept Architecture</h4>
+                <p>Mind maps, flowcharts, annotated ray diagrams, and color-coded formula chips for rapid retention.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ“</div>
+              <div class="comparison-text">
+                <h4>100% Free & Open Access</h4>
+                <p>Zero paywalls, zero locked PDF tricks, zero ads. High-grade education accessible to all.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ“</div>
+              <div class="comparison-text">
+                <h4>Ultra-Lightweight & Zero Lag</h4>
+                <p>Loads in under 50 milliseconds. Smooth 60 FPS performance even on 4GB RAM & dual-core PCs.</p>
+              </div>
+            </div>
+
+            <div class="comparison-item">
+              <div class="comparison-icon">âœ“</div>
+              <div class="comparison-text">
+                <h4>Strictly CBSE Board Aligned</h4>
+                <p>Filtered 100% strictly according to the latest rationalized syllabus and marking scheme.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. QUICK REVISION TABBED SUITE -->
+    <section id="quick-revision" class="section" style="background: rgba(11, 15, 28, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag violet">Speed Prep</span>
+          <h2 class="section-title">10-Minute Rapid Revision Suite</h2>
+          <p class="section-subtitle">
+            Switch between essential formulas, concept snapshots, examiner traps, and memory mnemonics.
+          </p>
+        </div>
+
+        <div class="revision-tabs-container">
+          
+          <!-- Tab Headers -->
+          <div class="revision-tab-headers" role="tablist">
+            <button class="rev-tab-btn active" data-tab="formulas">ðŸ“ Essential Formulas</button>
+            <button class="rev-tab-btn" data-tab="concepts">âš¡ Key Concept Snapshots</button>
+            <button class="rev-tab-btn" data-tab="traps">âš ï¸ Examiner's Traps</button>
+            <button class="rev-tab-btn" data-tab="mnemonics">ðŸ§  Memory Hacks</button>
+          </div>
+
+          <!-- Tab Content 1: Formulas -->
+          <div class="rev-tab-content active" id="tab-formulas">
+            <div class="formula-cards-grid">
+              
+              <div class="formula-card-item">
+                <div class="formula-name">Quadratic Formula</div>
+                <div class="formula-equation">x = (-b &plusmn; &radic;D) / 2a</div>
+                <div class="formula-notes">Where Discriminant D = b&sup2; - 4ac. Determines nature of roots.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Arithmetic Progression</div>
+                <div class="formula-equation">a<sub>n</sub> = a + (n-1)d</div>
+                <div class="formula-notes">Sum of n terms: S<sub>n</sub> = n/2 &times; [2a + (n-1)d]</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Mirror Formula & Magnification</div>
+                <div class="formula-equation">1/f = 1/v + 1/u</div>
+                <div class="formula-notes">m = -v/u = h'/h. Note: Lens formula uses 1/v - 1/u.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Ohm's Law & Resistance</div>
+                <div class="formula-equation">V = I &times; R</div>
+                <div class="formula-notes">R = &rho; &times; (l / A). Resistance depends on length and area.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Electric Power</div>
+                <div class="formula-equation">P = V &times; I = I&sup2;R = V&sup2;/R</div>
+                <div class="formula-notes">Commercial unit of energy: 1 kWh = 3.6 &times; 10<sup>6</sup> Joules.</div>
+              </div>
+
+              <div class="formula-card-item">
+                <div class="formula-name">Trigonometric Identity</div>
+                <div class="formula-equation">sin&sup2;&theta; + cos&sup2;&theta; = 1</div>
+                <div class="formula-notes">1 + tan&sup2;&theta; = sec&sup2;&theta; and 1 + cot&sup2;&theta; = cosec&sup2;&theta;.</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Concept Snapshots -->
+          <div class="rev-tab-content" id="tab-concepts">
+            <div class="grid-2">
+              <div class="glass-card">
+                <span class="badge badge-cyan" style="margin-bottom: 8px;">CHEMISTRY</span>
+                <h4 style="margin-bottom: 6px;">Redox Reactions Simplified</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Oxidation is Loss of electrons (or addition of Oxygen/removal of Hydrogen). Reduction is Gain of electrons. The substance getting oxidised is the reducing agent!
+                </p>
+              </div>
+              <div class="glass-card">
+                <span class="badge badge-violet" style="margin-bottom: 8px;">BIOLOGY</span>
+                <h4 style="margin-bottom: 6px;">Double Circulation in Human Heart</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Blood goes through the heart twice in one complete cardiac cycle: Pulmonary Circulation (Heart &rarr; Lungs &rarr; Heart) and Systemic Circulation (Heart &rarr; Body Organs &rarr; Heart).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 3: Examiner's Traps -->
+          <div class="rev-tab-content" id="tab-traps">
+            <div class="grid-2">
+              <div class="glass-card" style="border-left: 3px solid #ef4444;">
+                <span class="badge badge-amber" style="margin-bottom: 8px;">COMMON PITFALL #1</span>
+                <h4 style="margin-bottom: 6px;">Sign Convention in Optics</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Object distance <code style="color: #38bdf8;">u</code> is <strong>always negative</strong> in Cartesian sign convention. Many students forget this and get reversed focal length values!
+                </p>
+              </div>
+              <div class="glass-card" style="border-left: 3px solid #ef4444;">
+                <span class="badge badge-amber" style="margin-bottom: 8px;">COMMON PITFALL #2</span>
+                <h4 style="margin-bottom: 6px;">Linear Equations: Consistency Check</h4>
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                  Parallel lines (a<sub>1</sub>/a<sub>2</sub> = b<sub>1</sub>/b<sub>2</sub> &ne; c<sub>1</sub>/c<sub>2</sub>) have NO solution and are <strong>Inconsistent</strong>. Coincident lines are Dependent Consistent.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 4: Memory Mnemonics -->
+          <div class="rev-tab-content" id="tab-mnemonics">
+            <div class="grid-2">
+              <div class="glass-card" style="border-left: 3px solid #10b981;">
+                <span class="badge badge-emerald" style="margin-bottom: 8px;">MNEMONIC #1</span>
+                <h4 style="margin-bottom: 6px;">Reactivity Series of Metals</h4>
+                <p style="font-size: 0.95rem; font-family: var(--font-mono); color: #34d399; margin-bottom: 6px;">
+                  "Please Stop Calling Me A Careless Zebra Instead Try Learning How Copper Saves Gold"
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                  K (Potassium), Na (Sodium), Ca, Mg, Al, C, Zn, Fe, Sn, Pb, H, Cu, Ag, Au.
+                </p>
+              </div>
+              <div class="glass-card" style="border-left: 3px solid #10b981;">
+                <span class="badge badge-emerald" style="margin-bottom: 8px;">MNEMONIC #2</span>
+                <h4 style="margin-bottom: 6px;">Trigonometry Ratios (Sin, Cos, Tan)</h4>
+                <p style="font-size: 0.95rem; font-family: var(--font-mono); color: #34d399; margin-bottom: 6px;">
+                  "Some People Have Curly Brown Hair Through Proper Brushing"
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                  Sin = P/H, Cos = B/H, Tan = P/B.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. INTERACTIVE PRACTICE ZONE TEASER WIDGET -->
+    <section id="practice-zone" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Interactive Practice</span>
+          <h2 class="section-title">Test Your Board Readiness</h2>
+          <p class="section-subtitle">
+            Try this authentic CBSE Class 10 board question right now and get immediate intelligent feedback.
+          </p>
+        </div>
+
+        <div class="practice-teaser-box">
+          
+          <div class="practice-teaser-header">
+            <div class="practice-meta-tags">
+              <span class="badge badge-cyan">SCIENCE â€¢ PHYSICS</span>
+              <span class="badge badge-violet">LIGHT: REFLECTION</span>
+            </div>
+            <span style="font-size: 0.825rem; color: #fbbf24; font-weight: 600;">â˜… High Frequency Board MCQ</span>
+          </div>
+
+          <div class="practice-question-text" id="practice-question">
+            Loading question...
+          </div>
+
+          <div class="practice-options-grid" id="practice-options">
+            <!-- Rendered by home.js -->
+          </div>
+
+          <div class="practice-feedback" id="practice-feedback">
+            <!-- Feedback populated on option click -->
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 12px;">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">100+ Board Questions with step-by-step marking schemes available</span>
+            <button class="btn btn-sm btn-glass" onclick="showToast('Practice Zone Full Suite: 100+ questions loaded!')">
+              <span>Explore All 100+ Practice Questions &rarr;</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. STUDENT-FRIENDLY PLATFORM ADVANTAGES -->
+    <section class="section" style="background: rgba(11, 15, 28, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag violet">Designed for Students</span>
+          <h2 class="section-title">Engineered for Stress-Free Study</h2>
+          <p class="section-subtitle">
+            Every feature is crafted to support late-night revisions, low-bandwidth internet, and high recall.
+          </p>
+        </div>
+
+        <div class="grid-4">
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">ðŸŒ™</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Late Night Eye Care</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">Deep midnight navy palette reduces eye fatigue during intense late-night board revision sessions.</p>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">âš¡</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Zero CPU Lag</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">No bloated 3D scripts. Operates at a silky 60 FPS even on entry-level dual-core laptops with 4GB RAM.</p>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">ðŸŒ</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Hindi & English Dual Support</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">Switch between English and Hindi with a single click to grasp complex concepts in your native tongue.</p>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">ðŸ–¨ï¸</div>
+            <h4 style="font-size: 1.1rem; margin-bottom: 6px;">Print & Offline Ready</h4>
+            <p style="font-size: 0.875rem; color: var(--text-secondary);">Clean typography and vector diagram assets ensure notes print crisply without wasted printer ink.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. FAQ ACCORDION SECTION -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Common Inquiries</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">
+            Everything you need to know about STUDYVERSE, CBSE Class 10 resources, and our roadmap.
+          </p>
+        </div>
+
+        <div class="faq-list" id="faq-accordion">
+          <!-- Rendered dynamically by home.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. COMMUNITY ORBIT / NEWSLETTER SECTION -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="orbit-banner">
+          <span class="badge badge-violet" style="margin-bottom: 12px;">STUDYVERSE ORBIT ðŸš€</span>
+          <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 10px;">
+            Join 15,000+ Class 10 Toppers
+          </h2>
+          <p style="max-width: 580px; margin: 0 auto; color: var(--text-secondary); font-size: 1.05rem;">
+            Get weekly high-yield formula capsules, CBSE board date-sheet alerts, and chapter mind maps delivered straight to your inbox.
+          </p>
+
+          <form class="orbit-form" onsubmit="return false;">
+            <input type="email" class="orbit-input" placeholder="Enter your email address..." required aria-label="Student email">
+            <button type="submit" class="btn btn-primary">
+              <span>Join Orbit Free</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+          <div style="font-size: 0.775rem; color: var(--text-dim); margin-top: 12px;">
+            100% Free. No spam, ever. Unsubscribe with one click anytime.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 14. COMPREHENSIVE FUTURISTIC FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Brand Summary -->
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 12px;">
+            <div class="brand-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="logo-main">STUDY<span>VERSE</span></span>
+              <span class="logo-sub">Your Universe of Learning</span>
+            </div>
+          </a>
+          <p>
+            A next-generation, high-speed educational platform engineered to empower CBSE Class 10 school students across India with visual clarity and confidence.
+          </p>
+          <div style="margin-top: 16px; display: flex; gap: 10px;">
+            <span class="badge badge-cyan">CBSE 2024-25 & 2025-26</span>
+            <span class="badge badge-emerald">Free & Open</span>
+          </div>
+        </div>
+
+        <!-- Column 1: Classes & Portals -->
+        <div class="footer-col">
+          <div class="footer-heading">Classes</div>
+          <div class="footer-links">
+            <a href="#class-10-hub">Class 10 Hub (Active)</a>
+            <a href="#classes">Class 9 Foundation</a>
+            <a href="#classes">Class 11 Science</a>
+            <a href="#classes">Class 11 Commerce</a>
+            <a href="#classes">Class 12 Champions</a>
+          </div>
+        </div>
+
+        <!-- Column 2: Class 10 Subjects -->
+        <div class="footer-col">
+          <div class="footer-heading">Subjects</div>
+          <div class="footer-links">
+            <a href="#subjects">Mathematics (041)</a>
+            <a href="#subjects">Science (086)</a>
+            <a href="#subjects">Social Science (087)</a>
+            <a href="#subjects">English Language (184)</a>
+            <a href="#subjects">Hindi Course A & B</a>
+            <a href="#subjects">Artificial Intelligence (417)</a>
+          </div>
+        </div>
+
+        <!-- Column 3: Study Resources -->
+        <div class="footer-col">
+          <div class="footer-heading">Resources</div>
+          <div class="footer-links">
+            <a href="#featured-resources">Notes Library</a>
+            <a href="#quick-revision">Formula Sheets</a>
+            <a href="#featured-resources">Chapter Mind Maps</a>
+            <a href="#practice-zone">Practice Zone</a>
+            <a href="#quick-revision">Examiner Traps</a>
+            <a href="#featured-resources">Board Paper Decks</a>
+          </div>
+        </div>
+
+        <!-- Column 4: Platform & Legal -->
+        <div class="footer-col">
+          <div class="footer-heading">Platform</div>
+          <div class="footer-links">
+            <a href="#why-studyverse">About Us</a>
+            <a href="#faq">Student FAQ</a>
+            <a href="#faq">Contact Support</a>
+            <a href="javascript:void(0)" onclick="showToast('Privacy Policy: No personal data is tracked or sold.')">Privacy Policy</a>
+            <a href="javascript:void(0)" onclick="showToast('Terms of Service: Free educational use for students.')">Terms & Conditions</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 STUDYVERSE. Designed for CBSE Class 10 Students in India. All rights reserved.
+        </div>
+
+        <div class="footer-system-status">
+          <span class="live-dot" style="background-color: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>
+          <span>All Systems Nominal &bull; Ultra-Low Latency Engine &bull; Zero Lag</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- 15. UNIVERSAL SPOTLIGHT SEARCH MODAL (CTRL + K) -->
+  <div class="search-modal-backdrop" id="search-modal" role="dialog" aria-modal="true" aria-label="Search resources">
+    <div class="search-modal-card">
+      <div class="search-modal-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Search chapters, formulas, or subjects (e.g., Quadratic, Light, Life Processes)..." autocomplete="off">
+        <button id="search-modal-close" class="btn btn-sm btn-glass" style="padding: 4px 8px; font-size: 0.75rem;">ESC</button>
+      </div>
+
+      <div class="search-results-list" id="search-results-list">
+        <!-- Filtered items dynamically inserted here -->
+      </div>
+
+      <div class="search-modal-footer">
+        <span>Navigation: Click to view or preview resource</span>
+        <span>Press <kbd style="background: rgba(255,255,255,0.1); padding: 1px 4px; border-radius: 3px;">ESC</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. REALISTIC PDF PREVIEW MODAL -->
+  <div class="pdf-modal-backdrop" id="pdf-modal" role="dialog" aria-modal="true" aria-label="PDF Preview">
+    <div class="pdf-modal-card">
+      <div class="pdf-modal-toolbar">
+        <div class="pdf-modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #ef4444;">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+          <span id="pdf-modal-title-text">Resource Title</span>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn btn-sm btn-primary" id="pdf-download-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download PDF</span>
+          </button>
+          <button class="btn btn-sm btn-glass" id="pdf-modal-close" style="width: 32px; height: 32px; padding: 0;">âœ•</button>
+        </div>
+      </div>
+
+      <div class="pdf-viewer-content">
+        <div class="mock-pdf-page" id="pdf-mock-page-content">
+          <!-- Populated dynamically by home.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. Interactive Application Engine (Zero-dependency, offline & file:/// compatible) -->
+  <script>
+/**
+ * STUDYVERSE - Main High-Performance Platform Engine
+ * Zero external dependencies. Silky 60 FPS performance on 4GB RAM & dual-core systems.
+ * Fully compatible with file:/// local double-click and live HTTP servers.
+ */
+
+/* ========================================================================== */
+/* DATA LAYER (Modular Curriculum & Study Resources)                         */
+/* ========================================================================== */
+
+const SUBJECTS_DATA = [
+  {
+    id: 'mathematics',
+    name: 'Mathematics',
+    hindiName: 'à¤—à¤£à¤¿à¤¤ (Mathematics)',
+    code: '041 / 241',
+    category: 'Core STEM',
+    chaptersCount: 14,
+    notesCount: 28,
+    formulasCount: 14,
+    questionsCount: 150,
+    gradient: 'linear-gradient(135deg, #38bdf8 0%, #6366f1 100%)',
+    iconColor: '#38bdf8',
+    iconBg: 'rgba(56, 189, 248, 0.12)',
+    iconBorder: 'rgba(56, 189, 248, 0.3)',
+    description: 'Master Real Numbers, Polynomials, Trigonometry, Coordinate Geometry, and Surface Areas with step-by-step theorem proofs and formula sheets.',
+    hindiDescription: 'à¤µà¤¾à¤¸à¥à¤¤à¤µà¤¿à¤• à¤¸à¤‚à¤–à¥à¤¯à¤¾à¤à¤, à¤¬à¤¹à¥à¤ªà¤¦, à¤¤à¥à¤°à¤¿à¤•à¥‹à¤£à¤®à¤¿à¤¤à¤¿, à¤¨à¤¿à¤°à¥à¤¦à¥‡à¤¶à¤¾à¤‚à¤• à¤œà¥à¤¯à¤¾à¤®à¤¿à¤¤à¤¿ à¤”à¤° à¤ªà¥ƒà¤·à¥à¤ à¥€à¤¯ à¤•à¥à¤·à¥‡à¤¤à¥à¤°à¤«à¤² à¤•à¥‡ à¤¸à¤®à¥à¤ªà¥‚à¤°à¥à¤£ à¤¸à¥‚à¤¤à¥à¤° à¤”à¤° à¤¹à¤²à¥¤',
+    chapters: [
+      { id: 'math-ch1', num: 1, title: 'Real Numbers', highYield: true, marks: '6 Marks' },
+      { id: 'math-ch2', num: 2, title: 'Polynomials', highYield: false, marks: '4 Marks' },
+      { id: 'math-ch3', num: 3, title: 'Pair of Linear Equations in Two Variables', highYield: true, marks: '6 Marks' },
+      { id: 'math-ch4', num: 4, title: 'Quadratic Equations', highYield: true, marks: '6 Marks' },
+      { id: 'math-ch5', num: 5, title: 'Arithmetic Progressions', highYield: true, marks: '5 Marks' },
+      { id: 'math-ch6', num: 6, title: 'Triangles', highYield: true, marks: '8 Marks' },
+      { id: 'math-ch7', num: 7, title: 'Coordinate Geometry', highYield: false, marks: '6 Marks' },
+      { id: 'math-ch8', num: 8, title: 'Introduction to Trigonometry', highYield: true, marks: '8 Marks' },
+      { id: 'math-ch9', num: 9, title: 'Some Applications of Trigonometry (Heights & Distances)', highYield: true, marks: '4 Marks' },
+      { id: 'math-ch10', num: 10, title: 'Circles', highYield: true, marks: '6 Marks' },
+      { id: 'math-ch11', num: 11, title: 'Areas Related to Circles', highYield: false, marks: '4 Marks' },
+      { id: 'math-ch12', num: 12, title: 'Surface Areas and Volumes', highYield: true, marks: '6 Marks' },
+      { id: 'math-ch13', num: 13, title: 'Statistics', highYield: true, marks: '7 Marks' },
+      { id: 'math-ch14', num: 14, title: 'Probability', highYield: false, marks: '4 Marks' }
+    ]
+  },
+  {
+    id: 'science',
+    name: 'Science',
+    hindiName: 'à¤µà¤¿à¤œà¥à¤žà¤¾à¤¨ (Science)',
+    code: '086',
+    category: 'Physics, Chemistry, Biology',
+    chaptersCount: 13,
+    notesCount: 32,
+    formulasCount: 10,
+    questionsCount: 180,
+    gradient: 'linear-gradient(135deg, #10b981 0%, #06b6d4 100%)',
+    iconColor: '#34d399',
+    iconBg: 'rgba(16, 185, 129, 0.12)',
+    iconBorder: 'rgba(16, 185, 129, 0.3)',
+    description: 'Crisp diagrams for Life Processes, balanced reactions for Chemistry, and ray diagrams + circuit formulas for Physics.',
+    hindiDescription: 'à¤œà¥ˆà¤µ à¤ªà¥à¤°à¤•à¥à¤°à¤® à¤•à¥‡ à¤¸à¥à¤µà¤šà¥à¤› à¤šà¤¿à¤¤à¥à¤°, à¤°à¤¾à¤¸à¤¾à¤¯à¤¨à¤¿à¤• à¤…à¤­à¤¿à¤•à¥à¤°à¤¿à¤¯à¤¾à¤à¤ à¤”à¤° à¤­à¥Œà¤¤à¤¿à¤• à¤µà¤¿à¤œà¥à¤žà¤¾à¤¨ à¤•à¥‡ à¤•à¤¿à¤°à¤£ à¤†à¤°à¥‡à¤– à¤µ à¤ªà¤°à¤¿à¤ªà¤¥ à¤¸à¥‚à¤¤à¥à¤°à¥¤',
+    chapters: [
+      { id: 'sci-ch1', num: 1, title: 'Chemical Reactions and Equations', highYield: true, marks: '5 Marks' },
+      { id: 'sci-ch2', num: 2, title: 'Acids, Bases and Salts', highYield: true, marks: '6 Marks' },
+      { id: 'sci-ch3', num: 3, title: 'Metals and Non-metals', highYield: true, marks: '7 Marks' },
+      { id: 'sci-ch4', num: 4, title: 'Carbon and its Compounds', highYield: true, marks: '7 Marks' },
+      { id: 'sci-ch5', num: 5, title: 'Life Processes', highYield: true, marks: '9 Marks' },
+      { id: 'sci-ch6', num: 6, title: 'Control and Coordination', highYield: false, marks: '6 Marks' },
+      { id: 'sci-ch7', num: 7, title: 'How do Organisms Reproduce?', highYield: true, marks: '7 Marks' },
+      { id: 'sci-ch8', num: 8, title: 'Heredity', highYield: false, marks: '4 Marks' },
+      { id: 'sci-ch9', num: 9, title: 'Light â€“ Reflection and Refraction', highYield: true, marks: '8 Marks' },
+      { id: 'sci-ch10', num: 10, title: 'The Human Eye and the Colourful World', highYield: false, marks: '4 Marks' },
+      { id: 'sci-ch11', num: 11, title: 'Electricity', highYield: true, marks: '8 Marks' },
+      { id: 'sci-ch12', num: 12, title: 'Magnetic Effects of Electric Current', highYield: true, marks: '5 Marks' },
+      { id: 'sci-ch13', num: 13, title: 'Our Environment', highYield: false, marks: '4 Marks' }
+    ]
+  },
+  {
+    id: 'social-science',
+    name: 'Social Science',
+    hindiName: 'à¤¸à¤¾à¤®à¤¾à¤œà¤¿à¤• à¤µà¤¿à¤œà¥à¤žà¤¾à¤¨ (SST)',
+    code: '087',
+    category: 'History, Geog, Civics, Econ',
+    chaptersCount: 21,
+    notesCount: 42,
+    formulasCount: 0,
+    questionsCount: 210,
+    gradient: 'linear-gradient(135deg, #f59e0b 0%, #ec4899 100%)',
+    iconColor: '#fbbf24',
+    iconBg: 'rgba(245, 158, 11, 0.12)',
+    iconBorder: 'rgba(245, 158, 11, 0.3)',
+    description: 'Visual timelines for Nationalism in India, comprehensive map pointers for Geography, and tabular notes for Economics.',
+    hindiDescription: 'à¤­à¤¾à¤°à¤¤ à¤®à¥‡à¤‚ à¤°à¤¾à¤·à¥à¤Ÿà¥à¤°à¤µà¤¾à¤¦ à¤•à¥€ à¤¸à¤®à¤¯à¤°à¥‡à¤–à¤¾, à¤­à¥‚à¤—à¥‹à¤² à¤•à¥‡ à¤¨à¤¿à¤¶à¥à¤šà¤¿à¤¤ à¤®à¤¾à¤¨à¤šà¤¿à¤¤à¥à¤° à¤”à¤° à¤…à¤°à¥à¤¥à¤¶à¤¾à¤¸à¥à¤¤à¥à¤° à¤•à¥‡ à¤¸à¤°à¤² à¤¤à¥à¤²à¤¨à¤¾à¤¤à¥à¤®à¤• à¤¨à¥‹à¤Ÿà¥à¤¸à¥¤',
+    chapters: [
+      { id: 'sst-ch1', num: 1, title: 'The Rise of Nationalism in Europe', highYield: true, marks: '6 Marks' },
+      { id: 'sst-ch2', num: 2, title: 'Nationalism in India', highYield: true, marks: '8 Marks' },
+      { id: 'sst-ch3', num: 3, title: 'Resources and Development', highYield: true, marks: '4 Marks' },
+      { id: 'sst-ch4', num: 4, title: 'Power Sharing', highYield: true, marks: '5 Marks' },
+      { id: 'sst-ch5', num: 5, title: 'Money and Credit', highYield: true, marks: '6 Marks' }
+    ]
+  },
+  {
+    id: 'english',
+    name: 'English Language & Lit',
+    hindiName: 'à¤…à¤‚à¤—à¥à¤°à¥‡à¤œà¤¼à¥€ (English 184)',
+    code: '184',
+    category: 'Language & Literature',
+    chaptersCount: 22,
+    notesCount: 30,
+    formulasCount: 0,
+    questionsCount: 120,
+    gradient: 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+    iconColor: '#c084fc',
+    iconBg: 'rgba(168, 85, 247, 0.12)',
+    iconBorder: 'rgba(168, 85, 247, 0.3)',
+    description: 'Character sketches, poetic devices, chapter summaries for First Flight & Footprints, and high-scoring grammar formats.',
+    hindiDescription: 'à¤šà¤°à¤¿à¤¤à¥à¤° à¤šà¤¿à¤¤à¥à¤°à¤£, à¤•à¤¾à¤µà¥à¤¯ à¤‰à¤ªà¤•à¤°à¤£ (Poetic Devices), à¤…à¤§à¥à¤¯à¤¾à¤¯ à¤¸à¤¾à¤°à¤¾à¤‚à¤¶ à¤”à¤° à¤ªà¤¤à¥à¤° à¤µ à¤¨à¤¿à¤¬à¤‚à¤§ à¤ªà¥à¤°à¤¾à¤°à¥‚à¤ªà¥¤',
+    chapters: [
+      { id: 'eng-ch1', num: 1, title: 'A Letter to God', highYield: true, marks: 'Board Essential' },
+      { id: 'eng-ch2', num: 2, title: 'Nelson Mandela: Long Walk to Freedom', highYield: true, marks: 'Board Essential' },
+      { id: 'eng-ch3', num: 3, title: 'Poetic Devices & Literary Terms Master Deck', highYield: true, marks: '5 Marks' },
+      { id: 'eng-ch4', num: 4, title: 'Analytical Paragraph & Formal Letter Formats', highYield: true, marks: '10 Marks' }
+    ]
+  },
+  {
+    id: 'hindi',
+    name: 'Hindi (Course A & B)',
+    hindiName: 'à¤¹à¤¿à¤‚à¤¦à¥€ (à¤•à¥‹à¤°à¥à¤¸ à¤… à¤à¤µà¤‚ à¤¬ 002/085)',
+    code: '002 / 085',
+    category: 'à¤¸à¤¾à¤¹à¤¿à¤¤à¥à¤¯ à¤à¤µà¤‚ à¤µà¥à¤¯à¤¾à¤•à¤°à¤£',
+    chaptersCount: 18,
+    notesCount: 24,
+    formulasCount: 0,
+    questionsCount: 110,
+    gradient: 'linear-gradient(135deg, #f43f5e 0%, #fb923c 100%)',
+    iconColor: '#fb7185',
+    iconBg: 'rgba(244, 63, 94, 0.12)',
+    iconBorder: 'rgba(244, 63, 94, 0.3)',
+    description: 'à¤•à¥à¤·à¤¿à¤¤à¤¿à¤œ, à¤•à¥ƒà¤¤à¤¿à¤•à¤¾, à¤¸à¥à¤ªà¤°à¥à¤¶, à¤¸à¤‚à¤šà¤¯à¤¨ à¤•à¥‡ à¤ªà¤¾à¤  à¤¸à¤¾à¤°à¤¾à¤‚à¤¶, à¤ªà¤¦ à¤µà¥à¤¯à¤¾à¤–à¥à¤¯à¤¾, à¤”à¤° à¤°à¤šà¤¨à¤¾ à¤•à¥‡ à¤†à¤§à¤¾à¤° à¤ªà¤° à¤µà¤¾à¤•à¥à¤¯ à¤­à¥‡à¤¦ à¤¤à¤¥à¤¾ à¤¸à¤®à¤¾à¤¸ à¤µà¥à¤¯à¤¾à¤•à¤°à¤£ à¤—à¤¾à¤‡à¤¡à¥¤',
+    hindiDescription: 'à¤•à¥à¤·à¤¿à¤¤à¤¿à¤œ, à¤•à¥ƒà¤¤à¤¿à¤•à¤¾, à¤¸à¥à¤ªà¤°à¥à¤¶, à¤¸à¤‚à¤šà¤¯à¤¨ à¤•à¥‡ à¤­à¤¾à¤µà¤¾à¤°à¥à¤¥, à¤ªà¤¦ à¤ªà¤°à¤¿à¤šà¤¯, à¤¸à¤®à¤¾à¤¸, à¤”à¤° à¤”à¤ªà¤šà¤¾à¤°à¤¿à¤• à¤ªà¤¤à¥à¤° à¤²à¥‡à¤–à¤¨ à¤ªà¥à¤°à¤¾à¤°à¥‚à¤ªà¥¤',
+    chapters: [
+      { id: 'hin-ch1', num: 1, title: 'à¤¨à¥‡à¤¤à¤¾à¤œà¥€ à¤•à¤¾ à¤šà¤¶à¥à¤®à¤¾ (à¤¸à¥à¤µà¤¯à¤‚ à¤ªà¥à¤°à¤•à¤¾à¤¶)', highYield: true, marks: 'à¤®à¤¹à¤¤à¥à¤µà¤ªà¥‚à¤°à¥à¤£' },
+      { id: 'hin-ch2', num: 2, title: 'à¤¸à¥‚à¤°à¤¦à¤¾à¤¸ à¤•à¥‡ à¤ªà¤¦ - à¤¸à¤ªà¥à¤°à¤¸à¤‚à¤— à¤µà¥à¤¯à¤¾à¤–à¥à¤¯à¤¾', highYield: true, marks: 'à¤¬à¥‹à¤°à¥à¤¡ à¤¸à¥à¤ªà¥‡à¤¶à¤²' },
+      { id: 'hin-ch3', num: 3, title: 'à¤µà¥à¤¯à¤¾à¤•à¤°à¤£: à¤°à¤šà¤¨à¤¾ à¤•à¥‡ à¤†à¤§à¤¾à¤° à¤ªà¤° à¤µà¤¾à¤•à¥à¤¯ à¤­à¥‡à¤¦', highYield: true, marks: '4 à¤…à¤‚à¤•' },
+      { id: 'hin-ch4', num: 4, title: 'à¤µà¥à¤¯à¤¾à¤•à¤°à¤£: à¤ªà¤¦ à¤ªà¤°à¤¿à¤šà¤¯ à¤à¤µà¤‚ à¤µà¤¾à¤šà¥à¤¯', highYield: true, marks: '4 à¤…à¤‚à¤•' }
+    ]
+  },
+  {
+    id: 'artificial-intelligence',
+    name: 'Artificial Intelligence',
+    hindiName: 'à¤†à¤°à¥à¤Ÿà¤¿à¤«à¤¿à¤¶à¤¿à¤¯à¤² à¤‡à¤‚à¤Ÿà¥‡à¤²à¤¿à¤œà¥‡à¤‚à¤¸ (AI 417)',
+    code: '417',
+    category: 'Skill Subject (Future Tech)',
+    chaptersCount: 6,
+    notesCount: 12,
+    formulasCount: 4,
+    questionsCount: 75,
+    gradient: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
+    iconColor: '#38bdf8',
+    iconBg: 'rgba(6, 182, 212, 0.12)',
+    iconBorder: 'rgba(6, 182, 212, 0.3)',
+    description: 'CBSE Skill Elective Code 417: AI Project Cycle, Computer Vision (CV), Natural Language Processing (NLP), and Python fundamentals.',
+    hindiDescription: 'à¤¸à¥€à¤¬à¥€à¤à¤¸à¤ˆ à¤•à¥‹à¤¡ 417: à¤à¤†à¤ˆ à¤ªà¥à¤°à¥‹à¤œà¥‡à¤•à¥à¤Ÿ à¤¸à¤¾à¤‡à¤•à¤¿à¤², à¤•à¤‚à¤ªà¥à¤¯à¥‚à¤Ÿà¤° à¤µà¤¿à¤œà¤¼à¤¨, à¤à¤¨à¤à¤²à¤ªà¥€ à¤à¤µà¤‚ à¤ªà¤¾à¤¯à¤¥à¤¨ à¤ªà¥à¤°à¥‹à¤—à¥à¤°à¤¾à¤®à¤¿à¤‚à¤— à¤•à¥‡ à¤‰à¤šà¥à¤š-à¤…à¤‚à¤• à¤¨à¥‹à¤Ÿà¥à¤¸à¥¤',
+    chapters: [
+      { id: 'ai-ch1', num: 1, title: 'Introduction to Artificial Intelligence', highYield: true, marks: 'Unit 1' },
+      { id: 'ai-ch2', num: 2, title: 'AI Project Cycle (Problem Scoping to Evaluation)', highYield: true, marks: 'Unit 2' },
+      { id: 'ai-ch3', num: 3, title: 'Advance Python for Data Science', highYield: true, marks: 'Unit 3' },
+      { id: 'ai-ch4', num: 4, title: 'Computer Vision (CV) Concepts & OpenCV Basics', highYield: true, marks: 'Unit 4' },
+      { id: 'ai-ch5', num: 5, title: 'Natural Language Processing (NLP)', highYield: true, marks: 'Unit 5' },
+      { id: 'ai-ch6', num: 6, title: 'Evaluation & Confusion Matrix Metrics', highYield: true, marks: 'Unit 6' }
+    ]
+  }
+];
+
+const FEATURED_RESOURCES = [
+  {
+    id: 'res-chem-reactions',
+    title: 'Chemical Reactions & Equations â€” Master Visual Blueprint',
+    subject: 'Science (Chemistry)',
+    subjectId: 'science',
+    chapter: 'Chapter 1',
+    type: 'Revision Notes',
+    badgeClass: 'badge-emerald',
+    readTime: '15 min read',
+    pages: '12 Pages',
+    rating: '4.9 â˜…',
+    downloads: '14.2k',
+    description: 'Complete visual breakdowns of Combination, Decomposition, Displacement, Double Displacement and Redox reactions with color-change indicators and balanced equations.',
+    keyPoints: [
+      'Precipitate colors (Lead iodide yellow precipitate, barium sulphate white)',
+      'Rusting of iron & rancidity prevention antioxidant tips',
+      'Endothermic vs Exothermic energy diagrams',
+      'All 20+ NCERT activity-based board questions with answers'
+    ]
+  },
+  {
+    id: 'res-math-formulas',
+    title: 'Complete Class 10 Mathematics All-Formulas Cheat Sheet',
+    subject: 'Mathematics',
+    subjectId: 'mathematics',
+    chapter: 'All Chapters (1 to 14)',
+    type: 'Formula Sheet',
+    badgeClass: 'badge-cyan',
+    readTime: '10 min review',
+    pages: '6 Pages',
+    rating: '5.0 â˜…',
+    downloads: '26.8k',
+    description: 'Quadratic formula, Arithmetic Progression nth term & sum, Trigonometry identities, Section formula, and Surface Areas & Volumes quick reference deck.',
+    keyPoints: [
+      'Discriminant rules (D > 0, D = 0, D < 0 real/imaginary roots)',
+      'sinÂ²Î¸ + cosÂ²Î¸ = 1 and reciprocal identity proofs',
+      'Frustum, Cone, Cylinder, Sphere volume comparisons',
+      'Direct, Assumed Mean & Step Deviation methods for Statistics'
+    ]
+  },
+  {
+    id: 'res-life-processes',
+    title: 'Life Processes â€” High-Res NCERT Diagram & Marking Guide',
+    subject: 'Science (Biology)',
+    subjectId: 'science',
+    chapter: 'Chapter 5',
+    type: 'Mind Map & Diagrams',
+    badgeClass: 'badge-violet',
+    readTime: '18 min read',
+    pages: '16 Pages',
+    rating: '4.9 â˜…',
+    downloads: '18.9k',
+    description: 'High-clarity annotated diagrams for Human Alimentary Canal, Respiratory System, Human Heart Double Circulation, and Nephron Filtration.',
+    keyPoints: [
+      'Step-by-step arrows for pulmonary & systemic double circulation',
+      'Nephron ultrafiltration and selective reabsorption table',
+      'Aerobic vs Anaerobic respiration glucose breakdown pathway flowchart',
+      'Stomata opening and closing guard cell mechanism'
+    ]
+  },
+  {
+    id: 'res-ai-handbook',
+    title: 'Artificial Intelligence (Code 417) â€” 1-Shot Board Companion',
+    subject: 'Artificial Intelligence',
+    subjectId: 'artificial-intelligence',
+    chapter: 'Units 1-6',
+    type: 'Exam Handbook',
+    badgeClass: 'badge-cyan',
+    readTime: '20 min read',
+    pages: '14 Pages',
+    rating: '4.8 â˜…',
+    downloads: '8.4k',
+    description: 'AI Project Cycle (Problem Scoping, Data Acquisition, Data Exploration, Modelling, Evaluation) + Computer Vision & NLP essentials.',
+    keyPoints: [
+      '4Ws Canvas (Who, What, Where, Why) structured framework',
+      'Pixel values, RGB channels, and Convolution concepts',
+      'Text normalisation, Tokenisation, Stemming, and Lemmatization',
+      'Confusion matrix formulas: Accuracy, Precision, Recall, and F1 Score'
+    ]
+  }
+];
+
+const RECENT_RESOURCES = [
+  {
+    id: 'rec-1',
+    title: 'Light: Reflection & Refraction â€” Ray Diagram Mistakes to Avoid',
+    subject: 'Science (Physics)',
+    date: 'Updated Yesterday',
+    tag: 'Board Trap'
+  },
+  {
+    id: 'rec-2',
+    title: 'Social Science 2025: Guaranteed Map Work Locations Deck',
+    subject: 'Social Science',
+    date: '3 Days Ago',
+    tag: 'Guaranteed 5 Marks'
+  },
+  {
+    id: 'rec-3',
+    title: 'Top 50 Quadratic Equations & AP Word Problems with Solutions',
+    subject: 'Mathematics',
+    date: '5 Days Ago',
+    tag: 'High Yield'
+  },
+  {
+    id: 'rec-4',
+    title: 'English Analytical Paragraph & Formal Letter 2025 Formats',
+    subject: 'English',
+    date: '1 Week Ago',
+    tag: 'Writing Skills'
+  }
+];
+
+const HOMEPAGE_PRACTICE_QUESTION = {
+  subject: 'Science â€” Physics (Light)',
+  chapter: 'Light â€“ Reflection and Refraction',
+  difficulty: 'CBSE Board Favorite',
+  question: 'Where should an object be placed in front of a concave mirror so that it produces a virtual, erect, and magnified image?',
+  options: [
+    { id: 'opt-a', letter: 'A', text: 'Between the Focus (F) and Centre of Curvature (C)' },
+    { id: 'opt-b', letter: 'B', text: 'Between the Pole (P) and Focus (F)', isCorrect: true },
+    { id: 'opt-c', letter: 'C', text: 'Beyond the Centre of Curvature (C)' },
+    { id: 'opt-d', letter: 'D', text: 'At the Principal Focus (F)' }
+  ],
+  explanation: 'When an object is placed between the Pole (P) and the Principal Focus (F) of a concave mirror, the reflected rays diverge. When produced backward behind the mirror, they appear to intersect, forming a virtual, erect, and magnified image behind the mirror (used in shaving mirrors & dental mirrors).'
+};
+
+const FAQ_DATA = [
+  {
+    id: 'faq-1',
+    question: 'Is STUDYVERSE completely free for school students?',
+    answer: 'Yes! STUDYVERSE is 100% free for all students. There are no paywalls, no forced subscriptions, and no credit card requirements. Every revision note, formula cheat sheet, mind map, and practice question is openly accessible to empower students everywhere.'
+  },
+  {
+    id: 'faq-2',
+    question: 'Are the resources strictly aligned with the latest CBSE 2024-25 & 2025-26 syllabus?',
+    answer: 'Absolutely. Every chapter map and note is curated specifically according to the latest rationalized NCERT textbooks and CBSE board exam guidelines. Deleted topics have been eliminated so you never waste precious revision time on out-of-syllabus questions.'
+  },
+  {
+    id: 'faq-3',
+    question: 'Will this website run smoothly on my budget laptop or low-end mobile phone?',
+    answer: 'Yes! STUDYVERSE has been intentionally engineered with lightweight, hardware-accelerated CSS and zero heavy WebGL/Three.js bloat. Even on computers with 4GB RAM or entry-level dual-core processors, page loads take under 50 milliseconds with butter-smooth 60 FPS transitions.'
+  },
+  {
+    id: 'faq-4',
+    question: 'Can I study offline or print the notes and formula sheets?',
+    answer: 'Yes. All study cards, formula sheets, and chapter summaries feature clean, high-contrast layouts engineered for easy reading on screen as well as clean printing without dark ink waste.'
+  },
+  {
+    id: 'faq-5',
+    question: 'When will resources for Class 9, Class 11, and Class 12 be released?',
+    answer: 'Class 10 is our flagship launchpad. The foundation tier for Class 9 and the senior secondary wings for Class 11 & 12 (covering Science and Commerce streams) are currently on our active development roadmap and will roll out progressively.'
+  },
+  {
+    id: 'faq-6',
+    question: 'Does STUDYVERSE support both English and Hindi medium students?',
+    answer: 'Yes! We believe language should never be a barrier to high-grade learning. You can toggle between English and Hindi right from the top navigation bar to view key terminology, chapter names, and concept overviews in Hindi.'
+  }
+];
+
+/* ========================================================================== */
+/* UI CONTROLLERS & INTERACTIVE BEHAVIORS                                     */
+/* ========================================================================== */
+
+const state = {
+  currentLang: 'en',
+  activeRevTab: 'formulas'
+};
+
+const ICONS = {
+  math: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M4 5h6l4 14 6-14"/></svg>`,
+  science: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4 19a2 2 0 0 0 1.66 3h12.68A2 2 0 0 0 20 19l-6-9.69V2"/><path d="M8.5 2h7"/><path d="M14 9.3 8.5 18"/></svg>`,
+  sst: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+  english: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>`,
+  hindi: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>`,
+  ai: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4Z"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M10 17h4"/></svg>`,
+  check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+  arrowRight: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`,
+  eye: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`,
+  chevronDown: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  initNavbarScroll();
+  initMobileMenu();
+  renderSubjects();
+  renderFeaturedResources();
+  renderRecentResources();
+  initRevisionTabs();
+  initPracticeWidget();
+  renderFaq();
+  init3DCardTilt();
+  initSearchModal();
+  initPdfModal();
+  initLanguageSwitcher();
+  initSmoothScroll();
+});
+
+function initNavbarScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }, { passive: true });
+}
+
+function initMobileMenu() {
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (!toggleBtn || !mobileNav) return;
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+    toggleBtn.innerHTML = isOpen 
+      ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`
+      : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
+  });
+
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', false);
+    });
+  });
+}
+
+function renderSubjects() {
+  const container = document.getElementById('subjects-grid');
+  if (!container) return;
+
+  const getIcon = (id) => {
+    switch (id) {
+      case 'mathematics': return ICONS.math;
+      case 'science': return ICONS.science;
+      case 'social-science': return ICONS.sst;
+      case 'english': return ICONS.english;
+      case 'hindi': return ICONS.hindi;
+      case 'artificial-intelligence': return ICONS.ai;
+      default: return ICONS.science;
+    }
+  };
+
+  container.innerHTML = SUBJECTS_DATA.map(sub => {
+    const isHi = state.currentLang === 'hi';
+    const name = isHi ? sub.hindiName : sub.name;
+    const desc = isHi ? sub.hindiDescription : sub.description;
+
+    return `
+      <div class="subject-card shimmer-hover" style="--card-gradient: ${sub.gradient};">
+        <div class="subject-icon-box" style="--icon-bg: ${sub.iconBg}; --icon-border: ${sub.iconBorder}; --icon-color: ${sub.iconColor};">
+          ${getIcon(sub.id)}
+        </div>
+        <div class="flex items-center justify-between gap-sm" style="margin-bottom: 6px;">
+          <h3 class="subject-name">${name}</h3>
+          <span class="badge" style="border-color: ${sub.iconBorder}; color: ${sub.iconColor};">Code ${sub.code}</span>
+        </div>
+        <p class="subject-desc">${desc}</p>
+        
+        <div class="subject-pill-group">
+          <span class="resource-pill">ðŸ“š ${sub.chaptersCount} Chapters</span>
+          <span class="resource-pill">ðŸ“ ${sub.notesCount} Notes</span>
+          <span class="resource-pill">ðŸ“ ${sub.formulasCount > 0 ? sub.formulasCount + ' Formulas' : 'Map Work'}</span>
+          <span class="resource-pill">ðŸŽ¯ ${sub.questionsCount}+ Qs</span>
+        </div>
+
+        <div class="subject-meta">
+          <button class="btn btn-sm btn-glass open-subject-hub" data-subject-id="${sub.id}" style="width: 100%; justify-content: space-between;">
+            <span>${isHi ? 'à¤…à¤§à¥à¤¯à¤¾à¤¯ à¤à¤µà¤‚ à¤¸à¤‚à¤¸à¤¾à¤§à¤¨ à¤¦à¥‡à¤–à¥‡à¤‚' : 'Explore Subject Hub'}</span>
+            ${ICONS.arrowRight}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.querySelectorAll('.open-subject-hub').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const subId = e.currentTarget.dataset.subjectId;
+      const sub = SUBJECTS_DATA.find(s => s.id === subId);
+      showToast(`Entering ${sub.name} Hub â€¢ CBSE Class 10`);
+      
+      setTimeout(() => {
+        openPdfPreview({
+          title: `${sub.name} (Class 10) â€” Complete Syllabus Overview & Chapter Index`,
+          subject: sub.name,
+          chapter: `All ${sub.chaptersCount} Chapters`,
+          type: 'Curriculum & Notes Deck',
+          description: sub.description,
+          keyPoints: sub.chapters.slice(0, 5).map(c => `Chapter ${c.num}: ${c.title} (${c.marks})`)
+        });
+      }, 350);
+    });
+  });
+}
+
+function renderFeaturedResources() {
+  const container = document.getElementById('featured-resources-grid');
+  if (!container) return;
+
+  container.innerHTML = FEATURED_RESOURCES.map(res => `
+    <div class="resource-card glass-panel">
+      <div class="resource-header">
+        <span class="badge ${res.badgeClass}">${res.type}</span>
+        <span style="font-size: 0.8rem; color: var(--accent-cyan-bright); font-weight: 600;">${res.rating}</span>
+      </div>
+      <h3 class="resource-title">${res.title}</h3>
+      <p class="resource-subtitle">${res.subject} â€¢ ${res.chapter}</p>
+      
+      <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--space-md); line-height: 1.5;">
+        ${res.description}
+      </div>
+
+      <div class="resource-footer">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span>ðŸ“„ ${res.pages}</span>
+          <span>â€¢</span>
+          <span>â±ï¸ ${res.readTime}</span>
+        </div>
+        <button class="btn btn-sm btn-primary view-resource-btn" data-resource-id="${res.id}">
+          ${ICONS.eye}
+          <span>Preview PDF</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.view-resource-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const resId = e.currentTarget.dataset.resourceId;
+      const res = FEATURED_RESOURCES.find(r => r.id === resId);
+      if (res) openPdfPreview(res);
+    });
+  });
+}
+
+function renderRecentResources() {
+  const container = document.getElementById('recent-resources-list');
+  if (!container) return;
+
+  container.innerHTML = RECENT_RESOURCES.map(item => `
+    <div class="glass-panel" style="padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='rgba(56,189,248,0.4)'" onmouseout="this.style.borderColor='var(--border-subtle)'" onclick="window.previewRecentResource('${item.title}', '${item.subject}', '${item.tag}')">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan-bright);">
+          ${ICONS.science}
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; margin-bottom: 2px;">${item.title}</h4>
+          <span style="font-size: 0.775rem; color: var(--text-muted);">${item.subject} â€¢ ${item.date}</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="badge badge-cyan">${item.tag}</span>
+        <span style="color: var(--accent-cyan-bright);">${ICONS.arrowRight}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.previewRecentResource = (title, subject, tag) => {
+  openPdfPreview({
+    title,
+    subject,
+    chapter: tag,
+    type: 'Recent Update & Board Capsule',
+    description: `High-yield preparation material for ${subject}. Verified against CBSE 2024-25 marking scheme.`,
+    keyPoints: [
+      'Examiner mark allocation rules',
+      'Step-by-step model answer format',
+      'High-frequency recurring question patterns'
+    ]
+  });
+};
+
+function initRevisionTabs() {
+  const buttons = document.querySelectorAll('.rev-tab-btn');
+  const panels = document.querySelectorAll('.rev-tab-content');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.dataset.tab;
+      
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetPanel = document.getElementById(`tab-${targetTab}`);
+      if (targetPanel) targetPanel.classList.add('active');
+    });
+  });
+}
+
+function initPracticeWidget() {
+  const q = HOMEPAGE_PRACTICE_QUESTION;
+  const questionEl = document.getElementById('practice-question');
+  const optionsEl = document.getElementById('practice-options');
+  const feedbackEl = document.getElementById('practice-feedback');
+  if (!questionEl || !optionsEl || !feedbackEl) return;
+
+  questionEl.textContent = q.question;
+
+  optionsEl.innerHTML = q.options.map(opt => `
+    <button class="option-btn" data-opt-id="${opt.id}">
+      <span class="option-letter">${opt.letter}</span>
+      <span class="option-text">${opt.text}</span>
+    </button>
+  `).join('');
+
+  optionsEl.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const optId = btn.dataset.optId;
+      const opt = q.options.find(o => o.id === optId);
+
+      optionsEl.querySelectorAll('.option-btn').forEach(b => {
+        b.classList.remove('correct', 'incorrect');
+      });
+
+      if (opt.isCorrect) {
+        btn.classList.add('correct');
+        feedbackEl.className = 'practice-feedback show';
+        feedbackEl.innerHTML = `
+          <div class="practice-feedback-title" style="color: #34d399; display: flex; align-items: center; gap: 6px;">
+            ${ICONS.check} Perfect! Option ${opt.letter} is Correct.
+          </div>
+          <div class="practice-feedback-explanation">
+            ${q.explanation}
+          </div>
+        `;
+        showToast('ðŸŽ¯ Correct Answer! +10 Points in Practice Zone');
+      } else {
+        btn.classList.add('incorrect');
+        const correctBtn = optionsEl.querySelector(`[data-opt-id="opt-b"]`);
+        if (correctBtn) correctBtn.classList.add('correct');
+
+        feedbackEl.className = 'practice-feedback show';
+        feedbackEl.innerHTML = `
+          <div class="practice-feedback-title" style="color: #f87171;">
+            Incorrect choice. Review the Ray Diagram rules below:
+          </div>
+          <div class="practice-feedback-explanation">
+            ${q.explanation}
+          </div>
+        `;
+      }
+    });
+  });
+}
+
+function renderFaq() {
+  const container = document.getElementById('faq-accordion');
+  if (!container) return;
+
+  container.innerHTML = FAQ_DATA.map((item, idx) => `
+    <div class="faq-item ${idx === 0 ? 'active' : ''}">
+      <button class="faq-question">
+        <span>${item.question}</span>
+        <span class="faq-icon">${ICONS.chevronDown}</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          ${item.answer}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const item = e.currentTarget.closest('.faq-item');
+      const isActive = item.classList.contains('active');
+      
+      container.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+}
+
+function init3DCardTilt() {
+  const stage = document.querySelector('.showcase-stage');
+  const container = document.querySelector('.hero-showcase');
+  if (!stage || !container) return;
+
+  let ticking = false;
+
+  container.addEventListener('mousemove', (e) => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const rotateX = (-y / rect.height) * 14;
+        const rotateY = (x / rect.width) * 14;
+
+        stage.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  container.addEventListener('mouseleave', () => {
+    stage.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  });
+}
+
+function initSearchModal() {
+  const backdrop = document.getElementById('search-modal');
+  const triggerBtns = document.querySelectorAll('.search-trigger-btn');
+  const input = document.getElementById('search-modal-input');
+  const resultsContainer = document.getElementById('search-results-list');
+  const closeBtn = document.getElementById('search-modal-close');
+
+  if (!backdrop || !input || !resultsContainer) return;
+
+  function openSearch() {
+    backdrop.classList.add('open');
+    input.value = '';
+    input.focus();
+    renderSearchResults('');
+  }
+
+  function closeSearch() {
+    backdrop.classList.remove('open');
+  }
+
+  triggerBtns.forEach(btn => btn.addEventListener('click', openSearch));
+  if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeSearch();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      backdrop.classList.contains('open') ? closeSearch() : openSearch();
+    }
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+      closeSearch();
+    }
+  });
+
+  input.addEventListener('input', (e) => {
+    renderSearchResults(e.target.value.trim().toLowerCase());
+  });
+
+  function renderSearchResults(query) {
+    const items = [];
+    SUBJECTS_DATA.forEach(sub => {
+      items.push({
+        type: 'Subject',
+        title: `${sub.name} (Code ${sub.code})`,
+        subtitle: `${sub.chaptersCount} Chapters â€¢ ${sub.category}`,
+        badge: 'Subject',
+        subject: sub.name,
+        action: () => {
+          closeSearch();
+          showToast(`Opening ${sub.name} Portal`);
+        }
+      });
+      sub.chapters.forEach(ch => {
+        items.push({
+          type: 'Chapter',
+          title: `Ch ${ch.num}: ${ch.title}`,
+          subtitle: `${sub.name} â€¢ ${ch.marks}`,
+          badge: ch.highYield ? 'High Yield' : 'Chapter',
+          subject: sub.name,
+          action: () => {
+            closeSearch();
+            openPdfPreview({
+              title: `Chapter ${ch.num}: ${ch.title}`,
+              subject: sub.name,
+              chapter: `Class 10 CBSE â€¢ ${ch.marks}`,
+              type: 'Chapter Master Notes & Mind Map',
+              description: `Comprehensive revision deck for Chapter ${ch.num} of Class 10 ${sub.name}.`,
+              keyPoints: [
+                'Complete core concept summaries',
+                'NCERT in-text & back-exercise solutions',
+                'Previous 10-year board questions'
+              ]
+            });
+          }
+        });
+      });
+    });
+
+    const filtered = query === '' 
+      ? items.slice(0, 7)
+      : items.filter(it => it.title.toLowerCase().includes(query) || it.subtitle.toLowerCase().includes(query)).slice(0, 8);
+
+    if (filtered.length === 0) {
+      resultsContainer.innerHTML = `
+        <div style="padding: 24px; text-align: center; color: var(--text-muted);">
+          No chapters or resources found for "<span style="color: var(--text-primary);">${query}</span>".
+        </div>
+      `;
+      return;
+    }
+
+    resultsContainer.innerHTML = filtered.map((item, idx) => `
+      <div class="search-result-item" data-index="${idx}">
+        <div class="search-result-info">
+          <div style="width: 32px; height: 32px; border-radius: 6px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan-bright); font-size: 0.8rem; font-weight: 700;">
+            ${item.type[0]}
+          </div>
+          <div>
+            <div class="search-result-title">${item.title}</div>
+            <div class="search-result-tag">${item.subtitle}</div>
+          </div>
+        </div>
+        <span class="badge ${item.badge === 'High Yield' ? 'badge-amber' : 'badge-cyan'}">${item.badge}</span>
+      </div>
+    `).join('');
+
+    resultsContainer.querySelectorAll('.search-result-item').forEach((el, idx) => {
+      el.addEventListener('click', () => {
+        filtered[idx].action();
+      });
+    });
+  }
+}
+
+function initPdfModal() {
+  const backdrop = document.getElementById('pdf-modal');
+  const closeBtn = document.getElementById('pdf-modal-close');
+  const downloadBtn = document.getElementById('pdf-download-btn');
+
+  if (!backdrop) return;
+
+  function closePdf() {
+    backdrop.classList.remove('open');
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closePdf);
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closePdf();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+      closePdf();
+    }
+  });
+
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      showToast('ðŸ“¥ Downloading Demo PDF (CBSE Class 10 High-Yield Capsule)');
+    });
+  }
+}
+
+function openPdfPreview(res) {
+  const backdrop = document.getElementById('pdf-modal');
+  const titleEl = document.getElementById('pdf-modal-title-text');
+  const contentEl = document.getElementById('pdf-mock-page-content');
+  if (!backdrop || !titleEl || !contentEl) return;
+
+  titleEl.textContent = res.title;
+
+  contentEl.innerHTML = `
+    <div style="border-bottom: 2px solid var(--accent-cyan-bright); padding-bottom: 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <span class="badge badge-cyan" style="margin-bottom: 8px;">CBSE CLASS 10 â€¢ ${res.subject.toUpperCase()}</span>
+        <h2 style="font-size: 1.5rem; color: #ffffff; line-height: 1.2;">${res.title}</h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">Verified by Subject Experts â€¢ Based on Rationalized NCERT 2024-25</p>
+      </div>
+      <div>
+        <span style="font-size: 0.75rem; color: #10b981; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(16, 185, 129, 0.3);">â— EXAM READY</span>
+      </div>
+    </div>
+
+    <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+      <h4 style="color: var(--accent-cyan-bright); font-size: 0.95rem; margin-bottom: 6px;">Executive Concept Summary</h4>
+      <p style="font-size: 0.925rem; color: var(--text-secondary); line-height: 1.6;">${res.description}</p>
+    </div>
+
+    <h4 style="font-size: 1.05rem; color: #ffffff; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+      <span>Key Board Exam Takeaways & Theorems</span>
+    </h4>
+
+    <ul style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+      ${(res.keyPoints || [
+        'Fundamental concepts explained with step-by-step logic',
+        'Standard formulas and value substitutions',
+        'Model question templates frequently tested in past 5 years'
+      ]).map((point, i) => `
+        <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.925rem; color: var(--text-secondary); background: rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 6px; border: 1px solid var(--border-subtle);">
+          <span style="color: var(--accent-cyan-bright); font-weight: 700;">#${i+1}</span>
+          <span>${point}</span>
+        </li>
+      `).join('')}
+    </ul>
+
+    <div style="background: #080c18; border-radius: 8px; padding: 16px; border: 1px dashed rgba(255, 255, 255, 0.15); text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+      <p>âš ï¸ Demo Resource Preview: Full 12-page high-resolution vector PDF is packaged and ready for student download.</p>
+    </div>
+  `;
+
+  backdrop.classList.add('open');
+}
+
+function initLanguageSwitcher() {
+  const buttons = document.querySelectorAll('.lang-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      if (lang === state.currentLang) return;
+
+      state.currentLang = lang;
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+      updatePageLanguage(lang);
+      renderSubjects();
+      showToast(lang === 'hi' ? 'à¤­à¤¾à¤·à¤¾ à¤¬à¤¦à¤²à¤•à¤° à¤¹à¤¿à¤‚à¤¦à¥€ à¤•à¤° à¤¦à¥€ à¤—à¤ˆ à¤¹à¥ˆ' : 'Language switched to English');
+    });
+  });
+}
+
+function updatePageLanguage(lang) {
+  const heroBadge = document.querySelector('.hero-badge-pill span:last-child');
+  const heroTagline = document.querySelector('.hero-title .title-accent');
+  const heroDesc = document.querySelector('.hero-description');
+  const exploreBtn = document.querySelector('.hero-cta-group .btn-primary span');
+
+  if (lang === 'hi') {
+    if (heroBadge) heroBadge.textContent = 'âš¡ à¤†à¤§à¥à¤¨à¤¿à¤• à¤¸à¥€à¤¬à¥€à¤à¤¸à¤ˆ à¤•à¤•à¥à¤·à¤¾ 10 à¤…à¤§à¥à¤¯à¤¯à¤¨ à¤®à¤‚à¤š';
+    if (heroTagline) heroTagline.textContent = 'à¤•à¤•à¥à¤·à¤¾ 10 à¤¬à¥‹à¤°à¥à¤¡ à¤®à¥‡à¤‚ à¤¸à¤°à¥à¤µà¥‹à¤šà¥à¤š à¤¸à¤«à¤²à¤¤à¤¾';
+    if (heroDesc) heroDesc.textContent = 'à¤­à¤¾à¤°à¥€-à¤­à¤°à¤•à¤® à¤•à¤¿à¤¤à¤¾à¤¬à¥‹à¤‚ à¤•à¥‹ à¤›à¥‹à¤¡à¤¼à¥‡à¤‚à¥¤ à¤¸à¥€à¤¬à¥€à¤à¤¸à¤ˆ à¤•à¤•à¥à¤·à¤¾ 10 à¤Ÿà¥‰à¤ªà¤°à¥à¤¸ à¤•à¥‡ à¤²à¤¿à¤ à¤µà¤¿à¤¶à¥‡à¤· à¤°à¥‚à¤ª à¤¸à¥‡ à¤¤à¥ˆà¤¯à¤¾à¤° à¤µà¤¿à¤œà¤¼à¥à¤…à¤² à¤°à¤¿à¤µà¥€à¤œà¤¨ à¤¨à¥‹à¤Ÿà¥à¤¸, à¤¸à¥‚à¤¤à¥à¤° à¤ªà¤¤à¥à¤°à¤• à¤”à¤° à¤®à¤¹à¤¤à¥à¤µà¤ªà¥‚à¤°à¥à¤£ à¤¬à¥‹à¤°à¥à¤¡ à¤ªà¥à¤°à¤¶à¥à¤¨à¥‹à¤‚ à¤•à¤¾ à¤²à¤¾à¤­ à¤‰à¤ à¤¾à¤à¤‚à¥¤';
+    if (exploreBtn) exploreBtn.textContent = 'à¤¸à¤‚à¤¸à¤¾à¤§à¤¨ à¤¦à¥‡à¤–à¥‡à¤‚';
+  } else {
+    if (heroBadge) heroBadge.textContent = 'âš¡ Next-Gen CBSE Learning Platform â€¢ Class 10 Special';
+    if (heroTagline) heroTagline.textContent = 'Master Class 10 CBSE';
+    if (heroDesc) heroDesc.textContent = 'Ditch 800-page bulky textbooks. Access laser-focused visual revision notes, interactive formula sheets, curated board question banks, and chapter mind maps â€” engineered for CBSE Class 10 toppers.';
+    if (exploreBtn) exploreBtn.textContent = 'Explore Resources';
+  }
+}
+
+function showToast(message) {
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <span style="color: var(--accent-cyan-bright);">${ICONS.check}</span>
+    <span>${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  window.requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 3200);
+}
+
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        targetEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  const form = document.querySelector('.orbit-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('.orbit-input');
+      if (input && input.value) {
+        showToast('ðŸš€ Welcome to the STUDYVERSE Orbit! Weekly capsule confirmed.');
+        input.value = '';
+      }
+    });
+  }
+}
+
+</script>
+
+</body>
+</html>
+
