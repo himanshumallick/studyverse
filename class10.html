@@ -1,1386 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="STUDYVERSE Class 10 — Premium study resources for CBSE Class 10 students. Notes, Cheat Sheets, Sample Papers and Important Questions.">
-<title>Class 10 | STUDYVERSE</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-/* ===========================
-   DESIGN TOKENS
-   =========================== */
-:root {
-  --bg-body:        #05070e;
-  --bg-dark:        #090d1a;
-  --bg-card:        rgba(15,23,42,0.55);
-  --bg-card-hover:  rgba(15,23,42,0.80);
-  --border-glass:   rgba(99,102,241,0.18);
-  --border-hover:   rgba(99,102,241,0.45);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBSE Class 10 Hub — STUDYVERSE</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
-  --cyan:   #38bdf8;
-  --blue:   #3b82f6;
-  --indigo: #6366f1;
-  --violet: #8b5cf6;
-  --purple: #a855f7;
-  --green:  #34d399;
-  --amber:  #fbbf24;
-  --pink:   #ec4899;
+  <style>
+    :root {
+      --bg-primary: #030712;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
+      --border-subtle: rgba(99, 102, 241, 0.25);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
 
-  --grad-primary: linear-gradient(135deg, #38bdf8 0%, #6366f1 50%, #a855f7 100%);
-  --grad-math:    linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
-  --grad-sci:     linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
-  --grad-sst:     linear-gradient(135deg, #fbbf24 0%, #ec4899 100%);
-  --grad-eng:     linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --grad-hin:     linear-gradient(135deg, #f97316 0%, #ef4444 100%);
-  --grad-ai:      linear-gradient(135deg, #34d399 0%, #6366f1 100%);
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  --text-primary:   #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted:     #64748b;
+    html, body {
+      background-color: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
 
-  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+    a { text-decoration: none; color: inherit; }
 
-  --radius-sm:   8px;
-  --radius-md:   12px;
-  --radius-lg:   18px;
-  --radius-xl:   24px;
-  --radius-pill: 9999px;
+    #bg-3d-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-  --transition-fast:   150ms cubic-bezier(0.4,0,0.2,1);
-  --transition-normal: 280ms cubic-bezier(0.4,0,0.2,1);
-  --transition-slow:   450ms cubic-bezier(0.4,0,0.2,1);
+    .site-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
 
-  --shadow-glow-blue: 0 0 24px rgba(59,130,246,0.25), 0 8px 32px rgba(0,0,0,0.5);
-  --shadow-glow-violet: 0 0 24px rgba(139,92,246,0.25), 0 8px 32px rgba(0,0,0,0.5);
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
-}
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 40px;
+    }
+    .brand-logo { font-weight: 800; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo)); display: grid; place-items: center; color: #fff; }
+    .brand-logo span { color: var(--accent-cyan); }
 
-/* ===========================
-   RESET & BASE
-   =========================== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: var(--font-body);
-  background: var(--bg-body);
-  color: var(--text-primary);
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-a { text-decoration: none; color: inherit; }
-button { font-family: inherit; cursor: pointer; }
-img { max-width: 100%; display: block; }
+    .back-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-cyan); }
 
-/* ===========================
-   AMBIENT BACKGROUND
-   =========================== */
-.ambient-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0;
-  animation: orbReveal 2s ease-out forwards;
-}
-.orb-1 {
-  width: 520px; height: 520px;
-  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
-  top: -120px; left: -80px;
-  animation-delay: 0.2s;
-}
-.orb-2 {
-  width: 440px; height: 440px;
-  background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
-  top: 40%; right: -100px;
-  animation-delay: 0.5s;
-}
-.orb-3 {
-  width: 360px; height: 360px;
-  background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
-  bottom: 10%; left: 20%;
-  animation-delay: 0.8s;
-}
-@keyframes orbReveal {
-  to { opacity: 1; }
-}
-/* subtle grid overlay */
-.ambient-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
+    .page-header { margin-bottom: 40px; }
+    .page-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; margin-bottom: 10px; }
+    .gradient-text { background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-desc { color: var(--text-secondary); font-size: 1.05rem; }
 
-/* ===========================
-   PAGE WRAPPER
-   =========================== */
-.page-wrapper {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+    /* Subjects Grid */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 50px;
+    }
+    .subject-card {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 32px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .subject-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.18);
+    }
+    .subject-icon { font-size: 2.2rem; margin-bottom: 16px; display: block; }
+    .subject-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .subject-sub { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; }
 
-/* ===========================
-   TOP NAV (BACK BAR)
-   =========================== */
-.top-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 2rem;
-  background: rgba(9,13,26,0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-glass);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  opacity: 0;
-  animation: fadeSlideDown 0.5s ease-out 0.1s forwards;
-}
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-glass);
-  background: rgba(15,23,42,0.4);
-  transition: all var(--transition-normal);
-  letter-spacing: 0.03em;
-}
-.back-btn:hover {
-  color: var(--cyan);
-  border-color: rgba(56,189,248,0.4);
-  background: rgba(56,189,248,0.07);
-  transform: translateX(-2px);
-}
-.back-btn svg { transition: transform var(--transition-normal); }
-.back-btn:hover svg { transform: translateX(-3px); }
+    /* Chapters Box */
+    .chapters-section {
+      display: none;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 28px;
+      padding: 36px;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .chapters-section.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.nav-logo {
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  background: var(--grad-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.nav-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 0.3rem 0.9rem;
-  border-radius: var(--radius-pill);
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(99,102,241,0.3);
-  color: var(--indigo);
-}
-
-/* ===========================
-   HERO / ENTRY SECTION
-   =========================== */
-.hero {
-  padding: 5rem 2rem 4rem;
-  text-align: center;
-  max-width: 860px;
-  margin: 0 auto;
-}
-.hero-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: var(--indigo);
-  text-transform: uppercase;
-  margin-bottom: 1.2rem;
-  opacity: 0;
-  animation: fadeSlideUp 0.6s ease-out 0.4s forwards;
-}
-.hero-eyebrow span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1.1rem;
-  border-radius: var(--radius-pill);
-  background: rgba(99,102,241,0.12);
-  border: 1px solid rgba(99,102,241,0.25);
-}
-.hero-title {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.2rem;
-  opacity: 0;
-  animation: fadeSlideUp 0.7s ease-out 0.6s forwards;
-}
-.hero-title .grad-text {
-  background: var(--grad-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-subtitle {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  max-width: 540px;
-  margin: 0 auto;
-  opacity: 0;
-  animation: fadeSlideUp 0.7s ease-out 0.85s forwards;
-}
-
-/* ===========================
-   ENTRY KEYFRAMES (GPU-safe)
-   =========================== */
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeSlideDown {
-  from { opacity: 0; transform: translateY(-16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes cardReveal {
-  from { opacity: 0; transform: translateY(40px) scale(0.95); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes shimmer {
-  from { background-position: -200% center; }
-  to   { background-position: 200% center; }
-}
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 transparent; }
-  50%       { box-shadow: 0 0 24px rgba(99,102,241,0.3); }
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes downloadPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-@keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(4px); }
-}
-
-/* ===========================
-   SECTION LABEL
-   =========================== */
-.section-label {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeSlideUp 0.6s ease-out 1s forwards;
-}
-.section-label h2 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 0.4rem;
-  letter-spacing: -0.01em;
-}
-.section-label p {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-/* ===========================
-   SUBJECT CARDS GRID
-   =========================== */
-.subjects-section {
-  padding: 0 2rem 3rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-}
-.subjects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-.subject-card {
-  position: relative;
-  border-radius: var(--radius-xl);
-  padding: 2rem 1.75rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  cursor: pointer;
-  overflow: hidden;
-  transition: all var(--transition-normal);
-  opacity: 0;
-  /* stagger set via inline style */
-  transform-style: preserve-3d;
-  will-change: transform, box-shadow;
-}
-.subject-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  border-radius: inherit;
-}
-.subject-card.math::before  { background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(59,130,246,0.08)); }
-.subject-card.sci::before   { background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(56,189,248,0.08)); }
-.subject-card.sst::before   { background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(236,72,153,0.08)); }
-
-.subject-card:hover::before { opacity: 1; }
-.subject-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-6px) perspective(600px) rotateX(2deg);
-  box-shadow: var(--shadow-glow-blue);
-}
-.subject-card.active {
-  border-color: rgba(99,102,241,0.6);
-  box-shadow: 0 0 32px rgba(99,102,241,0.3), var(--shadow-card);
-}
-.subject-card.active::before { opacity: 1; }
-
-.subject-card-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.2rem;
-  position: relative;
-  z-index: 1;
-}
-.subject-card.math .subject-card-icon  { background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(59,130,246,0.2)); border: 1px solid rgba(56,189,248,0.3); }
-.subject-card.sci .subject-card-icon   { background: linear-gradient(135deg, rgba(52,211,153,0.2), rgba(56,189,248,0.2)); border: 1px solid rgba(52,211,153,0.3); }
-.subject-card.sst .subject-card-icon   { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(236,72,153,0.2)); border: 1px solid rgba(251,191,36,0.3); }
-
-.subject-card-name {
-  font-size: 1.15rem;
-  font-weight: 800;
-  margin-bottom: 0.4rem;
-  position: relative;
-  z-index: 1;
-}
-.subject-card.math .subject-card-name  { color: var(--cyan); }
-.subject-card.sci .subject-card-name   { color: var(--green); }
-.subject-card.sst .subject-card-name   { color: var(--amber); }
-
-.subject-card-desc {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  position: relative;
-  z-index: 1;
-  line-height: 1.5;
-}
-.subject-card-arrow {
-  position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(99,102,241,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: all var(--transition-normal);
-  z-index: 1;
-}
-.subject-card:hover .subject-card-arrow,
-.subject-card.active .subject-card-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-/* Glow strip at top */
-.subject-card-glow {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  border-radius: 999px;
-  opacity: 0.6;
-  transition: opacity var(--transition-normal);
-}
-.subject-card.math .subject-card-glow  { background: var(--grad-math); }
-.subject-card.sci .subject-card-glow   { background: var(--grad-sci); }
-.subject-card.sst .subject-card-glow   { background: var(--grad-sst); }
-.subject-card:hover .subject-card-glow,
-.subject-card.active .subject-card-glow { opacity: 1; }
-
-/* animated reveal */
-.subject-card.reveal { animation: cardReveal var(--transition-slow) ease-out forwards; }
-
-/* ===========================
-   RESOURCE SECTION
-   =========================== */
-.resources-section {
-  padding: 0 2rem 4rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  display: none;
-}
-.resources-section.visible { display: block; }
-
-.resources-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  animation: fadeSlideUp 0.5s ease-out forwards;
-}
-.active-subject-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.4rem 1.1rem;
-  border-radius: var(--radius-pill);
-  background: rgba(99,102,241,0.12);
-  border: 1px solid rgba(99,102,241,0.25);
-  color: var(--indigo);
-}
-.active-subject-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--cyan);
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-.resources-title {
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-
-/* Category Tabs */
-.category-tabs {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.cat-tab {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 0.55rem 1.25rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-glass);
-  background: rgba(15,23,42,0.5);
-  color: var(--text-secondary);
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  outline: none;
-  font-family: inherit;
-}
-.cat-tab:hover {
-  color: var(--text-primary);
-  border-color: rgba(99,102,241,0.4);
-  background: rgba(99,102,241,0.08);
-}
-.cat-tab.active {
-  background: var(--grad-primary);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: 0 0 16px rgba(99,102,241,0.35);
-}
-
-/* ===========================
-   RESOURCE CARDS
-   =========================== */
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-.resource-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-xl);
-  padding: 1.5rem;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: all var(--transition-normal);
-  animation: cardReveal 0.4s ease-out forwards;
-  opacity: 0;
-  position: relative;
-  overflow: hidden;
-}
-.resource-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: var(--grad-primary);
-  opacity: 0.4;
-}
-.resource-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-glow-violet);
-}
-.resource-card:hover::before { opacity: 1; }
-
-.resource-card-badges {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-.badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--radius-pill);
-}
-.badge-subject {
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(99,102,241,0.3);
-  color: var(--indigo);
-}
-.badge-category {
-  background: rgba(56,189,248,0.1);
-  border: 1px solid rgba(56,189,248,0.25);
-  color: var(--cyan);
-}
-.badge-cloud {
-  background: rgba(52,211,153,0.1);
-  border: 1px solid rgba(52,211,153,0.3);
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-.badge-cloud::before {
-  content: '';
-  display: inline-block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-}
-
-.resource-card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--text-primary);
-}
-.resource-card-meta {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.resource-card-meta svg { opacity: 0.5; }
-
-.resource-card-actions {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: auto;
-}
-
-/* View Button */
-.btn-view {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 0.65rem 1rem;
-  border-radius: var(--radius-lg);
-  background: rgba(99,102,241,0.12);
-  border: 1px solid rgba(99,102,241,0.3);
-  color: var(--indigo);
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  font-family: inherit;
-  text-decoration: none;
-  outline: none;
-}
-.btn-view:hover {
-  background: rgba(99,102,241,0.22);
-  border-color: rgba(99,102,241,0.6);
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-/* Download Button — Animated */
-.btn-download {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 0.65rem 1rem;
-  border-radius: var(--radius-lg);
-  background: var(--grad-primary);
-  border: none;
-  color: #fff;
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  font-family: inherit;
-  outline: none;
-  position: relative;
-  overflow: hidden;
-}
-.btn-download::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
-}
-.btn-download:hover::after { transform: translateX(100%); }
-.btn-download:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 20px rgba(99,102,241,0.4);
-}
-.btn-download.downloading {
-  pointer-events: none;
-  opacity: 0.75;
-}
-.btn-download.downloading .btn-icon { animation: bounceDown 0.5s ease-in-out infinite; }
-.btn-download.success { background: linear-gradient(135deg, #34d399, #10b981); }
-.btn-download.success .btn-icon { animation: none; }
-
-/* ===========================
-   EMPTY STATE
-   =========================== */
-.empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 4rem 2rem;
-  animation: fadeIn 0.5s ease-out forwards;
-}
-.empty-state-icon {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: rgba(99,102,241,0.1);
-  border: 1px solid rgba(99,102,241,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-}
-.empty-state h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--text-secondary);
-}
-.empty-state p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  max-width: 320px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* Loading spinner inside resource grid */
-.loading-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-.spinner {
-  width: 20px; height: 20px;
-  border: 2px solid rgba(99,102,241,0.2);
-  border-top-color: var(--indigo);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-/* ===========================
-   TOAST NOTIFICATION
-   =========================== */
-.toast-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  pointer-events: none;
-}
-.toast {
-  padding: 0.9rem 1.4rem;
-  border-radius: var(--radius-lg);
-  font-size: 0.875rem;
-  font-weight: 600;
-  backdrop-filter: blur(16px);
-  animation: toastIn 0.35s ease-out;
-  pointer-events: all;
-  max-width: 320px;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-.toast.success {
-  background: rgba(52,211,153,0.15);
-  border: 1px solid rgba(52,211,153,0.4);
-  color: var(--green);
-}
-.toast.error {
-  background: rgba(239,68,68,0.15);
-  border: 1px solid rgba(239,68,68,0.3);
-  color: #ef4444;
-}
-.toast.info {
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(99,102,241,0.3);
-  color: var(--indigo);
-}
-@keyframes toastIn {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* ===========================
-   DIVIDER
-   =========================== */
-.section-divider {
-  max-width: 1100px;
-  margin: 0 auto 3rem;
-  padding: 0 2rem;
-  opacity: 0.15;
-}
-.section-divider hr {
-  border: none;
-  border-top: 1px solid var(--indigo);
-}
-
-/* ===========================
-   FOOTER
-   =========================== */
-.page-footer {
-  margin-top: auto;
-  padding: 2.5rem 2rem;
-  text-align: center;
-  border-top: 1px solid var(--border-glass);
-  background: rgba(9,13,26,0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.footer-logo {
-  font-size: 1.3rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  background: var(--grad-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 0.5rem;
-}
-.footer-tagline {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
-}
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
-}
-.footer-links a {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
-}
-.footer-links a:hover { color: var(--cyan); }
-.footer-credit {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 1rem;
-}
-.footer-credit span {
-  color: var(--indigo);
-  font-weight: 600;
-}
-.footer-copy {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  margin-top: 0.4rem;
-  opacity: 0.6;
-}
-
-/* ===========================
-   SCROLL PROMPT
-   =========================== */
-.scroll-hint {
-  text-align: center;
-  padding: 0.5rem 2rem 2rem;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  animation: fadeIn 0.5s ease-out 2s forwards;
-  opacity: 0;
-}
-.scroll-hint svg { animation: bounceDown 1.2s ease-in-out infinite; }
-
-/* ===========================
-   RESPONSIVE
-   =========================== */
-@media (max-width: 768px) {
-  .top-nav { padding: 1rem 1.25rem; }
-  .nav-logo { display: none; }
-  .hero { padding: 3rem 1.25rem 2.5rem; }
-  .subjects-section,
-  .resources-section { padding-left: 1.25rem; padding-right: 1.25rem; }
-  .subjects-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .resource-grid { grid-template-columns: 1fr; }
-  .hero-title { font-size: 2rem; }
-  .category-tabs { gap: 0.4rem; }
-  .cat-tab { font-size: 0.78rem; padding: 0.45rem 0.9rem; }
-  .resource-card-actions { flex-direction: column; }
-  .toast-container { bottom: 1rem; right: 1rem; left: 1rem; }
-  .toast { max-width: 100%; }
-}
-@media (max-width: 480px) {
-  .back-btn span { display: none; }
-  .back-btn { padding: 0.5rem 0.75rem; }
-}
-</style>
+    .chapter-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .chapter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 22px;
+      border-radius: 16px;
+      transition: 0.2s;
+    }
+    .chapter-item:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .chapter-name { font-weight: 700; font-size: 1rem; color: #fff; margin-top: 2px; }
+    
+    .download-btn {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .download-btn:hover { opacity: 0.9; transform: scale(1.03); box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
+  </style>
 </head>
 <body>
 
-<!-- =================== AMBIENT BACKGROUND =================== -->
-<div class="ambient-bg">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-</div>
+  <canvas id="bg-3d-canvas"></canvas>
 
-<!-- =================== TOP NAV =================== -->
-<nav class="top-nav">
-  <a href="index.html" class="back-btn" aria-label="Back to STUDYVERSE home">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M12 5l-7 7 7 7"/>
-    </svg>
-    <span>STUDYVERSE</span>
-  </a>
-  <div class="nav-logo">STUDYVERSE</div>
-  <div class="nav-badge">CLASS 10</div>
-</nav>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="brand-logo" onclick="window.location.href='index.html'">
+        <div class="brand-icon">⚡</div>
+        STUDY<span>VERSE</span>
+      </div>
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </header>
 
-<!-- =================== PAGE WRAPPER =================== -->
-<div class="page-wrapper">
-
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-eyebrow">
-      <span>
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6L12 2z"/>
-        </svg>
-        CBSE Class 10 &mdash; 2024–25
-      </span>
-    </div>
-    <h1 class="hero-title" id="hero-title">
-      Welcome to <span class="grad-text">Class 10</span>
-    </h1>
-    <p class="hero-subtitle">
-      Choose your subject and start learning. Access premium notes, cheat sheets, sample papers and important questions — all in one place.
-    </p>
-  </section>
-
-  <!-- SUBJECTS SECTION -->
-  <section class="subjects-section" aria-label="Choose a subject">
-    <div class="section-label">
-      <h2>Choose Your Subject</h2>
-      <p>Select a subject to explore resources</p>
-    </div>
-
-    <div class="subjects-grid" id="subjects-grid">
-      <!-- MATHEMATICS -->
-      <div class="subject-card math" data-subject="Mathematics" role="button" tabindex="0" aria-label="Mathematics" style="animation-delay: 1.1s;">
-        <div class="subject-card-glow"></div>
-        <div class="subject-card-icon">
-          <svg width="28" height="28" fill="none" stroke="#38bdf8" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M12 6v12M4 4l2 2M18 4l-2 2M4 20l2-2M18 20l-2-2"/>
-            <circle cx="12" cy="12" r="9" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="subject-card-name">Mathematics</div>
-        <div class="subject-card-desc">Real Numbers, Polynomials, Trigonometry, Statistics, Geometry &amp; more. Sharpen your problem-solving skills.</div>
-        <div class="subject-card-arrow">
-          <svg width="14" height="14" fill="none" stroke="#6366f1" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/>
-          </svg>
-        </div>
+    <main>
+      <div class="page-header">
+        <h1 class="page-title"><span class="gradient-text">CBSE Class 10</span> Hub</h1>
+        <p class="page-desc">Select a subject below to explore chapters and download board revision notes.</p>
       </div>
 
-      <!-- SCIENCE -->
-      <div class="subject-card sci" data-subject="Science" role="button" tabindex="0" aria-label="Science" style="animation-delay: 1.3s;">
-        <div class="subject-card-glow"></div>
-        <div class="subject-card-icon">
-          <svg width="28" height="28" fill="none" stroke="#34d399" stroke-width="1.8" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v7L4 17a1 1 0 001 1h14a1 1 0 001-1l-5-7V3"/>
-            <path stroke-linecap="round" d="M9 3h6"/>
-            <circle cx="8" cy="17" r="1" fill="#34d399"/>
-            <circle cx="13" cy="15" r="1" fill="#34d399"/>
-          </svg>
+      <!-- 3 Subjects Cards -->
+      <div class="subjects-grid" id="subjectsGrid">
+        
+        <div class="subject-card" onclick="openSubject('science')">
+          <span class="subject-icon">🧪</span>
+          <h2 class="subject-title">Science</h2>
+          <p class="subject-sub">Physics, Chemistry & Biology Modules</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
         </div>
-        <div class="subject-card-name">Science</div>
-        <div class="subject-card-desc">Physics, Chemistry &amp; Biology — Chemical Reactions, Life Processes, Light, Electricity and beyond.</div>
-        <div class="subject-card-arrow">
-          <svg width="14" height="14" fill="none" stroke="#6366f1" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/>
-          </svg>
+
+        <div class="subject-card" onclick="openSubject('maths')">
+          <span class="subject-icon">📐</span>
+          <h2 class="subject-title">Mathematics</h2>
+          <p class="subject-sub">Algebra, Geometry, Trigonometry & Stats</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
         </div>
+
+        <div class="subject-card" onclick="openSubject('sst')">
+          <span class="subject-icon">🌍</span>
+          <h2 class="subject-title">Social Science</h2>
+          <p class="subject-sub">History, Civics, Geography & Economics</p>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
+        </div>
+
       </div>
 
-      <!-- SOCIAL SCIENCE -->
-      <div class="subject-card sst" data-subject="Social Science" role="button" tabindex="0" aria-label="Social Science" style="animation-delay: 1.5s;">
-        <div class="subject-card-glow"></div>
-        <div class="subject-card-icon">
-          <svg width="28" height="28" fill="none" stroke="#fbbf24" stroke-width="1.8" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"/>
-            <path stroke-linecap="round" d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
-          </svg>
+      <!-- Dynamic Chapters Box -->
+      <div class="chapters-section" id="chaptersSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px;">
+          <div>
+            <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase; font-weight: 700;">Selected Subject</span>
+            <h2 id="subjectHeading" style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 4px;">Subject Name</h2>
+          </div>
+          <button class="back-btn" onclick="closeChapters()">← Back to Subjects</button>
         </div>
-        <div class="subject-card-name">Social Science</div>
-        <div class="subject-card-desc">History, Geography, Political Science &amp; Economics — understand the world and India's journey.</div>
-        <div class="subject-card-arrow">
-          <svg width="14" height="14" fill="none" stroke="#6366f1" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/>
-          </svg>
-        </div>
+
+        <div class="chapter-list" id="chapterListContainer"></div>
       </div>
-    </div>
 
-    <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-      Click a subject to load resources below
-    </div>
-  </section>
+    </main>
+  </div>
 
-  <!-- DIVIDER -->
-  <div class="section-divider"><hr></div>
+  <!-- Three.js Background Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('bg-3d-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-  <!-- RESOURCE SECTION (shown after subject selection) -->
-  <section class="resources-section" id="resources-section" aria-live="polite">
-    <div class="resources-header" id="resources-header">
-      <div class="active-subject-label" id="active-subject-label">
-        <div class="active-subject-dot"></div>
-        <span id="active-subject-text">Mathematics</span>
-      </div>
-      <div class="resources-title">Select a Resource Category</div>
-      <div class="category-tabs" id="category-tabs" role="tablist">
-        <button class="cat-tab active" role="tab" data-cat="Notes" aria-selected="true">📄 Chapter Notes</button>
-        <button class="cat-tab" role="tab" data-cat="Formula Sheets" aria-selected="false">⚡ Cheat Sheets</button>
-        <button class="cat-tab" role="tab" data-cat="Sample Papers" aria-selected="false">📝 Sample Papers</button>
-        <button class="cat-tab" role="tab" data-cat="Important Questions" aria-selected="false">🎯 Important Questions</button>
-        <button class="cat-tab" role="tab" data-cat="Quick Revision" aria-selected="false">🚀 Quick Revision</button>
-      </div>
-    </div>
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    <div class="resource-grid" id="resource-grid" role="list">
-      <!-- Cards injected by JS -->
-    </div>
-  </section>
+    const group = new THREE.Group();
+    scene.add(group);
 
-  <!-- FOOTER -->
-  <footer class="page-footer">
-    <div class="footer-logo">STUDYVERSE</div>
-    <div class="footer-tagline">Your Universe of Learning &bull; Learn Smarter. Achieve More.</div>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="index.html#subjects">Subjects</a>
-      <a href="index.html#featured-resources">Resources</a>
-      <a href="admin.html">Admin</a>
-      <a href="index.html#faq">FAQ</a>
-    </div>
-    <div class="footer-credit">
-      Developed with ❤️ by
-      <span>Himanshu Sekhar Mallick</span> &amp; <span>Animesh Kumar Dora</span>
-    </div>
-    <div class="footer-copy">&copy; 2025 STUDYVERSE. All rights reserved.</div>
-  </footer>
-</div><!-- end page-wrapper -->
+    const geo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
+    const materials = [
+      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }),
+      new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })
+    ];
 
-<!-- TOAST CONTAINER -->
-<div class="toast-container" id="toast-container" aria-live="assertive" aria-atomic="true"></div>
-
-<!-- =================== SCRIPTS =================== -->
-<script>
-/* ===================================================
-   STUDYVERSE — class10.js (inlined)
-   Standalone, no ES6 modules, works on file:// & GH Pages
-   =================================================== */
-
-// ── Supabase helper (same pattern as index.html) ─────────
-function getStudentSupabase() {
-  if (typeof window.supabase === 'undefined') return null;
-  const url = localStorage.getItem('studyverse_supabase_url');
-  const key = localStorage.getItem('studyverse_supabase_anon_key');
-  if (!url || !key) return null;
-  try { return window.supabase.createClient(url, key); }
-  catch(e) { return null; }
-}
-
-// ── Toast ─────────────────────────────────────────────────
-function showToast(msg, type = 'info', duration = 3500) {
-  const container = document.getElementById('toast-container');
-  const icons = {
-    success: '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>',
-    error:   '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>',
-    info:    '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4M12 16h.01"/></svg>'
-  };
-  const toast = document.createElement('div');
-  toast.className = 'toast ' + type;
-  toast.innerHTML = (icons[type] || '') + msg;
-  container.appendChild(toast);
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateX(20px)';
-    toast.style.transition = 'all 0.3s ease';
-    setTimeout(() => toast.remove(), 300);
-  }, duration);
-}
-
-// ── State ─────────────────────────────────────────────────
-var selectedSubject  = null;
-var selectedCategory = 'Notes';
-var isLoading        = false;
-
-// ── Subject Card Interaction ──────────────────────────────
-function initSubjectCards() {
-  var cards = document.querySelectorAll('.subject-card');
-  cards.forEach(function(card) {
-    // reveal animation
-    card.classList.add('reveal');
-
-    // click & keyboard
-    function selectSubject() {
-      var subject = card.getAttribute('data-subject');
-      if (selectedSubject === subject) return; // no re-fetch
-      selectedSubject = subject;
-
-      // update active state
-      cards.forEach(function(c) { c.classList.remove('active'); });
-      card.classList.add('active');
-
-      // update label
-      document.getElementById('active-subject-text').textContent = subject;
-
-      // show resource section
-      var section = document.getElementById('resources-section');
-      section.classList.add('visible');
-
-      // hide scroll hint
-      var hint = document.getElementById('scroll-hint');
-      if (hint) hint.style.display = 'none';
-
-      // reset category tabs to first
-      selectCategory('Notes');
-
-      // smooth scroll to resources
-      setTimeout(function() {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 80);
+    const books = [];
+    for (let i = 0; i < 6; i++) {
+      const mesh = new THREE.Mesh(geo, materials);
+      mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 5 - 2);
+      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      group.add(mesh);
+      books.push(mesh);
     }
 
-    card.addEventListener('click', selectSubject);
-    card.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        selectSubject();
-      }
+    scene.add(new THREE.AmbientLight(0xffffff, 1.3));
+    const pLight = new THREE.PointLight(0x38bdf8, 3, 50);
+    pLight.position.set(5, 5, 5);
+    scene.add(pLight);
+
+    camera.position.z = 6;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      books.forEach((b, idx) => {
+        b.rotation.x += 0.003 * (idx % 2 === 0 ? 1 : -1);
+        b.rotation.y += 0.004;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
     });
-  });
-}
 
-// ── Category Tabs ─────────────────────────────────────────
-function initCategoryTabs() {
-  var tabs = document.querySelectorAll('.cat-tab');
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      var cat = tab.getAttribute('data-cat');
-      selectCategory(cat);
-    });
-  });
-}
-
-function selectCategory(cat) {
-  selectedCategory = cat;
-  var tabs = document.querySelectorAll('.cat-tab');
-  tabs.forEach(function(tab) {
-    var isActive = tab.getAttribute('data-cat') === cat;
-    tab.classList.toggle('active', isActive);
-    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-  });
-  if (selectedSubject) loadResources();
-}
-
-// ── Load Resources ────────────────────────────────────────
-function loadResources() {
-  if (isLoading) return;
-  isLoading = true;
-
-  var grid = document.getElementById('resource-grid');
-  grid.innerHTML = '<div class="loading-state"><div class="spinner"></div> Loading resources…</div>';
-
-  var client = getStudentSupabase();
-  if (!client) {
-    // No Supabase configured — show placeholder message
-    setTimeout(function() {
-      renderEmptyState(
-        'No Supabase Configured',
-        'Connect Supabase to see your uploaded PDFs here. Ask your teacher/owner to configure the backend.',
-        true
-      );
-      isLoading = false;
-    }, 500);
-    return;
-  }
-
-  client
-    .from('resources')
-    .select('*')
-    .eq('subject', selectedSubject)
-    .eq('category', selectedCategory)
-    .order('created_at', { ascending: false })
-    .then(function(result) {
-      isLoading = false;
-      var data  = result.data;
-      var error = result.error;
-      if (error) {
-        console.warn('[STUDYVERSE] Supabase error:', error.message);
-        renderEmptyState('Could not load resources', 'There was a problem fetching from the database. Please try again later.', false);
-        return;
+    // Subject & Chapter Data Management (Yahan tu baad mein apne notes ke PDF links daal sakta hai)
+    const subjectData = {
+      science: {
+        title: "Science (Physics, Chemistry & Biology)",
+        chapters: [
+          { name: "Chapter 1: Light - Reflection & Refraction", pdfUrl: "#" },
+          { name: "Chapter 2: Human Eye & Colorful World", pdfUrl: "#" },
+          { name: "Chapter 3: Electricity", pdfUrl: "#" },
+          { name: "Chapter 4: Magnetic Effects of Electric Current", pdfUrl: "#" },
+          { name: "Chapter 5: Chemical Reactions & Equations", pdfUrl: "#" },
+          { name: "Chapter 6: Acids, Bases and Salts", pdfUrl: "#" }
+        ]
+      },
+      maths: {
+        title: "Mathematics (Standard & Basic)",
+        chapters: [
+          { name: "Chapter 1: Real Numbers", pdfUrl: "#" },
+          { name: "Chapter 2: Polynomials", pdfUrl: "#" },
+          { name: "Chapter 3: Pair of Linear Equations in Two Variables", pdfUrl: "#" },
+          { name: "Chapter 4: Quadratic Equations", pdfUrl: "#" },
+          { name: "Chapter 5: Arithmetic Progressions", pdfUrl: "#" },
+          { name: "Chapter 6: Triangles", pdfUrl: "#" },
+          { name: "Chapter 7: Coordinate Geometry", pdfUrl: "#" },
+          { name: "Chapter 8: Introduction to Trigonometry", pdfUrl: "#" }
+        ]
+      },
+      sst: {
+        title: "Social Science (History, Civics, Geo, Eco)",
+        chapters: [
+          { name: "History Ch 1: Rise of Nationalism in Europe", pdfUrl: "#" },
+          { name: "History Ch 2: Nationalism in India", pdfUrl: "#" },
+          { name: "Geography Ch 1: Resources and Development", pdfUrl: "#" },
+          { name: "Geography Ch 2: Forest and Wildlife Resources", pdfUrl: "#" },
+          { name: "Civics Ch 1: Power Sharing", pdfUrl: "#" },
+          { name: "Economics Ch 1: Development", pdfUrl: "#" }
+        ]
       }
-      if (!data || data.length === 0) {
-        renderEmptyState(
-          'No Resources Yet',
-          'No ' + selectedCategory + ' found for ' + selectedSubject + '. Check back soon — the owner will upload resources shortly.'
-        );
-        return;
-      }
-      renderResourceCards(data);
-    })
-    .catch(function(err) {
-      isLoading = false;
-      console.warn('[STUDYVERSE] Fetch error:', err);
-      renderEmptyState('Connection Error', 'Could not reach the server. Please check your internet connection.', false);
-    });
-}
+    };
 
-// ── Render Empty State ────────────────────────────────────
-function renderEmptyState(title, body, isInfo) {
-  var grid = document.getElementById('resource-grid');
-  grid.innerHTML =
-    '<div class="empty-state">' +
-      '<div class="empty-state-icon">' +
-        '<svg width="36" height="36" fill="none" stroke="#6366f1" stroke-width="1.5" viewBox="0 0 24 24">' +
-          '<path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' +
-        '</svg>' +
-      '</div>' +
-      '<h3>' + escapeHtml(title) + '</h3>' +
-      '<p>' + escapeHtml(body) + '</p>' +
-    '</div>';
-}
+    function openSubject(subjectKey) {
+      const data = subjectData[subjectKey];
+      document.getElementById('subjectHeading').textContent = data.title;
+      
+      const container = document.getElementById('chapterListContainer');
+      container.innerHTML = data.chapters.map((ch, idx) => `
+        <div class="chapter-item">
+          <div>
+            <span style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">MODULE 0${idx+1}</span>
+            <div class="chapter-name">${ch.name}</div>
+          </div>
+          <a href="${ch.pdfUrl}" target="_blank" class="download-btn">
+            📥 Download PDF
+          </a>
+        </div>
+      `).join('');
 
-// ── Render Resource Cards ─────────────────────────────────
-function renderResourceCards(items) {
-  var grid = document.getElementById('resource-grid');
-  grid.innerHTML = '';
-
-  items.forEach(function(item, idx) {
-    var card = document.createElement('div');
-    card.className = 'resource-card';
-    card.style.animationDelay = (idx * 0.07) + 's';
-    card.setAttribute('role', 'listitem');
-
-    var sizeLabel = '';
-    if (item.file_size) {
-      var kb = Math.round(item.file_size / 1024);
-      sizeLabel = kb >= 1024 ? (kb / 1024).toFixed(1) + ' MB' : kb + ' KB';
+      document.getElementById('subjectsGrid').style.display = 'none';
+      document.getElementById('chaptersSection').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    var dateLabel = '';
-    if (item.created_at) {
-      var d = new Date(item.created_at);
-      dateLabel = d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+    function closeChapters() {
+      document.getElementById('chaptersSection').classList.remove('active');
+      document.getElementById('subjectsGrid').style.display = 'grid';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    card.innerHTML =
-      '<div class="resource-card-badges">' +
-        '<span class="badge badge-subject">' + escapeHtml(item.subject || '') + '</span>' +
-        '<span class="badge badge-category">' + escapeHtml(item.category || '') + '</span>' +
-        '<span class="badge badge-cloud">CLOUD VERIFIED</span>' +
-      '</div>' +
-      '<div class="resource-card-title">' + escapeHtml(item.title || 'Untitled Resource') + '</div>' +
-      '<div class="resource-card-meta">' +
-        (sizeLabel ? '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg><span>' + sizeLabel + '</span>' : '') +
-        (dateLabel ? '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>' + dateLabel + '</span>' : '') +
-        (item.downloads_count != null ? '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg><span>' + item.downloads_count + ' downloads</span>' : '') +
-      '</div>' +
-      '<div class="resource-card-actions">' +
-        '<a href="' + escapeAttr(item.file_url || '#') + '" target="_blank" rel="noopener noreferrer" class="btn-view" title="View PDF">' +
-          '<svg class="btn-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>' +
-          'View PDF' +
-        '</a>' +
-        '<button class="btn-download" data-url="' + escapeAttr(item.file_url || '') + '" data-title="' + escapeAttr(item.title || 'resource') + '" data-id="' + escapeAttr(item.id || '') + '" title="Download PDF">' +
-          '<svg class="btn-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>' +
-          'Download PDF' +
-        '</button>' +
-      '</div>';
-
-    // Download button handler
-    var dlBtn = card.querySelector('.btn-download');
-    dlBtn.addEventListener('click', function() {
-      handleDownload(dlBtn, item);
-    });
-
-    grid.appendChild(card);
-  });
-}
-
-// ── Download Handler ──────────────────────────────────────
-function handleDownload(btn, item) {
-  if (!item.file_url) {
-    showToast('No download link available for this resource.', 'error');
-    return;
-  }
-
-  btn.classList.add('downloading');
-  btn.innerHTML =
-    '<svg class="btn-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>' +
-    'Downloading…';
-
-  fetch(item.file_url)
-    .then(function(res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.blob();
-    })
-    .then(function(blob) {
-      var url  = URL.createObjectURL(blob);
-      var link = document.createElement('a');
-      link.href = url;
-      link.download = (item.title || 'resource') + '.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(function() { URL.revokeObjectURL(url); }, 2000);
-
-      // mark success
-      btn.classList.remove('downloading');
-      btn.classList.add('success');
-      btn.innerHTML =
-        '<svg class="btn-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>' +
-        'Downloaded!';
-
-      showToast('Downloaded: ' + (item.title || 'resource'), 'success');
-
-      // increment download count (fire-and-forget)
-      var client = getStudentSupabase();
-      if (client && item.id) {
-        client.rpc('increment_downloads', { resource_id: item.id }).catch(function(){});
-      }
-
-      setTimeout(function() {
-        btn.classList.remove('success');
-        btn.innerHTML =
-          '<svg class="btn-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>' +
-          'Download PDF';
-      }, 3000);
-    })
-    .catch(function(err) {
-      console.warn('[STUDYVERSE] Download error:', err);
-      btn.classList.remove('downloading');
-      btn.innerHTML =
-        '<svg class="btn-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12l7 7 7-7"/></svg>' +
-        'Download PDF';
-      showToast('Download failed. Try opening the PDF and saving it manually.', 'error');
-    });
-}
-
-// ── Security helpers ──────────────────────────────────────
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
-}
-function escapeAttr(str) {
-  if (!str) return '';
-  return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
-}
-
-// ── Init ──────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  initSubjectCards();
-  initCategoryTabs();
-
-  // Handle URL param: ?subject=Mathematics for direct linking
-  var params = new URLSearchParams(window.location.search);
-  var subParam = params.get('subject');
-  if (subParam) {
-    var targetCard = document.querySelector('[data-subject="' + subParam + '"]');
-    if (targetCard) {
-      setTimeout(function() { targetCard.click(); }, 1200);
-    }
-  }
-});
-</script>
+  </script>
 </body>
 </html>
