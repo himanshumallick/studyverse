@@ -156,6 +156,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
     .download-btn:hover { opacity: 0.9; transform: scale(1.03); box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
   </style>
@@ -176,7 +177,7 @@
     <main>
       <div class="page-header">
         <h1 class="page-title"><span class="gradient-text">CBSE Class 10</span> Hub</h1>
-        <p class="page-desc">Select a subject below to explore chapters and download board revision notes.</p>
+        <p class="page-desc">Select a subject below to explore full board syllabus chapters and download notes.</p>
       </div>
 
       <!-- 3 Subjects Cards -->
@@ -185,14 +186,14 @@
         <div class="subject-card" onclick="openSubject('science')">
           <span class="subject-icon">🧪</span>
           <h2 class="subject-title">Science</h2>
-          <p class="subject-sub">Physics, Chemistry & Biology Modules</p>
+          <p class="subject-sub">Physics, Chemistry & Biology (All 13 Chapters)</p>
           <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
         </div>
 
         <div class="subject-card" onclick="openSubject('maths')">
           <span class="subject-icon">📐</span>
           <h2 class="subject-title">Mathematics</h2>
-          <p class="subject-sub">Algebra, Geometry, Trigonometry & Stats</p>
+          <p class="subject-sub">Standard & Basic (All 14 Chapters)</p>
           <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
         </div>
 
@@ -207,7 +208,7 @@
 
       <!-- Dynamic Chapters Box -->
       <div class="chapters-section" id="chaptersSection">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
           <div>
             <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase; font-weight: 700;">Selected Subject</span>
             <h2 id="subjectHeading" style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 4px;">Subject Name</h2>
@@ -274,12 +275,12 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Subject & Chapter Data Management (Yahan tu baad mein apne notes ke PDF links daal sakta hai)
+    // Complete CBSE Class 10 Syllabus Chapters Data
     const subjectData = {
       science: {
         title: "Science (Physics, Chemistry & Biology)",
         chapters: [
-        { name: "Chapter 1: Chemical Reactions and Equations", pdfUrl: "#" },
+          { name: "Chapter 1: Chemical Reactions and Equations", pdfUrl: "#" },
           { name: "Chapter 2: Acids, Bases and Salts", pdfUrl: "#" },
           { name: "Chapter 3: Metals and Non-metals", pdfUrl: "#" },
           { name: "Chapter 4: Carbon and its Compounds", pdfUrl: "#" },
@@ -297,7 +298,7 @@
       maths: {
         title: "Mathematics (Standard & Basic)",
         chapters: [
-      { name: "Chapter 1: Real Numbers", pdfUrl: "#" },
+          { name: "Chapter 1: Real Numbers", pdfUrl: "#" },
           { name: "Chapter 2: Polynomials", pdfUrl: "#" },
           { name: "Chapter 3: Pair of Linear Equations in Two Variables", pdfUrl: "#" },
           { name: "Chapter 4: Quadratic Equations", pdfUrl: "#" },
@@ -310,23 +311,24 @@
           { name: "Chapter 11: Areas Related to Circles", pdfUrl: "#" },
           { name: "Chapter 12: Surface Areas and Volumes", pdfUrl: "#" },
           { name: "Chapter 13: Statistics", pdfUrl: "#" },
-          { name: "Chapter 14: Probability", pdfUrl: "#" },
+          { name: "Chapter 14: Probability", pdfUrl: "#" }
         ]
       },
       sst: {
-        title: "Social Science (History, Civics, Geo, Eco)",
+        title: "Social Science (History, Civics, Geography & Economics)",
         chapters: [
-          { name: "History Ch 1: Rise of Nationalism in Europe", pdfUrl: "#" },
+          { name: "History Ch 1: The Rise of Nationalism in Europe", pdfUrl: "#" },
           { name: "History Ch 2: Nationalism in India", pdfUrl: "#" },
-          { name: "history CH 3 : The Making of Global World",pdfurl: "#"},
-          { name: "Hiatory CH 4 :print culture and the Mordern World", pdfurl: "#"},
+          { name: "History Ch 3: The Making of a Global World", pdfUrl: "#" },
+          { name: "History Ch 4: The Age of Industrialisation", pdfUrl: "#" },
+          { name: "History Ch 5: Print Culture and the Modern World", pdfUrl: "#" },
           { name: "Geography Ch 1: Resources and Development", pdfUrl: "#" },
           { name: "Geography Ch 2: Forest and Wildlife Resources", pdfUrl: "#" },
-          { name: "Geography Ch 3: Water resources", pdfurl: "#"},
-          { name: "Geography Ch 4: Agriculture", pdfurl: "#"},
-          { name:"Geography Ch 5: Minerals and Energy resources", pdfurl: "#"}
-          { name: "Geography Ch 6: Manufacturing Industries", pdfurl: "#"}
-          { name: "Civics Ch 1: Power Sharing", pdfUrl: "#" },
+          { name: "Geography Ch 3: Water Resources", pdfUrl: "#" },
+          { name: "Geography Ch 4: Agriculture", pdfUrl: "#" },
+          { name: "Geography Ch 5: Minerals and Energy Resources", pdfUrl: "#" },
+          { name: "Geography Ch 6: Manufacturing Industries", pdfUrl: "#" },
+          { name: "Geography Ch 7: Lifelines of National Economy", pdfUrl: "#" },
           { name: "Civics Ch 1: Power Sharing", pdfUrl: "#" },
           { name: "Civics Ch 2: Federalism", pdfUrl: "#" },
           { name: "Civics Ch 3: Gender, Religion and Caste", pdfUrl: "#" },
@@ -336,7 +338,6 @@
           { name: "Economics Ch 2: Sectors of the Indian Economy", pdfUrl: "#" },
           { name: "Economics Ch 3: Money and Credit", pdfUrl: "#" },
           { name: "Economics Ch 4: Globalisation and the Indian Economy", pdfUrl: "#" }
-        
         ]
       }
     };
@@ -349,7 +350,7 @@
       container.innerHTML = data.chapters.map((ch, idx) => `
         <div class="chapter-item">
           <div>
-            <span style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">MODULE 0${idx+1}</span>
+            <span style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">MODULE ${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
             <div class="chapter-name">${ch.name}</div>
           </div>
           <a href="${ch.pdfUrl}" target="_blank" class="download-btn">
