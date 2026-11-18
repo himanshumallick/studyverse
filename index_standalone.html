@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- 21st.dev Style 3D & Glassmorphism Design System -->
   <style>
     :root {
       --bg-primary: #030712;
@@ -27,14 +26,13 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background-color: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
       font-family: var(--font-sans);
       overflow-x: hidden;
-      scroll-behavior: smooth;
+      min-height: 100vh;
     }
 
-    /* 3D Background Canvas */
     #bg-3d-canvas {
       position: fixed;
       inset: 0;
@@ -47,14 +45,13 @@
       z-index: 10;
     }
 
-    /* Navigation */
     .site-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 100;
-      background: rgba(3, 7, 18, 0.75);
+      background: rgba(3, 7, 18, 0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-subtle);
     }
@@ -72,6 +69,7 @@
       font-size: 1.25rem;
       letter-spacing: 0.05em;
       color: #fff;
+      text-decoration: none;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -97,7 +95,6 @@
       border-color: var(--accent-cyan);
     }
 
-    /* Multi-Step Pages Container */
     .pages-container {
       position: relative;
       min-height: 100vh;
@@ -110,13 +107,11 @@
 
     .app-page {
       position: absolute;
-      width: 100%;
+      width: calc(100% - 48px);
       opacity: 0;
       visibility: hidden;
       transform: translateY(30px) scale(0.98);
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      display: grid;
-      gap: 32px;
     }
 
     .app-page.active {
@@ -125,18 +120,17 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Glass Cards */
     .glass-card {
-      background: rgba(11, 15, 25, 0.75);
+      background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: 24px;
       padding: 36px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
 
     .page-title {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 800;
       line-height: 1.15;
       margin-bottom: 12px;
@@ -148,7 +142,6 @@
     }
     .page-desc { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 28px; }
 
-    /* Interactive Options Grid */
     .options-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -162,8 +155,6 @@
       padding: 24px;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
     }
 
     .choice-card:hover {
@@ -177,7 +168,6 @@
     .choice-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
     .choice-sub { font-size: 0.85rem; color: var(--text-secondary); }
 
-    /* Back Button */
     .back-btn {
       background: none;
       border: 1px solid rgba(255,255,255,0.2);
@@ -191,15 +181,13 @@
       align-items: center;
       gap: 6px;
       margin-bottom: 20px;
-      transition: 0.2s;
     }
     .back-btn:hover { background: rgba(255,255,255,0.1); }
 
-    /* Chapter List */
     .chapter-list {
       display: grid;
       gap: 12px;
-      max-height: 400px;
+      max-height: 380px;
       overflow-y: auto;
       padding-right: 8px;
     }
@@ -220,16 +208,14 @@
       transform: translateX(4px);
     }
     .chapter-num { font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.85rem; }
-    .chapter-name { font-weight: 600; font-size: 1rem; }
+    .chapter-name { font-weight: 600; font-size: 1rem; color: #fff; }
   </style>
 </head>
 <body>
 
-  <!-- Background 3D Three.js Interactive Floating Books & Particles -->
   <canvas id="bg-3d-canvas"></canvas>
 
   <div class="site-wrapper">
-    <!-- Header with Live Step Indicator -->
     <header class="site-header">
       <div class="nav-container">
         <a href="#" class="brand-logo" onclick="goToPage(1)">STUDY<span>VERSE</span> 3D</a>
@@ -241,20 +227,16 @@
       </div>
     </header>
 
-    <!-- Main 3-Page Flow Container -->
     <main class="pages-container">
-
-      <!-- PAGE 1: Select Class & Connect 3D Books -->
+      <!-- PAGE 1 -->
       <section class="app-page active" id="page-1">
         <div class="glass-card">
-          <div class="page-badge" style="color:var(--accent-cyan); font-weight:700; font-size:0.8rem; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.1em;">⚡ 3D Interactive Hub</div>
+          <div style="color:var(--accent-cyan); font-weight:700; font-size:0.8rem; margin-bottom:8px; text-transform:uppercase;">⚡ 3D Interactive Hub</div>
           <h1 class="page-title">
             Your Universe of Learning.<br>
             <span class="gradient-text">Select Your Class to Begin</span>
           </h1>
-          <p class="page-desc">
-            Interact with our immersive 3D study sphere. Choose your academic level to sync revision notes and board papers directly.
-          </p>
+          <p class="page-desc">Choose your academic level to sync revision notes and board papers directly.</p>
 
           <div class="options-grid">
             <div class="choice-card" onclick="selectClass('Class 10 CBSE')">
@@ -276,20 +258,18 @@
         </div>
       </section>
 
-      <!-- PAGE 2: Choose Notes vs Sample Paper -->
+      <!-- PAGE 2 -->
       <section class="app-page" id="page-2">
         <div class="glass-card">
           <button class="back-btn" onclick="goToPage(1)">← Change Class</button>
-          <h1 class="page-title">
-            <span id="selected-class-title" class="gradient-text">Class 10 CBSE</span> Selected
-          </h1>
+          <h1 class="page-title"><span id="selected-class-title" class="gradient-text">Class 10 CBSE</span> Selected</h1>
           <p class="page-desc">What material do you want to load from the 3D archive?</p>
 
           <div class="options-grid">
             <div class="choice-card" onclick="selectType('Visual Revision Notes')">
               <span class="choice-icon">📖</span>
               <div class="choice-title">Visual Revision Notes</div>
-              <div class="choice-sub">Mind maps, ray diagrams & formula cheat-sheets</div>
+              <div class="choice-sub">Mind maps, ray diagrams & formula sheets</div>
             </div>
             <div class="choice-card" onclick="selectType('Board Sample Papers')">
               <span class="choice-icon">📝</span>
@@ -300,26 +280,21 @@
         </div>
       </section>
 
-      <!-- PAGE 3: Chapter Selection & Instant PDF Preview -->
+      <!-- PAGE 3 -->
       <section class="app-page" id="page-3">
         <div class="glass-card">
           <button class="back-btn" onclick="goToPage(2)">← Back to Options</button>
           <h1 class="page-title">Select Chapter</h1>
           <p class="page-desc" id="summary-desc">Loading high-yield chapters...</p>
 
-          <div class="chapter-list" id="chapter-list-container">
-            <!-- Dynamically populated -->
-          </div>
+          <div class="chapter-list" id="chapter-list-container"></div>
         </div>
       </section>
-
     </main>
   </div>
 
-  <!-- Three.js Library for 3D Books & Background Animation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    /* --- Multi-Page Navigation Logic --- */
     let userState = { class: '', type: '' };
 
     function goToPage(pageNum) {
@@ -328,14 +303,6 @@
 
       document.getElementById(`page-${pageNum}`).classList.add('active');
       document.getElementById(`indicator-${pageNum}`).classList.add('active');
-
-      // Trigger 3D Camera / Book animation shifts based on page
-      if (pageNum === 1) animateCameraToState('home');
-      if (pageNum === 2) animateCameraToState('class-selected');
-      if (pageNum === 3) {
-        animateCameraToState('type-selected');
-        populateChapters();
-      }
     }
 
     function selectClass(className) {
@@ -348,6 +315,7 @@
       userState.type = typeName;
       document.getElementById('summary-desc').textContent = `${userState.class} • ${typeName} (Filtered & Ready)`;
       goToPage(3);
+      populateChapters();
     }
 
     function populateChapters() {
@@ -367,103 +335,75 @@
             <span class="chapter-num">MODULE 0${idx+1}</span>
             <div class="chapter-name">${ch}</div>
           </div>
-          <span style="color:var(--accent-cyan);">Launch →</span>
+          <span style="color:var(--accent-cyan); font-weight:600;">Launch →</span>
         </div>
       `).join('');
     }
 
-    /* --- Three.js 3D Background Books & Interactive Motion --- */
-    const canvas = document.getElementById('bg-3d-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    // Three.js Background Safe Init
+    try {
+      const canvas = document.getElementById('bg-3d-canvas');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Create 3D Book Meshes (Floating Glowing Rectangles representing books)
-    const booksGroup = new THREE.Group();
-    scene.add(booksGroup);
+      const booksGroup = new THREE.Group();
+      scene.add(booksGroup);
 
-    const bookGeo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
-    const bookMaterials = [
-      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }), // Spine
-      new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }), // Pages
-      new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })  // Cover
-    ];
+      const bookGeo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
+      const bookMaterials = [
+        new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }),
+        new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }),
+        new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })
+      ];
 
-    const books = [];
-    for (let i = 0; i < 5; i++) {
-      const book = new THREE.Mesh(bookGeo, bookMaterials);
-      book.position.set(
-        (Math.random() - 0.5) * 8,
-        (Math.random() - 0.5) * 5,
-        (Math.random() - 0.5) * 4 - 2
-      );
-      book.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-      booksGroup.add(book);
-      books.push(book);
-    }
-
-    // Ambient & Directional Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0x38bdf8, 3, 50);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-
-    camera.position.z = 6;
-
-    // Camera target positions based on steps
-    let targetCameraZ = 6;
-    let targetBooksRotationSpeed = 0.003;
-
-    function animateCameraToState(state) {
-      if (state === 'home') {
-        targetCameraZ = 6;
-        targetBooksRotationSpeed = 0.003;
-      } else if (state === 'class-selected') {
-        targetCameraZ = 4.5;
-        targetBooksRotationSpeed = 0.008;
-      } else if (state === 'type-selected') {
-        targetCameraZ = 3.5;
-        targetBooksRotationSpeed = 0.015;
+      const books = [];
+      for (let i = 0; i < 6; i++) {
+        const book = new THREE.Mesh(bookGeo, bookMaterials);
+        book.position.set((Math.random() - 0.5) * 9, (Math.random() - 0.5) * 5, (Math.random() - 0.5) * 4 - 2);
+        book.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+        booksGroup.add(book);
+        books.push(book);
       }
-    }
 
-    // Mouse movement parallax effect
-    let mouseX = 0, mouseY = 0;
-    window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
-    });
+      scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+      const pointLight = new THREE.PointLight(0x38bdf8, 3, 50);
+      pointLight.position.set(5, 5, 5);
+      scene.add(pointLight);
 
-    // Render loop
-    function animate() {
-      requestAnimationFrame(animate);
+      camera.position.z = 6;
 
-      // Smooth camera zoom
-      camera.position.z += (targetCameraZ - camera.position.z) * 0.05;
-      camera.position.x += (mouseX - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY - camera.position.y) * 0.05;
-
-      // Rotate books with motion animation
-      books.forEach((b, idx) => {
-        b.rotation.x += targetBooksRotationSpeed * (idx % 2 === 0 ? 1 : -1);
-        b.rotation.y += targetBooksRotationSpeed;
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
       });
 
-      renderer.render(scene, camera);
-    }
-    animate();
+      function animate() {
+        requestAnimationFrame(animate);
+        camera.position.x += (mouseX - camera.position.x) * 0.05;
+        camera.position.y += (-mouseY - camera.position.y) * 0.05;
 
-    // Handle Window Resize
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+        books.forEach((b, idx) => {
+          b.rotation.x += 0.004 * (idx % 2 === 0 ? 1 : -1);
+          b.rotation.y += 0.004;
+        });
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    } catch(e) {
+      console.log("WebGL fallback active");
+    }
   </script>
 </body>
 </html>
