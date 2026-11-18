@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #05070e;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDYVERSE — Owner Admin Console | PDF Management</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Core Design System -->
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/animations.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+
+  <!-- Supabase JS Client via Official CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* Admin Specific Styles preserving STUDYVERSE Design System */
+    .admin-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    .admin-nav {
+      height: 72px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(5, 7, 14, 0.85);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-xl);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #ffffff;
+    }
+
+    /* Auth Screen */
+    .auth-section {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 460px;
+      background: rgba(13, 19, 36, 0.88);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-primary);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(7, 10, 20, 0.8);
+      border: 1px solid var(--border-medium);
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: all var(--transition-fast);
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--accent-cyan-bright);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+    }
+
+    .form-select option {
+      background: #090d1a;
+      color: #ffffff;
+    }
+
+    /* Admin Dashboard Content */
+    .dashboard-container {
+      display: none;
+      padding: var(--space-2xl) 0 var(--space-4xl) 0;
+    }
+
+    .dashboard-container.active {
+      display: block;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      transition: transform var(--transition-fast);
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .metric-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Drag & Drop File Zone */
+    .dropzone {
+      border: 2px dashed rgba(56, 189, 248, 0.35);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl) var(--space-lg);
+      text-align: center;
+      background: rgba(15, 23, 42, 0.4);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--accent-cyan-bright);
+      background: rgba(56, 189, 248, 0.08);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+    }
+
+    .dropzone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Upload Progress Bar */
+    .progress-container {
+      display: none;
+      margin-top: var(--space-md);
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: var(--radius-pill);
+      background: var(--gradient-primary);
+      width: 0%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .progress-status {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Management Table */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .admin-table th {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px 18px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.775rem;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .admin-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .action-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Configuration Modal */
+    .config-banner {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: var(--space-lg);
+      font-size: 0.85rem;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    @media (max-width: 992px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      .admin-nav {
+        padding: 0 var(--space-md);
+      }
+    }
+  </style>
+</head>
+<body style="background-color: #05070e; color: #f8fafc; min-height: 100vh; margin: 0;">
+
+  <!-- Ambient Cosmic Lighting -->
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-orb orb-1 animate-glow-pulse"></div>
+    <div class="ambient-orb orb-2 animate-glow-pulse" style="animation-delay: -2s;"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="admin-wrapper">
+
+    <!-- Top Admin Header -->
+    <header class="admin-nav">
+      <div class="admin-logo">
+        <div class="brand-icon-wrapper" style="width: 34px; height: 34px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)" />
+          </svg>
+        </div>
+        <span>STUDYVERSE <span class="gradient-text" style="font-size: 0.95rem; font-weight: 700; margin-left: 6px;">OWNER CONSOLE</span></span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="index.html" class="btn btn-sm btn-glass" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span>View Student Site</span>
+        </a>
+
+        <button id="nav-config-btn" class="btn btn-sm btn-glass" title="Supabase API Settings">
+          ⚙️ Keys
+        </button>
+
+        <button id="nav-logout-btn" class="btn btn-sm btn-primary" style="display: none; background: #ef4444; border-color: rgba(239, 68, 68, 0.4);">
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- STATE 1: OWNER LOGIN FORM -->
+    <section id="auth-view" class="auth-section">
+      <div class="auth-card">
+        
+        <div style="text-align: center; margin-bottom: var(--space-xl);">
+          <div style="width: 52px; height: 52px; margin: 0 auto 12px auto; border-radius: 50%; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan-bright);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h2 style="font-size: 1.5rem; margin-bottom: 6px;">Owner Sign In</h2>
+          <p style="font-size: 0.875rem; color: var(--text-secondary);">Restricted to STUDYVERSE platform administrator.</p>
+        </div>
+
+        <div id="auth-config-alert" class="config-banner" style="display: none;">
+          <div>
+            <strong>Setup Required:</strong> Connect your free Supabase URL & Anon Key.
+          </div>
+          <button id="open-config-btn" class="btn btn-sm btn-glass" style="padding: 4px 10px; font-size: 0.75rem;">Configure</button>
+        </div>
+
+        <form id="owner-login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Owner Email</label>
+            <input type="email" id="login-email" class="form-input" placeholder="admin@studyverse.in" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password">
+          </div>
+
+          <div id="login-error-msg" style="display: none; padding: 10px 14px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: var(--radius-sm); color: #f87171; font-size: 0.85rem; margin-bottom: var(--space-md);"></div>
+
+          <button type="submit" id="login-submit-btn" class="btn btn-primary" style="width: 100%; padding: 14px;">
+            <span>Authenticate as Owner</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </form>
+
+        <div style="margin-top: var(--space-lg); text-align: center; font-size: 0.775rem; color: var(--text-dim);">
+          Protected by Supabase Auth & PostgreSQL Row-Level Security.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STATE 2: PROTECTED OWNER MANAGEMENT DASHBOARD -->
+    <main id="dashboard-view" class="dashboard-container">
+      <div class="container">
+
+        <!-- Welcome Banner -->
+        <div class="glass-card" style="margin-bottom: var(--space-2xl); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="badge badge-cyan" style="margin-bottom: 6px;">VERIFIED ADMINISTRATOR</span>
+            <h1 style="font-size: 1.85rem;">PDF Resource Hub</h1>
+            <p style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 4px;">
+              Logged in as: <strong id="owner-display-email" style="color: var(--accent-cyan-bright);">owner@studyverse.in</strong>
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a href="#upload-section" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Upload New PDF</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Metrics Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon-box" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan-bright); border: 1px solid rgba(56, 189, 248, 0.25);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            </div>
+            <div>
+              <div id="stat-total-pdfs" style="font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono);">0</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Published PDFs</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-box" style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.25);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div>
+              <div id="stat-subjects-covered" style="font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono);">0 / 6</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Active Subjects</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-box" style="background: rgba(139, 92, 246, 0.12); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.25);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </div>
+            <div>
+              <div id="stat-total-downloads" style="font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono);">0</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Total Student Downloads</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-box" style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+            </div>
+            <div>
+              <div id="stat-storage-size" style="font-size: 1.6rem; font-weight: 800; font-family: var(--font-mono);">0 MB</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Total Storage Used</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. UPLOAD PDF FORM SECTION -->
+        <section id="upload-section" class="glass-card" style="margin-bottom: var(--space-3xl); padding: var(--space-2xl);">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-md);">
+            <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan-bright);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            <div>
+              <h2 style="font-size: 1.4rem;">Upload Study Resource (PDF)</h2>
+              <p style="font-size: 0.875rem; color: var(--text-secondary);">Uploads are stored in Supabase Storage and automatically published on the student website.</p>
+            </div>
+          </div>
+
+          <form id="pdf-upload-form">
+            <div class="grid-2" style="margin-bottom: var(--space-md);">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="pdf-title">PDF Title *</label>
+                <input type="text" id="pdf-title" class="form-input" placeholder="e.g., Real Numbers - Complete Theorem Proofs & Notes" required>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="pdf-subject">Subject *</label>
+                <select id="pdf-subject" class="form-select" required>
+                  <option value="Mathematics">Mathematics (041/241)</option>
+                  <option value="Science">Science (086)</option>
+                  <option value="Social Science">Social Science (087)</option>
+                  <option value="English">English Language & Lit (184)</option>
+                  <option value="Hindi">Hindi (Course A & B)</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence (417)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--space-lg);">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="pdf-category">Category *</label>
+                <select id="pdf-category" class="form-select" required>
+                  <option value="Notes">Notes (Comprehensive Chapter Notes)</option>
+                  <option value="Sample Papers">Sample Papers (Board Model Papers)</option>
+                  <option value="Important Questions">Important Questions (High Frequency Board Qs)</option>
+                  <option value="Quick Revision">Quick Revision (Mind Maps & Capsules)</option>
+                  <option value="Formula Sheets">Formula Sheets (Equations Cheat Sheet)</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Selected File Info</label>
+                <div id="file-info-chip" style="padding: 12px 16px; border-radius: var(--radius-md); background: rgba(7, 10, 20, 0.8); border: 1px solid var(--border-medium); font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+                  <span id="file-name-text">No file chosen yet</span>
+                  <span id="file-size-badge" class="badge" style="display: none;">0 KB</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drag & Drop Zone -->
+            <div class="dropzone" id="pdf-dropzone">
+              <input type="file" id="pdf-file-input" accept="application/pdf,.pdf" required>
+              <div style="font-size: 2rem; margin-bottom: 8px;">📄</div>
+              <h4 style="font-size: 1.1rem; margin-bottom: 4px;">Choose a PDF file or drag it here</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Standard PDF format only (Max size 25MB)</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="upload-progress-container">
+              <div class="progress-bar" id="upload-progress-bar"></div>
+            </div>
+            <div class="progress-status" id="upload-progress-status" style="display: none;">
+              <span id="progress-status-text">Preparing upload...</span>
+              <span id="progress-percentage-text">0%</span>
+            </div>
+
+            <div style="margin-top: var(--space-lg); display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+              <button type="button" id="reset-form-btn" class="btn btn-glass">Clear Form</button>
+              <button type="submit" id="submit-upload-btn" class="btn btn-primary" style="padding: 12px 28px;">
+                <span>Publish PDF to Website</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- 2. MANAGE UPLOADED PDFS -->
+        <section id="manage-section">
+          <div class="flex items-center justify-between" style="margin-bottom: var(--space-lg); flex-wrap: wrap; gap: 14px;">
+            <div>
+              <h2 style="font-size: 1.45rem;">Manage Published PDFs</h2>
+              <p style="font-size: 0.875rem; color: var(--text-secondary);">View, preview, download, or delete existing resources from the database and storage.</p>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <input type="text" id="filter-search" class="form-input" placeholder="Search by title..." style="width: 220px; padding: 8px 12px; font-size: 0.85rem;">
+              
+              <select id="filter-subject" class="form-select" style="width: 170px; padding: 8px 12px; font-size: 0.85rem;">
+                <option value="all">All Subjects</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Science">Science</option>
+                <option value="Social Science">Social Science</option>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Artificial Intelligence">AI (417)</option>
+              </select>
+
+              <select id="filter-category" class="form-select" style="width: 160px; padding: 8px 12px; font-size: 0.85rem;">
+                <option value="all">All Categories</option>
+                <option value="Notes">Notes</option>
+                <option value="Sample Papers">Sample Papers</option>
+                <option value="Important Questions">Important Qs</option>
+                <option value="Quick Revision">Quick Revision</option>
+                <option value="Formula Sheets">Formula Sheets</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Table Container -->
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title & Document</th>
+                  <th>Subject</th>
+                  <th>Category</th>
+                  <th>File Size</th>
+                  <th>Upload Date</th>
+                  <th>Downloads</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="resources-table-body">
+                <tr>
+                  <td colspan="7" style="text-align: center; padding: 36px; color: var(--text-muted);">
+                    Loading published PDF resources...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- SUPABASE CONFIGURATION MODAL (Safe client-side setup) -->
+  <div class="search-modal-backdrop" id="config-modal">
+    <div class="search-modal-card" style="max-width: 540px;">
+      <div class="search-modal-header" style="justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.2rem;">⚙️</span>
+          <h3 style="font-size: 1.15rem;">Supabase Project Configuration</h3>
+        </div>
+        <button id="close-config-modal" class="btn btn-sm btn-glass" style="padding: 2px 8px;">✕</button>
+      </div>
+
+      <div style="padding: var(--space-xl);">
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-lg); line-height: 1.5;">
+          Find these in your free Supabase Dashboard: <strong>Project Settings &rarr; API &rarr; Project URL & Anon Public Key</strong>.
+        </p>
+
+        <form id="config-form">
+          <div class="form-group">
+            <label class="form-label" for="cfg-url">Project URL</label>
+            <input type="url" id="cfg-url" class="form-input" placeholder="https://xyzcompany.supabase.co" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cfg-key">Public Anon Key (Safe for frontend)</label>
+            <input type="text" id="cfg-key" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5c..." required>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: var(--space-lg);">
+            <button type="button" id="cancel-config-btn" class="btn btn-glass">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save & Connect</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div class="search-modal-backdrop" id="delete-modal">
+    <div class="search-modal-card" style="max-width: 440px; border-color: rgba(239, 68, 68, 0.4);">
+      <div style="padding: var(--space-xl); text-align: center;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px auto; color: #f87171;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        </div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 8px;">Delete PDF Resource?</h3>
+        <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: var(--space-xl);">
+          This will permanently delete <strong id="delete-item-title" style="color: #ffffff;"></strong> from both the cloud storage bucket and the student website.
+        </p>
+
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button id="cancel-delete-btn" class="btn btn-glass" style="flex: 1;">Cancel</button>
+          <button id="confirm-delete-btn" class="btn btn-primary" style="flex: 1; background: #ef4444; border-color: #ef4444;">Delete PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="admin-toasts"></div>
+
+  <!-- Admin Interactive Controller -->
+  <script type="module">
+    import {
+      isConfigured,
+      getCredentials,
+      saveCredentials,
+      reloadSupabase,
+      loginOwner,
+      logoutOwner,
+      getCurrentOwner,
+      uploadPdfResource,
+      deletePdfResource,
+      fetchPublishedResources,
+      formatFileSize,
+      formatDate
+    } from './js/supabase-config.js';
+
+    // State
+    let currentOwnerUser = null;
+    let cachedResources = [];
+    let pendingDeleteTarget = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      checkSetupStatus();
+      initEventListeners();
+      await checkAuthSession();
+    });
+
+    // Check if Supabase keys exist
+    function checkSetupStatus() {
+      const configAlert = document.getElementById('auth-config-alert');
+      if (!isConfigured()) {
+        configAlert.style.display = 'flex';
+      } else {
+        configAlert.style.display = 'none';
+      }
+    }
+
+    // Check existing login session
+    async function checkAuthSession() {
+      if (!isConfigured()) {
+        showAuthView();
+        return;
+      }
+
+      try {
+        const user = await getCurrentOwner();
+        if (user) {
+          currentOwnerUser = user;
+          showDashboardView();
+        } else {
+          showAuthView();
+        }
+      } catch (err) {
+        console.warn('Session check error:', err);
+        showAuthView();
+      }
+    }
+
+    function showAuthView() {
+      document.getElementById('auth-view').style.display = 'flex';
+      document.getElementById('dashboard-view').classList.remove('active');
+      document.getElementById('nav-logout-btn').style.display = 'none';
+    }
+
+    function showDashboardView() {
+      document.getElementById('auth-view').style.display = 'none';
+      document.getElementById('dashboard-view').classList.add('active');
+      document.getElementById('nav-logout-btn').style.display = 'inline-flex';
+      document.getElementById('owner-display-email').textContent = currentOwnerUser.email || 'Admin';
+
+      loadResourcesTable();
+    }
+
+    // Load & Render Admin Table
+    async function loadResourcesTable() {
+      const tbody = document.getElementById('resources-table-body');
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 36px; color: var(--text-muted);">
+            Fetching resources from Supabase...
+          </td>
+        </tr>
+      `;
+
+      try {
+        const resources = await fetchPublishedResources({ subject: 'all', category: 'all' });
+        cachedResources = resources;
+        renderFilteredTable();
+        updateMetrics(resources);
+      } catch (err) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 36px; color: #f87171;">
+              Failed to load resources: ${err.message}
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function renderFilteredTable() {
+      const search = document.getElementById('filter-search').value.toLowerCase();
+      const subject = document.getElementById('filter-subject').value;
+      const category = document.getElementById('filter-category').value;
+      const tbody = document.getElementById('resources-table-body');
+
+      const filtered = cachedResources.filter(r => {
+        const matchTitle = !search || r.title.toLowerCase().includes(search);
+        const matchSubject = subject === 'all' || r.subject === subject;
+        const matchCategory = category === 'all' || r.category === category;
+        return matchTitle && matchSubject && matchCategory;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-muted);">
+              No PDF resources match your search or filters.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(r => `
+        <tr>
+          <td>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 34px; height: 34px; border-radius: 6px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); display: flex; align-items: center; justify-content: center; color: var(--accent-cyan-bright); flex-shrink: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              </div>
+              <div>
+                <strong style="color: #ffffff; display: block; font-size: 0.95rem;">${r.title}</strong>
+                <span style="font-size: 0.75rem; color: var(--text-dim); font-family: var(--font-mono);">${r.file_path}</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="badge badge-cyan">${r.subject}</span></td>
+          <td><span class="badge badge-violet">${r.category}</span></td>
+          <td><span style="font-family: var(--font-mono); font-size: 0.85rem;">${formatFileSize(r.file_size)}</span></td>
+          <td><span style="color: var(--text-secondary); font-size: 0.85rem;">${formatDate(r.created_at)}</span></td>
+          <td><span style="font-family: var(--font-mono); font-weight: 700; color: #34d399;">${r.downloads_count || 0}</span></td>
+          <td style="text-align: right;">
+            <div class="action-btn-group" style="justify-content: flex-end;">
+              <a href="${r.file_url}" target="_blank" class="btn btn-sm btn-glass" style="padding: 6px 10px;" title="View in new tab">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span>View</span>
+              </a>
+              <a href="${r.file_url}" download="${r.title}.pdf" class="btn btn-sm btn-glass" style="padding: 6px 10px;" title="Download">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </a>
+              <button class="btn btn-sm btn-glass delete-trigger-btn" data-id="${r.id}" data-path="${r.file_path}" data-title="${r.title}" style="padding: 6px 10px; color: #f87171;" title="Delete">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      // Delete buttons
+      tbody.querySelectorAll('.delete-trigger-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          pendingDeleteTarget = {
+            id: btn.dataset.id,
+            path: btn.dataset.path,
+            title: btn.dataset.title
+          };
+          document.getElementById('delete-item-title').textContent = pendingDeleteTarget.title;
+          document.getElementById('delete-modal').classList.add('open');
+        });
+      });
+    }
+
+    function updateMetrics(resources) {
+      document.getElementById('stat-total-pdfs').textContent = resources.length;
+      
+      const uniqueSubjects = new Set(resources.map(r => r.subject));
+      document.getElementById('stat-subjects-covered').textContent = `${uniqueSubjects.size} / 6`;
+
+      const totalDownloads = resources.reduce((acc, r) => acc + (r.downloads_count || 0), 0);
+      document.getElementById('stat-total-downloads').textContent = totalDownloads;
+
+      const totalBytes = resources.reduce((acc, r) => acc + (r.file_size || 0), 0);
+      document.getElementById('stat-storage-size').textContent = formatFileSize(totalBytes);
+    }
+
+    // Event Listeners
+    function initEventListeners() {
+      // Login Form
+      const loginForm = document.getElementById('owner-login-form');
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const submitBtn = document.getElementById('login-submit-btn');
+        const errorBox = document.getElementById('login-error-msg');
+
+        errorBox.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>Authenticating...</span>`;
+
+        try {
+          const authData = await loginOwner(email, password);
+          currentOwnerUser = authData.user;
+          showToast('✓ Authentication Successful. Welcome Owner!');
+          showDashboardView();
+        } catch (err) {
+          errorBox.textContent = err.message || 'Authentication failed. Please check credentials.';
+          errorBox.style.display = 'block';
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span>Authenticate as Owner</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+        }
+      });
+
+      // Sign Out
+      document.getElementById('nav-logout-btn').addEventListener('click', async () => {
+        await logoutOwner();
+        currentOwnerUser = null;
+        showToast('Signed out successfully.');
+        showAuthView();
+      });
+
+      // File Input change
+      const fileInput = document.getElementById('pdf-file-input');
+      const dropzone = document.getElementById('pdf-dropzone');
+      const fileNameText = document.getElementById('file-name-text');
+      const fileSizeBadge = document.getElementById('file-size-badge');
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+          fileNameText.textContent = file.name;
+          fileSizeBadge.textContent = formatFileSize(file.size);
+          fileSizeBadge.style.display = 'inline-block';
+        } else {
+          fileNameText.textContent = 'No file chosen yet';
+          fileSizeBadge.style.display = 'none';
+        }
+      });
+
+      // Drag and Drop styling
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      // Upload Form Submit
+      const uploadForm = document.getElementById('pdf-upload-form');
+      uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const file = fileInput.files[0];
+        const title = document.getElementById('pdf-title').value;
+        const subject = document.getElementById('pdf-subject').value;
+        const category = document.getElementById('pdf-category').value;
+        const submitBtn = document.getElementById('submit-upload-btn');
+
+        const progressContainer = document.getElementById('upload-progress-container');
+        const progressBar = document.getElementById('upload-progress-bar');
+        const progressStatus = document.getElementById('upload-progress-status');
+        const statusText = document.getElementById('progress-status-text');
+        const percentageText = document.getElementById('progress-percentage-text');
+
+        submitBtn.disabled = true;
+        progressContainer.style.display = 'block';
+        progressStatus.style.display = 'flex';
+
+        try {
+          await uploadPdfResource({
+            file,
+            title,
+            subject,
+            category,
+            onProgress: (percent, msg) => {
+              progressBar.style.width = `${percent}%`;
+              percentageText.textContent = `${percent}%`;
+              statusText.textContent = msg;
+            }
+          });
+
+          showToast('🎉 PDF published successfully to student website!');
+          uploadForm.reset();
+          fileNameText.textContent = 'No file chosen yet';
+          fileSizeBadge.style.display = 'none';
+          loadResourcesTable();
+        } catch (err) {
+          alert(`Upload Error: ${err.message}`);
+          showToast(`❌ Error: ${err.message}`);
+        } finally {
+          submitBtn.disabled = false;
+          setTimeout(() => {
+            progressContainer.style.display = 'none';
+            progressStatus.style.display = 'none';
+            progressBar.style.width = '0%';
+          }, 2000);
+        }
+      });
+
+      // Reset form
+      document.getElementById('reset-form-btn').addEventListener('click', () => {
+        uploadForm.reset();
+        fileNameText.textContent = 'No file chosen yet';
+        fileSizeBadge.style.display = 'none';
+      });
+
+      // Filter events
+      ['filter-search', 'filter-subject', 'filter-category'].forEach(id => {
+        document.getElementById(id).addEventListener('input', renderFilteredTable);
+      });
+
+      // Delete confirmation modal actions
+      const deleteModal = document.getElementById('delete-modal');
+      document.getElementById('cancel-delete-btn').addEventListener('click', () => {
+        deleteModal.classList.remove('open');
+        pendingDeleteTarget = null;
+      });
+
+      document.getElementById('confirm-delete-btn').addEventListener('click', async () => {
+        if (!pendingDeleteTarget) return;
+
+        const confirmBtn = document.getElementById('confirm-delete-btn');
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Deleting...';
+
+        try {
+          await deletePdfResource(pendingDeleteTarget.id, pendingDeleteTarget.path);
+          deleteModal.classList.remove('open');
+          showToast('🗑️ PDF removed from database & storage.');
+          loadResourcesTable();
+        } catch (err) {
+          alert(`Failed to delete: ${err.message}`);
+        } finally {
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = 'Delete PDF';
+          pendingDeleteTarget = null;
+        }
+      });
+
+      // Config Modal
+      const configModal = document.getElementById('config-modal');
+      const openConfigBtns = [document.getElementById('nav-config-btn'), document.getElementById('open-config-btn')];
+      openConfigBtns.forEach(b => {
+        if (b) b.addEventListener('click', () => {
+          const creds = getCredentials();
+          document.getElementById('cfg-url').value = creds.url.includes('YOUR_PROJECT') ? '' : creds.url;
+          document.getElementById('cfg-key').value = creds.anonKey.includes('YOUR_SUPABASE') ? '' : creds.anonKey;
+          configModal.classList.add('open');
+        });
+      });
+
+      document.getElementById('close-config-modal').addEventListener('click', () => configModal.classList.remove('open'));
+      document.getElementById('cancel-config-btn').addEventListener('click', () => configModal.classList.remove('open'));
+
+      document.getElementById('config-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const url = document.getElementById('cfg-url').value;
+        const key = document.getElementById('cfg-key').value;
+
+        saveCredentials(url, key);
+        reloadSupabase();
+        configModal.classList.remove('open');
+        checkSetupStatus();
+        showToast('✓ Supabase credentials saved!');
+        checkAuthSession();
+      });
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('admin-toasts');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>${message}</span>`;
+      container.appendChild(toast);
+
+      window.requestAnimationFrame(() => toast.classList.add('show'));
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+
+</body>
+</html>
