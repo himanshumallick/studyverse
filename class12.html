@@ -1,1 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBSE Class 12 Hub — STUDYVERSE</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
+  <style>
+    :root {
+      --bg-primary: #030712;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-violet: #a855f7;
+      --border-subtle: rgba(99, 102, 241, 0.25);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background-color: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    #bg-3d-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .site-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 40px;
+    }
+    .brand-logo { font-weight: 800; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo)); display: grid; place-items: center; color: #fff; }
+    .brand-logo span { color: var(--accent-cyan); }
+
+    .back-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-cyan); }
+
+    .page-header { margin-bottom: 40px; text-align: center; }
+    .page-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; margin-bottom: 10px; }
+    .gradient-text { background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-desc { color: var(--text-secondary); font-size: 1.05rem; }
+
+    /* Views System for Smooth Animated Transitions */
+    .view-section {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .view-section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Streams Grid (Step 1) */
+    .streams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    .stream-card {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 36px;
+      cursor: pointer;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .stream-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56,189,248,0.1), transparent);
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .stream-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+    }
+    .stream-card:hover::before { opacity: 1; }
+    .stream-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+    .stream-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .stream-sub { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 24px; }
+
+    /* Subjects Grid inside Stream */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .subject-box {
+      background: rgba(11, 15, 25, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .subject-box:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(56,189,248,0.15);
+    }
+    .subject-name { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .subject-desc { font-size: 0.82rem; color: var(--text-secondary); }
+
+    /* Chapters Section */
+    .chapters-box {
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 28px;
+      padding: 36px;
+    }
+    .chapter-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+      max-height: 450px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .chapter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 22px;
+      border-radius: 16px;
+      transition: 0.2s;
+    }
+    .chapter-item:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .chapter-name { font-weight: 700; font-size: 1rem; color: #fff; margin-top: 2px; }
+    
+    .download-btn {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .download-btn:hover { opacity: 0.9; transform: scale(1.03); box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg-3d-canvas"></canvas>
+
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="brand-logo" onclick="window.location.href='index.html'">
+        <div class="brand-icon">⚡</div>
+        STUDY<span>VERSE</span>
+      </div>
+      <a href="index.html" class="back-btn">← Back to Home</a>
+    </header>
+
+    <main>
+      <div class="page-header">
+        <h1 class="page-title"><span class="gradient-text">CBSE Class 12</span> Champions Hub</h1>
+        <p class="page-desc" id="headerSubtitle">Select your stream to unlock high-yield board revision modules.</p>
+      </div>
+
+      <!-- VIEW 1: SELECT STREAM (PCM, PCB, COMMERCE) -->
+      <div class="view-section active" id="streamSelectView">
+        <div class="streams-grid">
+          
+          <div class="stream-card" onclick="selectStream('pcm')">
+            <span class="stream-icon">🚀</span>
+            <h2 class="stream-title">PCM (Science)</h2>
+            <p class="stream-sub">Physics, Chemistry & Mathematics for JEE & Boards</p>
+            <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">Explore Stream →</span>
+          </div>
+
+          <div class="stream-card" onclick="selectStream('pcb')">
+            <span class="stream-icon">🧬</span>
+            <h2 class="stream-title">PCB (Medical)</h2>
+            <p class="stream-sub">Physics, Chemistry & Biology for NEET & Boards</p>
+            <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">Explore Stream →</span>
+          </div>
+
+          <div class="stream-card" onclick="selectStream('commerce')">
+            <span class="stream-icon">📊</span>
+            <h2 class="stream-title">Commerce</h2>
+            <p class="stream-sub">Accountancy, Business Studies & Economics</p>
+            <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">Explore Stream →</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VIEW 2: SELECT SUBJECTS WITHIN STREAM -->
+      <div class="view-section" id="subjectSelectView">
+        <div style="margin-bottom: 24px;">
+          <button class="back-btn" onclick="goToStreams()">← Change Stream</button>
+        </div>
+        <div class="subjects-grid" id="subjectsGridContainer">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- VIEW 3: CHAPTERS & PDF NOTES -->
+      <div class="view-section" id="chaptersView">
+        <div class="chapters-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase; font-weight: 700;">Selected Subject</span>
+              <h2 id="subjectHeading" style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 4px;">Subject Name</h2>
+            </div>
+            <button class="back-btn" onclick="goToSubjects()">← Back to Subjects</button>
+          </div>
+
+          <div class="chapter-list" id="chapterListContainer"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Three.js Background Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('bg-3d-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const geo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
+    const materials = [
+      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }),
+      new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }),
+      new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })
+    ];
+
+    const books = [];
+    for (let i = 0; i < 6; i++) {
+      const mesh = new THREE.Mesh(geo, materials);
+      mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 5 - 2);
+      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      group.add(mesh);
+      books.push(mesh);
+    }
+
+    scene.add(new THREE.AmbientLight(0xffffff, 1.3));
+    const pLight = new THREE.PointLight(0x38bdf8, 3, 50);
+    pLight.position.set(5, 5, 5);
+    scene.add(pLight);
+
+    camera.position.z = 6;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      books.forEach((b, idx) => {
+        b.rotation.x += 0.003 * (idx % 2 === 0 ? 1 : -1);
+        b.rotation.y += 0.004;
+      });
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Complete Class 12 Streams, Subjects & Chapters Data
+    const class12Data = {
+      pcm: {
+        streamName: "PCM (Science Stream)",
+        subjects: [
+          {
+            key: "physics",
+            icon: "⚡",
+            name: "Physics",
+            desc: "14 Chapters • Electrostatics to Semiconductors",
+            chapters: [
+              { name: "Chapter 1: Electric Charges and Fields", pdfUrl: "#" },
+              { name: "Chapter 2: Electrostatic Potential and Capacitance", pdfUrl: "#" },
+              { name: "Chapter 3: Current Electricity", pdfUrl: "#" },
+              { name: "Chapter 4: Moving Charges and Magnetism", pdfUrl: "#" },
+              { name: "Chapter 5: Magnetism and Matter", pdfUrl: "#" },
+              { name: "Chapter 6: Electromagnetic Induction", pdfUrl: "#" },
+              { name: "Chapter 7: Alternating Current", pdfUrl: "#" },
+              { name: "Chapter 8: Electromagnetic Waves", pdfUrl: "#" },
+              { name: "Chapter 9: Ray Optics and Optical Instruments", pdfUrl: "#" },
+              { name: "Chapter 10: Wave Optics", pdfUrl: "#" },
+              { name: "Chapter 11: Dual Nature of Radiation and Matter", pdfUrl: "#" },
+              { name: "Chapter 12: Atoms", pdfUrl: "#" },
+              { name: "Chapter 13: Nuclei", pdfUrl: "#" },
+              { name: "Chapter 14: Semiconductor Electronics", pdfUrl: "#" }
+            ]
+          },
+          {
+            key: "chemistry",
+            icon: "🧪",
+            name: "Chemistry",
+            desc: "10 Chapters • Physical, Organic & Inorganic",
+            chapters: [
+              { name: "Chapter 1: Solutions", pdfUrl: "#" },
+              { name: "Chapter 2: Electrochemistry", pdfUrl: "#" },
+              { name: "Chapter 3: Chemical Kinetics", pdfUrl: "#" },
+              { name: "Chapter 4: The d- and f-Block Elements", pdfUrl: "#" },
+              { name: "Chapter 5: Coordination Compounds", pdfUrl: "#" },
+              { name: "Chapter 6: Haloalkanes and Haloarenes", pdfUrl: "#" },
+              { name: "Chapter 7: Alcohols, Phenols and Ethers", pdfUrl: "#" },
+              { name: "Chapter 8: Aldehydes, Ketones and Carboxylic Acids", pdfUrl: "#" },
+              { name: "Chapter 9: Amines", pdfUrl: "#" },
+              { name: "Chapter 10: Biomolecules", pdfUrl: "#" }
+            ]
+          },
+          {
+            key: "maths",
+            icon: "📐",
+            name: "Mathematics",
+            desc: "13 Chapters • Calculus, Vectors & Probability",
+            chapters: [
+              { name: "Chapter 1: Relations and Functions", pdfUrl: "#" },
+              { name: "Chapter 2: Inverse Trigonometric Functions", pdfUrl: "#" },
+              { name: "Chapter 3: Matrices", pdfUrl: "#" },
+              { name: "Chapter 4: Determinants", pdfUrl: "#" },
+              { name: "Chapter 5: Continuity and Differentiability", pdfUrl: "#" },
+              { name: "Chapter 6: Application of Derivatives", pdfUrl: "#" },
+              { name: "Chapter 7: Integrals", pdfUrl: "#" },
+              { name: "Chapter 8: Application of Integrals", pdfUrl: "#" },
+              { name: "Chapter 9: Differential Equations", pdfUrl: "#" },
+              { name: "Chapter 10: Vector Algebra", pdfUrl: "#" },
+              { name: "Chapter 11: Three Dimensional Geometry", pdfUrl: "#" },
+              { name: "Chapter 12: Linear Programming", pdfUrl: "#" },
+              { name: "Chapter 13: Probability", pdfUrl: "#" }
+            ]
+          }
+        ]
+      },
+      pcb: {
+        streamName: "PCB (Medical Stream)",
+        subjects: [
+          {
+            key: "physics",
+            icon: "⚡",
+            name: "Physics",
+            desc: "14 Chapters • Board & NEET Prep",
+            chapters: [
+              { name: "Chapter 1: Electric Charges and Fields", pdfUrl: "#" },
+              { name: "Chapter 2: Electrostatic Potential and Capacitance", pdfUrl: "#" },
+              { name: "Chapter 3: Current Electricity", pdfUrl: "#" },
+              { name: "Chapter 4: Moving Charges and Magnetism", pdfUrl: "#" },
+              { name: "Chapter 5: Magnetism and Matter", pdfUrl: "#" },
+              { name: "Chapter 6: Electromagnetic Induction", pdfUrl: "#" },
+              { name: "Chapter 7: Alternating Current", pdfUrl: "#" },
+              { name: "Chapter 8: Electromagnetic Waves", pdfUrl: "#" },
+              { name: "Chapter 9: Ray Optics and Optical Instruments", pdfUrl: "#" },
+              { name: "Chapter 10: Wave Optics", pdfUrl: "#" },
+              { name: "Chapter 11: Dual Nature of Radiation and Matter", pdfUrl: "#" },
+              { name: "Chapter 12: Atoms", pdfUrl: "#" },
+              { name: "Chapter 13: Nuclei", pdfUrl: "#" },
+              { name: "Chapter 14: Semiconductor Electronics", pdfUrl: "#" }
+            ]
+          },
+          {
+            key: "chemistry",
+            icon: "🧪",
+            name: "Chemistry",
+            desc: "10 Chapters • Physical, Organic & Inorganic",
+            chapters: [
+              { name: "Chapter 1: Solutions", pdfUrl: "#" },
+              { name: "Chapter 2: Electrochemistry", pdfUrl: "#" },
+              { name: "Chapter 3: Chemical Kinetics", pdfUrl: "#" },
+              { name: "Chapter 4: The d- and f-Block Elements", pdfUrl: "#" },
+              { name: "Chapter 5: Coordination Compounds", pdfUrl: "#" },
+              { name: "Chapter 6: Haloalkanes and Haloarenes", pdfUrl: "#" },
+              { name: "Chapter 7: Alcohols, Phenols and Ethers", pdfUrl: "#" },
+              { name: "Chapter 8: Aldehydes, Ketones and Carboxylic Acids", pdfUrl: "#" },
+              { name: "Chapter 9: Amines", pdfUrl: "#" },
+              { name: "Chapter 10: Biomolecules", pdfUrl: "#" }
+            ]
+          },
+          {
+            key: "biology",
+            icon: "🧬",
+            name: "Biology",
+            desc: "13 Chapters • Genetics, Ecology & Biotechnology",
+            chapters: [
+              { name: "Chapter 1: Sexual Reproduction in Flowering Plants", pdfUrl: "#" },
+              { name: "Chapter 2: Human Reproduction", pdfUrl: "#" },
+              { name: "Chapter 3: Reproductive Health", pdfUrl: "#" },
+              { name: "Chapter 4: Principles of Inheritance and Variation", pdfUrl: "#" },
+              { name: "Chapter 5: Molecular Basis of Inheritance", pdfUrl: "#" },
+              { name: "Chapter 6: Evolution", pdfUrl: "#" },
+              { name: "Chapter 7: Human Health and Disease", pdfUrl: "#" },
+              { name: "Chapter 8: Microbes in Human Welfare", pdfUrl: "#" },
+              { name: "Chapter 9: Biotechnology - Principles and Processes", pdfUrl: "#" },
+              { name: "Chapter 10: Biotechnology and its Applications", pdfUrl: "#" },
+              { name: "Chapter 11: Organisms and Populations", pdfUrl: "#" },
+              { name: "Chapter 12: Ecosystem", pdfUrl: "#" },
+              { name: "Chapter 13: Biodiversity and Conservation", pdfUrl: "#" }
+            ]
+          }
+        ]
+      },
+      commerce: {
+        streamName: "Commerce Stream",
+        subjects: [
+          {
+            key: "accounts",
+            icon: "📊",
+            name: "Accountancy",
+            desc: "Partnership, Company Accounts & Analysis",
+            chapters: [
+              { name: "Chapter 1: Accounting for Partnership Firms - Fundamental", pdfUrl: "#" },
+              { name: "Chapter 2: Goodwill: Nature and Valuation", pdfUrl: "#" },
+              { name: "Chapter 3: Reconstitution of Partnership Firm", pdfUrl: "#" },
+              { name: "Chapter 4: Dissolution of Partnership Firm", pdfUrl: "#" },
+              { name: "Chapter 5: Accounting for Share Capital", pdfUrl: "#" },
+              { name: "Chapter 6: Issue of Debentures", pdfUrl: "#" },
+              { name: "Chapter 7: Financial Statements of a Company", pdfUrl: "#" },
+              { name: "Chapter 8: Analysis of Financial Statements", pdfUrl: "#" },
+              { name: "Chapter 9: Accounting Ratios", pdfUrl: "#" },
+              { name: "Chapter 10: Cash Flow Statement", pdfUrl: "#" }
+            ]
+          },
+          {
+            key: "bst",
+            icon: "💼",
+            name: "Business Studies",
+            desc: "Principles of Management, Marketing & Finance",
+            chapters: [
+              { name: "Chapter 1: Nature and Significance of Management", pdfUrl: "#" },
+              { name: "Chapter 2: Principles of Management", pdfUrl: "#" },
+              { name: "Chapter 3: Business Environment", pdfUrl: "#" },
+              { name: "Chapter 4: Planning", pdfUrl: "#" },
+              { name: "Chapter 5: Organising", pdfUrl: "#" },
+              { name: "Chapter 6: Staffing", pdfUrl: "#" },
+              { name: "Chapter 7: Directing", pdfUrl: "#" },
+              { name: "Chapter 8: Controlling", pdfUrl: "#" },
+              { name: "Chapter 9: Financial Management", pdfUrl: "#" },
+              { name: "Chapter 10: Financial Markets", pdfUrl: "#" },
+              { name: "Chapter 11: Marketing Management", pdfUrl: "#" },
+              { name: "Chapter 12: Consumer Protection", pdfUrl: "#" }
+            ]
+          },
+          {
+            key: "economics",
+            icon: "📈",
+            name: "Economics",
+            desc: "Macroeconomics & Indian Economic Development",
+            chapters: [
+              { name: "Chapter 1: National Income and Related Aggregates", pdfUrl: "#" },
+              { name: "Chapter 2: Money and Banking", pdfUrl: "#" },
+              { name: "Chapter 3: Determination of Income and Employment", pdfUrl: "#" },
+              { name: "Chapter 4: Government Budget and the Economy", pdfUrl: "#" },
+              { name: "Chapter 5: Balance of Payments", pdfUrl: "#" },
+              { name: "Chapter 6: Development Experience (1947-90)", pdfUrl: "#" },
+              { name: "Chapter 7: Economic Reforms Since 1991", pdfUrl: "#" },
+              { name: "Chapter 8: Human Capital Formation in India", pdfUrl: "#" },
+              { name: "Chapter 9: Rural Development", pdfUrl: "#" },
+              { name: "Chapter 10: Employment and Growth", pdfUrl: "#" },
+              { name: "Chapter 11: Environment and Sustainable Development", pdfUrl: "#" }
+            ]
+          }
+        ]
+      }
+    };
+
+    let activeStreamData = null;
+
+    function selectStream(streamKey) {
+      activeStreamData = class12Data[streamKey];
+      document.getElementById('headerSubtitle').textContent = activeStreamData.streamName;
+
+      const container = document.getElementById('subjectsGridContainer');
+      container.innerHTML = activeStreamData.subjects.map(sub => `
+        <div class="subject-box" onclick="openSubject('${sub.key}')">
+          <span style="font-size: 2rem; display: block; margin-bottom: 12px;">${sub.icon}</span>
+          <div class="subject-name">${sub.name}</div>
+          <div class="subject-desc">${sub.desc}</div>
+          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.82rem; margin-top: 14px; display: inline-block;">Open Chapters →</span>
+        </div>
+      `).join('');
+
+      switchView('subjectSelectView');
+    }
+
+    function openSubject(subjectKey) {
+      const subject = activeStreamData.subjects.find(s => s.key === subjectKey);
+      document.getElementById('subjectHeading').textContent = `${subject.name} (${activeStreamData.streamName})`;
+
+      const container = document.getElementById('chapterListContainer');
+      container.innerHTML = subject.chapters.map((ch, idx) => `
+        <div class="chapter-item">
+          <div>
+            <span style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">MODULE ${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+            <div class="chapter-name">${ch.name}</div>
+          </div>
+          <a href="${ch.pdfUrl}" target="_blank" class="download-btn">
+            📥 Download PDF
+          </a>
+        </div>
+      `).join('');
+
+      switchView('chaptersView');
+    }
+
+    function goToStreams() {
+      document.getElementById('headerSubtitle').textContent = "Select your stream to unlock high-yield board revision modules.";
+      switchView('streamSelectView');
+    }
+
+    function goToSubjects() {
+      switchView('subjectSelectView');
+    }
+
+    function switchView(viewId) {
+      document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
