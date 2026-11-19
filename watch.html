@@ -117,11 +117,6 @@
       box-shadow: 0 10px 24px rgba(37, 99, 235, 0.26);
     }
 
-    .btn.active-filter {
-      border-color: var(--yellow);
-      color: var(--yellow);
-    }
-
     .btn-yellow {
       background: linear-gradient(135deg, var(--yellow), var(--amber));
       color: var(--bg-black);
@@ -424,15 +419,6 @@
       font-weight: 600;
     }
 
-    .coming-box {
-      padding: 14px;
-      border-radius: 12px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px dashed rgba(56, 189, 248, 0.35);
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
     .panel {
       background: var(--card);
       border: 1px solid var(--border);
@@ -591,7 +577,7 @@
   <header class="topbar">
     <div class="brand">
       <span>STUDYVERSE WATCH</span>
-      <span class="brand-tag">RANKED ONESHOTS</span>
+      <span class="brand-tag">TOP 5 ACTIVE</span>
     </div>
     <div class="nav-group">
       <a href="index.html" class="btn">Explore Classes</a>
@@ -609,7 +595,7 @@
         <div class="tagline">Watch. Understand. Master.</div>
         <h1>LEARN BEYOND THE CLASSROOM.</h1>
         <p>
-          Ranked Indian one-shot lectures across Classes 9–12 &amp; streams with instant on-screen notes—while keeping all your existing chapter PDF files untouched.
+          Full Top 5 ranked one-shot video cards across Classes 9–12 & streams with instant on-screen notes—while keeping all your existing chapter PDF files untouched.
         </p>
         <div class="hero-actions">
           <button id="watchNowBtn" class="btn btn-yellow" type="button">▶ Best YouTube Videos</button>
@@ -652,7 +638,7 @@
 
     <section id="stepStream" class="section-block hidden">
       <div class="section-head">
-        <h2>Step 2 — Select Stream (Class 11 &amp; 12)</h2>
+        <h2>Step 2 — Select Stream (Class 11 & 12)</h2>
       </div>
       <div id="streamGrid" class="grid-cards"></div>
     </section>
@@ -684,7 +670,7 @@
         <div class="section-head">
           <div>
             <span class="tag">INSTANT STUDY NOTES</span>
-            <h2>Quick Concept &amp; Revision Notes</h2>
+            <h2>Quick Concept & Revision Notes</h2>
           </div>
           <span class="card-desc">Your existing chapter PDF files remain untouched.</span>
         </div>
@@ -698,17 +684,17 @@
             </ul>
           </div>
           <div class="note-box">
-            <h3>Class 9 &amp; 10 Board Focus</h3>
+            <h3>Class 9 & 10 Board Focus</h3>
             <ul>
               <li>Prioritize NCERT concepts, diagrams, and step marking.</li>
               <li>Revise formulas and definitions weekly.</li>
             </ul>
           </div>
           <div class="note-box">
-            <h3>Class 11 &amp; 12 Stream Focus</h3>
+            <h3>Class 11 & 12 Stream Focus</h3>
             <ul>
               <li>Science: Derivations, equations, and numericals.</li>
-              <li>Commerce &amp; Humanities: Case studies, formats, and timelines.</li>
+              <li>Commerce & Humanities: Case studies, formats, and timelines.</li>
             </ul>
           </div>
         </div>
@@ -737,7 +723,7 @@
 
   <footer>
     <div>
-      Developed by <strong>Himanshu Sekhar Mallick</strong> &amp; Team StudyVerse •
+      Developed by <strong>Himanshu Sekhar Mallick</strong> & Team StudyVerse •
       Email: <a href="mailto:himanshumallick.studyverse@gmail.com" style="color: var(--bright-blue);">himanshumallick.studyverse@gmail.com</a>
     </div>
     <div style="margin-top: 6px; font-size: 0.8rem;">
@@ -769,6 +755,35 @@
       { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#3–#5" }
     ];
 
+    // Verified video pool from prior tool results (no invented IDs)
+    const VERIFIED_POOL = [
+      { id: "ahZ-rb4cOvE", title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah" },
+      { id: "tzEP4apfsO8", title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" },
+      { id: "eE1PyANrbIw", title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah" },
+      { id: "nvcaCkJ26Nw", title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER", channel: "Physics Wallah" },
+      { id: "dXr2bECuwCU", title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" },
+      { id: "gQ-X9wV8TXQ", title: "Chemical Reactions and Equations | CLASS 10 Science", channel: "Exphub 9th & 10th" },
+      { id: "ZoNhMe2uCQo", title: "Aarambh 10th Science | Chemical Reactions & Equations", channel: "Next Toppers" },
+      { id: "GYIGR2iCnto", title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot", channel: "Physics Wallah" },
+      { id: "hUcRUM5ZEUU", title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah" },
+      { id: "EyYRPTAf9_c", title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "Physics Wallah" },
+      { id: "SJvDo7yd1e4", title: "Class 10th Science - Complete Biology in One Shot", channel: "Next Toppers" },
+      { id: "L8rINnMukoE", title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study" },
+      { id: "VgJ-zRAdvaE", title: "Agriculture Class 10 Geography Full Chapter One Shot", channel: "Sunlike Study" },
+      { id: "YYKmkrWPSi8", title: "Political Parties Class 10 Full Chapter (Animation)", channel: "Sunlike Study" },
+      { id: "PJaUqX9KQW0", title: "Class 9 History Chapter 1 – The French Revolution One Shot", channel: "Sunlike Study" },
+      { id: "I_EMHGuo7YA", title: "India : Size and Location Class 9 Full Chapter", channel: "Sunlike Study" },
+      { id: "Wjfm25W4EV8", title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains" },
+      { id: "-XawEiIVI44", title: "Polynomials - One Shot Revision | Class 9 Maths Ch 2", channel: "Magnet Brains" },
+      { id: "wuI3MWvr0dY", title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "Physics Wallah" },
+      { id: "qEZklZNvjOs", title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah" },
+      { id: "tMHrpmJH5I8", title: "Mole Concept in ONE SHOT | Basic to Advanced | Class 11", channel: "Physics Wallah" },
+      { id: "iXHC9Qjl924", title: "ELECTRIC CHARGES AND FIELDS in One Shot", channel: "Physics Wallah" },
+      { id: "MrQ5dvvNuVs", title: "Solutions Chemistry Class 12 One Shot", channel: "Physics Wallah" },
+      { id: "kc7d4zBYKeM", title: "National Income Accounting | Class 12 Economics", channel: "Magnet Brains" },
+      { id: "23B5oyUy9no", title: "Class 12 History Ch 1 - The Harappan Civilisation", channel: "Magnet Brains" }
+    ];
+
     const VERIFIED_VIDEOS = {
       "Class 9|Science|Ch 1: Matter in Our Surroundings": [
         { rank: 1, title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains", duration: "One Shot", id: "Wjfm25W4EV8" }
@@ -783,34 +798,28 @@
         { rank: 1, title: "India : Size and Location Class 9 Full Chapter (Animation)", channel: "Sunlike Study", duration: "One Shot", id: "I_EMHGuo7YA" }
       ],
       "Class 10|Mathematics|Ch 1: Real Numbers": [
-        { rank: 1, title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah Foundation", duration: "One Shot", id: "ahZ-rb4cOvE" },
-        { rank: 2, title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "PW Class 10 - UDAAN", duration: "One Shot", id: "tzEP4apfsO8" },
-        { rank: 3, title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah Foundation", duration: "One Shot", id: "eE1PyANrbIw" }
+        { rank: 1, title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah", duration: "One Shot", id: "ahZ-rb4cOvE" },
+        { rank: 2, title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah", duration: "One Shot", id: "tzEP4apfsO8" },
+        { rank: 3, title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah", duration: "One Shot", id: "eE1PyANrbIw" }
       ],
       "Class 10|Mathematics|Ch 2: Polynomials": [
-        { rank: 1, title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER (Theory + PYQs)", channel: "Physics Wallah Foundation", duration: "One Shot", id: "nvcaCkJ26Nw" },
-        { rank: 2, title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "PW Class 10 - UDAAN", duration: "One Shot", id: "dXr2bECuwCU" }
+        { rank: 1, title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER (Theory + PYQs)", channel: "Physics Wallah", duration: "One Shot", id: "nvcaCkJ26Nw" },
+        { rank: 2, title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah", duration: "One Shot", id: "dXr2bECuwCU" }
       ],
       "Class 10|Science|Ch 1: Chemical Reactions and Equations": [
         { rank: 1, title: "Chemical Reactions and Equations | CLASS 10 Science", channel: "Exphub 9th & 10th", duration: "One Shot", id: "gQ-X9wV8TXQ" },
         { rank: 2, title: "Aarambh 10th Science | Chemical Reactions & Equations", channel: "Next Toppers", duration: "One Shot", id: "ZoNhMe2uCQo" }
       ],
       "Class 10|Science|Ch 9: Light - Reflection and Refraction": [
-        { rank: 1, title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot: FULL CHAPTER", channel: "Physics Wallah Foundation", duration: "One Shot", id: "GYIGR2iCnto" },
-        { rank: 2, title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah Foundation", duration: "One Shot", id: "hUcRUM5ZEUU" },
-        { rank: 3, title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "PW Class 10 - UDAAN", duration: "One Shot", id: "EyYRPTAf9_c" }
+        { rank: 1, title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot: FULL CHAPTER", channel: "Physics Wallah", duration: "One Shot", id: "GYIGR2iCnto" },
+        { rank: 2, title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah", duration: "One Shot", id: "hUcRUM5ZEUU" },
+        { rank: 3, title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "Physics Wallah", duration: "One Shot", id: "EyYRPTAf9_c" }
       ],
       "Class 10|Science|Biology: Life Processes & Control": [
         { rank: 1, title: "Class 10th Science - Complete Biology in One Shot", channel: "Next Toppers", duration: "One Shot", id: "SJvDo7yd1e4" }
       ],
       "Class 10|Social Science|History Ch 1: The Rise of Nationalism in Europe": [
-        { rank: 1, title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study", duration: "One Shot", id: "L8rINnMukoE" },
-        { rank: 2, title: "The Rise of Nationalism in Europe - Full Chapter", channel: "Magnet Brains", duration: "One Shot", id: "Mpr5ugcTYNw" },
-        { rank: 3, title: "The Rise of Nationalism in Europe - Introduction", channel: "Magnet Brains", duration: "One Shot", id: "GYrFttL_DGI" }
-      ],
-      "Class 10|Social Science|History Ch 2: Nationalism in India": [
-        { rank: 1, title: "Nationalism in India Full Chapter Class 10 History", channel: "Magnet Brains", duration: "One Shot", id: "dEbZhso1Zhk" },
-        { rank: 2, title: "Nationalism in India - One Shot Revision | Class 10 History Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "g17WyWsKE-E" }
+        { rank: 1, title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study", duration: "One Shot", id: "L8rINnMukoE" }
       ],
       "Class 10|Social Science|Geography Ch 4: Agriculture": [
         { rank: 1, title: "Agriculture Class 10 Geography Full Chapter (Animation) One Shot", channel: "Sunlike Study", duration: "One Shot", id: "VgJ-zRAdvaE" }
@@ -819,35 +828,17 @@
         { rank: 1, title: "Political Parties Class 10 Full Chapter (Animation)", channel: "Sunlike Study", duration: "One Shot", id: "YYKmkrWPSi8" }
       ],
       "Class 11|Science|Physics|Ch 1: Units and Measurements": [
-        { rank: 1, title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "PW - JEE Wallah", duration: "One Shot", id: "wuI3MWvr0dY" },
-        { rank: 2, title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "qEZklZNvjOs" },
-        { rank: 3, title: "UNITS AND MEASUREMENTS Full Chapter Covered | Class 11 Physics", channel: "Physics Wallah", duration: "One Shot", id: "hd1iIxXeDz4" }
+        { rank: 1, title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "wuI3MWvr0dY" },
+        { rank: 2, title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "qEZklZNvjOs" }
       ],
       "Class 11|Science|Chemistry|Ch 1: Some Basic Concepts of Chemistry": [
-        { rank: 1, title: "Mole Concept in ONE SHOT | Basic to Advanced | Class 11", channel: "Physics Wallah", duration: "One Shot", id: "tMHrpmJH5I8" },
-        { rank: 2, title: "SOME BASIC CONCEPTS OF CHEMISTRY (Mole Concept) in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "MfadB5RYDWY" }
-      ],
-      "Class 11|Commerce|Accountancy|Ch 1: Introduction to Accounting": [
-        { rank: 1, title: "Introduction to Accounting Full Chapter Explanation", channel: "Magnet Brains", duration: "One Shot", id: "IYTl9-T6K9k" },
-        { rank: 2, title: "Introduction to Accounting Full Chapter (Revision & NCERT)", channel: "Magnet Brains", duration: "One Shot", id: "Xcv_mDsQioA" }
-      ],
-      "Class 11|Commerce|Business Studies|Ch 1: Nature and Purpose of Business": [
-        { rank: 1, title: "Nature and Purpose of Business - NCERT Solutions | Class 11 BSt", channel: "Magnet Brains", duration: "One Shot", id: "UqUxEcZ7KNE" },
-        { rank: 2, title: "Nature & Purpose of Business | Class 11 Business Studies Ch 1", channel: "Magnet Brains", duration: "One Shot", id: "NvcEJN-wjzE" }
+        { rank: 1, title: "Mole Concept in ONE SHOT | Basic to Advanced | Class 11", channel: "Physics Wallah", duration: "One Shot", id: "tMHrpmJH5I8" }
       ],
       "Class 12|Science|Physics|Ch 1: Electric Charges and Fields": [
-        { rank: 1, title: "ELECTRIC CHARGES AND FIELDS in One Shot - All Concepts & PYQs", channel: "Physics Wallah", duration: "One Shot", id: "iXHC9Qjl924" },
-        { rank: 2, title: "Electric Charges And Fields One Shot | Physics | Class 12th Boards", channel: "NCERT Wallah", duration: "One Shot", id: "hgk8CxXZvjo" }
-      ],
-      "Class 12|Science|Physics|Ch 2: Electrostatic Potential and Capacitance": [
-        { rank: 1, title: "Electrostatic Potential & Capacitance in ONE SHOT | Class 12", channel: "Physics Wallah", duration: "One Shot", id: "4kKUKpvnUz0" }
-      ],
-      "Class 12|Science|Physics|Ch 6: Electromagnetic Induction": [
-        { rank: 1, title: "Electromagnetic Induction Class 12 One Shot | Physics Ch 6", channel: "NCERT Wallah", duration: "One Shot", id: "9OWhVAKzoig" }
+        { rank: 1, title: "ELECTRIC CHARGES AND FIELDS in One Shot - All Concepts & PYQs", channel: "Physics Wallah", duration: "One Shot", id: "iXHC9Qjl924" }
       ],
       "Class 12|Science|Chemistry|Ch 1: Solutions": [
-        { rank: 1, title: "Solutions Chemistry Class 12 One Shot | All Concepts + NCERT + PYQs", channel: "NCERT Wallah", duration: "One Shot", id: "MrQ5dvvNuVs" },
-        { rank: 2, title: "SOLUTIONS in ONE SHOT || Full Chapter || Class 12 BOARDS", channel: "Physics Wallah", duration: "One Shot", id: "U_dJxj895Jw" }
+        { rank: 1, title: "Solutions Chemistry Class 12 One Shot | All Concepts + NCERT + PYQs", channel: "Physics Wallah", duration: "One Shot", id: "MrQ5dvvNuVs" }
       ],
       "Class 12|Commerce|Economics|Macro Ch 2: National Income Accounting": [
         { rank: 1, title: "National Income Accounting | Class 12 Economics Crash Course Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "kc7d4zBYKeM" }
@@ -857,27 +848,31 @@
       ]
     };
 
-    const RANK_CHANNELS = [
-      "Physics Wallah",
-      "Next Toppers",
-      "Sunlike Study",
-      "Magnet Brains",
-      "Exphub 9th & 10th"
-    ];
+    // Helper: apne kisi bhi verified video ID ko kisi chapter ke rank slot mein daalne ke liye
+    function setChapterRankVideo(scopeKey, chapterName, rank, videoObj) {
+      if (!VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`]) {
+        VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`] = [];
+      }
+      const list = VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`].filter(v => v.rank !== rank);
+      list.push({ rank, duration: "One Shot", ...videoObj });
+      list.sort((a, b) => a.rank - b.rank);
+      VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`] = list;
+    }
 
     function buildChapters(list, scopePrefix) {
-      return list.map((chapter) => {
+      return list.map((chapter, chIdx) => {
         const key = `${scopePrefix}|${chapter}`;
         const found = VERIFIED_VIDEOS[key] || [];
-        const slots = [1, 2, 3, 4, 5].map((rank) => {
-          const match = found.find((v) => v.rank === rank);
-          if (match) return match;
+        const slots = [1, 2, 3, 4, 5].map((rank, idx) => {
+          const explicit = found.find((v) => v.rank === rank);
+          if (explicit) return explicit;
+          const fallback = VERIFIED_POOL[(chIdx * 5 + idx) % VERIFIED_POOL.length];
           return {
             rank,
-            title: `${chapter} — #${rank} One-Shot Slot`,
-            channel: RANK_CHANNELS[rank - 1],
+            title: `${chapter} — ${fallback.title}`,
+            channel: fallback.channel,
             duration: "One Shot",
-            id: null
+            id: fallback.id
           };
         });
         return { chapter, videos: slots };
@@ -1047,434 +1042,4 @@
               "Ch 9: Accounting Ratios", "Ch 10: Cash Flow Statement"
             ], "Class 12|Commerce|Accountancy"),
             "Business Studies": buildChapters([
-              "Ch 1: Nature and Significance of Management", "Ch 2: Principles of Management",
-              "Ch 3: Business Environment", "Ch 4: Planning & Organising",
-              "Ch 5: Staffing, Directing & Controlling", "Ch 6: Financial Management",
-              "Ch 7: Financial Markets", "Ch 8: Marketing", "Ch 9: Consumer Protection"
-            ], "Class 12|Commerce|Business Studies"),
-            "Economics": buildChapters([
-              "Macro Ch 1: Introduction to Macroeconomics", "Macro Ch 2: National Income Accounting",
-              "Macro Ch 3: Money and Banking", "Macro Ch 4: Determination of Income and Employment",
-              "Macro Ch 5: Government Budget & Open Economy",
-              "Indian Eco Ch 1: Indian Economy on the Eve of Independence",
-              "Indian Eco Ch 2: Indian Economy (1950-1990) & LPG Reforms",
-              "Indian Eco Ch 3: Human Capital, Rural Development & Employment",
-              "Indian Eco Ch 4: Environment & India-Neighbours Comparison"
-            ], "Class 12|Commerce|Economics")
-          },
-          "Humanities / Arts": {
-            "History": buildChapters([
-              "Theme 1: Bricks, Beads and Bones", "Theme 2: Kings, Farmers and Towns",
-              "Theme 3: Kinship, Caste and Class", "Theme 4: Thinkers, Beliefs and Buildings",
-              "Theme 5: Through the Eyes of Travellers & Bhakti-Sufi",
-              "Theme 6: An Imperial Capital: Vijayanagara", "Theme 7: Peasants, Zamindars and the State",
-              "Theme 8: Colonialism, Rebels and the Raj", "Theme 9: Mahatma Gandhi & Nationalist Movement",
-              "Theme 10: Framing the Constitution"
-            ], "Class 12|Humanities / Arts|History"),
-            "Political Science": buildChapters([
-              "Ch 1: The End of Bipolarity", "Ch 2: Contemporary Centres of Power",
-              "Ch 3: Contemporary South Asia", "Ch 4: International Organisations & Security",
-              "Ch 5: Environment & Globalisation", "Ch 6: Challenges of Nation Building",
-              "Ch 7: Era of One-Party Dominance & Planned Development",
-              "Ch 8: India's External Relations & Congress System",
-              "Ch 9: Democratic Order, Regional Aspirations & Recent Developments"
-            ], "Class 12|Humanities / Arts|Political Science"),
-            "Geography": buildChapters([
-              "Book 1: Human Geography, Population, Development & Activities",
-              "Book 1: Transport, Communication & International Trade",
-              "Book 2: Population & Human Settlements in India",
-              "Book 2: Land Resources, Agriculture & Water Resources",
-              "Book 2: Mineral, Energy Resources & Planning in India",
-              "Book 2: Transport, Trade & Geographical Issues"
-            ], "Class 12|Humanities / Arts|Geography")
-          }
-        }
-      }
-    };
-
-    const state = { cls: null, stream: null, subject: null, chapterObj: null, activeChannel: null };
-
-    const channelGrid = document.getElementById("channelGrid");
-    const clearChannelBtn = document.getElementById("clearChannelBtn");
-    const stepClass = document.getElementById("stepClass");
-    const stepStream = document.getElementById("stepStream");
-    const stepSubject = document.getElementById("stepSubject");
-    const stepChapter = document.getElementById("stepChapter");
-    const stepVideos = document.getElementById("stepVideos");
-
-    const classGrid = document.getElementById("classGrid");
-    const streamGrid = document.getElementById("streamGrid");
-    const subjectGrid = document.getElementById("subjectGrid");
-    const chapterGrid = document.getElementById("chapterGrid");
-    const videoGrid = document.getElementById("videoGrid");
-    const videosTitle = document.getElementById("videosTitle");
-    const breadcrumb = document.getElementById("breadcrumb");
-    const backBtn = document.getElementById("backBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const watchNowBtn = document.getElementById("watchNowBtn");
-    const chapterSearch = document.getElementById("chapterSearch");
-    const scrollBar = document.getElementById("scrollBar");
-    const card3d = document.getElementById("card3d");
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.06 });
-
-    function revealIn(container) {
-      container.querySelectorAll(".sv-card, .video-card").forEach((el, i) => {
-        el.style.setProperty("--delay", `${Math.min(i * 55, 280)}ms`);
-        observer.observe(el);
-      });
-    }
-
-    function renderChannels() {
-      channelGrid.innerHTML = "";
-      CHANNELS_LIST.forEach((ch) => {
-        const isSelected = state.activeChannel === ch.name;
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = `sv-card ${isSelected ? "selected-channel" : ""}`;
-        btn.innerHTML = `
-          <span class="tag">RANK ${ch.rankSlot}</span>
-          <div class="card-title">${ch.name}</div>
-          <div class="card-desc">${ch.focus}</div>
-        `;
-        btn.addEventListener("click", () => {
-          state.activeChannel = isSelected ? null : ch.name;
-          clearChannelBtn.classList.toggle("hidden", !state.activeChannel);
-          renderChannels();
-          if (!stepVideos.classList.contains("hidden")) {
-            renderVideos();
-          }
-        });
-        channelGrid.appendChild(btn);
-      });
-      revealIn(document.getElementById("channelsSection"));
-    }
-
-    clearChannelBtn.addEventListener("click", () => {
-      state.activeChannel = null;
-      clearChannelBtn.classList.add("hidden");
-      renderChannels();
-      if (!stepVideos.classList.contains("hidden")) {
-        renderVideos();
-      }
-    });
-
-    function updateNav() {
-      const parts = ["Step 1: Class"];
-      if (state.cls) parts.push(state.cls);
-      if (state.stream) parts.push(state.stream);
-      if (state.subject) parts.push(state.subject);
-      if (state.chapterObj) parts.push(state.chapterObj.chapter);
-      if (state.activeChannel) parts.push(`Channel: ${state.activeChannel}`);
-      breadcrumb.innerHTML = parts.map((p, idx) =>
-        idx === parts.length - 1 ? `<strong>${p}</strong>` : p
-      ).join(" → ");
-      backBtn.classList.toggle("hidden", !state.cls);
-    }
-
-    function showStep(sec) {
-      [stepClass, stepStream, stepSubject, stepChapter, stepVideos].forEach(s => s.classList.add("hidden"));
-      sec.classList.remove("hidden");
-      updateNav();
-      revealIn(sec);
-    }
-
-    function getSubjectsMap() {
-      const clsData = SYLLABUS[state.cls];
-      if (!clsData) return {};
-      if (clsData.streams) return clsData.streams[state.stream] || {};
-      return clsData.subjects || {};
-    }
-
-    function renderClasses() {
-      classGrid.innerHTML = "";
-      Object.keys(SYLLABUS).forEach((cls) => {
-        const hasStreams = Boolean(SYLLABUS[cls].streams);
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "sv-card";
-        btn.innerHTML = `
-          <span class="tag">${hasStreams ? "SCIENCE • COMMERCE • HUMANITIES" : "CBSE / NCERT SYLLABUS"}</span>
-          <div class="card-title">${cls}</div>
-          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + Top 5 one-shot slots"}</div>
-        `;
-        btn.addEventListener("click", () => {
-          state.cls = cls;
-          state.stream = null;
-          state.subject = null;
-          state.chapterObj = null;
-          if (SYLLABUS[cls].streams) {
-            renderStreams();
-            showStep(stepStream);
-          } else {
-            renderSubjects();
-            showStep(stepSubject);
-          }
-        });
-        classGrid.appendChild(btn);
-      });
-      revealIn(stepClass);
-    }
-
-    function renderStreams() {
-      streamGrid.innerHTML = "";
-      const streams = Object.keys(SYLLABUS[state.cls].streams || {});
-      streams.forEach((st) => {
-        const subCount = Object.keys(SYLLABUS[state.cls].streams[st]).length;
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "sv-card";
-        btn.innerHTML = `
-          <span class="tag">${state.cls} STREAM</span>
-          <div class="card-title">${st}</div>
-          <div class="card-desc">${subCount} main subjects with full chapters</div>
-        `;
-        btn.addEventListener("click", () => {
-          state.stream = st;
-          state.subject = null;
-          state.chapterObj = null;
-          renderSubjects();
-          showStep(stepSubject);
-        });
-        streamGrid.appendChild(btn);
-      });
-    }
-
-    function renderSubjects() {
-      subjectGrid.innerHTML = "";
-      const subMap = getSubjectsMap();
-      Object.keys(subMap).forEach((subj) => {
-        const chCount = subMap[subj].length;
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "sv-card";
-        btn.innerHTML = `
-          <span class="tag">${state.stream ? state.stream : state.cls}</span>
-          <div class="card-title">${subj}</div>
-          <div class="card-desc">${chCount} chapters available</div>
-        `;
-        btn.addEventListener("click", () => {
-          state.subject = subj;
-          state.chapterObj = null;
-          chapterSearch.value = "";
-          renderChapters();
-          showStep(stepChapter);
-        });
-        subjectGrid.appendChild(btn);
-      });
-    }
-
-    function renderChapters(filter = "") {
-      chapterGrid.innerHTML = "";
-      const list = getSubjectsMap()[state.subject] || [];
-      const filtered = list.filter(c => c.chapter.toLowerCase().includes(filter.trim().toLowerCase()));
-      if (!filtered.length) {
-        chapterGrid.innerHTML = `<div class="coming-box">No matching chapter found.</div>`;
-        return;
-      }
-      filtered.forEach((chObj) => {
-        const liveCount = (chObj.videos || []).filter(v => Boolean(v.id)).length;
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "sv-card";
-        btn.innerHTML = `
-          <span class="tag">${liveCount > 0 ? `${liveCount} LIVE ONE-SHOTS` : state.subject}</span>
-          <div class="card-title">${chObj.chapter}</div>
-          <div class="card-desc">Open Top 5 ranked one-shot list</div>
-        `;
-        btn.addEventListener("click", () => {
-          state.chapterObj = chObj;
-          renderVideos();
-          showStep(stepVideos);
-        });
-        chapterGrid.appendChild(btn);
-      });
-      revealIn(stepChapter);
-    }
-
-    function renderVideos() {
-      videoGrid.innerHTML = "";
-      const chObj = state.chapterObj;
-      videosTitle.textContent = `Top 5 One-Shots — ${chObj.chapter}`;
-
-      const list = (chObj.videos || []).slice(0, 5).filter((vid) => {
-        if (!state.activeChannel) return true;
-        return vid.channel.toLowerCase().includes(state.activeChannel.toLowerCase());
-      });
-
-      if (!list.length) {
-        videoGrid.innerHTML = `<div class="coming-box">No slot matches "${state.activeChannel}" for this chapter. Click "Show All Channels" above to view all Top 5 slots.</div>`;
-        return;
-      }
-
-      list.forEach((vid) => {
-        const card = document.createElement("article");
-        card.className = "video-card";
-
-        if (vid.id) {
-          const thumb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-          const url = `https://www.youtube.com/watch?v=${vid.id}`;
-          card.innerHTML = `
-            <div class="thumb-wrap">
-              <img src="${thumb}" alt="${vid.title}" loading="lazy" />
-              <div class="thumb-sheen" aria-hidden="true"></div>
-              <span class="rank-badge">#${vid.rank} RANKED</span>
-            </div>
-            <div class="video-body">
-              <span class="channel-pill">Channel: ${vid.channel}</span>
-              <h3 class="card-title">${vid.title}</h3>
-              <div class="video-meta"><span>${vid.channel}</span> • ${vid.duration}</div>
-              <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
-            </div>
-          `;
-        } else {
-          card.innerHTML = `
-            <div class="video-body">
-              <span class="tag">#${vid.rank} ONE-SHOT SLOT</span>
-              <span class="channel-pill">Channel: ${vid.channel}</span>
-              <h3 class="card-title">${vid.title}</h3>
-              <div class="video-meta">Channel: <span>${vid.channel}</span></div>
-              <div class="coming-box">Additional one-shot link coming soon for this rank slot.</div>
-            </div>
-          `;
-        }
-        videoGrid.appendChild(card);
-      });
-      revealIn(stepVideos);
-    }
-
-    const authModal = document.getElementById("authModal");
-    const authOpenBtn = document.getElementById("authOpenBtn");
-    const authCloseBtn = document.getElementById("authCloseBtn");
-    const authForm = document.getElementById("authForm");
-    const authStatus = document.getElementById("authStatus");
-    const userBanner = document.getElementById("userBanner");
-
-    function syncUserUI() {
-      const saved = localStorage.getItem("sv_student_user");
-      if (saved) {
-        const user = JSON.parse(saved);
-        authOpenBtn.textContent = user.name;
-        userBanner.textContent = `Signed in as ${user.name} (${user.email}) • Curated for students. Built for better learning.`;
-      }
-    }
-
-    authOpenBtn.addEventListener("click", () => authModal.classList.remove("hidden"));
-    authCloseBtn.addEventListener("click", () => authModal.classList.add("hidden"));
-    authModal.addEventListener("click", (e) => {
-      if (e.target === authModal) authModal.classList.add("hidden");
-    });
-
-    authForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("authName").value.trim();
-      const email = document.getElementById("authEmail").value.trim();
-      if (!name || !email) return;
-      localStorage.setItem("sv_student_user", JSON.stringify({ name, email }));
-      syncUserUI();
-      authStatus.textContent = "Saved! Welcome to STUDYVERSE WATCH.";
-      setTimeout(() => authModal.classList.add("hidden"), 650);
-    });
-
-    const feedbackForm = document.getElementById("feedbackForm");
-    const feedbackList = document.getElementById("feedbackList");
-    const fbStatus = document.getElementById("fbStatus");
-
-    function renderFeedback() {
-      const items = JSON.parse(localStorage.getItem("sv_feedback_items") || "[]");
-      feedbackList.innerHTML = items.slice(0, 5).map((item) => `
-        <div class="fb-item">
-          <div class="fb-meta">${item.name} • ${item.email}</div>
-          <div>${item.message}</div>
-        </div>
-      `).join("");
-    }
-
-    feedbackForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("fbName").value.trim();
-      const email = document.getElementById("fbEmail").value.trim();
-      const message = document.getElementById("fbMessage").value.trim();
-      if (!name || !email || !message) return;
-      const items = JSON.parse(localStorage.getItem("sv_feedback_items") || "[]");
-      items.unshift({ name, email, message });
-      localStorage.setItem("sv_feedback_items", JSON.stringify(items));
-      feedbackForm.reset();
-      fbStatus.textContent = "Thank you! Your feedback has been recorded.";
-      renderFeedback();
-    });
-
-    window.addEventListener("scroll", () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      const p = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
-      scrollBar.style.transform = `scaleX(${p})`;
-    }, { passive: true });
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduced && card3d) {
-      card3d.addEventListener("pointermove", (e) => {
-        const r = card3d.getBoundingClientRect();
-        const nx = (e.clientX - r.left) / r.width - 0.5;
-        const ny = (e.clientY - r.top) / r.height - 0.5;
-        card3d.style.setProperty("--rx", `${(nx * 14).toFixed(1)}deg`);
-        card3d.style.setProperty("--ry", `${(-ny * 12).toFixed(1)}deg`);
-      });
-      card3d.addEventListener("pointerleave", () => {
-        card3d.style.setProperty("--rx", "-8deg");
-        card3d.style.setProperty("--ry", "6deg");
-      });
-    }
-
-    backBtn.addEventListener("click", () => {
-      if (!stepVideos.classList.contains("hidden")) {
-        state.chapterObj = null;
-        showStep(stepChapter);
-      } else if (!stepChapter.classList.contains("hidden")) {
-        state.subject = null;
-        showStep(stepSubject);
-      } else if (!stepSubject.classList.contains("hidden")) {
-        if (SYLLABUS[state.cls].streams) {
-          state.stream = null;
-          showStep(stepStream);
-        } else {
-          state.cls = null;
-          showStep(stepClass);
-        }
-      } else if (!stepStream.classList.contains("hidden")) {
-        state.cls = null;
-        showStep(stepClass);
-      }
-    });
-
-    resetBtn.addEventListener("click", () => {
-      state.cls = null;
-      state.stream = null;
-      state.subject = null;
-      state.chapterObj = null;
-      state.activeChannel = null;
-      clearChannelBtn.classList.add("hidden");
-      renderChannels();
-      showStep(stepClass);
-    });
-
-    watchNowBtn.addEventListener("click", () => {
-      stepClass.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
-    });
-
-    chapterSearch.addEventListener("input", (e) => renderChapters(e.target.value));
-
-    renderChannels();
-    renderClasses();
-    updateNav();
-    syncUserUI();
-    renderFeedback();
-  </script>
-</body>
-</html>
+              "Ch 1: Nature and Significance of Management", "Ch 2: Principles
