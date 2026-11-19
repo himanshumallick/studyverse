@@ -1,570 +1,433 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STUDYVERSE —  Learning Universe | CBSE Class 10</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONAN STUDY — Class 10, 9 & 8 New NCERT + Top 3 Ranked Videos</title>
+  <meta name="description" content="CONAN STUDY — Learn Beyond Limits. Class 10, 9 & 8 New NCERT Syllabus and Top 3 Ranked YouTube Lectures." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg-primary: #030712;
-      --bg-secondary: #0b0f19;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --accent-cyan: #38bdf8;
-      --accent-indigo: #6366f1;
-      --accent-violet: #a855f7;
-      --border-subtle: rgba(99, 102, 241, 0.25);
-      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body {
-      background-color: #030712 !important;
-      color: #f8fafc !important;
-      font-family: var(--font-sans);
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #03040A;
+      color: #F8FAFC;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
-      scroll-behavior: smooth;
-      min-height: 100vh;
     }
+    h1, h2, h3, h4, .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+    .font-editorial { font-family: 'Instrument Serif', Georgia, serif; }
 
-    a { text-decoration: none; color: inherit; }
-
-    /* 21st.dev Style Pure CSS 3D Motion Background Orbs */
-    .bg-motion-container {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .motion-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.45;
-      animation: floatOrb 12s ease-in-out infinite alternate;
-    }
-    .orb-1 { width: 450px; height: 450px; background: rgba(56, 189, 248, 0.2); top: -100px; left: -100px; }
-    .orb-2 { width: 500px; height: 500px; background: rgba(99, 102, 241, 0.22); top: 40%; right: -150px; animation-delay: -4s; }
-    .orb-3 { width: 400px; height: 400px; background: rgba(168, 85, 247, 0.18); bottom: -100px; left: 25%; animation-delay: -8s; }
-
-    @keyframes floatOrb {
-      0% { transform: translateY(0px) translateX(0px) scale(1); }
-      50% { transform: translateY(40px) translateX(30px) scale(1.08); }
-      100% { transform: translateY(-30px) translateX(-40px) scale(0.95); }
-    }
-
-    .site-wrapper {
+    .surface-card {
       position: relative;
-      z-index: 10;
+      background: linear-gradient(160deg, rgba(10, 15, 32, 0.94), rgba(4, 6, 14, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 22px 50px -26px rgba(0, 0, 0, 0.95);
+    }
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: radial-gradient(
+        420px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(249, 115, 22, 0.14),
+        rgba(59, 130, 246, 0.10) 45%,
+        transparent 75%
+      );
+    }
+    .spotlight-card:hover::before { opacity: 1; }
+
+    .rank1-surface {
+      position: relative;
+      background: linear-gradient(145deg, rgba(28, 17, 7, 0.92), rgba(8, 13, 28, 0.96));
+      border: 1px solid rgba(250, 204, 21, 0.42);
+      box-shadow: 0 28px 75px -28px rgba(249, 115, 22, 0.35);
     }
 
-    /* Sticky Glass Navigation */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(3, 7, 18, 0.82);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-subtle);
+    .spring-hover {
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+      will-change: transform;
     }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: 75px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
+    .spring-hover:hover {
+      transform: translateY(-5px);
+      border-color: rgba(250, 204, 21, 0.45);
+      box-shadow: 0 24px 60px -24px rgba(59, 130, 246, 0.35);
     }
-    .brand-logo {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: 0.05em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 1.1rem;
-    }
-    .brand-logo span { color: var(--accent-cyan); }
+    .spring-hover:active { transform: translateY(-1px) scale(0.99); }
 
-    .nav-menu {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-    }
-    .nav-link {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-weight: 600;
-      transition: 0.2s ease;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: var(--accent-cyan);
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    .editorial-grid {
+      background-image:
+        linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(250, 204, 21, 0.035) 1px, transparent 1px);
+      background-size: 56px 56px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.88rem;
-      border: 1px solid transparent;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
+    .hero-mask { overflow: hidden; display: block; }
+    .hero-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(105%);
+      animation: heroClip 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo), var(--accent-violet));
-      color: #fff;
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+    .d1 { animation-delay: 0.06s; }
+    .d2 { animation-delay: 0.18s; }
+    .d3 { animation-delay: 0.30s; }
+    .d4 { animation-delay: 0.42s; }
+    @keyframes heroClip { to { opacity: 1; transform: translateY(0); } }
+
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.68s cubic-bezier(0.16, 1, 0.3, 1), transform 0.68s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.45);
+    .reveal-section.is-visible { opacity: 1; transform: translateY(0); }
+
+    .stagger-card {
+      opacity: 0;
+      transform: translateY(20px) scale(0.985);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      transition-delay: calc(var(--stagger, 0) * 65ms);
     }
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(148, 163, 184, 0.2);
-      color: #fff;
+    .stagger-card.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -10px, 0); }
     }
-    .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--accent-cyan);
+    .float-slow { animation: floatSlow 6s ease-in-out infinite; }
+
+    .thumb-img {
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .thumb-img.loaded { opacity: 1; transform: scale(1); }
+    .group:hover .thumb-img.loaded { transform: scale(1.06); }
+
+    @keyframes viewSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .view-enter { animation: viewSlide 0.32s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    @keyframes shimmerSweep {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton-shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(249,115,22,0.14) 50%, rgba(59,130,246,0.08) 75%);
+      background-size: 200% 100%;
+      animation: shimmerSweep 1.1s infinite linear;
     }
 
-    /* Hero Section */
-    .hero-section {
-      padding: 140px 24px 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 99px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      font-size: 0.8rem;
-      color: var(--accent-cyan);
-      margin-bottom: 20px;
-    }
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      background: #34d399;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #34d399;
-    }
-    .hero-title {
-      font-size: clamp(2.3rem, 4.5vw, 3.6rem);
-      font-weight: 800;
-      line-height: 1.12;
-      margin-bottom: 20px;
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-desc {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* Holographic 3D Showcase Card */
-    .hero-showcase {
-      perspective: 1000px;
-    }
-    .showcase-card {
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(56, 189, 248, 0.15);
-      transition: transform 0.2s ease-out;
-    }
-    .showcase-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      color: var(--accent-cyan);
-    }
-    .showcase-main-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .showcase-sub {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-    }
-    .math-box {
-      background: rgba(3, 7, 18, 0.7);
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 16px;
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: #c084fc;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    /* Classes Section */
-    .section {
-      padding: 90px 24px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      max-width: 650px;
-      margin: 0 auto 50px;
-    }
-    .section-tag {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-cyan);
-      background: rgba(56, 189, 248, 0.1);
-      padding: 4px 12px;
-      border-radius: 99px;
-      display: inline-block;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .section-subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-    }
-
-    .classes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-    }
-    .class-card {
-      background: rgba(11, 15, 25, 0.75);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-    .class-card.featured {
-      border-color: rgba(56, 189, 248, 0.5);
-      background: rgba(11, 15, 25, 0.9);
-      box-shadow: 0 0 35px rgba(56, 189, 248, 0.12);
-    }
-    .class-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
-    }
-    .class-num {
-      font-family: var(--font-mono);
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      margin-bottom: 10px;
-    }
-    .class-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .class-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-
-    /* Footer */
-    .site-footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 40px 24px;
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-    }
-
-    @media(max-width: 900px) {
-      .hero-section { grid-template-columns: 1fr; text-align: center; }
-      .hero-cta { justify-content: center; }
-      .nav-menu { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero-line, .reveal-section, .stagger-card, .float-slow, .view-enter, .skeleton-shimmer {
+        animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important;
+      }
+      .spring-hover:hover { transform: none !important; }
+      .spotlight-card::before { display: none !important; }
     }
   </style>
 </head>
-<body>
-
-  <!-- Pure CSS 3D Motion Orbs (Guaranteed No White Screen) -->
-  <div class="bg-motion-container">
-    <div class="motion-orb orb-1"></div>
-    <div class="motion-orb orb-2"></div>
-    <div class="motion-orb orb-3"></div>
+<body class="min-h-screen flex flex-col selection:bg-amber-400/30 selection:text-amber-100">
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div id="orb-blue" class="absolute -top-44 -left-36 h-[34rem] w-[34rem] rounded-full bg-blue-600/20 blur-[120px] will-change-transform"></div>
+    <div id="orb-orange" class="absolute top-1/4 -right-36 h-[30rem] w-[30rem] rounded-full bg-orange-500/15 blur-[120px] will-change-transform"></div>
+    <div id="orb-yellow" class="absolute bottom-0 left-1/3 h-[22rem] w-[22rem] rounded-full bg-amber-400/10 blur-[110px] will-change-transform"></div>
   </div>
 
-  <div class="site-wrapper">
-    <!-- Header Navigation -->
-    <header class="site-header">
-      <div class="nav-container">
-        <a href="#hero" class="brand-logo">
-          <div class="brand-icon">⚡</div>
-          STUDY<span>VERSE</span>
-        </a>
-        <nav class="nav-menu">
-          <a href="#hero" class="nav-link active">Home</a>
-          <a href="#classes" class="nav-link">Classes</a>
-          <a href="#subjects" class="nav-link">Subjects</a>
-          <a href="#resources" class="nav-link">Notes Library</a>
-          <a href="#practice" class="nav-link">Practice Zone</a>
-          <a href="ncert.html">Open NCERT Universe</a>
-        </nav>
-        <div>
-          <a href="#classes" class="btn btn-primary">Class 10 Hub →</a>
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-[#03040A]/85 backdrop-blur-md">
+    <div id="navbar" class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-8"></div>
+    <div id="mobile-drawer" class="hidden lg:hidden border-t border-white/10 bg-[#050814] px-4 py-4 space-y-2"></div>
+  </header>
+
+  <main id="app" class="flex-1"></main>
+  <div id="modal-root"></div>
+
+  <footer class="border-t border-white/10 bg-[#020308] mt-24">
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-8 grid gap-10 md:grid-cols-12">
+      <div class="md:col-span-6 space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 via-amber-400 to-orange-500 text-slate-950 font-extrabold">✦</div>
+          <div>
+            <p class="font-display text-lg font-bold text-white">CONAN <span class="text-amber-400">STUDY</span></p>
+            <p class="text-[10px] tracking-[0.22em] uppercase text-blue-300">Learn Beyond Limits</p>
+          </div>
         </div>
+        <p class="text-sm text-slate-400 max-w-md leading-relaxed">
+          Class 10, Class 9, and Class 8 New NCERT Syllabus explorer paired with Top 3 Editorially Ranked YouTube Lectures.
+        </p>
+        <p class="inline-block rounded-lg border border-amber-400/20 bg-amber-500/10 px-3 py-1.5 text-[11px] text-amber-200">
+          Editorial Sample Recommendations • No fabricated ratings, views, or official teacher endorsements.
+        </p>
       </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-      <!-- Hero Section -->
-      <section id="hero" class="hero-section">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="live-dot"></span>
-            <span>⚡ Next-Gen CBSE Learning Platform • 2025-26</span>
-          </div>
-          <h1 class="hero-title">
-            Your Universe of Learning.
-            <span class="gradient-text">Master Class 10 CBSE</span>
-            with 3D Clarity.
-          </h1>
-          <p class="hero-desc">
-            Ditch 800-page bulky textbooks. Access high-yield visual revision notes, interactive formula sheets, and curated board question banks engineered for top results.
-          </p>
-          <div class="hero-cta">
-            <a href="#classes" class="btn btn-primary">Explore Classes →</a>
-            <a href="watch.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;margin-left:10px;border-radius:12px;text-decoration:none;font-weight:700;color:#05070d;background:linear-gradient(135deg,#facc15,#38bdf8);">
-  <span>▶</span>
-  <span>Best YouTube Videos</span>
-</a>
-            <a href="#classes" class="btn btn-glass">Browse Notes Library ✦</a>
-          </div>
-        </div>
-
-        <!-- Holographic Showcase Card -->
-        <div class="hero-showcase">
-          <div class="showcase-card" id="tilt-card">
-            <div class="showcase-header">
-              <span>PHYSICS • CODE 086</span>
-              <span style="color:#34d399">● High Yield</span>
-            </div>
-            <h2 class="showcase-main-title">Light: Reflection & Refraction</h2>
-            <p class="showcase-sub">Complete Ray Diagrams & Sign Conventions</p>
-            
-            <div class="math-box">
-              1/f = 1/v - 1/u  |  m = v/u
-            </div>
-
-            <a href="#classes" class="btn btn-primary" style="width: 100%;">Access Chapter Notes →</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Classes Section -->
-      <section id="classes" class="section">
-        <div class="section-header">
-          <span class="section-tag">Academic Spectrum</span>
-          <h2 class="section-title">Explore by Class</h2>
-          <div class="sv-cta-row">
-  <!-- Tumhara existing "Explore Classes" button yahan rahega -->
-
-  <a href="watch.html" class="sv-btn-watch">
-    <span class="sv-btn-play" aria-hidden="true">▶</span>
-    <span>Best YouTube Videos</span>
-  </a>
-</div>
-
-<style>
-  .sv-cta-row {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .sv-btn-watch {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #05070d;
-    background: linear-gradient(135deg, #facc15 0%, #38bdf8 100%);
-    border: 1px solid rgba(250, 204, 21, 0.7);
-    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 28px rgba(250, 204, 21, 0.24);
-    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .sv-btn-watch:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 36px rgba(250, 204, 21, 0.38);
-  }
-
-  .sv-btn-play {
-    display: inline-grid;
-    place-items: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 999px;
-    background: #05070d;
-    color: #facc15;
-    font-size: 11px;
-  }
-</style>
-
-</a>
-
-<style>
-  .sv-best-yt-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 12px 20px;
-    margin-left: 12px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #05070d;
-    background: linear-gradient(135deg, #facc15, #38bdf8);
-    border: 1px solid rgba(250, 204, 21, 0.6);
-    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 26px rgba(250, 204, 21, 0.25);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .sv-best-yt-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 34px rgba(250, 204, 21, 0.4);
-  }
-
-  .sv-yt-icon {
-    display: inline-grid;
-    place-items: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 999px;
-    background: #05070d;
-    color: #facc15;
-    font-size: 11px;
-  }
-</style>
-          <p class="section-subtitle">Tailored learning universes built for school curricula, starting with our flagship Class 10 Hub.</p>
-        </div>
-          <div class="class-card featured" onclick="window.location.href='class10.html'">
-            <div class="class-num">10</div>
-            <h3 class="class-title">CBSE Class 10 Board Accelerator</h3>
-            <p class="class-desc">Maths, Science, SST, English, Hindi, and AI (Code 417) with latest rationalized syllabus.</p>
-            <a href="class10.html" class="btn btn-primary" style="margin-top:auto;">Enter Universe →</a>
-          </div>
-      
-
-      <div class="class-card" onclick="window.location.href='class9.html'">
-  <div class="class-num">09</div>
-  <h3 class="class-title">Class 9 Foundation Hub</h3>
-  <p class="class-desc">Complete chapters and revision notes for Science, Maths, and SST.</p>
-  <a href="class9.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
-</div>
-
-         <div class="class-card" onclick="window.location.href='class11.html'">
-  <div class="class-num">11</div>
-  <h3 class="class-title">Class 11 STEM & Science Hub</h3>
-  <p class="class-desc">Advanced Physics, Chemistry, Maths, and Biology modules for board & competitive excellence.</p>
-  <a href="class11.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
-</div>
-
-        <div class="class-card" onclick="window.location.href='class12.html'">
-  <div class="class-num">12</div>
-  <h3 class="class-title">Class 12 Board Champions</h3>
-  <p class="class-desc">PCM, PCB, and Commerce streams with animated subject modules and PDF notes.</p>
-  <a href="class12.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
-</div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-        <div>© 2026 STUDYVERSE. Designed for CBSE Class 10 Students in India.</div>
-        <div style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.8rem;">● 3D Motion Glow Active</div>
+      <div class="md:col-span-3 space-y-2.5 text-sm">
+        <p class="text-xs font-semibold uppercase tracking-widest text-slate-300">Classes</p>
+        <button onclick="cs.openClassSyllabus(10)" class="block text-slate-400 hover:text-amber-300">Class 10 New NCERT</button>
+        <button onclick="cs.openClassSyllabus(9)" class="block text-slate-400 hover:text-amber-300">Class 9 New NCERT</button>
+        <button onclick="cs.openClassSyllabus(8)" class="block text-slate-400 hover:text-amber-300">Class 8 New NCERT</button>
       </div>
-    </footer>
-  </div>
+      <div class="md:col-span-3 space-y-2.5 text-sm">
+        <p class="text-xs font-semibold uppercase tracking-widest text-slate-300">Shortcuts</p>
+        <button onclick="cs.go('home')" class="block text-slate-400 hover:text-blue-300">Home</button>
+        <button onclick="cs.openChapterTop3('c10-sci-light')" class="block text-slate-400 hover:text-blue-300">Class 10 Optics Top 3</button>
+        <button onclick="cs.openChapterTop3('c8-sci-electricity')" class="block text-slate-400 hover:text-blue-300">Class 8 Curiosity Top 3</button>
+      </div>
+    </div>
+    <div class="border-t border-white/5 py-5 text-center text-xs text-slate-500">
+      © <span id="yr"></span> CONAN STUDY • Learn Beyond Limits.
+    </div>
+  </footer>
 
   <script>
-    // Smooth 3D Tilt Effect on Mouse Move
-    const card = document.getElementById('tilt-card');
-    document.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      card.style.transform = `rotateX(${-y * 0.04}deg) rotateY(${x * 0.04}deg) translateY(-4px)`;
-    });
-  </script>
-</body>
-</html>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    const CLASSES_INFO = [
+      {
+        classLevel: 10,
+        badge: 'CBSE Board Track',
+        syllabusLabel: 'Rationalised NCERT Syllabus (2025–27)',
+        accent: 'from-amber-400 to-orange-500',
+        border: 'border-amber-400/35',
+        pill: 'text-amber-300 bg-amber-500/15 border-amber-400/30',
+        desc: 'Board-focused Science, Mathematics, Social Science & English chapters with Top 3 ranked one-shot & conceptual lectures.',
+        books: 'Science • Mathematics • India & Contemporary World-II • First Flight'
+      },
+      {
+        classLevel: 9,
+        badge: 'Foundation Core',
+        syllabusLabel: 'Rationalised NCERT Syllabus (2025–27)',
+        accent: 'from-blue-500 to-cyan-400',
+        border: 'border-blue-400/35',
+        pill: 'text-blue-300 bg-blue-500/15 border-blue-400/30',
+        desc: 'Conceptual mastery across Motion, Polynomials, French Revolution & Beehive — built for deep school and competitive prep.',
+        books: 'Science • Mathematics • Contemporary World-I • Beehive'
+      },
+      {
+        classLevel: 8,
+        badge: 'NEP 2020 New NCERT Books',
+        syllabusLabel: 'New NCERT: Curiosity • Ganita Prakash • Exploring Society • Poorvi',
+        accent: 'from-orange-500 to-yellow-400',
+        border: 'border-orange-400/35',
+        pill: 'text-orange-300 bg-orange-500/15 border-orange-400/30',
+        desc: 'Updated NEP 2020 curriculum featuring the new Curiosity Science, Ganita Prakash Maths, Exploring Society & Poorvi textbooks.',
+        books: 'Curiosity (Science) • Ganita Prakash (Maths) • Exploring Society • Poorvi'
+      }
+    ];
+
+    const SUBJECTS_LIST = ['Science', 'Mathematics', 'Social Science', 'English'];
+
+    const SYLLABUS_CHAPTERS = [
+      {
+        id: 'c10-sci-chemical-reactions', classLevel: 10, subject: 'Science', chNo: 1,
+        title: 'Chemical Reactions and Equations',
+        topics: ['Balancing Equations', 'Combination & Decomposition', 'Redox', 'Corrosion & Rancidity'],
+        diagramType: 'chemical',
+        videos: [
+          { rank: 1, id: 'v10c1-1', title: 'Chemical Reactions and Equations | Animated NCERT Full Chapter', channel: 'CBSE Animated Concepts (Editorial Sample)', teacher: 'Visual NCERT Series', duration: '18:45', difficulty: 'Beginner', youtubeId: 'aWkVP_lk0DU', url: 'https://www.youtube.com/watch?v=aWkVP_lk0DU', thumb: 'https://img.youtube.com/vi/aWkVP_lk0DU/hqdefault.jpg', reason: 'Fastest visual grasp of precipitate colours, redox shifts, and balanced equations.' },
+          { rank: 2, id: 'v10c1-2', title: 'Chemical Reactions & Equations — Complete One Shot + PYQs', channel: 'Physics Wallah Foundation (Search Track)', teacher: 'Sunil Hingorani Sir', duration: 'Long-form Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Class+10+One+Shot+Physics+Wallah', reason: 'Deep Board-level NCERT activity questions and equation balancing drills.' },
+          { rank: 3, id: 'v10c1-3', title: 'Chemical Reactions Rapid Revision & Important Equations', channel: 'CBSE Rapid Revision (Search Track)', teacher: 'Board Sprint Track', duration: '20–30 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Class+10+Rapid+Revision', reason: 'Ideal last-day revision checklist of all NCERT colour observations.' }
+        ]
+      },
+      {
+        id: 'c10-sci-acids-bases', classLevel: 10, subject: 'Science', chNo: 2,
+        title: 'Acids, Bases and Salts',
+        topics: ['Indicators', 'pH Scale', 'Chlor-Alkali Process', 'Baking/Washing Soda & POP'],
+        diagramType: 'chemical',
+        videos: [
+          { rank: 1, id: 'v10c2-1', title: 'Acids, Bases and Salts | Complete Chapter in ONE SHOT', channel: 'Physics Wallah Foundation (Search Track)', teacher: 'Sunil Bhaiya', duration: '2:51:00 Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Acids+Bases+and+Salts+One+Shot+Sunil+Bhaiya+PW', reason: 'Thorough NCERT coverage including Chlor-Alkali, pH daily life, and water of crystallisation.' },
+          { rank: 2, id: 'v10c2-2', title: 'Acids, Bases & Salts | Full Chapter Animation', channel: 'Gradebooster / Visual Science (Search Track)', teacher: 'Animated Track', duration: 'Short Visual Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Acids+Bases+and+Salts+Class+10+Animated+One+Shot', reason: 'Great animated first look at pH colour transitions and indicator tests.' },
+          { rank: 3, id: 'v10c2-3', title: 'Acids, Bases and Salts — Rapid Board Revision', channel: 'CBSE Exam Prep (Search Track)', teacher: 'Rapid Track', duration: '1h Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Acids+Bases+and+Salts+Class+10+NCERT+Revision', reason: 'Quick salt-formula recall (Bleaching powder, Baking soda, POP).' }
+        ]
+      },
+      { id: 'c10-sci-metals', classLevel: 10, subject: 'Science', chNo: 3, title: 'Metals and Non-metals', topics: ['Reactivity Series', 'Ionic Bonding', 'Extraction & Metallurgy', 'Corrosion Prevention'], diagramType: 'chemical' },
+      { id: 'c10-sci-carbon', classLevel: 10, subject: 'Science', chNo: 4, title: 'Carbon and its Compounds', topics: ['Covalent Bonding', 'Homologous Series', 'IUPAC Naming', 'Ethanol & Ethanoic Acid', 'Soaps'], diagramType: 'chemical' },
+      {
+        id: 'c10-sci-life', classLevel: 10, subject: 'Science', chNo: 5,
+        title: 'Life Processes',
+        topics: ['Photosynthesis', 'Human Digestion', 'Respiration', 'Double Circulation', 'Nephron'],
+        diagramType: 'biology',
+        videos: [
+          { rank: 1, id: 'v10c5-1', title: 'Life Processes Full Chapter — Nutrition, Respiration, Circulation', channel: 'CBSE Visual Biology (Editorial Sample)', teacher: 'NCERT Biology Series', duration: '26:30', difficulty: 'Beginner', youtubeId: 'JzihOwFW3gI', url: 'https://www.youtube.com/watch?v=JzihOwFW3gI', thumb: 'https://img.youtube.com/vi/JzihOwFW3gI/hqdefault.jpg', reason: 'Clear organ-system visuals connecting digestion, heart chambers, and nephron filtration.' },
+          { rank: 2, id: 'v10c5-2', title: 'Life Processes — Complete NCERT Line-by-Line One Shot', channel: 'CBSE Biology Educators (Search Track)', teacher: 'Samridhi Ma’am / Board Track', duration: '2h+ Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Life+Processes+Class+10+One+Shot+NCERT', reason: 'Comprehensive enzyme tables and Board diagram labelling practice.' },
+          { rank: 3, id: 'v10c5-3', title: 'Life Processes — Important Board Diagrams & PYQs', channel: 'Exam Prep Biology (Search Track)', teacher: 'Board Revision', duration: '45 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Life+Processes+Class+10+Important+Questions+NCERT', reason: 'Targeted 3-mark and 5-mark competency questions.' }
+        ]
+      },
+      { id: 'c10-sci-control', classLevel: 10, subject: 'Science', chNo: 6, title: 'Control and Coordination', topics: ['Neurons & Reflex Arc', 'Human Brain', 'Plant Hormones', 'Endocrine System'], diagramType: 'biology' },
+      { id: 'c10-sci-reproduce', classLevel: 10, subject: 'Science', chNo: 7, title: 'How do Organisms Reproduce?', topics: ['Asexual Modes', 'Flower Reproduction', 'Human Reproductive System', 'Contraception'], diagramType: 'biology' },
+      { id: 'c10-sci-heredity', classLevel: 10, subject: 'Science', chNo: 8, title: 'Heredity', topics: ['Mendel’s Monohybrid & Dihybrid Cross', 'Sex Determination', 'Traits Expression'], diagramType: 'biology' },
+      {
+        id: 'c10-sci-light', classLevel: 10, subject: 'Science', chNo: 9,
+        title: 'Light – Reflection and Refraction',
+        topics: ['Concave & Convex Mirrors', 'Ray Diagrams', 'Mirror & Lens Formulas', 'Refractive Index & Power'],
+        diagramType: 'optics',
+        videos: [
+          { rank: 1, id: 'v10c9-1', title: 'Light: Reflection & Refraction — Visual NCERT Chapter Guide', channel: 'CBSE Visual Science (Editorial Sample)', teacher: 'Optics Guided Module', duration: '24:10', difficulty: 'Beginner', youtubeId: '8iVoxtEYJeM', url: 'https://www.youtube.com/watch?v=8iVoxtEYJeM', thumb: 'https://img.youtube.com/vi/8iVoxtEYJeM/hqdefault.jpg', reason: 'Best visual clarity for spherical mirror/lens ray paths and sign convention.' },
+          { rank: 2, id: 'v10c9-2', title: 'Light Reflection & Refraction — Numericals & Ray Diagrams One Shot', channel: 'Physics Wallah Foundation (Search Track)', teacher: 'Rakshak Sir Track', duration: 'Long-form Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Class+10+Rakshak+Sir+One+Shot', reason: 'Deep practice on Board mirror/lens numericals and magnification sign rules.' },
+          { rank: 3, id: 'v10c9-3', title: 'Light Chapter Quick Formula & Ray Table Recap', channel: 'Optics Rapid Prep (Search Track)', teacher: 'Quick Revision', duration: '25 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Light+Class+10+Rapid+Revision+Ray+Diagrams', reason: 'Rapid review of all 6 concave mirror and 6 convex lens cases.' }
+        ]
+      },
+      { id: 'c10-sci-human-eye', classLevel: 10, subject: 'Science', chNo: 10, title: 'The Human Eye and the Colourful World', topics: ['Myopia & Hypermetropia', 'Prism Dispersion', 'Atmospheric Refraction', 'Scattering'], diagramType: 'optics' },
+      { id: 'c10-sci-electricity', classLevel: 10, subject: 'Science', chNo: 11, title: 'Electricity', topics: ['Ohm’s Law', 'Resistivity', 'Series & Parallel Resistors', 'Joule’s Heating & Power'], diagramType: 'optics' },
+      { id: 'c10-sci-magnetic', classLevel: 10, subject: 'Science', chNo: 12, title: 'Magnetic Effects of Electric Current', topics: ['Right-Hand Thumb Rule', 'Solenoid', 'Fleming’s Left-Hand Rule', 'Domestic Circuits'], diagramType: 'optics' },
+      { id: 'c10-sci-environment', classLevel: 10, subject: 'Science', chNo: 13, title: 'Our Environment', topics: ['Food Chains & 10% Law', 'Biological Magnification', 'Ozone Depletion', 'Waste Management'], diagramType: 'biology' },
+
+      { id: 'c10-math-real', classLevel: 10, subject: 'Mathematics', chNo: 1, title: 'Real Numbers', topics: ['Fundamental Theorem of Arithmetic', 'HCF & LCM', 'Irrationality Proofs'], diagramType: 'parabola' },
+      { id: 'c10-math-poly', classLevel: 10, subject: 'Mathematics', chNo: 2, title: 'Polynomials', topics: ['Geometrical Zeroes', 'Sum & Product of Zeroes', 'Quadratic Polynomial Formation'], diagramType: 'parabola' },
+      { id: 'c10-math-linear', classLevel: 10, subject: 'Mathematics', chNo: 3, title: 'Pair of Linear Equations in Two Variables', topics: ['Graphical Consistency', 'Substitution Method', 'Elimination Method'], diagramType: 'parabola' },
+      {
+        id: 'c10-math-quad', classLevel: 10, subject: 'Mathematics', chNo: 4,
+        title: 'Quadratic Equations',
+        topics: ['Factorisation', 'Quadratic Formula', 'Discriminant D = b²-4ac', 'Word Problems'],
+        diagramType: 'parabola',
+        videos: [
+          { rank: 1, id: 'v10m4-1', title: 'Quadratic Equations ONE SHOT | Class 10 Maths Chapter 4', channel: 'Physics Wallah Foundation', teacher: 'Ritik Mishra Sir', duration: '3:16:00', difficulty: 'Intermediate', youtubeId: 'hayFtYnAB-Q', url: 'https://www.youtube.com/watch?v=hayFtYnAB-Q', thumb: 'https://img.youtube.com/vi/hayFtYnAB-Q/hqdefault.jpg', reason: 'Complete mastery from discriminant fundamentals to high-scoring speed/stream word problems.' },
+          { rank: 2, id: 'v10m4-2', title: 'Quadratic Equations Competency & PYQ Practice', channel: 'CBSE Maths PYQs (Search Track)', teacher: 'Board Maths Track', duration: '1h+ Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Quadratic+Equations+Class+10+PYQ+One+Shot', reason: 'Targeted CBSE Board sample paper and case-study questions.' },
+          { rank: 3, id: 'v10m4-3', title: 'Quadratic Equations 20-Min Rapid Formula Recap', channel: 'Quick Maths Revision (Search Track)', teacher: 'Rapid Recap', duration: '20 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Quadratic+Equations+Class+10+Rapid+Revision', reason: 'Quick pre-exam summary of root conditions (D > 0, D = 0, D < 0).' }
+        ]
+      },
+      { id: 'c10-math-ap', classLevel: 10, subject: 'Mathematics', chNo: 5, title: 'Arithmetic Progressions', topics: ['nth Term aₙ', 'Sum of n Terms Sₙ', 'Case-Study Applications'], diagramType: 'parabola' },
+      { id: 'c10-math-tri', classLevel: 10, subject: 'Mathematics', chNo: 6, title: 'Triangles', topics: ['Basic Proportionality Theorem (Thales)', 'AAA/SAS/SSS Similarity Criteria', 'Proofs'], diagramType: 'trig' },
+      { id: 'c10-math-coord', classLevel: 10, subject: 'Mathematics', chNo: 7, title: 'Coordinate Geometry', topics: ['Distance Formula', 'Section Formula', 'Midpoint Applications'], diagramType: 'parabola' },
+      {
+        id: 'c10-math-trig', classLevel: 10, subject: 'Mathematics', chNo: 8,
+        title: 'Introduction to Trigonometry',
+        topics: ['6 Trigonometric Ratios', 'Angle Table (0°–90°)', 'Pythagorean Identities'],
+        diagramType: 'trig',
+        videos: [
+          { rank: 1, id: 'v10m8-1', title: 'Trigonometry ONE SHOT | Class 10 Maths Chapter 8', channel: 'Physics Wallah Foundation', teacher: 'Ritik Mishra Sir', duration: '4:25:00', difficulty: 'Intermediate', youtubeId: 'wdaBwIv7Jso', url: 'https://www.youtube.com/watch?v=wdaBwIv7Jso', thumb: 'https://img.youtube.com/vi/wdaBwIv7Jso/hqdefault.jpg', reason: 'Unmatched clarity on proving Ex. 8.3 Board trigonometric identities step-by-step.' },
+          { rank: 2, id: 'v10m8-2', title: 'Some Applications of Trigonometry (Ch. 9 Companion)', channel: 'Physics Wallah Foundation', teacher: 'Ritik Mishra Sir', duration: '3:04:00', difficulty: 'Intermediate', youtubeId: 'otABxL0TP6U', url: 'https://www.youtube.com/watch?v=otABxL0TP6U', thumb: 'https://img.youtube.com/vi/otABxL0TP6U/hqdefault.jpg', reason: 'Connects Chapter 8 ratios directly into Heights & Distances Board case studies.' },
+          { rank: 3, id: 'v10m8-3', title: 'Trigonometry Identities & Angle Table 20-Min Cheat Sheet', channel: 'CBSE Rapid Maths (Search Track)', teacher: 'Quick Revision', duration: '20 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Introduction+to+Trigonometry+Class+10+Rapid+Revision', reason: 'Fastest refresher for exact sin/cos/tan values and 3 core identities.' }
+        ]
+      },
+      { id: 'c10-math-app-trig', classLevel: 10, subject: 'Mathematics', chNo: 9, title: 'Some Applications of Trigonometry', topics: ['Line of Sight', 'Angle of Elevation', 'Angle of Depression'], diagramType: 'trig' },
+      { id: 'c10-math-circles', classLevel: 10, subject: 'Mathematics', chNo: 10, title: 'Circles', topics: ['Tangent Perpendicular to Radius', 'Equal Tangents Theorem 10.2'], diagramType: 'trig' },
+      { id: 'c10-math-areas-circles', classLevel: 10, subject: 'Mathematics', chNo: 11, title: 'Areas Related to Circles', topics: ['Sector Area', 'Segment Area', 'Arc Length'], diagramType: 'trig' },
+      { id: 'c10-math-sav', classLevel: 10, subject: 'Mathematics', chNo: 12, title: 'Surface Areas and Volumes', topics: ['Combination of Solids', 'Cylinder, Cone, Hemisphere & Sphere'], diagramType: 'trig' },
+      { id: 'c10-math-stats', classLevel: 10, subject: 'Mathematics', chNo: 13, title: 'Statistics', topics: ['Grouped Mean (Assumed & Direct)', 'Mode', 'Median Formula'], diagramType: 'parabola' },
+      { id: 'c10-math-prob', classLevel: 10, subject: 'Mathematics', chNo: 14, title: 'Probability', topics: ['Theoretical Probability', 'Cards, Dice & Coins', 'Complementary Events'], diagramType: 'parabola' },
+
+      {
+        id: 'c10-sst-europe', classLevel: 10, subject: 'Social Science', chNo: 1,
+        title: 'The Rise of Nationalism in Europe (History)',
+        topics: ['French Revolution', 'Treaty of Vienna 1815', 'Unification of Germany & Italy', 'Balkan Crisis'],
+        diagramType: 'timeline',
+        videos: [
+          { rank: 1, id: 'v10s1-1', title: 'The Rise of Nationalism in Europe | Animated History One Shot', channel: 'Educational Bhaiya (Editorial Sample)', teacher: 'Animated History', duration: 'Animated One-Shot', difficulty: 'Beginner', youtubeId: 'vW-DPlhz0wM', url: 'https://www.youtube.com/watch?v=vW-DPlhz0wM', thumb: 'https://img.youtube.com/vi/vW-DPlhz0wM/hqdefault.jpg', reason: 'Makes 19th-century European treaties and revolutions effortless to recall.' },
+          { rank: 2, id: 'v10s1-2', title: 'Rise of Nationalism in Europe — Line-by-Line NCERT + PYQs', channel: 'Digraj Singh Rajput / SST (Search Track)', teacher: 'Board SST Track', duration: 'Long-form Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Rise+of+Nationalism+in+Europe+Class+10+Digraj+Sir', reason: 'Gold standard for 5-mark structured CBSE History answer writing.' },
+          { rank: 3, id: 'v10s1-3', title: 'Nationalism in Europe — Mind Map & Dates Revision', channel: 'Rapid SST (Search Track)', teacher: 'Timeline Recap', duration: '25 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Rise+of+Nationalism+in+Europe+Class+10+Mind+Map', reason: 'Quick date and personality revision before tests.' }
+        ]
+      },
+      { id: 'c10-sst-india', classLevel: 10, subject: 'Social Science', chNo: 2, title: 'Nationalism in India (History)', topics: ['Non-Cooperation', 'Civil Disobedience', 'Salt March', 'Sense of Collective Belonging'], diagramType: 'timeline' },
+      { id: 'c10-sst-resources', classLevel: 10, subject: 'Social Science', chNo: 3, title: 'Resources and Development (Geography)', topics: ['Resource Planning', 'Land Degradation', 'Alluvial & Black Soil Types'], diagramType: 'timeline' },
+      { id: 'c10-sst-powersharing', classLevel: 10, subject: 'Social Science', chNo: 4, title: 'Power-sharing & Federalism (Civics)', topics: ['Belgium vs Sri Lanka', 'Forms of Power-sharing', 'Decentralisation in India'], diagramType: 'timeline' },
+      { id: 'c10-sst-development', classLevel: 10, subject: 'Social Science', chNo: 5, title: 'Development & Sectors of Economy (Economics)', topics: ['Per Capita Income & HDI', 'Primary, Secondary & Tertiary Sectors', 'MGNREGA'], diagramType: 'timeline' },
+
+      {
+        id: 'c10-eng-letter', classLevel: 10, subject: 'English', chNo: 1,
+        title: 'A Letter to God (First Flight)',
+        topics: ['Lencho’s Faith', 'Situational Irony', 'Postmaster’s Kindness', 'Extract Questions'],
+        diagramType: 'literature',
+        videos: [
+          { rank: 1, id: 'v10e1-1', title: 'A Letter to God — Chapter MCQs, Themes & Extract Practice', channel: 'English Academy (Editorial Sample)', teacher: 'CBSE English', duration: 'Focused Guide', difficulty: 'Beginner', youtubeId: 'VJX6KV-4pmg', url: 'https://www.youtube.com/watch?v=VJX6KV-4pmg', thumb: 'https://img.youtube.com/vi/VJX6KV-4pmg/hqdefault.jpg', reason: 'Direct CBSE extract-MCQ and character-sketch preparation.' },
+          { rank: 2, id: 'v10e1-2', title: 'A Letter to God — Animated Story Summary & Word Meanings', channel: 'Story Explanation (Editorial Sample)', teacher: 'Literature Series', duration: 'Summary Track', difficulty: 'Beginner', youtubeId: 'GMRYb0zATxw', url: 'https://www.youtube.com/watch?v=GMRYb0zATxw', thumb: 'https://img.youtube.com/vi/GMRYb0zATxw/hqdefault.jpg', reason: 'Engaging narrative walkthrough for quick story recall.' },
+          { rank: 3, id: 'v10e1-3', title: 'A Letter to God — Long Answer & Value Questions', channel: 'Board English Prep (Search Track)', teacher: 'Writing Track', duration: '20 min Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=A+Letter+to+God+Class+10+Important+Questions+Answers', reason: 'Model 6-mark character contrast answers for Board exams.' }
+        ]
+      },
+      {
+        id: 'c10-eng-mandela', classLevel: 10, subject: 'English', chNo: 2,
+        title: 'Nelson Mandela: Long Walk to Freedom',
+        topics: ['Apartheid Struggle', 'Twin Obligations', 'True Meaning of Courage'],
+        diagramType: 'literature',
+        videos: [
+          { rank: 1, id: 'v10e2-1', title: 'Nelson Mandela: Long Walk to Freedom — Full Explanation', channel: 'CBSE English Academy (Editorial Sample)', teacher: 'Literature Track', duration: 'Complete Guide', difficulty: 'Beginner', youtubeId: '1xx6tbX3p2o', url: 'https://www.youtube.com/watch?v=1xx6tbX3p2o', thumb: 'https://img.youtube.com/vi/1xx6tbX3p2o/hqdefault.jpg', reason: 'Explains Mandela’s quotes and twin-obligation theme clearly.' },
+          { rank: 2, id: 'v10e2-2', title: 'Nelson Mandela — Extract MCQs & Important Questions', channel: 'Board English (Search Track)', teacher: 'Practice Track', duration: '25 min Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Nelson+Mandela+Long+Walk+to+Freedom+Class+10+PYQ', reason: 'Covers frequent CBSE RTC extract questions.' },
+          { rank: 3, id: 'v10e2-3', title: 'Nelson Mandela — 10-Minute Chapter Summary', channel: 'Quick Literature (Search Track)', teacher: 'Rapid Summary', duration: '10 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Nelson+Mandela+Class+10+Summary', reason: 'Fast recap before unit tests.' }
+        ]
+      },
+
+      { id: 'c9-sci-matter', classLevel: 9, subject: 'Science', chNo: 1, title: 'Matter in Our Surroundings', topics: ['States of Matter', 'Latent Heat', 'Evaporation Cooling'], diagramType: 'chemical' },
+      {
+        id: 'c9-sci-pure', classLevel: 9, subject: 'Science', chNo: 2,
+        title: 'Is Matter Around Us Pure?',
+        topics: ['Mixtures vs Compounds', 'Solutions, Colloids & Suspensions', 'Physical vs Chemical Changes'],
+        diagramType: 'chemical',
+        videos: [
+          { rank: 1, id: 'v9s2-1', title: 'Is Matter Around Us Pure? | Complete Chapter One Shot', channel: 'Alakh Pandey / PW Foundation (Editorial Sample)', teacher: 'Alakh Sir', duration: 'Full Chapter', difficulty: 'Beginner', youtubeId: 'aSXeach0I4A', url: 'https://www.youtube.com/watch?v=aSXeach0I4A', thumb: 'https://img.youtube.com/vi/aSXeach0I4A/hqdefault.jpg', reason: 'Explains Tyndall effect, concentration numericals, and pure substances cleanly.' },
+          { rank: 2, id: 'v9s2-2', title: 'Is Matter Around Us Pure? — NCERT Activities & Questions', channel: 'Class 9 Science (Search Track)', teacher: 'NCERT Track', duration: '1h Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Is+Matter+Around+Us+Pure+Class+9+One+Shot+NCERT', reason: 'Extra concentration percentage numerical practice.' },
+          { rank: 3, id: 'v9s2-3', title: 'Is Matter Around Us Pure? Rapid Revision', channel: 'Quick Revision (Search Track)', teacher: 'Rapid Recap', duration: '20 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Is+Matter+Around+Us+Pure+Class+9+Rapid+Revision', reason: 'Fast comparison table recap.' }
+        ]
+      },
+      { id: 'c9-sci-atoms', classLevel: 9, subject: 'Science', chNo: 3, title: 'Atoms and Molecules', topics: ['Laws of Chemical Combination', 'Dalton’s Theory', 'Chemical Formulae', 'Molecular Mass'], diagramType: 'chemical' },
+      {
+        id: 'c9-sci-cell', classLevel: 9, subject: 'Science', chNo: 5,
+        title: 'The Fundamental Unit of Life',
+        topics: ['Plasma Membrane & Osmosis', 'Nucleus', 'Mitochondria, Plastids & Lysosomes', 'Mitosis vs Meiosis'],
+        diagramType: 'biology',
+        videos: [
+          { rank: 1, id: 'v9s5-1', title: 'The Fundamental Unit of Life | Full Chapter One Shot', channel: 'PW Foundation (Editorial Sample)', teacher: 'Class 9 Bio Track', duration: 'Full Chapter', difficulty: 'Beginner', youtubeId: '_zOwnsquS6E', url: 'https://www.youtube.com/watch?v=_zOwnsquS6E', thumb: 'https://img.youtube.com/vi/_zOwnsquS6E/hqdefault.jpg', reason: 'Crystal-clear organelle functions and hypotonic/hypertonic osmosis examples.' },
+          { rank: 2, id: 'v9s5-2', title: 'Fundamental Unit of Life — NCERT + PYQs', channel: 'Samridhi Sharma (Search Track)', teacher: 'Samridhi Ma’am', duration: '1h 44m Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=The+Fundamental+Unit+of+Life+Class+9+Samridhi+Sharma', reason: 'Strong exam question coverage and diagram tips.' },
+          { rank: 3, id: 'v9s5-3', title: 'Cell Organelles Quick Mind Map', channel: 'Bio Quick Recap (Search Track)', teacher: 'Rapid Recap', duration: '15 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Fundamental+Unit+of+Life+Class+9+Quick+Revision', reason: 'Fast pre-test summary of all cell organelles.' }
+        ]
+      },
+      {
+        id: 'c9-sci-motion', classLevel: 9, subject: 'Science', chNo: 7,
+        title: 'Motion',
+        topics: ['Distance vs Displacement', 's-t & v-t Graphs', 'Three Equations of Motion', 'Uniform Circular Motion'],
+        diagramType: 'motion',
+        videos: [
+          { rank: 1, id: 'v9s7-1', title: 'Derivation of Equations of Motion — Graphical Method', channel: 'Physics Wallah Foundation (Editorial Sample)', teacher: 'Class 9 Physics', duration: 'Focused Derivation', difficulty: 'Beginner', youtubeId: 'r-hkWU33Rpw', url: 'https://www.youtube.com/watch?v=r-hkWU33Rpw', thumb: 'https://img.youtube.com/vi/r-hkWU33Rpw/hqdefault.jpg', reason: 'Nails the v-t graph derivations asked in virtually every Class 9 exam.' },
+          { rank: 2, id: 'v9s7-2', title: 'Motion IN ONE SHOT — Full Chapter + Numericals', channel: 'Class 9 Physics (Search Track)', teacher: 'NEEV / CBSE Track', duration: '2h+ Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Motion+Class+9+One+Shot+NCERT+Numericals', reason: 'Full numericals drill on average speed and acceleration.' },
+          { rank: 3, id: 'v9s7-3', title: 'Motion Graphs & Formulas 20-Min Sprint', channel: 'Physics Sprint (Search Track)', teacher: 'Rapid Recap', duration: '20 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Motion+Class+9+Rapid+Revision', reason: 'Quick graph-slope and area refresher.' }
+        ]
+      },
+      {
+        id: 'c9-sci-force', classLevel: 9, subject: 'Science', chNo: 8,
+        title: 'Force and Laws of Motion',
+        topics: ['Inertia', 'Newton’s First, Second & Third Laws', 'Momentum (p = mv)', 'Action-Reaction Pairs'],
+        diagramType: 'motion',
+        videos: [
+          { rank: 1, id: 'v9s8-1', title: 'Force and Laws of Motion | Complete Chapter One Shot', channel: 'PW Foundation (Editorial Sample)', teacher: 'Class 9 Physics', duration: 'Full Chapter', difficulty: 'Beginner', youtubeId: 'uOz2jyshMO8', url: 'https://www.youtube.com/watch?v=uOz2jyshMO8', thumb: 'https://img.youtube.com/vi/uOz2jyshMO8/hqdefault.jpg', reason: 'Clear real-world inertia demonstrations and F = ma numerical derivations.' },
+          { rank: 2, id: 'v9s8-2', title: 'Force & Laws of Motion — Akshay Tyagi Sir One Shot', channel: 'PW NEEV (Search Track)', teacher: 'Akshay Tyagi Sir', duration: '2h Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Force+and+Laws+of+Motion+Class+9+Akshay+Tyagi', reason: 'Detailed system-of-objects and momentum questions.' },
+          { rank: 3, id: 'v9s8-3', title: 'Newton’s 3 Laws Quick Exam Recap', channel: 'Rapid Physics (Search Track)', teacher: 'Quick Recap', duration: '20 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Force+and+Laws+of+Motion+Class+9+Rapid+Revision', reason: 'Fast revision of recoil and fielder hand-pull reasoning questions.' }
+        ]
+      },
+      {
+        id: 'c9-sci-gravitation', classLevel: 9, subject: 'Science', chNo: 9,
+        title: 'Gravitation',
+        topics: ['Universal Law of Gravitation', 'Free Fall (g)', 'Mass vs Weight', 'Thrust, Pressure & Archimedes'],
+        diagramType: 'motion',
+        videos: [
+          { rank: 1, id: 'v9s9-1', title: 'Gravitation Class 9 | Complete Chapter One Shot', channel: 'PW Foundation (Editorial Sample)', teacher: 'Class 9 Physics', duration: 'Full Chapter', difficulty: 'Beginner', youtubeId: 'K_gbborBB_A', url: 'https://www.youtube.com/watch?v=K_gbborBB_A', thumb: 'https://img.youtube.com/vi/K_gbborBB_A/hqdefault.jpg', reason: 'Covers both Universal Gravitation and Floatation/Buoyancy smoothly.' },
+          { rank: 2, id: 'v9s9-2', title: 'Gravitation — Numericals & Free Fall Practice', channel: 'CBSE Physics (Search Track)', teacher: 'Practice Track', duration: '1h Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Gravitation+Class+9+Numericals+One+Shot', reason: 'Focused practice on g = GM/R² and buoyancy numericals.' },
+          { rank: 3, id: 'v9s9-3', title: 'Gravitation Formula Sheet Revision', channel: 'Quick Physics (Search Track)', teacher: 'Rapid Recap', duration: '15 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Gravitation+Class+9+Rapid+Revision', reason: 'Fast formula check before tests.' }
+        ]
+      },
+      { id: 'c9-sci-work', classLevel: 9, subject: 'Science', chNo: 10, title: 'Work and Energy', topics: ['Scientific Work', 'Kinetic & Potential Energy', 'Conservation of Energy', 'Power (Watt)'], diagramType: 'motion' },
+
+      { id: 'c9-math-num', classLevel: 9, subject: 'Mathematics', chNo: 1, title: 'Number Systems', topics: ['Irrational Numbers', 'Laws of Exponents', 'Rationalising Denominators'], diagramType: 'parabola' },
+      {
+        id: 'c9-math-poly', classLevel: 9, subject: 'Mathematics', chNo: 2,
+        title: 'Polynomials',
+        topics: ['Zeroes of Polynomial', 'Factor Theorem', 'Algebraic Identities (2 & 3 Variables)'],
+        diagramType: 'parabola',
+        videos: [
+          { rank: 1, id: 'v9m2-1', title: 'Polynomials | Complete Chapter in One Shot (Class 9 Maths)', channel: 'Class 9 NCERT Maths (Editorial Sample)', teacher: 'Complete Chapter', duration: 'Full Chapter', difficulty: 'Beginner', youtubeId: 'WwcsvWh69_Q', url: 'https://www.youtube.com/watch?v=WwcsvWh69_Q', thumb: 'https://img.youtube.com/vi/WwcsvWh69_Q/hqdefault.jpg', reason: 'Step-by-step Factor Theorem and all 8 algebraic identities.' },
+          { rank: 2, id: 'v9m2-2', title: 'Class 9 Polynomials — Important Identities & Extra Questions', channel: 'CBSE Maths (Search Track)', teacher: 'Practice Track', duration: '1h Track', difficulty: 'Intermediate', url: 'https://www.youtube.com/results?search_query=Class+9+Maths+Polynomials+Important+Questions', reason: 'Focuses on tricky x³ + y³ + z³ = 3xyz proofs.' },
+          { rank: 3, id: 'v9m2-3', title: 'Polynomials 15-Minute Identity Recap', channel: 'Quick Maths (Search Track)', teacher: 'Rapid Recap', duration: '15 min Track', difficulty: 'Beginner', url: 'https://www.youtube.com/results?search_query=Class+9+Polynomials+Rapid+Revision', reason: 'Instant formula recall.' }
+        ]
+      },
+      { id: 'c9-math-lines', classLevel: 9, subject: 'Mathematics', chNo: 6, title: 'Lines and Angles', topics: ['Linear Pair Axiom', 'Vertically Opposite Angles', 'Parallel Lines & Transversal'], diagramType: 'trig' },
+      { id: 'c9-math-triangles', classLevel: 9, subject: 'Mathematics', chNo: 7, title: 'Triangles', topics: ['SAS, ASA, AAS, SSS, RHS Congruence', 'Isosceles Triangle Theorems'], diagramType: 'trig' },
+      { id: 'c9-math-heron', classLevel: 9, subject: 'Mathematics', chNo: 10, title: 'Heron’s Formula', topics: ['Semi-perimeter s', 'Area = √(s(s-a)(s-b)(s-c))'], diagramType: 'trig' },
+
+      { id: 'c9-sst-french', classLevel: 9, subject: 'Social Science', chNo: 1, title: 'The French Revolution (History)', topics: ['Three Estates', 'Bastille 1789', 'Reign of Terror', 'Legacy of Rights'], diagramType: 'timeline' },
+      { id: '
