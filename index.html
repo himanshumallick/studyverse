@@ -422,11 +422,57 @@
         <div class="section-header">
           <span class="section-tag">Academic Spectrum</span>
           <h2 class="section-title">Explore by Class</h2>
-          <a href="watch.html" ...>Best YouTube Videos</a>
-          <!-- Existing "Explore Classes" button ke ঠিক baad yeh code add karo -->
-<a href="watch.html" class="sv-best-yt-btn">
-  <span class="sv-yt-icon" aria-hidden="true">▶</span>
-  <span>Best YouTube Videos</span>
+          <div class="sv-cta-row">
+  <!-- Tumhara existing "Explore Classes" button yahan rahega -->
+
+  <a href="watch.html" class="sv-btn-watch">
+    <span class="sv-btn-play" aria-hidden="true">▶</span>
+    <span>Best YouTube Videos</span>
+  </a>
+</div>
+
+<style>
+  .sv-cta-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .sv-btn-watch {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #05070d;
+    background: linear-gradient(135deg, #facc15 0%, #38bdf8 100%);
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 28px rgba(250, 204, 21, 0.24);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .sv-btn-watch:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 36px rgba(250, 204, 21, 0.38);
+  }
+
+  .sv-btn-play {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #05070d;
+    color: #facc15;
+    font-size: 11px;
+  }
+</style>
+
 </a>
 
 <style>
