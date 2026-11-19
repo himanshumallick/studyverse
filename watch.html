@@ -346,11 +346,8 @@
     .thumb-wrap {
       position: relative;
       aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(10, 16, 32, 0.96));
+      background: #070b16;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .thumb-wrap img {
@@ -360,43 +357,10 @@
       display: block;
     }
 
-    .thumb-card-banner {
-      width: 100%;
-      height: 100%;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background:
-        radial-gradient(circle at top right, rgba(250, 204, 21, 0.16), transparent 55%),
-        linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(5, 7, 13, 0.98));
-    }
-
-    .thumb-channel {
-      color: var(--yellow);
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .thumb-chapter {
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    .thumb-sub {
-      color: var(--cyan);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
     .rank-badge {
       position: absolute;
       top: 10px;
-      right: 10px;
+      left: 10px;
       padding: 4px 10px;
       border-radius: 999px;
       background: var(--yellow);
@@ -422,6 +386,15 @@
     .video-meta span {
       color: var(--cyan);
       font-weight: 600;
+    }
+
+    .empty-box {
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(10, 16, 32, 0.85);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
     .panel {
@@ -571,7 +544,7 @@
   <header class="topbar">
     <div class="brand">
       <span>STUDYVERSE WATCH</span>
-      <span class="brand-tag">STRICT EXACT CHAPTER</span>
+      <span class="brand-tag">DIRECT VIDEO + THUMBNAIL</span>
     </div>
     <div class="nav-group">
       <a href="index.html" class="btn">Explore Classes</a>
@@ -589,7 +562,7 @@
         <div class="tagline">Watch. Understand. Master.</div>
         <h1>LEARN BEYOND THE CLASSROOM.</h1>
         <p>
-          Top 3 chapter-exact one-shot picks per chapter with zero cross-chapter mixing, instant on-screen notes, and all your existing chapter PDF files untouched.
+          Direct YouTube one-shot video links with thumbnails for matching chapters, instant on-screen notes, and all your existing chapter PDF files untouched.
         </p>
         <div class="hero-actions">
           <button id="watchNowBtn" class="btn btn-yellow" type="button">▶ Best YouTube Videos</button>
@@ -600,7 +573,7 @@
 
       <div class="stage-3d" aria-hidden="true">
         <div id="card3d" class="card-3d">
-          <span class="tag">NO WRONG CHAPTER MIX</span>
+          <span class="tag">DIRECT YOUTUBE LINKS</span>
           <h3>One-Shot Educators</h3>
           <p class="card-desc">Sunlike Study • Physics Wallah • Next Toppers • Magnet Brains • Exphub</p>
         </div>
@@ -654,7 +627,7 @@
 
     <section id="stepVideos" class="section-block hidden">
       <div class="section-head">
-        <h2 id="videosTitle">Step 5 — Top 3 Chapter-Exact One-Shots</h2>
+        <h2 id="videosTitle">Step 5 — Direct YouTube One-Shots</h2>
       </div>
       <div id="videoGrid" class="grid-videos"></div>
     </section>
@@ -742,14 +715,14 @@
 
   <script>
     const CHANNELS_LIST = [
-      { name: "Physics Wallah", focus: "Foundation, Udaan, Uday & NCERT Wallah One-Shots", rankSlot: "#1–#2" },
+      { name: "Physics Wallah", focus: "Foundation, Udaan, Uday & NCERT Wallah One-Shots", rankSlot: "#1–#3" },
       { name: "Next Toppers", focus: "Board & One-Shot Exam Sessions", rankSlot: "#1–#3" },
       { name: "Sunlike Study", focus: "Animated Full Chapter Explainers", rankSlot: "#1–#3" },
       { name: "Magnet Brains", focus: "Detailed NCERT & One-Shot Revisions", rankSlot: "#1–#3" },
       { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#1–#3" }
     ];
 
-    // Strictly verified exact-chapter video IDs (zero cross-chapter or cross-subject reuse)
+    // Direct YouTube video IDs only (zero search links, zero cross-chapter mixing)
     const EXACT_CHAPTER_VIDEOS = {
       "Class 9|Science|Ch 1: Matter in Our Surroundings": [
         { rank: 1, title: "Matter in Our Surroundings ONE SHOT | Class 9 Science", channel: "Physics Wallah", id: "Ltr3IROAD0E" },
@@ -822,52 +795,11 @@
       ]
     };
 
-    const TOP_CREATOR_PICKS = [
-      { channel: "Physics Wallah", tag: "One-Shot & PYQs" },
-      { channel: "Next Toppers", tag: "Board One-Shot" },
-      { channel: "Magnet Brains", tag: "NCERT Revision" }
-    ];
-
-    function buildExactSearchUrl(scopePrefix, chapter, channelName) {
-      const cleanScope = scopePrefix.replace(/\|/g, " ");
-      const query = `${cleanScope} ${chapter} ${channelName} one shot`;
-      return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-    }
-
     function buildChapters(list, scopePrefix) {
       return list.map((chapter) => {
         const key = `${scopePrefix}|${chapter}`;
-        const exact = (EXACT_CHAPTER_VIDEOS[key] || []).slice(0, 3);
-        const items = [];
-
-        exact.forEach((v, i) => {
-          items.push({
-            rank: i + 1,
-            title: v.title,
-            channel: v.channel,
-            subjectLabel: scopePrefix.split("|").pop(),
-            chapterName: chapter,
-            id: v.id,
-            url: `https://www.youtube.com/watch?v=${v.id}`,
-            cta: "▶ Watch Exact Video"
-          });
-        });
-
-        for (let r = items.length + 1; r <= 3; r++) {
-          const pick = TOP_CREATOR_PICKS[(r - 1) % TOP_CREATOR_PICKS.length];
-          items.push({
-            rank: r,
-            title: `${chapter} — ${pick.channel} (${pick.tag})`,
-            channel: pick.channel,
-            subjectLabel: scopePrefix.split("|").pop(),
-            chapterName: chapter,
-            id: null,
-            url: buildExactSearchUrl(scopePrefix, chapter, pick.channel),
-            cta: `🔍 Find ${chapter} on YouTube`
-          });
-        }
-
-        return { chapter, videos: items };
+        const videos = (EXACT_CHAPTER_VIDEOS[key] || []).slice(0, 3);
+        return { chapter, videos };
       });
     }
 
@@ -1172,7 +1104,7 @@
         btn.innerHTML = `
           <span class="tag">${hasStreams ? "SCIENCE • COMMERCE • HUMANITIES" : "CBSE / NCERT SYLLABUS"}</span>
           <div class="card-title">${cls}</div>
-          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + Top 3 exact slots"}</div>
+          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + direct one-shot videos"}</div>
         `;
         btn.addEventListener("click", () => {
           state.cls = cls;
@@ -1248,14 +1180,14 @@
         return;
       }
       filtered.forEach((chObj) => {
-        const exactCount = (chObj.videos || []).filter(v => Boolean(v.id)).length;
+        const count = (chObj.videos || []).length;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "sv-card";
         btn.innerHTML = `
-          <span class="tag">${exactCount > 0 ? `${exactCount} DIRECT + TOP 3` : "TOP 3 EXACT PICKS"}</span>
+          <span class="tag">${count > 0 ? `${count} DIRECT VIDEO${count > 1 ? "S" : ""}` : "DIRECT VIDEO"}</span>
           <div class="card-title">${chObj.chapter}</div>
-          <div class="card-desc">Open Top 3 chapter-exact cards</div>
+          <div class="card-desc">Open exact YouTube video & thumbnail</div>
         `;
         btn.addEventListener("click", () => {
           state.chapterObj = chObj;
@@ -1269,57 +1201,44 @@
     function renderVideos() {
       videoGrid.innerHTML = "";
       const chObj = state.chapterObj;
-      videosTitle.textContent = `Top 3 One-Shots — ${chObj.chapter}`;
+      videosTitle.textContent = `Direct One-Shot Videos — ${chObj.chapter}`;
 
-      const list = (chObj.videos || []).slice(0, 3).filter((vid) => {
+      const list = (chObj.videos || []).filter((vid) => {
         if (!state.activeChannel) return true;
         return vid.channel.toLowerCase().includes(state.activeChannel.toLowerCase());
       });
 
       if (!list.length) {
-        videoGrid.innerHTML = `<div class="card-desc">No slot for "${state.activeChannel}" in Top 3 of this chapter. Click "Show All Channels" above.</div>`;
+        videoGrid.innerHTML = `<div class="empty-box">No direct video from "${state.activeChannel}" is listed for this chapter yet. Click "Show All Channels" above.</div>`;
         return;
       }
 
       list.forEach((vid, idx) => {
         const card = document.createElement("article");
         card.className = "video-card";
-
-        const visualHtml = vid.id
-          ? `<img src="https://img.youtube.com/vi/${vid.id}/hqdefault.jpg" alt="${vid.title}" />`
-          : `<div class="thumb-card-banner">
-               <span class="thumb-channel">${vid.channel}</span>
-               <div class="thumb-chapter">${vid.chapterName}</div>
-               <span class="thumb-sub">${state.cls} • ${vid.subjectLabel} • Rank #${idx + 1}</span>
-             </div>`;
+        const thumb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+        const url = `https://www.youtube.com/watch?v=${vid.id}`;
 
         card.innerHTML = `
           <div class="thumb-wrap">
-            ${visualHtml}
-            <span class="rank-badge">#${idx + 1} PICK</span>
+            <img src="${thumb}" alt="${vid.title}" />
+            <span class="rank-badge">#${idx + 1} DIRECT</span>
           </div>
           <div class="video-body">
             <span class="channel-pill">Channel: ${vid.channel}</span>
             <h3 class="card-title">${vid.title}</h3>
-            <div class="video-meta"><span>${vid.channel}</span> • ${vid.chapterName}</div>
-            <a class="btn btn-yellow" href="${vid.url}" target="_blank" rel="noopener noreferrer">${vid.cta}</a>
+            <div class="video-meta"><span>${vid.channel}</span> • One Shot</div>
+            <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
           </div>
         `;
 
-        if (vid.id) {
-          const img = card.querySelector("img");
-          if (img) {
-            img.addEventListener("error", () => {
-              img.parentElement.innerHTML = `
-                <div class="thumb-card-banner">
-                  <span class="thumb-channel">${vid.channel}</span>
-                  <div class="thumb-chapter">${vid.chapterName}</div>
-                  <span class="thumb-sub">${state.cls} • ${vid.subjectLabel} • Rank #${idx + 1}</span>
-                </div>
-                <span class="rank-badge">#${idx + 1} PICK</span>
-              `;
-            });
-          }
+        const img = card.querySelector("img");
+        if (img) {
+          img.addEventListener("error", () => {
+            if (img.dataset.sdTried) return;
+            img.dataset.sdTried = "1";
+            img.src = `https://i.ytimg.com/vi/${vid.id}/0.jpg`;
+          });
         }
 
         videoGrid.appendChild(card);
