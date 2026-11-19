@@ -8,7 +8,7 @@
     :root {
       --bg-black: #05070d;
       --bg-navy: #0a1020;
-      --card: rgba(10, 16, 32, 0.88);
+      --card: rgba(10, 16, 32, 0.9);
       --blue: #2563eb;
       --bright-blue: #38bdf8;
       --cyan: #22d3ee;
@@ -17,7 +17,7 @@
       --indigo: #6366f1;
       --white: #f8fafc;
       --muted: #94a3b8;
-      --border: rgba(56, 189, 248, 0.22);
+      --border: rgba(56, 189, 248, 0.24);
       --spring: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -67,7 +67,7 @@
       flex-wrap: wrap;
       gap: 12px;
       padding: 14px 24px;
-      background: rgba(5, 7, 13, 0.88);
+      background: rgba(5, 7, 13, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -108,7 +108,7 @@
       font-size: 0.9rem;
       text-decoration: none;
       cursor: pointer;
-      transition: transform 0.25s var(--spring), border-color 0.25s var(--spring), box-shadow 0.25s var(--spring);
+      transition: transform 0.22s var(--spring), border-color 0.22s var(--spring), box-shadow 0.22s var(--spring);
     }
 
     .btn:hover {
@@ -276,25 +276,20 @@
       text-align: left;
       color: var(--white);
       cursor: pointer;
-      opacity: 0;
-      transform: translateY(18px) scale(0.98);
-      transition: opacity 0.48s var(--spring), transform 0.48s var(--spring), border-color 0.25s var(--spring);
-      transition-delay: var(--delay, 0ms);
-    }
-
-    .sv-card.visible {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
+      transition: transform 0.24s var(--spring), border-color 0.24s var(--spring), box-shadow 0.24s var(--spring);
     }
 
     .sv-card:hover {
       transform: translateY(-4px);
       border-color: var(--yellow);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.22);
     }
 
     .sv-card.selected-channel {
       border-color: var(--yellow);
-      box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.45);
+      box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.5);
     }
 
     .tag {
@@ -318,7 +313,7 @@
     }
 
     .card-title {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -336,15 +331,15 @@
       border: 1px solid var(--border);
       border-radius: 18px;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(20px) scale(0.97);
-      transition: opacity 0.5s var(--spring), transform 0.5s var(--spring), border-color 0.25s var(--spring);
-      transition-delay: var(--delay, 0ms);
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform 0.24s var(--spring), border-color 0.24s var(--spring), box-shadow 0.24s var(--spring);
     }
 
-    .video-card.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .video-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--yellow);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
     }
 
     .thumb-wrap {
@@ -359,33 +354,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      clip-path: inset(0 0 100% 0);
-      transform: scale(1.07);
-      transition: clip-path 0.62s var(--spring), transform 0.62s var(--spring);
-      transition-delay: calc(var(--delay, 0ms) + 70ms);
-    }
-
-    .video-card.visible .thumb-wrap img {
-      clip-path: inset(0 0 0% 0);
-      transform: scale(1);
-    }
-
-    .thumb-sheen {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.2) 50%, transparent 65%);
-      transform: translateX(-120%);
-      pointer-events: none;
-    }
-
-    .video-card.visible .thumb-sheen {
-      animation: sweep 1.05s var(--spring) forwards;
-      animation-delay: calc(var(--delay, 0ms) + 180ms);
-    }
-
-    @keyframes sweep {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(120%); }
     }
 
     .rank-badge {
@@ -556,17 +524,6 @@
       .hero {
         grid-template-columns: 1fr;
         padding: 24px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .card-3d, .thumb-sheen { animation: none !important; }
-      .sv-card, .video-card, .thumb-wrap img, .btn {
-        opacity: 1 !important;
-        transform: none !important;
-        clip-path: none !important;
-        transition: none !important;
       }
     }
   </style>
@@ -755,7 +712,6 @@
       { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#3–#5" }
     ];
 
-    // Verified video pool from prior tool results (no invented IDs)
     const VERIFIED_POOL = [
       { id: "ahZ-rb4cOvE", title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah" },
       { id: "tzEP4apfsO8", title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" },
@@ -847,17 +803,6 @@
         { rank: 1, title: "Class 12 History Ch 1 - The Harappan Civilisation (Theme 1)", channel: "Magnet Brains", duration: "One Shot", id: "23B5oyUy9no" }
       ]
     };
-
-    // Helper: apne kisi bhi verified video ID ko kisi chapter ke rank slot mein daalne ke liye
-    function setChapterRankVideo(scopeKey, chapterName, rank, videoObj) {
-      if (!VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`]) {
-        VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`] = [];
-      }
-      const list = VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`].filter(v => v.rank !== rank);
-      list.push({ rank, duration: "One Shot", ...videoObj });
-      list.sort((a, b) => a.rank - b.rank);
-      VERIFIED_VIDEOS[`${scopeKey}|${chapterName}`] = list;
-    }
 
     function buildChapters(list, scopePrefix) {
       return list.map((chapter, chIdx) => {
@@ -1042,4 +987,394 @@
               "Ch 9: Accounting Ratios", "Ch 10: Cash Flow Statement"
             ], "Class 12|Commerce|Accountancy"),
             "Business Studies": buildChapters([
-              "Ch 1: Nature and Significance of Management", "Ch 2: Principles
+              "Ch 1: Nature and Significance of Management", "Ch 2: Principles of Management",
+              "Ch 3: Business Environment", "Ch 4: Planning & Organising",
+              "Ch 5: Staffing, Directing & Controlling", "Ch 6: Financial Management",
+              "Ch 7: Financial Markets", "Ch 8: Marketing", "Ch 9: Consumer Protection"
+            ], "Class 12|Commerce|Business Studies"),
+            "Economics": buildChapters([
+              "Macro Ch 1: Introduction to Macroeconomics", "Macro Ch 2: National Income Accounting",
+              "Macro Ch 3: Money and Banking", "Macro Ch 4: Determination of Income and Employment",
+              "Macro Ch 5: Government Budget & Open Economy",
+              "Indian Eco Ch 1: Indian Economy on the Eve of Independence",
+              "Indian Eco Ch 2: Indian Economy (1950-1990) & LPG Reforms",
+              "Indian Eco Ch 3: Human Capital, Rural Development & Employment",
+              "Indian Eco Ch 4: Environment & India-Neighbours Comparison"
+            ], "Class 12|Commerce|Economics")
+          },
+          "Humanities / Arts": {
+            "History": buildChapters([
+              "Theme 1: Bricks, Beads and Bones", "Theme 2: Kings, Farmers and Towns",
+              "Theme 3: Kinship, Caste and Class", "Theme 4: Thinkers, Beliefs and Buildings",
+              "Theme 5: Through the Eyes of Travellers & Bhakti-Sufi",
+              "Theme 6: An Imperial Capital: Vijayanagara", "Theme 7: Peasants, Zamindars and the State",
+              "Theme 8: Colonialism, Rebels and the Raj", "Theme 9: Mahatma Gandhi & Nationalist Movement",
+              "Theme 10: Framing the Constitution"
+            ], "Class 12|Humanities / Arts|History"),
+            "Political Science": buildChapters([
+              "Ch 1: The End of Bipolarity", "Ch 2: Contemporary Centres of Power",
+              "Ch 3: Contemporary South Asia", "Ch 4: International Organisations & Security",
+              "Ch 5: Environment & Globalisation", "Ch 6: Challenges of Nation Building",
+              "Ch 7: Era of One-Party Dominance & Planned Development",
+              "Ch 8: India's External Relations & Congress System",
+              "Ch 9: Democratic Order, Regional Aspirations & Recent Developments"
+            ], "Class 12|Humanities / Arts|Political Science"),
+            "Geography": buildChapters([
+              "Book 1: Human Geography, Population, Development & Activities",
+              "Book 1: Transport, Communication & International Trade",
+              "Book 2: Population & Human Settlements in India",
+              "Book 2: Land Resources, Agriculture & Water Resources",
+              "Book 2: Mineral, Energy Resources & Planning in India",
+              "Book 2: Transport, Trade & Geographical Issues"
+            ], "Class 12|Humanities / Arts|Geography")
+          }
+        }
+      }
+    };
+
+    const state = { cls: null, stream: null, subject: null, chapterObj: null, activeChannel: null };
+
+    const channelGrid = document.getElementById("channelGrid");
+    const clearChannelBtn = document.getElementById("clearChannelBtn");
+    const stepClass = document.getElementById("stepClass");
+    const stepStream = document.getElementById("stepStream");
+    const stepSubject = document.getElementById("stepSubject");
+    const stepChapter = document.getElementById("stepChapter");
+    const stepVideos = document.getElementById("stepVideos");
+
+    const classGrid = document.getElementById("classGrid");
+    const streamGrid = document.getElementById("streamGrid");
+    const subjectGrid = document.getElementById("subjectGrid");
+    const chapterGrid = document.getElementById("chapterGrid");
+    const videoGrid = document.getElementById("videoGrid");
+    const videosTitle = document.getElementById("videosTitle");
+    const breadcrumb = document.getElementById("breadcrumb");
+    const backBtn = document.getElementById("backBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const watchNowBtn = document.getElementById("watchNowBtn");
+    const chapterSearch = document.getElementById("chapterSearch");
+    const scrollBar = document.getElementById("scrollBar");
+    const card3d = document.getElementById("card3d");
+
+    function renderChannels() {
+      channelGrid.innerHTML = "";
+      CHANNELS_LIST.forEach((ch) => {
+        const isSelected = state.activeChannel === ch.name;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `sv-card ${isSelected ? "selected-channel" : ""}`;
+        btn.innerHTML = `
+          <span class="tag">RANK ${ch.rankSlot}</span>
+          <div class="card-title">${ch.name}</div>
+          <div class="card-desc">${ch.focus}</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.activeChannel = isSelected ? null : ch.name;
+          clearChannelBtn.classList.toggle("hidden", !state.activeChannel);
+          renderChannels();
+          if (!stepVideos.classList.contains("hidden")) {
+            renderVideos();
+          }
+        });
+        channelGrid.appendChild(btn);
+      });
+    }
+
+    clearChannelBtn.addEventListener("click", () => {
+      state.activeChannel = null;
+      clearChannelBtn.classList.add("hidden");
+      renderChannels();
+      if (!stepVideos.classList.contains("hidden")) {
+        renderVideos();
+      }
+    });
+
+    function updateNav() {
+      const parts = ["Step 1: Class"];
+      if (state.cls) parts.push(state.cls);
+      if (state.stream) parts.push(state.stream);
+      if (state.subject) parts.push(state.subject);
+      if (state.chapterObj) parts.push(state.chapterObj.chapter);
+      if (state.activeChannel) parts.push(`Channel: ${state.activeChannel}`);
+      breadcrumb.innerHTML = parts.map((p, idx) =>
+        idx === parts.length - 1 ? `<strong>${p}</strong>` : p
+      ).join(" → ");
+      backBtn.classList.toggle("hidden", !state.cls);
+    }
+
+    function showStep(sec) {
+      [stepClass, stepStream, stepSubject, stepChapter, stepVideos].forEach(s => s.classList.add("hidden"));
+      sec.classList.remove("hidden");
+      updateNav();
+    }
+
+    function getSubjectsMap() {
+      const clsData = SYLLABUS[state.cls];
+      if (!clsData) return {};
+      if (clsData.streams) return clsData.streams[state.stream] || {};
+      return clsData.subjects || {};
+    }
+
+    function renderClasses() {
+      classGrid.innerHTML = "";
+      Object.keys(SYLLABUS).forEach((cls) => {
+        const hasStreams = Boolean(SYLLABUS[cls].streams);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${hasStreams ? "SCIENCE • COMMERCE • HUMANITIES" : "CBSE / NCERT SYLLABUS"}</span>
+          <div class="card-title">${cls}</div>
+          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + Top 5 active videos"}</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.cls = cls;
+          state.stream = null;
+          state.subject = null;
+          state.chapterObj = null;
+          if (SYLLABUS[cls].streams) {
+            renderStreams();
+            showStep(stepStream);
+          } else {
+            renderSubjects();
+            showStep(stepSubject);
+          }
+        });
+        classGrid.appendChild(btn);
+      });
+    }
+
+    function renderStreams() {
+      streamGrid.innerHTML = "";
+      const streams = Object.keys(SYLLABUS[state.cls].streams || {});
+      streams.forEach((st) => {
+        const subCount = Object.keys(SYLLABUS[state.cls].streams[st]).length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${state.cls} STREAM</span>
+          <div class="card-title">${st}</div>
+          <div class="card-desc">${subCount} main subjects with full chapters</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.stream = st;
+          state.subject = null;
+          state.chapterObj = null;
+          renderSubjects();
+          showStep(stepSubject);
+        });
+        streamGrid.appendChild(btn);
+      });
+    }
+
+    function renderSubjects() {
+      subjectGrid.innerHTML = "";
+      const subMap = getSubjectsMap();
+      Object.keys(subMap).forEach((subj) => {
+        const chCount = subMap[subj].length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${state.stream ? state.stream : state.cls}</span>
+          <div class="card-title">${subj}</div>
+          <div class="card-desc">${chCount} chapters available</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.subject = subj;
+          state.chapterObj = null;
+          chapterSearch.value = "";
+          renderChapters();
+          showStep(stepChapter);
+        });
+        subjectGrid.appendChild(btn);
+      });
+    }
+
+    function renderChapters(filter = "") {
+      chapterGrid.innerHTML = "";
+      const list = getSubjectsMap()[state.subject] || [];
+      const filtered = list.filter(c => c.chapter.toLowerCase().includes(filter.trim().toLowerCase()));
+      if (!filtered.length) {
+        chapterGrid.innerHTML = `<div class="card-desc">No matching chapter found.</div>`;
+        return;
+      }
+      filtered.forEach((chObj) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">TOP 5 RANKED</span>
+          <div class="card-title">${chObj.chapter}</div>
+          <div class="card-desc">Open all 5 ranked YouTube video cards</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.chapterObj = chObj;
+          renderVideos();
+          showStep(stepVideos);
+        });
+        chapterGrid.appendChild(btn);
+      });
+    }
+
+    function renderVideos() {
+      videoGrid.innerHTML = "";
+      const chObj = state.chapterObj;
+      videosTitle.textContent = `Top 5 One-Shots — ${chObj.chapter}`;
+
+      const list = (chObj.videos || []).slice(0, 5).filter((vid) => {
+        if (!state.activeChannel) return true;
+        return vid.channel.toLowerCase().includes(state.activeChannel.toLowerCase());
+      });
+
+      const finalCards = list.length ? list : (chObj.videos || []).slice(0, 5);
+
+      finalCards.forEach((vid) => {
+        const thumb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+        const url = `https://www.youtube.com/watch?v=${vid.id}`;
+        const card = document.createElement("article");
+        card.className = "video-card";
+        card.innerHTML = `
+          <div class="thumb-wrap">
+            <img src="${thumb}" alt="${vid.title}" loading="lazy" />
+            <span class="rank-badge">#${vid.rank} RANKED</span>
+          </div>
+          <div class="video-body">
+            <span class="channel-pill">Channel: ${vid.channel}</span>
+            <h3 class="card-title">${vid.title}</h3>
+            <div class="video-meta"><span>${vid.channel}</span> • ${vid.duration}</div>
+            <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
+          </div>
+        `;
+        videoGrid.appendChild(card);
+      });
+    }
+
+    const authModal = document.getElementById("authModal");
+    const authOpenBtn = document.getElementById("authOpenBtn");
+    const authCloseBtn = document.getElementById("authCloseBtn");
+    const authForm = document.getElementById("authForm");
+    const authStatus = document.getElementById("authStatus");
+    const userBanner = document.getElementById("userBanner");
+
+    function syncUserUI() {
+      const saved = localStorage.getItem("sv_student_user");
+      if (saved) {
+        const user = JSON.parse(saved);
+        authOpenBtn.textContent = user.name;
+        userBanner.textContent = `Signed in as ${user.name} (${user.email}) • Curated for students. Built for better learning.`;
+      }
+    }
+
+    authOpenBtn.addEventListener("click", () => authModal.classList.remove("hidden"));
+    authCloseBtn.addEventListener("click", () => authModal.classList.add("hidden"));
+    authModal.addEventListener("click", (e) => {
+      if (e.target === authModal) authModal.classList.add("hidden");
+    });
+
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("authName").value.trim();
+      const email = document.getElementById("authEmail").value.trim();
+      if (!name || !email) return;
+      localStorage.setItem("sv_student_user", JSON.stringify({ name, email }));
+      syncUserUI();
+      authStatus.textContent = "Saved! Welcome to STUDYVERSE WATCH.";
+      setTimeout(() => authModal.classList.add("hidden"), 650);
+    });
+
+    const feedbackForm = document.getElementById("feedbackForm");
+    const feedbackList = document.getElementById("feedbackList");
+    const fbStatus = document.getElementById("fbStatus");
+
+    function renderFeedback() {
+      const items = JSON.parse(localStorage.getItem("sv_feedback_items") || "[]");
+      feedbackList.innerHTML = items.slice(0, 5).map((item) => `
+        <div class="fb-item">
+          <div class="fb-meta">${item.name} • ${item.email}</div>
+          <div>${item.message}</div>
+        </div>
+      `).join("");
+    }
+
+    feedbackForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("fbName").value.trim();
+      const email = document.getElementById("fbEmail").value.trim();
+      const message = document.getElementById("fbMessage").value.trim();
+      if (!name || !email || !message) return;
+      const items = JSON.parse(localStorage.getItem("sv_feedback_items") || "[]");
+      items.unshift({ name, email, message });
+      localStorage.setItem("sv_feedback_items", JSON.stringify(items));
+      feedbackForm.reset();
+      fbStatus.textContent = "Thank you! Your feedback has been recorded.";
+      renderFeedback();
+    });
+
+    window.addEventListener("scroll", () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
+      scrollBar.style.transform = `scaleX(${p})`;
+    }, { passive: true });
+
+    if (card3d) {
+      card3d.addEventListener("pointermove", (e) => {
+        const r = card3d.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        card3d.style.setProperty("--rx", `${(nx * 14).toFixed(1)}deg`);
+        card3d.style.setProperty("--ry", `${(-ny * 12).toFixed(1)}deg`);
+      });
+      card3d.addEventListener("pointerleave", () => {
+        card3d.style.setProperty("--rx", "-8deg");
+        card3d.style.setProperty("--ry", "6deg");
+      });
+    }
+
+    backBtn.addEventListener("click", () => {
+      if (!stepVideos.classList.contains("hidden")) {
+        state.chapterObj = null;
+        showStep(stepChapter);
+      } else if (!stepChapter.classList.contains("hidden")) {
+        state.subject = null;
+        showStep(stepSubject);
+      } else if (!stepSubject.classList.contains("hidden")) {
+        if (SYLLABUS[state.cls].streams) {
+          state.stream = null;
+          showStep(stepStream);
+        } else {
+          state.cls = null;
+          showStep(stepClass);
+        }
+      } else if (!stepStream.classList.contains("hidden")) {
+        state.cls = null;
+        showStep(stepClass);
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      state.cls = null;
+      state.stream = null;
+      state.subject = null;
+      state.chapterObj = null;
+      state.activeChannel = null;
+      clearChannelBtn.classList.add("hidden");
+      renderChannels();
+      showStep(stepClass);
+    });
+
+    watchNowBtn.addEventListener("click", () => {
+      stepClass.scrollIntoView({ behavior: "smooth" });
+    });
+
+    chapterSearch.addEventListener("input", (e) => renderChapters(e.target.value));
+
+    renderChannels();
+    renderClasses();
+    updateNav();
+    syncUserUI();
+    renderFeedback();
+  </script>
+</body>
+</html>
