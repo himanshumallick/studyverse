@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDYVERSE —  Learning Universe | CBSE Class 10</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #030712;
+      --bg-secondary: #0b0f19;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-violet: #a855f7;
+      --border-subtle: rgba(99, 102, 241, 0.25);
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background-color: #030712 !important;
+      color: #f8fafc !important;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* 21st.dev Style Pure CSS 3D Motion Background Orbs */
+    .bg-motion-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .motion-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.45;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 450px; height: 450px; background: rgba(56, 189, 248, 0.2); top: -100px; left: -100px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(99, 102, 241, 0.22); top: 40%; right: -150px; animation-delay: -4s; }
+    .orb-3 { width: 400px; height: 400px; background: rgba(168, 85, 247, 0.18); bottom: -100px; left: 25%; animation-delay: -8s; }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(0px) translateX(0px) scale(1); }
+      50% { transform: translateY(40px) translateX(30px) scale(1.08); }
+      100% { transform: translateY(-30px) translateX(-40px) scale(0.95); }
+    }
+
+    .site-wrapper {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Sticky Glass Navigation */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(3, 7, 18, 0.82);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+    .brand-logo span { color: var(--accent-cyan); }
+
+    .nav-menu {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .nav-link {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-cyan);
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      border: 1px solid transparent;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo), var(--accent-violet));
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.45);
+    }
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(148, 163, 184, 0.2);
+      color: #fff;
+    }
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-cyan);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 140px 24px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #34d399;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #34d399;
+    }
+    .hero-title {
+      font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Holographic 3D Showcase Card */
+    .hero-showcase {
+      perspective: 1000px;
+    }
+    .showcase-card {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(56, 189, 248, 0.15);
+      transition: transform 0.2s ease-out;
+    }
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+    }
+    .showcase-main-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .showcase-sub {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .math-box {
+      background: rgba(3, 7, 18, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: #c084fc;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Classes Section */
+    .section {
+      padding: 90px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 50px;
+    }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 4px 12px;
+      border-radius: 99px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .class-card {
+      background: rgba(11, 15, 25, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .class-card.featured {
+      border-color: rgba(56, 189, 248, 0.5);
+      background: rgba(11, 15, 25, 0.9);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.12);
+    }
+    .class-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+    }
+    .class-num {
+      font-family: var(--font-mono);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+    }
+    .class-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .class-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    @media(max-width: 900px) {
+      .hero-section { grid-template-columns: 1fr; text-align: center; }
+      .hero-cta { justify-content: center; }
+      .nav-menu { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pure CSS 3D Motion Orbs (Guaranteed No White Screen) -->
+  <div class="bg-motion-container">
+    <div class="motion-orb orb-1"></div>
+    <div class="motion-orb orb-2"></div>
+    <div class="motion-orb orb-3"></div>
+  </div>
+
+  <div class="site-wrapper">
+    <!-- Header Navigation -->
+    <header class="site-header">
+      <div class="nav-container">
+        <a href="#hero" class="brand-logo">
+          <div class="brand-icon">⚡</div>
+          STUDY<span>VERSE</span>
+        </a>
+        <nav class="nav-menu">
+          <a href="#hero" class="nav-link active">Home</a>
+          <a href="#classes" class="nav-link">Classes</a>
+          <a href="#subjects" class="nav-link">Subjects</a>
+          <a href="#resources" class="nav-link">Notes Library</a>
+          <a href="#practice" class="nav-link">Practice Zone</a>
+          <a href="ncert.html">Open NCERT Universe</a>
+        </nav>
+        <div>
+          <a href="#classes" class="btn btn-primary">Class 10 Hub →</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Hero Section -->
+      <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="live-dot"></span>
+            <span>⚡ Next-Gen CBSE Learning Platform • 2025-26</span>
+          </div>
+          <h1 class="hero-title">
+            Your Universe of Learning.
+            <span class="gradient-text">Master Class 10 CBSE</span>
+            with 3D Clarity.
+          </h1>
+          <p class="hero-desc">
+            Ditch 800-page bulky textbooks. Access high-yield visual revision notes, interactive formula sheets, and curated board question banks engineered for top results.
+          </p>
+          <div class="hero-cta">
+            <a href="#classes" class="btn btn-primary">Explore Classes →</a>
+            <a href="watch.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;margin-left:10px;border-radius:12px;text-decoration:none;font-weight:700;color:#05070d;background:linear-gradient(135deg,#facc15,#38bdf8);">
+  <span>▶</span>
+  <span>Best YouTube Videos</span>
+</a>
+            <a href="#classes" class="btn btn-glass">Browse Notes Library ✦</a>
+          </div>
+        </div>
+
+        <!-- Holographic Showcase Card -->
+        <div class="hero-showcase">
+          <div class="showcase-card" id="tilt-card">
+            <div class="showcase-header">
+              <span>PHYSICS • CODE 086</span>
+              <span style="color:#34d399">● High Yield</span>
+            </div>
+            <h2 class="showcase-main-title">Light: Reflection & Refraction</h2>
+            <p class="showcase-sub">Complete Ray Diagrams & Sign Conventions</p>
+            
+            <div class="math-box">
+              1/f = 1/v - 1/u  |  m = v/u
+            </div>
+
+            <a href="#classes" class="btn btn-primary" style="width: 100%;">Access Chapter Notes →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Classes Section -->
+      <section id="classes" class="section">
+        <div class="section-header">
+          <span class="section-tag">Academic Spectrum</span>
+          <h2 class="section-title">Explore by Class</h2>
+          <div class="sv-cta-row">
+  <!-- Tumhara existing "Explore Classes" button yahan rahega -->
+
+  <a href="watch.html" class="sv-btn-watch">
+    <span class="sv-btn-play" aria-hidden="true">▶</span>
+    <span>Best YouTube Videos</span>
+  </a>
+</div>
+
+<style>
+  .sv-cta-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .sv-btn-watch {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #05070d;
+    background: linear-gradient(135deg, #facc15 0%, #38bdf8 100%);
+    border: 1px solid rgba(250, 204, 21, 0.7);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 28px rgba(250, 204, 21, 0.24);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .sv-btn-watch:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 36px rgba(250, 204, 21, 0.38);
+  }
+
+  .sv-btn-play {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #05070d;
+    color: #facc15;
+    font-size: 11px;
+  }
+</style>
+
+</a>
+
+<style>
+  .sv-best-yt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 20px;
+    margin-left: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #05070d;
+    background: linear-gradient(135deg, #facc15, #38bdf8);
+    border: 1px solid rgba(250, 204, 21, 0.6);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 26px rgba(250, 204, 21, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .sv-best-yt-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 34px rgba(250, 204, 21, 0.4);
+  }
+
+  .sv-yt-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #05070d;
+    color: #facc15;
+    font-size: 11px;
+  }
+</style>
+          <p class="section-subtitle">Tailored learning universes built for school curricula, starting with our flagship Class 10 Hub.</p>
+        </div>
+          <div class="class-card featured" onclick="window.location.href='class10.html'">
+            <div class="class-num">10</div>
+            <h3 class="class-title">CBSE Class 10 Board Accelerator</h3>
+            <p class="class-desc">Maths, Science, SST, English, Hindi, and AI (Code 417) with latest rationalized syllabus.</p>
+            <a href="class10.html" class="btn btn-primary" style="margin-top:auto;">Enter Universe →</a>
+          </div>
+      
+
+      <div class="class-card" onclick="window.location.href='class9.html'">
+  <div class="class-num">09</div>
+  <h3 class="class-title">Class 9 Foundation Hub</h3>
+  <p class="class-desc">Complete chapters and revision notes for Science, Maths, and SST.</p>
+  <a href="class9.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
+</div>
+
+         <div class="class-card" onclick="window.location.href='class11.html'">
+  <div class="class-num">11</div>
+  <h3 class="class-title">Class 11 STEM & Science Hub</h3>
+  <p class="class-desc">Advanced Physics, Chemistry, Maths, and Biology modules for board & competitive excellence.</p>
+  <a href="class11.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
+</div>
+
+        <div class="class-card" onclick="window.location.href='class12.html'">
+  <div class="class-num">12</div>
+  <h3 class="class-title">Class 12 Board Champions</h3>
+  <p class="class-desc">PCM, PCB, and Commerce streams with animated subject modules and PDF notes.</p>
+  <a href="class12.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
+</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>© 2026 STUDYVERSE. Designed for CBSE Class 10 Students in India.</div>
+        <div style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.8rem;">● 3D Motion Glow Active</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Smooth 3D Tilt Effect on Mouse Move
+    const card = document.getElementById('tilt-card');
+    document.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `rotateX(${-y * 0.04}deg) rotateY(${x * 0.04}deg) translateY(-4px)`;
+    });
+  </script>
+</body>
+</html>
