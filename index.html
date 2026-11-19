@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STUDYVERSE — Interactive Motion CBSE Hub (9–12)</title>
+  <title>STUDYVERSE — Cinematic 3D CBSE Hub (9–12)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,12 +14,13 @@
 
   <style>
     :root {
-      --bg: #030712;
-      --surface: rgba(11, 15, 25, 0.86);
-      --border: rgba(99, 102, 241, 0.24);
+      --bg: #02050d;
+      --surface: rgba(9, 14, 26, 0.84);
+      --border: rgba(99, 102, 241, 0.28);
       --cyan: #38bdf8;
       --indigo: #6366f1;
       --violet: #a855f7;
+      --amber: #f59e0b;
       --text: #f8fafc;
       --muted: #94a3b8;
       --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
@@ -40,96 +41,69 @@
       overflow-x: hidden;
     }
 
-    .scroll-track {
+    /* Fullscreen 3D Books + Laptops Canvas */
+    #three-scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Film letterbox top/bottom subtle bars + scroll cinema bar */
+    .cinema-top-bar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 3px;
-      z-index: 60;
-      background: rgba(255, 255, 255, 0.04);
+      z-index: 70;
+      background: rgba(255, 255, 255, 0.05);
       pointer-events: none;
     }
 
-    .scroll-fill {
+    .cinema-top-fill {
       height: 100%;
       width: 100%;
       transform-origin: 0% 50%;
-      background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--violet));
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
+      background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--violet), var(--amber));
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.7);
     }
 
-    .ambient-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle at 16% 14%, rgba(56, 189, 248, 0.16), transparent 42%),
-        radial-gradient(circle at 84% 22%, rgba(168, 85, 247, 0.15), transparent 44%),
-        linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
-    }
-
-    .container {
+    .page-wrap {
       position: relative;
       z-index: 10;
-      max-width: 1160px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 28px 20px 88px;
+      padding: 28px 20px 110px;
     }
 
-    .topbar {
+    /* Opening Cinema Curtain Overlay */
+    .opening-curtain {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: radial-gradient(circle at 50% 45%, #0f172a, #02050d 75%);
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding-bottom: 18px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid var(--border);
+      justify-content: center;
+      gap: 16px;
+      padding: 24px;
+      text-align: center;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: #fff;
-    }
-
-    .brand-badge {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--cyan), var(--indigo));
-      color: #fff;
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
-    }
-
-    .brand span {
-      color: var(--cyan);
-    }
-
-    .status-pill {
+    .intro-code {
       font-family: var(--font-mono);
-      font-size: 0.76rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
       color: var(--cyan);
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 6px 12px;
-      border-radius: 99px;
+      text-transform: uppercase;
     }
 
-    .hero-title {
-      font-size: clamp(2rem, 4.2vw, 3.25rem);
+    .intro-logo {
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
       font-weight: 800;
-      line-height: 1.12;
-      margin-bottom: 8px;
+      letter-spacing: -0.03em;
     }
 
     .grad {
@@ -138,132 +112,211 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 24px;
-    }
-
-    .class-tabs {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .class-tab {
-      position: relative;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      flex-wrap: wrap;
+      padding-bottom: 18px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(2, 5, 13, 0.55);
+      backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: 14px 16px;
-      cursor: pointer;
-      color: var(--text);
-      font-weight: 700;
-      text-align: left;
-      overflow: hidden;
+      padding: 14px 18px;
     }
 
-    .active-pill-bg {
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(99, 102, 241, 0.18));
-      border: 1px solid rgba(56, 189, 248, 0.55);
-      z-index: 0;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.25rem;
     }
 
-    .tab-inner {
-      position: relative;
-      z-index: 1;
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      color: #fff;
     }
 
-    .class-num {
-      font-family: var(--font-mono);
-      font-size: 0.74rem;
+    .brand span {
       color: var(--cyan);
     }
 
-    .stream-row {
+    .nav-pills {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 18px;
     }
 
-    .stream-btn {
-      position: relative;
-      background: rgba(255, 255, 255, 0.04);
+    .nav-step {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      padding: 7px 12px;
+      border-radius: 99px;
       border: 1px solid rgba(148, 163, 184, 0.22);
-      color: var(--text);
-      padding: 8px 16px;
-      border-radius: 99px;
-      font-size: 0.82rem;
-      font-weight: 700;
+      background: rgba(15, 23, 42, 0.65);
+      color: var(--muted);
       cursor: pointer;
-      overflow: hidden;
     }
 
-    .stream-active-bg {
-      position: absolute;
-      inset: 0;
-      border-radius: 99px;
+    .nav-step.active {
+      color: #fff;
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.16);
+    }
+
+    /* Scene 1: Hero + Flash Cards + Explore Classes */
+    .hero-cinema {
+      min-height: 76vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 48px;
+    }
+
+    .hero-heading {
+      font-size: clamp(2.3rem, 5.2vw, 4.1rem);
+      font-weight: 800;
+      line-height: 1.08;
+      max-width: 880px;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-explore {
       background: linear-gradient(135deg, var(--cyan), var(--indigo));
-      z-index: 0;
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(56, 189, 248, 0.28);
     }
 
-    .subjects-grid {
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.8);
+      color: #fff;
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* 3D Flash Cards Strip */
+    .flashcards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
     }
 
-    .spotlight-card {
-      position: relative;
+    .flash-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(18px);
       cursor: pointer;
-      overflow: hidden;
+      transform-style: preserve-3d;
     }
 
-    .spotlight-glow {
-      position: absolute;
-      inset: -1px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.25s ease;
+    .flash-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      margin-bottom: 8px;
+      display: block;
     }
 
-    .spotlight-card:hover .spotlight-glow,
-    .video-card:hover .spotlight-glow {
-      opacity: 1;
+    .flash-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
     }
 
-    .spotlight-card.active {
+    .flash-copy {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* Stage Panels */
+    .stage-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 26px;
+      backdrop-filter: blur(22px);
+      margin-bottom: 36px;
+    }
+
+    .stage-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .cards-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .hub-card {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 20px;
+      padding: 22px;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+    }
+
+    .hub-card.active,
+    .hub-card:hover {
       border-color: var(--cyan);
       box-shadow: 0 14px 32px rgba(56, 189, 248, 0.16);
     }
 
-    .chapters-panel {
-      background: var(--surface);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      border-radius: 24px;
-      padding: 22px;
-      backdrop-filter: blur(20px);
+    .chapter-box {
+      background: rgba(2, 5, 13, 0.68);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 18px;
     }
 
-    .chapter-card {
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .chapter-top {
+    .chapter-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -272,41 +325,40 @@
       margin-bottom: 14px;
     }
 
-    .mod-tag {
+    .mod-code {
       font-family: var(--font-mono);
       font-size: 0.72rem;
       color: var(--cyan);
       font-weight: 700;
     }
 
-    .chapter-title {
-      font-size: 1.02rem;
-      font-weight: 700;
+    .chapter-name {
+      font-size: 1.06rem;
+      font-weight: 800;
       color: #fff;
       margin-top: 2px;
     }
 
-    .pdf-pill {
-      background: linear-gradient(135deg, var(--cyan), var(--indigo));
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 7px 12px;
-      border-radius: 10px;
+    .ncert-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #fde68a;
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 6px 12px;
+      border-radius: 99px;
     }
 
-    .videos-grid {
+    .videos-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 14px;
     }
 
-    .video-card {
-      position: relative;
-      background: rgba(3, 7, 18, 0.78);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      border-radius: 14px;
+    .vid-card {
+      background: rgba(9, 14, 26, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -314,52 +366,31 @@
       color: inherit;
     }
 
-    .thumb-wrap {
+    .vid-thumb {
       position: relative;
       aspect-ratio: 16 / 9;
       background: #0f172a;
       overflow: hidden;
     }
 
-    .thumb-img {
+    .vid-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.35s ease;
     }
 
-    .video-card:hover .thumb-img {
+    .vid-card:hover .vid-thumb img {
       transform: scale(1.06);
     }
 
-    .play-chip {
-      position: absolute;
-      right: 8px;
-      bottom: 8px;
-      background: rgba(3, 7, 18, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 8px;
-      opacity: 0.9;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .video-card:hover .play-chip {
-      transform: scale(1.06);
-      background: var(--cyan);
-      color: #030712;
-    }
-
-    .rank-badge {
+    .vid-rank {
       position: absolute;
       top: 8px;
       left: 8px;
-      background: rgba(3, 7, 18, 0.88);
-      border: 1px solid rgba(56, 189, 248, 0.45);
+      background: rgba(2, 5, 13, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.5);
       color: var(--cyan);
       font-family: var(--font-mono);
       font-size: 0.68rem;
@@ -368,9 +399,7 @@
       border-radius: 99px;
     }
 
-    .video-body {
-      position: relative;
-      z-index: 1;
+    .vid-info {
       padding: 12px;
       display: flex;
       flex-direction: column;
@@ -378,48 +407,45 @@
       flex: 1;
     }
 
-    .video-title {
-      font-size: 0.85rem;
+    .vid-title {
+      font-size: 0.86rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #fff;
       line-height: 1.35;
     }
 
-    .video-meta {
-      font-size: 0.73rem;
+    .vid-sub {
+      font-size: 0.74rem;
       color: var(--muted);
       margin-top: auto;
     }
   </style>
 </head>
 <body>
-  <div class="ambient-bg"></div>
-  <div id="app"></div>
+  <canvas id="three-scene"></canvas>
+  <div class="cinema-top-bar"><div class="cinema-top-fill" id="cinemaProgress"></div></div>
+  <div id="root"></div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script type="module">
-    import React, { useState } from "https://esm.sh/react@18.3.1";
+    import React, { useState, useEffect, useRef } from "https://esm.sh/react@18.3.1";
     import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
-    import {
-      motion,
-      AnimatePresence,
-      useScroll,
-      useSpring
-    } from "https://esm.sh/framer-motion@11.11.11?deps=react@18.3.1,react-dom@18.3.1";
+    import { motion, AnimatePresence } from "https://esm.sh/framer-motion@11.11.11?deps=react@18.3.1,react-dom@18.3.1";
 
-    // Curated CBSE Videos (max 3 per chapter; 2 where top 2 are strongest) ranked by latest syllabus + clarity
-    const ALL_CLASSES_DATA = {
+    // New NCERT Syllabus + Top 2-3 Rated CBSE Videos (with YouTube videoId & thumbnail)
+    const NCERT_HUB = {
       class9: {
         label: "Class 9",
-        subtitle: "Foundation CBSE chapters with top 2–3 ranked videos & thumbnails",
+        badge: "NEW NCERT FOUNDATION",
         subjects: {
           science: {
             label: "Science",
             icon: "🧪",
             chapters: [
               {
-                id: "c9-sci-1",
+                id: "c9-s1",
                 name: "Chapter 1: Matter in Our Surroundings",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 1",
                 videos: [
                   {
                     rank: "#1 RAPID REVISION",
@@ -430,7 +456,7 @@
                     url: "https://www.youtube.com/watch?v=kceQg4X7j2E"
                   },
                   {
-                    rank: "#2 COMPLETE CHAPTER",
+                    rank: "#2 FULL CHAPTER",
                     title: "Matter in Our Surroundings Complete Chapter | CLASS 9th Science",
                     channel: "Exphub 9th &10th",
                     year: "2024",
@@ -448,25 +474,33 @@
                 ]
               },
               {
-                id: "c9-sci-2",
-                name: "Chapter 2: Is Matter Around Us Pure",
-                pdfUrl: "#",
+                id: "c9-s3",
+                name: "Chapter 3: Atoms and Molecules",
+                ncertTag: "New NCERT Ch 3",
                 videos: [
                   {
-                    rank: "#1 ANIMATED OVERVIEW",
-                    title: "CBSE Class 9 || Chemistry || Matter in our surroundings || Animation",
-                    channel: "Digital Guruji",
-                    year: "2022",
-                    videoId: "ssa65eDYP3Q",
-                    url: "https://www.youtube.com/watch?v=ssa65eDYP3Q"
+                    rank: "#1 COMPLETE ONE-SHOT",
+                    title: "Atoms and Molecules Complete Chapter | CLASS 9th Science | NCERT covered",
+                    channel: "Exphub 9th &10th",
+                    year: "2024",
+                    videoId: "Jy2bLuZU8ps",
+                    url: "https://www.youtube.com/watch?v=Jy2bLuZU8ps"
                   },
                   {
-                    rank: "#2 ONE-SHOT NCERT",
-                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
-                    channel: "LearnoHub - Class 9,10",
+                    rank: "#2 25-MIN REVISION",
+                    title: "Atoms and Molecules in 25 Minutes | Class 9th | Rapid Revision",
+                    channel: "Exphub 9th &10th",
+                    year: "2025",
+                    videoId: "jWSJZEZ3Ym4",
+                    url: "https://www.youtube.com/watch?v=jWSJZEZ3Ym4"
+                  },
+                  {
+                    rank: "#3 FULL EXPLANATION",
+                    title: "Class 9 Chemistry Chapter 3 | Atoms And Molecules Full Chapter Explanation",
+                    channel: "Magnet Brains",
                     year: "2024",
-                    videoId: "iAklm6Bpszs",
-                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
+                    videoId: "HLhKy0KcGMY",
+                    url: "https://www.youtube.com/watch?v=HLhKy0KcGMY"
                   }
                 ]
               }
@@ -477,9 +511,9 @@
             icon: "📐",
             chapters: [
               {
-                id: "c9-m-1",
+                id: "c9-m1",
                 name: "Chapter 1: Number Systems",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 1",
                 videos: [
                   {
                     rank: "#1 RAPID REVISION",
@@ -506,25 +540,25 @@
             icon: "🌍",
             chapters: [
               {
-                id: "c9-sst-1",
+                id: "c9-sst1",
                 name: "History Ch 1: The French Revolution",
-                pdfUrl: "#",
+                ncertTag: "New NCERT History",
                 videos: [
                   {
-                    rank: "#1 FULL CHAPTER",
-                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
-                    channel: "LearnoHub - Class 9,10",
-                    year: "2024",
-                    videoId: "iAklm6Bpszs",
-                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
-                  },
-                  {
-                    rank: "#2 COMPLETE CHAPTER",
+                    rank: "#1 COMPLETE CHAPTER",
                     title: "Matter in Our Surroundings Complete Chapter | CLASS 9th Science",
                     channel: "Exphub 9th &10th",
                     year: "2024",
                     videoId: "bmzDsWMSCTk",
                     url: "https://www.youtube.com/watch?v=bmzDsWMSCTk"
+                  },
+                  {
+                    rank: "#2 ONE-SHOT NCERT",
+                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
+                    channel: "LearnoHub - Class 9,10",
+                    year: "2024",
+                    videoId: "iAklm6Bpszs",
+                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
                   }
                 ]
               }
@@ -535,16 +569,16 @@
 
       class10: {
         label: "Class 10",
-        subtitle: "Board Accelerator — Science, Maths & SST chapters with top videos",
+        badge: "NEW NCERT BOARD ACCELERATOR",
         subjects: {
           science: {
             label: "Science",
             icon: "🧪",
             chapters: [
               {
-                id: "c10-sci-1",
+                id: "c10-s1",
                 name: "Chapter 1: Chemical Reactions and Equations",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 1",
                 videos: [
                   {
                     rank: "#1 LATEST CBSE",
@@ -573,12 +607,12 @@
                 ]
               },
               {
-                id: "c10-sci-2",
+                id: "c10-s2",
                 name: "Chapter 2: Acids, Bases and Salts",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 2",
                 videos: [
                   {
-                    rank: "#1 LATEST FULL REVISION",
+                    rank: "#1 LATEST REVISION",
                     title: "Class 10 CBSE Chemistry | Acids , Bases & Salts | Full Chapter Revision",
                     channel: "Xylem Class 10 CBSE",
                     year: "2026",
@@ -594,7 +628,7 @@
                     url: "https://www.youtube.com/watch?v=qKl4mieovu0"
                   },
                   {
-                    rank: "#3 20-MIN RAPID REVISION",
+                    rank: "#3 20-MIN RAPID",
                     title: "Acids, Bases and Salts in 20 Minutes | Class 10th | Rapid Revision",
                     channel: "Exphub 9th &10th",
                     year: "2024",
@@ -604,12 +638,43 @@
                 ]
               },
               {
-                id: "c10-sci-9",
-                name: "Chapter 9: Light – Reflection and Refraction",
-                pdfUrl: "#",
+                id: "c10-s5",
+                name: "Chapter 5: Life Processes",
+                ncertTag: "New NCERT Ch 5",
                 videos: [
                   {
-                    rank: "#1 QUICK ONE-SHOT",
+                    rank: "#1 2026-27 FULL CHAPTER",
+                    title: "Life Processes | Class 10 Science Chapter 5 | 2026-27 | Full Chapter | CBSE",
+                    channel: "Sunlike study Science",
+                    year: "2026",
+                    videoId: "PqXvVt-MOlo",
+                    url: "https://www.youtube.com/watch?v=PqXvVt-MOlo"
+                  },
+                  {
+                    rank: "#2 COMPLETE NCERT",
+                    title: "Life Processes Complete Chapter | CLASS 10 Science | NCERT Covered",
+                    channel: "Exphub 9th &10th",
+                    year: "2025",
+                    videoId: "2anxgj0TUgQ",
+                    url: "https://www.youtube.com/watch?v=2anxgj0TUgQ"
+                  },
+                  {
+                    rank: "#3 20-MIN RAPID",
+                    title: "Life Processes in 20 Minutes | Class 10th | Rapid Revision",
+                    channel: "Exphub 9th &10th",
+                    year: "2024",
+                    videoId: "5YOf-Rm4B7I",
+                    url: "https://www.youtube.com/watch?v=5YOf-Rm4B7I"
+                  }
+                ]
+              },
+              {
+                id: "c10-s9",
+                name: "Chapter 9: Light – Reflection and Refraction",
+                ncertTag: "New NCERT Ch 9",
+                videos: [
+                  {
+                    rank: "#1 15-MIN ONE-SHOT",
                     title: "CBSE 10 Physics | Light Reflection & Refraction | Full Chapter In Just 15 Minutes",
                     channel: "Exam Winner: CBSE Class 10",
                     year: "2025",
@@ -617,7 +682,7 @@
                     url: "https://www.youtube.com/watch?v=4YESpXn1i9I"
                   },
                   {
-                    rank: "#2 CONCEPT & DIAGRAMS",
+                    rank: "#2 ANIMATED NCERT",
                     title: "Light - Reflection & Refraction FULL CHAPTER in Animation | NCERT Science",
                     channel: "Grade booster",
                     year: "2024",
@@ -633,9 +698,9 @@
             icon: "📐",
             chapters: [
               {
-                id: "c10-m-1",
+                id: "c10-m1",
                 name: "Chapter 1: Real Numbers",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 1",
                 videos: [
                   {
                     rank: "#1 RAPID REVISION",
@@ -664,9 +729,9 @@
                 ]
               },
               {
-                id: "c10-m-2",
+                id: "c10-m2",
                 name: "Chapter 2: Polynomials",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 2",
                 videos: [
                   {
                     rank: "#1 LATEST REVISION",
@@ -685,12 +750,43 @@
                     url: "https://www.youtube.com/watch?v=kiegUjhq8Ao"
                   },
                   {
-                    rank: "#3 HIGH-YIELD ONE-SHOT",
+                    rank: "#3 ONE-SHOT PRACTICE",
                     title: "Hum Nahi Rukne Wale !! - Class 10th Polynomials One Shot",
                     channel: "Maths By Shobhit Nirwan",
                     year: "2025",
                     videoId: "Hnoe8hNPFr8",
                     url: "https://www.youtube.com/watch?v=Hnoe8hNPFr8"
+                  }
+                ]
+              },
+              {
+                id: "c10-m4",
+                name: "Chapter 4: Quadratic Equations",
+                ncertTag: "New NCERT Ch 4",
+                videos: [
+                  {
+                    rank: "#1 LATEST REVISION",
+                    title: "Class 10 CBSE Mathematics | Quadratic Equations | Full Chapter Revision",
+                    channel: "Xylem Class 10 CBSE",
+                    year: "2026",
+                    videoId: "KcH4jhNg_fA",
+                    url: "https://www.youtube.com/watch?v=KcH4jhNg_fA"
+                  },
+                  {
+                    rank: "#2 COMPLETE ONE-SHOT",
+                    title: "Quadratic Equations ONE SHOT | Class 10 Maths Chapter 4",
+                    channel: "Ritik Mishra - 9th & 10th",
+                    year: "2025",
+                    videoId: "hayFtYnAB-Q",
+                    url: "https://www.youtube.com/watch?v=hayFtYnAB-Q"
+                  },
+                  {
+                    rank: "#3 BOARD ONE-SHOT",
+                    title: "Class 10th Quadratic Equations One Shot | Class 10 Maths Chapter 4",
+                    channel: "Maths By Shobhit Nirwan",
+                    year: "2025",
+                    videoId: "t8fUmrKnvEM",
+                    url: "https://www.youtube.com/watch?v=t8fUmrKnvEM"
                   }
                 ]
               }
@@ -701,9 +797,9 @@
             icon: "🌍",
             chapters: [
               {
-                id: "c10-sst-1",
+                id: "c10-sst1",
                 name: "History Ch 1: The Rise of Nationalism in Europe",
-                pdfUrl: "#",
+                ncertTag: "New NCERT History",
                 videos: [
                   {
                     rank: "#1 ONE-SHOT REVISION",
@@ -732,9 +828,9 @@
                 ]
               },
               {
-                id: "c10-sst-2",
+                id: "c10-sst2",
                 name: "History Ch 2: Nationalism in India",
-                pdfUrl: "#",
+                ncertTag: "New NCERT History",
                 videos: [
                   {
                     rank: "#1 FULL CHAPTER",
@@ -745,7 +841,7 @@
                     url: "https://www.youtube.com/watch?v=n96yn8IfE-4"
                   },
                   {
-                    rank: "#2 10-MIN RAPID REVISION",
+                    rank: "#2 10-MIN RAPID",
                     title: "Nationalism in INDIA | 10 Minutes Rapid Revision | Class 10 SST",
                     channel: "Digraj Singh Rajput",
                     year: "2024",
@@ -769,16 +865,16 @@
 
       class11: {
         label: "Class 11",
-        subtitle: "Senior Secondary STEM & Science modules with ranked CBSE videos",
+        badge: "NEW NCERT SENIOR SECONDARY",
         subjects: {
           physics: {
             label: "Physics",
             icon: "⚛️",
             chapters: [
               {
-                id: "c11-p-1",
+                id: "c11-p1",
                 name: "Chapter 1: Units and Measurements",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 1",
                 videos: [
                   {
                     rank: "#1 LATEST CBSE 2026-27",
@@ -789,7 +885,7 @@
                     url: "https://www.youtube.com/watch?v=nKoavD9nfBM"
                   },
                   {
-                    rank: "#2 FULL CHAPTER REVISION",
+                    rank: "#2 FULL REVISION",
                     title: "Plus One Physics | Units And Measurements - Full Chapter Revision",
                     channel: "Xylem Plus One",
                     year: "2026",
@@ -805,6 +901,37 @@
                     url: "https://www.youtube.com/watch?v=hdDBk9VgG-w"
                   }
                 ]
+              },
+              {
+                id: "c11-p4",
+                name: "Chapter 4: Laws of Motion",
+                ncertTag: "New NCERT Ch 4",
+                videos: [
+                  {
+                    rank: "#1 LATEST DETAILED ONE-SHOT",
+                    title: "Laws Of Motion Class 11 One Shot | Detailed Revision | Physics Chapter 4",
+                    channel: "PW Class 11 Science",
+                    year: "2026",
+                    videoId: "KrQ8P8Pr97o",
+                    url: "https://www.youtube.com/watch?v=KrQ8P8Pr97o"
+                  },
+                  {
+                    rank: "#2 2026-27 ONE-SHOT",
+                    title: "Chapter 4 Class 11 Physics One Shot || LAWS OF MOTION ONESHOT || CBSE JEE NEET",
+                    channel: "Abhishek Sahu",
+                    year: "2026",
+                    videoId: "Jzy58eM5ZTY",
+                    url: "https://www.youtube.com/watch?v=Jzy58eM5ZTY"
+                  },
+                  {
+                    rank: "#3 FULL CHAPTER REVISION",
+                    title: "Class 11 CBSE Physics | Laws of Motion | Full Chapter Revision",
+                    channel: "Xylem Class 11 CBSE",
+                    year: "2026",
+                    videoId: "H_b_Yk-MeJw",
+                    url: "https://www.youtube.com/watch?v=H_b_Yk-MeJw"
+                  }
+                ]
               }
             ]
           },
@@ -813,9 +940,9 @@
             icon: "⚗️",
             chapters: [
               {
-                id: "c11-c-2",
+                id: "c11-c2",
                 name: "Chapter 2: Structure of Atom",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 2",
                 videos: [
                   {
                     rank: "#1 LATEST ONE-SHOT",
@@ -834,7 +961,7 @@
                     url: "https://www.youtube.com/watch?v=ORZOEoWKH1A"
                   },
                   {
-                    rank: "#3 15-MIN RAPID REVISION",
+                    rank: "#3 15-MIN RAPID",
                     title: "Structure of Atom Class 11 Rapid Revision | CBSE 11th Chemistry in 15 Mins",
                     channel: "Next Toppers - 11th Science",
                     year: "2025",
@@ -850,9 +977,9 @@
             icon: "📈",
             chapters: [
               {
-                id: "c11-m-1",
+                id: "c11-m1",
                 name: "Chapter 1: Sets",
-                pdfUrl: "#",
+                ncertTag: "New NCERT Ch 1",
                 videos: [
                   {
                     rank: "#1 RAPID REVISION",
@@ -879,7 +1006,7 @@
 
       class12: {
         label: "Class 12",
-        subtitle: "Board Champions — Switch across PCM, PCB & Commerce streams",
+        badge: "NEW NCERT BOARD FINALE",
         streams: {
           pcm: {
             label: "PCM (Science)",
@@ -891,7 +1018,7 @@
                   {
                     id: "c12-pcm-p1",
                     name: "Chapter 1: Electric Charges and Fields",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Part 1 Ch 1",
                     videos: [
                       {
                         rank: "#1 LATEST CBSE 2026-27",
@@ -922,7 +1049,7 @@
                   {
                     id: "c12-pcm-p2",
                     name: "Chapter 2: Electrostatic Potential and Capacitance",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Part 1 Ch 2",
                     videos: [
                       {
                         rank: "#1 LATEST FULL CHAPTER",
@@ -957,25 +1084,33 @@
                 icon: "🧪",
                 chapters: [
                   {
-                    id: "c12-pcm-c1",
-                    name: "Chapter 1: Solutions",
-                    pdfUrl: "#",
+                    id: "c12-pcm-c3",
+                    name: "Chapter 3: Chemical Kinetics",
+                    ncertTag: "New NCERT Ch 3",
                     videos: [
                       {
-                        rank: "#1 ONE-SHOT REVISION",
-                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        rank: "#1 LATEST ONE-SHOT",
+                        title: "Chemical Kinetics Class 12 One Shot | Complete Revision | Chemistry Chapter 3",
                         channel: "NCERT Wallah",
-                        year: "2025",
-                        videoId: "vvOxKA9dups",
-                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                        year: "2026",
+                        videoId: "C0ctzb1sQoo",
+                        url: "https://www.youtube.com/watch?v=C0ctzb1sQoo"
                       },
                       {
-                        rank: "#2 2026-27 SERIES",
-                        title: "Class 12 CBSE 2026-27 Physics | Chapter 1 Electric Charges And Fields",
-                        channel: "Xylem Class 11 CBSE",
-                        year: "2026",
-                        videoId: "yxlynAsUqAo",
-                        url: "https://www.youtube.com/watch?v=yxlynAsUqAo"
+                        rank: "#2 BOARD ONE-SHOT",
+                        title: "Chemical Kinetics Class 12 One Shot | Grade 12th Chemistry Chapter 3 Revision",
+                        channel: "Next Toppers - 12th Science",
+                        year: "2025",
+                        videoId: "JT2hDAn17bQ",
+                        url: "https://www.youtube.com/watch?v=JT2hDAn17bQ"
+                      },
+                      {
+                        rank: "#3 MARATHON SESSION",
+                        title: "Chemical Kinetics | Full Marathon | Class 12 | CBSE 2026",
+                        channel: "Vedantu Master Tamil",
+                        year: "2025",
+                        videoId: "7Y4Jp_ZD4rw",
+                        url: "https://www.youtube.com/watch?v=7Y4Jp_ZD4rw"
                       }
                     ]
                   }
@@ -988,10 +1123,10 @@
                   {
                     id: "c12-pcm-m1",
                     name: "Chapter 1: Relations and Functions",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Part 1 Ch 1",
                     videos: [
                       {
-                        rank: "#1 2026-27 SWAHA",
+                        rank: "#1 LATEST CBSE 2026-27",
                         title: "Electric Charges and Field - Class 12th Physics Chapter-1 | CBSE 2026-27",
                         channel: "Next Toppers - 12th Science",
                         year: "2026",
@@ -1022,7 +1157,7 @@
                   {
                     id: "c12-pcb-p2",
                     name: "Chapter 2: Electrostatic Potential and Capacitance",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Ch 2",
                     videos: [
                       {
                         rank: "#1 LATEST FULL CHAPTER",
@@ -1051,23 +1186,23 @@
                   {
                     id: "c12-pcb-b1",
                     name: "Chapter 1: Sexual Reproduction in Flowering Plants",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Ch 1",
                     videos: [
                       {
-                        rank: "#1 COMPLETE ONE-SHOT",
-                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        rank: "#1 LATEST ONE-SHOT",
+                        title: "Chemical Kinetics Class 12 One Shot | Complete Revision | Chemistry Chapter 3",
                         channel: "NCERT Wallah",
-                        year: "2025",
-                        videoId: "vvOxKA9dups",
-                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                        year: "2026",
+                        videoId: "C0ctzb1sQoo",
+                        url: "https://www.youtube.com/watch?v=C0ctzb1sQoo"
                       },
                       {
-                        rank: "#2 CONCEPT EXPLAINER",
-                        title: "Electric Charges and Fields | Complete Lesson in ONE Video | CBSE Class 12",
-                        channel: "LearnoHub - Class 11, 12",
-                        year: "2024",
-                        videoId: "v3QOBfCuKRc",
-                        url: "https://www.youtube.com/watch?v=v3QOBfCuKRc"
+                        rank: "#2 BOARD REVISION",
+                        title: "Chemical Kinetics Class 12 One Shot | Grade 12th Chemistry Chapter 3 Revision",
+                        channel: "Next Toppers - 12th Science",
+                        year: "2025",
+                        videoId: "JT2hDAn17bQ",
+                        url: "https://www.youtube.com/watch?v=JT2hDAn17bQ"
                       }
                     ]
                   }
@@ -1085,23 +1220,23 @@
                   {
                     id: "c12-com-a1",
                     name: "Chapter 1: Accounting for Partnership Firms - Fundamentals",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Accountancy",
                     videos: [
                       {
-                        rank: "#1 ONE-SHOT REVISION",
-                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        rank: "#1 LATEST ONE-SHOT",
+                        title: "Chemical Kinetics Class 12 One Shot | Complete Revision | Chemistry Chapter 3",
                         channel: "NCERT Wallah",
-                        year: "2025",
-                        videoId: "vvOxKA9dups",
-                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                        year: "2026",
+                        videoId: "C0ctzb1sQoo",
+                        url: "https://www.youtube.com/watch?v=C0ctzb1sQoo"
                       },
                       {
-                        rank: "#2 FULL LESSON",
-                        title: "Electric Charges and Fields | Complete Lesson in ONE Video | CBSE Class 12",
-                        channel: "LearnoHub - Class 11, 12",
-                        year: "2024",
-                        videoId: "v3QOBfCuKRc",
-                        url: "https://www.youtube.com/watch?v=v3QOBfCuKRc"
+                        rank: "#2 MARATHON SESSION",
+                        title: "Chemical Kinetics | Full Marathon | Class 12 | CBSE 2026",
+                        channel: "Vedantu Master Tamil",
+                        year: "2025",
+                        videoId: "7Y4Jp_ZD4rw",
+                        url: "https://www.youtube.com/watch?v=7Y4Jp_ZD4rw"
                       }
                     ]
                   }
@@ -1114,10 +1249,10 @@
                   {
                     id: "c12-com-e1",
                     name: "Chapter 1: National Income and Related Aggregates",
-                    pdfUrl: "#",
+                    ncertTag: "New NCERT Macro",
                     videos: [
                       {
-                        rank: "#1 2026-27 SERIES",
+                        rank: "#1 LATEST CBSE 2026-27",
                         title: "Electric Charges and Field - Class 12th Physics Chapter-1 | CBSE 2026-27",
                         channel: "Next Toppers - 12th Science",
                         year: "2026",
@@ -1142,285 +1277,593 @@
       }
     };
 
-    function useSpotlight() {
-      const [pos, setPos] = useState({ x: 0, y: 0 });
-      const onMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    const FLASH_CARDS = [
+      {
+        tag: "FLASH 01 • NEW NCERT",
+        title: "Rationalized Syllabus Mapped",
+        copy: "Har chapter New NCERT structure ke hisaab se arrange kiya gaya hai."
+      },
+      {
+        tag: "FLASH 02 • TOP 2–3 PICKS",
+        title: "Clarity & Recency Ranked",
+        copy: "Sirf views nahi—latest CBSE relevance aur clarity ke basis par top 2–3 videos."
+      },
+      {
+        tag: "FLASH 03 • 3D CINEMA",
+        title: "Books & Laptops in Motion",
+        copy: "Scroll karte hi 3D books aur laptops camera depth aur angle ke saath move karte hain."
+      }
+    ];
+
+    function initThreeCinema() {
+      const canvas = document.getElementById("three-scene");
+      if (!canvas || !window.THREE) return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0, 8);
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const world = new THREE.Group();
+      scene.add(world);
+
+      // Build stylized 3D Book mesh (cover + pages)
+      function make3DBook(accentHex) {
+        const book = new THREE.Group();
+        const coverMat = new THREE.MeshStandardMaterial({
+          color: accentHex,
+          roughness: 0.35,
+          metalness: 0.55
+        });
+        const pageMat = new THREE.MeshStandardMaterial({
+          color: 0xe2e8f0,
+          roughness: 0.8
+        });
+        const cover = new THREE.Mesh(new THREE.BoxGeometry(1.3, 1.75, 0.24), coverMat);
+        const pages = new THREE.Mesh(new THREE.BoxGeometry(1.18, 1.62, 0.18), pageMat);
+        pages.position.x = 0.05;
+        book.add(cover, pages);
+        return book;
+      }
+
+      // Build stylized 3D Laptop mesh (base + screen)
+      function make3DLaptop(accentHex) {
+        const laptop = new THREE.Group();
+        const bodyMat = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          roughness: 0.3,
+          metalness: 0.85
+        });
+        const screenGlowMat = new THREE.MeshStandardMaterial({
+          color: accentHex,
+          emissive: accentHex,
+          emissiveIntensity: 0.45,
+          roughness: 0.25
+        });
+        const base = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.1, 1.3), bodyMat);
+        const screenFrame = new THREE.Mesh(new THREE.BoxGeometry(1.9, 1.2, 0.08), bodyMat);
+        const screenPanel = new THREE.Mesh(new THREE.PlaneGeometry(1.72, 1.02), screenGlowMat);
+
+        screenFrame.position.set(0, 0.62, -0.58);
+        screenFrame.rotation.x = -0.25;
+        screenPanel.position.set(0, 0.62, -0.535);
+        screenPanel.rotation.x = -0.25;
+
+        laptop.add(base, screenFrame, screenPanel);
+        return laptop;
+      }
+
+      const props = [];
+      const palette = [0x38bdf8, 0x6366f1, 0xa855f7];
+
+      for (let i = 0; i < 4; i++) {
+        const b = make3DBook(palette[i % palette.length]);
+        b.position.set(-4.2 + i * 2.8, (i % 2 === 0 ? 1.8 : -1.9), -1.5 - i * 0.8);
+        b.rotation.set(0.3, 0.5 * i, 0.15);
+        world.add(b);
+        props.push({ mesh: b, kind: "book", speed: 0.004 + i * 0.001, baseY: b.position.y });
+      }
+
+      for (let j = 0; j < 3; j++) {
+        const l = make3DLaptop(palette[(j + 1) % palette.length]);
+        l.position.set(3.8 - j * 3.4, (j % 2 === 0 ? -1.4 : 2.1), -0.8 - j * 1.1);
+        l.rotation.set(0.28, -0.45 * (j + 1), 0.1);
+        world.add(l);
+        props.push({ mesh: l, kind: "laptop", speed: 0.003 + j * 0.001, baseY: l.position.y });
+      }
+
+      scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+      const keyLight = new THREE.PointLight(0x38bdf8, 3.2, 40);
+      keyLight.position.set(5, 6, 7);
+      const rimLight = new THREE.PointLight(0xa855f7, 2.5, 40);
+      rimLight.position.set(-6, -4, 6);
+      scene.add(keyLight, rimLight);
+
+      let scrollNorm = 0;
+      const fillEl = document.getElementById("cinemaProgress");
+
+      const onScroll = () => {
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        scrollNorm = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        if (fillEl) fillEl.style.transform = `scaleX(${scrollNorm})`;
       };
-      const glowStyle = {
-        background: `radial-gradient(240px circle at ${pos.x}px ${pos.y}px, rgba(56, 189, 248, 0.16), transparent 70%)`
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      let rafId;
+      const tick = (t) => {
+        rafId = requestAnimationFrame(tick);
+        // Film-like camera sweep driven by scroll progress
+        camera.position.x = Math.sin(scrollNorm * Math.PI * 1.5) * 1.6;
+        camera.position.y = (0.5 - scrollNorm) * 2.2;
+        camera.position.z = 8 - scrollNorm * 2.1;
+        camera.lookAt(0, 0, -1);
+
+        props.forEach((p, idx) => {
+          p.mesh.rotation.y += p.speed + scrollNorm * 0.012;
+          p.mesh.rotation.x += p.speed * 0.6;
+          p.mesh.position.y = p.baseY + Math.sin(t * 0.0012 + idx) * 0.25 - scrollNorm * 1.4;
+        });
+
+        renderer.render(scene, camera);
       };
-      return { onMouseMove, glowStyle };
+      tick(0);
+
+      return () => {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener("scroll", onScroll);
+      };
     }
 
-    function SubjectTile({ subKey, subVal, isActive, onSelect }) {
-      const { onMouseMove, glowStyle } = useSpotlight();
-      return React.createElement(
-        motion.div,
-        {
-          key: subKey,
-          onMouseMove,
-          whileHover: { y: -4, scale: 1.015 },
-          whileTap: { scale: 0.98 },
-          transition: { type: "spring", stiffness: 380, damping: 25 },
-          onClick: onSelect,
-          className: `spotlight-card ${isActive ? "active" : ""}`
-        },
-        React.createElement("div", { className: "spotlight-glow", style: glowStyle }),
-        React.createElement("div", { style: { position: "relative", zIndex: 1, fontSize: "1.5rem", marginBottom: "6px" } }, subVal.icon),
-        React.createElement("div", { style: { position: "relative", zIndex: 1, fontSize: "1.05rem", fontWeight: 700 } }, subVal.label)
-      );
-    }
-
-    function VideoTile({ chId, vid }) {
-      const { onMouseMove, glowStyle } = useSpotlight();
-      return React.createElement(
-        motion.a,
-        {
-          key: `${chId}-${vid.videoId}`,
-          href: vid.url,
-          target: "_blank",
-          rel: "noopener noreferrer",
-          onMouseMove,
-          whileHover: { y: -5, scale: 1.015 },
-          whileTap: { scale: 0.98 },
-          transition: { type: "spring", stiffness: 400, damping: 25 },
-          className: "video-card"
-        },
-        React.createElement("div", { className: "spotlight-glow", style: glowStyle }),
-        React.createElement(
-          "div",
-          { className: "thumb-wrap" },
-          React.createElement("img", {
-            src: `https://img.youtube.com/vi/${vid.videoId}/hqdefault.jpg`,
-            alt: vid.title,
-            className: "thumb-img",
-            loading: "lazy"
-          }),
-          React.createElement("span", { className: "rank-badge" }, vid.rank),
-          React.createElement("span", { className: "play-chip" }, "▶ Watch")
-        ),
-        React.createElement(
-          "div",
-          { className: "video-body" },
-          React.createElement("div", { className: "video-title" }, vid.title),
-          React.createElement("div", { className: "video-meta" }, `${vid.channel} • ${vid.year}`)
-        )
-      );
-    }
-
-    function App() {
+    function CinemaApp() {
+      const [introDone, setIntroDone] = useState(false);
+      const [stage, setStage] = useState("home"); // "home" | "classes" | "subjects" | "syllabus"
       const [selectedClass, setSelectedClass] = useState("class10");
       const [selectedStream, setSelectedStream] = useState("pcm");
       const [selectedSubject, setSelectedSubject] = useState("science");
 
-      const { scrollYProgress } = useScroll();
-      const smoothScaleX = useSpring(scrollYProgress, {
-        stiffness: 260,
-        damping: 30,
-        restDelta: 0.001
-      });
+      const classesSectionRef = useRef(null);
+      const subjectsSectionRef = useRef(null);
+      const syllabusSectionRef = useRef(null);
 
-      const currentClassObj = ALL_CLASSES_DATA[selectedClass];
+      useEffect(() => {
+        const cleanup = initThreeCinema();
+        const timer = setTimeout(() => setIntroDone(true), 1250);
+        return () => {
+          clearTimeout(timer);
+          if (cleanup) cleanup();
+        };
+      }, []);
+
+      const scrollToRef = (ref) => {
+        setTimeout(() => {
+          ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      };
+
+      const handleExploreClasses = () => {
+        setStage("classes");
+        scrollToRef(classesSectionRef);
+      };
+
+      const handleSelectClass = (clsKey) => {
+        setSelectedClass(clsKey);
+        setStage("subjects");
+        const subMap =
+          clsKey === "class12"
+            ? NCERT_HUB.class12.streams[selectedStream].subjects
+            : NCERT_HUB[clsKey].subjects;
+        setSelectedSubject(Object.keys(subMap)[0]);
+        scrollToRef(subjectsSectionRef);
+      };
+
+      const handleSelectStream = (streamKey) => {
+        setSelectedStream(streamKey);
+        const firstSub = Object.keys(NCERT_HUB.class12.streams[streamKey].subjects)[0];
+        setSelectedSubject(firstSub);
+        setStage("syllabus");
+        scrollToRef(syllabusSectionRef);
+      };
+
+      const handleSelectSubject = (subKey) => {
+        setSelectedSubject(subKey);
+        setStage("syllabus");
+        scrollToRef(syllabusSectionRef);
+      };
+
+      const currentClassData = NCERT_HUB[selectedClass];
       const subjectsMap =
         selectedClass === "class12"
-          ? currentClassObj.streams[selectedStream].subjects
-          : currentClassObj.subjects;
-
-      const activeSubjectKey = subjectsMap[selectedSubject]
-        ? selectedSubject
-        : Object.keys(subjectsMap)[0];
-      const activeSubjectObj = subjectsMap[activeSubjectKey];
-
-      const handleClassChange = (clsKey) => {
-        setSelectedClass(clsKey);
-        const firstSub =
-          clsKey === "class12"
-            ? Object.keys(ALL_CLASSES_DATA.class12.streams[selectedStream].subjects)[0]
-            : Object.keys(ALL_CLASSES_DATA[clsKey].subjects)[0];
-        setSelectedSubject(firstSub);
-      };
-
-      const handleStreamChange = (streamKey) => {
-        setSelectedStream(streamKey);
-        const firstSub = Object.keys(ALL_CLASSES_DATA.class12.streams[streamKey].subjects)[0];
-        setSelectedSubject(firstSub);
-      };
+          ? currentClassData.streams[selectedStream].subjects
+          : currentClassData.subjects;
+      const activeSubKey = subjectsMap[selectedSubject] ? selectedSubject : Object.keys(subjectsMap)[0];
+      const activeSubData = subjectsMap[activeSubKey];
 
       return React.createElement(
         React.Fragment,
         null,
+
+        // Opening Cinema Curtain
         React.createElement(
-          "div",
-          { className: "scroll-track" },
-          React.createElement(motion.div, { className: "scroll-fill", style: { scaleX: smoothScaleX } })
-        ),
-        React.createElement(
-          "div",
-          { className: "container" },
-          React.createElement(
-            "header",
-            { className: "topbar" },
-            React.createElement(
-              "div",
-              { className: "brand" },
-              React.createElement("div", { className: "brand-badge" }, "⚡"),
-              React.createElement("div", null, "STUDY", React.createElement("span", null, "VERSE"))
-            ),
-            React.createElement("div", { className: "status-pill" }, "● SPRING MOTION + 21ST.DEV SPOTLIGHT")
-          ),
-
-          React.createElement(
-            motion.div,
-            {
-              initial: { opacity: 0, y: 14 },
-              animate: { opacity: 1, y: 0 },
-              transition: { type: "spring", stiffness: 280, damping: 24 }
-            },
-            React.createElement(
-              "h1",
-              { className: "hero-title" },
-              "Interactive Motion ",
-              React.createElement("span", { className: "grad" }, "CBSE Hub (9–12)")
-            ),
-            React.createElement("p", { className: "subtitle" }, currentClassObj.subtitle)
-          ),
-
-          React.createElement(
-            "div",
-            { className: "class-tabs" },
-            Object.entries(ALL_CLASSES_DATA).map(([clsKey, clsVal]) => {
-              const isSelected = selectedClass === clsKey;
-              return React.createElement(
-                motion.button,
-                {
-                  key: clsKey,
-                  type: "button",
-                  whileHover: { y: -3 },
-                  whileTap: { scale: 0.98 },
-                  transition: { type: "spring", stiffness: 400, damping: 26 },
-                  onClick: () => handleClassChange(clsKey),
-                  className: "class-tab"
-                },
-                isSelected &&
-                  React.createElement(motion.div, {
-                    layoutId: "activeClassPill",
-                    transition: { type: "spring", stiffness: 420, damping: 32 },
-                    className: "active-pill-bg"
-                  }),
-                React.createElement(
-                  "div",
-                  { className: "tab-inner" },
-                  React.createElement("div", { className: "class-num" }, clsVal.label.toUpperCase()),
-                  React.createElement("div", { style: { fontSize: "0.95rem", marginTop: "2px" } }, `${clsVal.label} Hub`)
-                )
-              );
-            })
-          ),
-
-          selectedClass === "class12" &&
+          AnimatePresence,
+          null,
+          !introDone &&
             React.createElement(
               motion.div,
               {
-                initial: { opacity: 0, y: 8 },
-                animate: { opacity: 1, y: 0 },
-                className: "stream-row"
+                key: "intro-curtain",
+                initial: { opacity: 1 },
+                exit: { opacity: 0, y: -40, scale: 1.03 },
+                transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+                className: "opening-curtain"
               },
-              Object.entries(ALL_CLASSES_DATA.class12.streams).map(([sKey, sVal]) => {
-                const isStreamActive = selectedStream === sKey;
-                return React.createElement(
+              React.createElement("div", { className: "intro-code" }, "OPENING REEL • CBSE 9–12"),
+              React.createElement(
+                motion.div,
+                {
+                  initial: { scale: 0.88, opacity: 0 },
+                  animate: { scale: 1, opacity: 1 },
+                  transition: { duration: 0.55 },
+                  className: "intro-logo"
+                },
+                "STUDY",
+                React.createElement("span", { className: "grad" }, "VERSE")
+              ),
+              React.createElement(
+                "button",
+                {
+                  type: "button",
+                  className: "btn-secondary",
+                  onClick: () => setIntroDone(true)
+                },
+                "Skip Intro →"
+              )
+            )
+        ),
+
+        React.createElement(
+          "div",
+          { className: "page-wrap" },
+
+          // Top Navigation Bar across flow stages
+          React.createElement(
+            "header",
+            { className: "header-bar" },
+            React.createElement(
+              "div",
+              {
+                className: "brand",
+                style: { cursor: "pointer" },
+                onClick: () => {
+                  setStage("home");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              },
+              React.createElement("div", { className: "brand-icon" }, "⚡"),
+              React.createElement("div", null, "STUDY", React.createElement("span", null, "VERSE"))
+            ),
+            React.createElement(
+              "div",
+              { className: "nav-pills" },
+              [
+                { id: "home", label: "01 Flash & Intro" },
+                { id: "classes", label: "02 Classes" },
+                { id: "subjects", label: "03 Subjects" },
+                { id: "syllabus", label: "04 NCERT & Top Videos" }
+              ].map((step) =>
+                React.createElement(
                   "button",
                   {
-                    key: sKey,
+                    key: step.id,
                     type: "button",
-                    onClick: () => handleStreamChange(sKey),
-                    className: "stream-btn"
+                    onClick: () => setStage(step.id),
+                    className: `nav-step ${stage === step.id ? "active" : ""}`
                   },
-                  isStreamActive &&
-                    React.createElement(motion.div, {
-                      layoutId: "activeStreamPill",
-                      transition: { type: "spring", stiffness: 420, damping: 32 },
-                      className: "stream-active-bg"
-                    }),
-                  React.createElement("span", { style: { position: "relative", zIndex: 1 } }, sVal.label)
-                );
-              })
-            ),
-
-          React.createElement(
-            "div",
-            { className: "subjects-grid" },
-            Object.entries(subjectsMap).map(([subKey, subVal]) =>
-              React.createElement(SubjectTile, {
-                key: subKey,
-                subKey,
-                subVal,
-                isActive: activeSubjectKey === subKey,
-                onSelect: () => setSelectedSubject(subKey)
-              })
+                  step.label
+                )
+              )
             )
           ),
 
+          // Scene 1: Opening Hero + 3D Flash Cards + Explore Classes
           React.createElement(
-            AnimatePresence,
-            { mode: "wait" },
+            motion.section,
+            {
+              initial: { opacity: 0, y: 24 },
+              animate: { opacity: 1, y: 0 },
+              transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+              className: "hero-cinema"
+            },
             React.createElement(
-              motion.section,
-              {
-                key: `${selectedClass}-${selectedStream}-${activeSubjectKey}`,
-                initial: { opacity: 0, y: 16 },
-                animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: -10 },
-                transition: { type: "spring", stiffness: 290, damping: 26 },
-                className: "chapters-panel"
-              },
+              "div",
+              { className: "mod-code" },
+              "CINEMATIC 3D STAGE • BOOKS & LAPTOPS IN SCROLL MOTION"
+            ),
+            React.createElement(
+              "h1",
+              { className: "hero-heading" },
+              "Ek Film Jaisa ",
+              React.createElement("span", { className: "grad" }, "CBSE Learning Hub"),
+              " — Classes 9 se 12 Tak"
+            ),
+            React.createElement(
+              "p",
+              { className: "hero-sub" },
+              "Pehle Flash Cards dekhein, phir Explore Classes se apni Class aur Stream chunein, Subject kholein, aur New NCERT syllabus ke saath top 2–3 rated CBSE videos dekhein."
+            ),
+            React.createElement(
+              "div",
+              { className: "cta-row" },
               React.createElement(
-                "h2",
-                { style: { fontSize: "1.3rem", fontWeight: 800, marginBottom: "16px" } },
-                `${currentClassObj.label}${selectedClass === "class12" ? ` • ${ALL_CLASSES_DATA.class12.streams[selectedStream].label}` : ""} • ${activeSubjectObj.label}`
+                motion.button,
+                {
+                  type: "button",
+                  whileHover: { scale: 1.03 },
+                  whileTap: { scale: 0.97 },
+                  onClick: handleExploreClasses,
+                  className: "btn-explore"
+                },
+                "Explore Classes →"
               ),
-              activeSubjectObj.chapters.map((ch, idx) =>
+              React.createElement(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => {
+                    setStage("classes");
+                    scrollToRef(classesSectionRef);
+                  },
+                  className: "btn-secondary"
+                },
+                "Jump to Class 9–12"
+              )
+            ),
+
+            // Flash Cards
+            React.createElement(
+              "div",
+              { className: "flashcards-grid" },
+              FLASH_CARDS.map((fc, i) =>
                 React.createElement(
                   motion.div,
                   {
-                    key: ch.id,
-                    initial: { opacity: 0, y: 10 },
-                    animate: { opacity: 1, y: 0 },
-                    transition: { delay: idx * 0.04, type: "spring", stiffness: 310, damping: 25 },
-                    className: "chapter-card"
+                    key: fc.tag,
+                    initial: { opacity: 0, y: 22 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true, amount: 0.2 },
+                    transition: { delay: i * 0.08, duration: 0.55 },
+                    whileHover: { y: -8, rotateX: 3, rotateY: -3 },
+                    onClick: handleExploreClasses,
+                    className: "flash-card"
                   },
+                  React.createElement("span", { className: "flash-tag" }, fc.tag),
+                  React.createElement("div", { className: "flash-title" }, fc.title),
+                  React.createElement("div", { className: "flash-copy" }, fc.copy)
+                )
+              )
+            )
+          ),
+
+          // Scene 2: Classes Explorer (9, 10, 11, 12)
+          React.createElement(
+            motion.section,
+            {
+              ref: classesSectionRef,
+              initial: { opacity: 0, y: 28 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true, amount: 0.15 },
+              transition: { duration: 0.65 },
+              className: "stage-panel"
+            },
+            React.createElement(
+              "div",
+              { className: "stage-head" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("div", { className: "mod-code" }, "STEP 02 • EXPLORE CLASSES"),
+                React.createElement("h2", { style: { fontSize: "1.5rem", fontWeight: 800, marginTop: "4px" } }, "Apni Class Chunein")
+              ),
+              React.createElement("span", { className: "ncert-badge" }, "3D SCROLL ACTIVE")
+            ),
+            React.createElement(
+              "div",
+              { className: "cards-4" },
+              Object.entries(NCERT_HUB).map(([clsKey, clsVal], idx) =>
+                React.createElement(
+                  motion.button,
+                  {
+                    key: clsKey,
+                    type: "button",
+                    initial: { opacity: 0, y: 18 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true, amount: 0.2 },
+                    transition: { delay: idx * 0.06 },
+                    whileHover: { y: -6, scale: 1.02 },
+                    whileTap: { scale: 0.98 },
+                    onClick: () => handleSelectClass(clsKey),
+                    className: `hub-card ${selectedClass === clsKey ? "active" : ""}`
+                  },
+                  React.createElement("div", { className: "mod-code" }, clsVal.badge),
+                  React.createElement("div", { style: { fontSize: "1.35rem", fontWeight: 800, margin: "8px 0 6px" } }, clsVal.label),
+                  React.createElement("div", { style: { fontSize: "0.82rem", color: "#94a3b8" } }, "Subjects & New NCERT Chapters →")
+                )
+              )
+            )
+          ),
+
+          // Scene 3: Stream (if Class 12) + Subjects Explorer
+          React.createElement(
+            motion.section,
+            {
+              ref: subjectsSectionRef,
+              initial: { opacity: 0, y: 28 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true, amount: 0.15 },
+              transition: { duration: 0.65 },
+              className: "stage-panel"
+            },
+            React.createElement(
+              "div",
+              { className: "stage-head" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("div", { className: "mod-code" }, `STEP 03 • ${currentClassData.label.toUpperCase()} SUBJECTS`),
+                React.createElement(
+                  "h2",
+                  { style: { fontSize: "1.5rem", fontWeight: 800, marginTop: "4px" } },
+                  selectedClass === "class12"
+                    ? `Class 12 (${NCERT_HUB.class12.streams[selectedStream].label}) — Stream & Subjects`
+                    : `${currentClassData.label} — Subjects`
+                )
+              )
+            ),
+
+            // Class 12 Stream Switcher
+            selectedClass === "class12" &&
+              React.createElement(
+                "div",
+                { style: { display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "18px" } },
+                Object.entries(NCERT_HUB.class12.streams).map(([sKey, sVal]) =>
+                  React.createElement(
+                    motion.button,
+                    {
+                      key: sKey,
+                      type: "button",
+                      whileHover: { y: -2 },
+                      whileTap: { scale: 0.97 },
+                      onClick: () => handleSelectStream(sKey),
+                      className: `nav-step ${selectedStream === sKey ? "active" : ""}`
+                    },
+                    sVal.label
+                  )
+                )
+              ),
+
+            React.createElement(
+              "div",
+              { className: "cards-4" },
+              Object.entries(subjectsMap).map(([subKey, subVal], idx) =>
+                React.createElement(
+                  motion.button,
+                  {
+                    key: subKey,
+                    type: "button",
+                    initial: { opacity: 0, y: 16 },
+                    whileInView: { opacity: 1, y: 0 },
+                    viewport: { once: true, amount: 0.2 },
+                    transition: { delay: idx * 0.06 },
+                    whileHover: { y: -5, scale: 1.02 },
+                    whileTap: { scale: 0.98 },
+                    onClick: () => handleSelectSubject(subKey),
+                    className: `hub-card ${activeSubKey === subKey ? "active" : ""}`
+                  },
+                  React.createElement("div", { style: { fontSize: "1.7rem", marginBottom: "8px" } }, subVal.icon),
+                  React.createElement("div", { style: { fontSize: "1.15rem", fontWeight: 800 } }, subVal.label),
                   React.createElement(
                     "div",
-                    { className: "chapter-top" },
-                    React.createElement(
-                      "div",
-                      null,
-                      React.createElement("div", { className: "mod-tag" }, `MODULE 0${idx + 1}`),
-                      React.createElement("div", { className: "chapter-title" }, ch.name)
-                    ),
+                    { style: { fontSize: "0.8rem", color: "#94a3b8", marginTop: "4px" } },
+                    `${subVal.chapters.length} Chapters Loaded →`
+                  )
+                )
+              )
+            )
+          ),
+
+          // Scene 4: New NCERT Syllabus Chapters + Top 2-3 Rated Videos with Thumbnails
+          React.createElement(
+            motion.section,
+            {
+              ref: syllabusSectionRef,
+              initial: { opacity: 0, y: 28 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true, amount: 0.1 },
+              transition: { duration: 0.65 },
+              className: "stage-panel"
+            },
+            React.createElement(
+              "div",
+              { className: "stage-head" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("div", { className: "mod-code" }, "STEP 04 • NEW NCERT SYLLABUS & TOP VIDEOS"),
+                React.createElement(
+                  "h2",
+                  { style: { fontSize: "1.5rem", fontWeight: 800, marginTop: "4px" } },
+                  `${currentClassData.label}${selectedClass === "class12" ? ` (${NCERT_HUB.class12.streams[selectedStream].label})` : ""} • ${activeSubData.label}`
+                )
+              ),
+              React.createElement("span", { className: "ncert-badge" }, "TOP 2–3 RATED CBSE PICKS")
+            ),
+
+            activeSubData.chapters.map((ch, cIdx) =>
+              React.createElement(
+                motion.div,
+                {
+                  key: ch.id,
+                  initial: { opacity: 0, y: 20 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true, amount: 0.15 },
+                  transition: { delay: cIdx * 0.06, duration: 0.5 },
+                  className: "chapter-box"
+                },
+                React.createElement(
+                  "div",
+                  { className: "chapter-header" },
+                  React.createElement(
+                    "div",
+                    null,
+                    React.createElement("div", { className: "mod-code" }, `CHAPTER 0${cIdx + 1}`),
+                    React.createElement("div", { className: "chapter-name" }, ch.name)
+                  ),
+                  React.createElement("span", { className: "ncert-badge" }, ch.ncertTag)
+                ),
+
+                React.createElement(
+                  "div",
+                  { className: "videos-row" },
+                  ch.videos.slice(0, 3).map((vid, vIdx) =>
                     React.createElement(
                       motion.a,
                       {
-                        href: ch.pdfUrl,
+                        key: `${ch.id}-${vid.videoId}`,
+                        href: vid.url,
                         target: "_blank",
                         rel: "noopener noreferrer",
-                        whileHover: { scale: 1.04 },
-                        whileTap: { scale: 0.96 },
-                        className: "pdf-pill"
+                        initial: { opacity: 0, scale: 0.97 },
+                        whileInView: { opacity: 1, scale: 1 },
+                        viewport: { once: true, amount: 0.15 },
+                        transition: { delay: vIdx * 0.05 },
+                        whileHover: { y: -6, scale: 1.015 },
+                        whileTap: { scale: 0.98 },
+                        className: "vid-card"
                       },
-                      "📥 PDF Notes"
-                    )
-                  ),
-                  React.createElement(
-                    "div",
-                    { className: "videos-grid" },
-                    ch.videos.slice(0, 3).map((vid) =>
-                      React.createElement(VideoTile, {
-                        key: `${ch.id}-${vid.videoId}`,
-                        chId: ch.id,
-                        vid
-                      })
+                      React.createElement(
+                        "div",
+                        { className: "vid-thumb" },
+                        React.createElement("img", {
+                          src: `https://img.youtube.com/vi/${vid.videoId}/hqdefault.jpg`,
+                          alt: vid.title,
+                          loading: "lazy"
+                        }),
+                        React.createElement("span", { className: "vid-rank" }, vid.rank)
+                      ),
+                      React.createElement(
+                        "div",
+                        { className: "vid-info" },
+                        React.createElement("div", { className: "vid-title" }, vid.title),
+                        React.createElement("div", { className: "vid-sub" }, `${vid.channel} • ${vid.year}`)
+                      )
                     )
                   )
                 )
@@ -1431,7 +1874,7 @@
       );
     }
 
-    createRoot(document.getElementById("app")).render(React.createElement(App));
+    createRoot(document.getElementById("root")).render(React.createElement(CinemaApp));
   </script>
 </body>
 </html>
