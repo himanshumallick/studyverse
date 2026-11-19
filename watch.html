@@ -8,16 +8,16 @@
     :root {
       --bg-black: #05070d;
       --bg-navy: #0a1020;
-      --card-bg: rgba(10, 16, 32, 0.84);
-      --electric-blue: #2563eb;
+      --card: rgba(10, 16, 32, 0.86);
+      --blue: #2563eb;
       --bright-blue: #38bdf8;
       --cyan: #22d3ee;
       --yellow: #facc15;
       --amber: #eab308;
       --indigo: #6366f1;
-      --text-white: #f8fafc;
-      --text-muted: #94a3b8;
-      --line: rgba(56, 189, 248, 0.22);
+      --white: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(56, 189, 248, 0.22);
       --spring: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -34,17 +34,17 @@
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background:
-        radial-gradient(circle at 14% 14%, rgba(37, 99, 235, 0.24), transparent 42%),
-        radial-gradient(circle at 86% 18%, rgba(250, 204, 21, 0.16), transparent 40%),
+        radial-gradient(circle at 12% 14%, rgba(37, 99, 235, 0.24), transparent 42%),
+        radial-gradient(circle at 88% 18%, rgba(250, 204, 21, 0.16), transparent 40%),
         radial-gradient(circle at 50% 88%, rgba(99, 102, 241, 0.18), transparent 48%),
         var(--bg-black);
-      color: var(--text-white);
+      color: var(--white);
       min-height: 100vh;
       line-height: 1.55;
       overflow-x: hidden;
     }
 
-    .scroll-line {
+    .scroll-bar {
       position: fixed;
       top: 0;
       left: 0;
@@ -53,7 +53,7 @@
       transform-origin: left;
       transform: scaleX(0);
       background: linear-gradient(90deg, var(--bright-blue), var(--cyan), var(--yellow));
-      z-index: 60;
+      z-index: 80;
       pointer-events: none;
     }
 
@@ -67,9 +67,9 @@
       flex-wrap: wrap;
       gap: 12px;
       padding: 14px 24px;
-      background: rgba(5, 7, 13, 0.86);
+      background: rgba(5, 7, 13, 0.88);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--border);
     }
 
     .brand {
@@ -79,7 +79,7 @@
       font-weight: 800;
     }
 
-    .brand-pill {
+    .brand-tag {
       background: linear-gradient(135deg, var(--yellow), var(--bright-blue));
       color: var(--bg-black);
       font-size: 0.72rem;
@@ -88,10 +88,11 @@
       border-radius: 999px;
     }
 
-    .nav-actions {
+    .nav-group {
       display: flex;
       gap: 10px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -100,14 +101,14 @@
       gap: 8px;
       padding: 10px 16px;
       border-radius: 12px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       background: var(--bg-navy);
-      color: var(--text-white);
+      color: var(--white);
       font-weight: 600;
       font-size: 0.9rem;
       text-decoration: none;
       cursor: pointer;
-      transition: transform 0.26s var(--spring), border-color 0.26s var(--spring), box-shadow 0.26s var(--spring);
+      transition: transform 0.25s var(--spring), border-color 0.25s var(--spring), box-shadow 0.25s var(--spring);
     }
 
     .btn:hover {
@@ -121,6 +122,13 @@
       color: var(--bg-black);
       border-color: rgba(250, 204, 21, 0.9);
       font-weight: 800;
+    }
+
+    .btn-blue {
+      background: linear-gradient(135deg, var(--blue), var(--bright-blue));
+      color: var(--white);
+      border-color: rgba(56, 189, 248, 0.75);
+      font-weight: 700;
     }
 
     .container {
@@ -137,7 +145,7 @@
       padding: 32px;
       border-radius: 24px;
       background: linear-gradient(150deg, rgba(10, 16, 32, 0.94), rgba(5, 7, 13, 0.92));
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       margin-bottom: 26px;
     }
 
@@ -159,16 +167,23 @@
     }
 
     .hero p {
-      color: var(--text-muted);
-      max-width: 600px;
+      color: var(--muted);
+      max-width: 610px;
       margin-bottom: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
     }
 
     .hero-note {
       display: block;
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 0.84rem;
-      color: var(--text-muted);
+      color: var(--muted);
     }
 
     .stage-3d {
@@ -183,7 +198,7 @@
       max-width: 320px;
       padding: 24px;
       border-radius: 22px;
-      background: linear-gradient(155deg, rgba(37, 99, 235, 0.24), rgba(10, 16, 32, 0.95));
+      background: linear-gradient(155deg, rgba(37, 99, 235, 0.25), rgba(10, 16, 32, 0.95));
       border: 1px solid rgba(56, 189, 248, 0.36);
       transform: rotateY(var(--rx, -8deg)) rotateX(var(--ry, 6deg));
       transition: transform 0.25s var(--spring);
@@ -203,18 +218,22 @@
       gap: 12px;
       padding: 14px 18px;
       border-radius: 16px;
-      background: var(--card-bg);
-      border: 1px solid var(--line);
+      background: var(--card);
+      border: 1px solid var(--border);
       margin-bottom: 24px;
     }
 
     .breadcrumb {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--muted);
     }
 
     .breadcrumb strong {
       color: var(--yellow);
+    }
+
+    .section-block {
+      margin-bottom: 44px;
     }
 
     .section-head {
@@ -231,9 +250,9 @@
       max-width: 320px;
       padding: 10px 14px;
       border-radius: 12px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       background: var(--bg-navy);
-      color: var(--text-white);
+      color: var(--white);
       font-size: 0.92rem;
     }
 
@@ -250,12 +269,12 @@
     }
 
     .sv-card {
-      background: var(--card-bg);
-      border: 1px solid var(--line);
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 18px;
       padding: 20px;
       text-align: left;
-      color: var(--text-white);
+      color: var(--white);
       cursor: pointer;
       opacity: 0;
       transform: translateY(18px) scale(0.98);
@@ -289,15 +308,15 @@
 
     .card-desc {
       font-size: 0.87rem;
-      color: var(--text-muted);
+      color: var(--muted);
     }
 
     .video-card {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: var(--card-bg);
-      border: 1px solid var(--line);
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 18px;
       overflow: hidden;
       opacity: 0;
@@ -375,7 +394,7 @@
 
     .video-meta {
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: var(--muted);
     }
 
     .video-meta span {
@@ -388,8 +407,126 @@
       border-radius: 12px;
       background: rgba(56, 189, 248, 0.08);
       border: 1px dashed rgba(56, 189, 248, 0.35);
-      color: var(--text-muted);
+      color: var(--muted);
       font-size: 0.86rem;
+    }
+
+    /* Quick Notes & Feedback Sections */
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .note-box {
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(5, 7, 13, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+    }
+
+    .note-box h3 {
+      color: var(--yellow);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .note-box ul {
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .field {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-navy);
+      color: var(--white);
+      font-size: 0.92rem;
+      font-family: inherit;
+    }
+
+    .field:focus {
+      outline: none;
+      border-color: var(--yellow);
+    }
+
+    textarea.field {
+      min-height: 96px;
+      resize: vertical;
+      grid-column: 1 / -1;
+    }
+
+    .feedback-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .fb-item {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(5, 7, 13, 0.72);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+      font-size: 0.9rem;
+    }
+
+    .fb-meta {
+      color: var(--bright-blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Auth Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 4, 9, 0.78);
+      backdrop-filter: blur(6px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      z-index: 90;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-navy);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .status-msg {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      color: var(--yellow);
     }
 
     .hidden {
@@ -398,10 +535,15 @@
 
     footer {
       text-align: center;
-      padding: 24px 16px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(56, 189, 248, 0.14);
+      padding: 28px 18px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border-top: 1px solid rgba(56, 189, 248, 0.16);
+      background: rgba(5, 7, 13, 0.9);
+    }
+
+    footer strong {
+      color: var(--white);
     }
 
     @media (max-width: 900px) {
@@ -424,15 +566,18 @@
   </style>
 </head>
 <body>
-  <div id="scrollLine" class="scroll-line" aria-hidden="true"></div>
+  <div id="scrollBar" class="scroll-bar" aria-hidden="true"></div>
 
   <header class="topbar">
     <div class="brand">
       <span>STUDYVERSE WATCH</span>
-      <span class="brand-pill">TOP 5 ONESHOT</span>
+      <span class="brand-tag">INTERACTIVE HUB</span>
     </div>
-    <div class="nav-actions">
-      <a href="index.html" class="btn">← Homepage</a>
+    <div class="nav-group">
+      <a href="index.html" class="btn">Explore Classes</a>
+      <a href="#quickNotesSection" class="btn">Quick Notes</a>
+      <a href="#feedbackSection" class="btn">Feedback</a>
+      <button id="authOpenBtn" class="btn btn-blue" type="button">Login / Sign Up</button>
       <button id="backBtn" class="btn hidden" type="button">← Back</button>
     </div>
   </header>
@@ -443,35 +588,39 @@
         <div class="tagline">Watch. Understand. Master.</div>
         <h1>LEARN BEYOND THE CLASSROOM.</h1>
         <p>
-          Full NCERT chapters across Classes 9 & 10 plus Class 11 & 12 streams (Science, Commerce, Humanities) with Top 5 ranked one-shot slots.
+          Explore Class 9 & 10 NCERT chapters plus Class 11 & 12 streams (Science, Commerce, Humanities) with Top 5 ranked one-shot slots and instant on-screen study notes—without touching your existing chapter PDF files.
         </p>
-        <button id="watchNowBtn" class="btn btn-yellow" type="button">▶ WATCH NOW</button>
-        <span class="hero-note">Curated for students. Built for better learning.</span>
+        <div class="hero-actions">
+          <button id="watchNowBtn" class="btn btn-yellow" type="button">▶ Best YouTube Videos</button>
+          <a href="index.html" class="btn">Explore Classes</a>
+        </div>
+        <span id="userBanner" class="hero-note">Curated for students. Built for better learning.</span>
       </div>
+
       <div class="stage-3d" aria-hidden="true">
         <div id="card3d" class="card-3d">
-          <span class="tag">CLASSES 9–12 • STREAMS</span>
+          <span class="tag">CLASSES 9–12 • ALL STREAMS</span>
           <h3>Top 5 Ranked One-Shots</h3>
-          <p class="card-desc">Sunlike Study, Physics Wallah, BYJU'S, Next Toppers & more.</p>
+          <p class="card-desc">Sunlike Study, Physics Wallah, Next Toppers, BYJU'S & LearnoHub.</p>
         </div>
       </div>
     </section>
 
     <div class="toolbar">
       <div id="breadcrumb" class="breadcrumb">Step 1: <strong>Select Class</strong></div>
-      <button id="resetBtn" class="btn" type="button">Reset</button>
+      <button id="resetBtn" class="btn" type="button">Reset Flow</button>
     </div>
 
     <!-- Step 1: Class -->
-    <section id="stepClass">
+    <section id="stepClass" class="section-block">
       <div class="section-head">
         <h2>Step 1 — Select Class</h2>
       </div>
       <div id="classGrid" class="grid-cards"></div>
     </section>
 
-    <!-- Step 2A: Stream (for Class 11 & 12) -->
-    <section id="stepStream" class="hidden">
+    <!-- Step 2A: Stream (Class 11 & 12) -->
+    <section id="stepStream" class="section-block hidden">
       <div class="section-head">
         <h2>Step 2 — Select Stream (Class 11 & 12)</h2>
       </div>
@@ -479,15 +628,15 @@
     </section>
 
     <!-- Step 2B: Subject -->
-    <section id="stepSubject" class="hidden">
+    <section id="stepSubject" class="section-block hidden">
       <div class="section-head">
-        <h2>Step 3 — Select Subject</h2>
+        <h2>Step 3 — Select Core Subject</h2>
       </div>
       <div id="subjectGrid" class="grid-cards"></div>
     </section>
 
     <!-- Step 3: Chapter -->
-    <section id="stepChapter" class="hidden">
+    <section id="stepChapter" class="section-block hidden">
       <div class="section-head">
         <h2>Step 4 — Select Chapter</h2>
         <input id="chapterSearch" class="search-input" type="search" placeholder="Search chapter..." />
@@ -496,20 +645,98 @@
     </section>
 
     <!-- Step 4: Top 5 Videos -->
-    <section id="stepVideos" class="hidden">
+    <section id="stepVideos" class="section-block hidden">
       <div class="section-head">
         <h2 id="videosTitle">Step 5 — Top 5 One-Shot Recommendations</h2>
       </div>
       <div id="videoGrid" class="grid-videos"></div>
     </section>
+
+    <!-- On-Screen Quick Notes (Preserves existing PDF files untouched) -->
+    <section id="quickNotesSection" class="section-block">
+      <div class="panel">
+        <div class="section-head">
+          <div>
+            <span class="tag">INSTANT STUDY NOTES</span>
+            <h2>Quick Concept & Revision Notes</h2>
+          </div>
+          <span class="card-desc">Your existing chapter PDF notes remain untouched.</span>
+        </div>
+        <div class="notes-grid">
+          <div class="note-box">
+            <h3>Smart One-Shot Strategy</h3>
+            <ul>
+              <li>Watch the #1 concept one-shot once with active notes.</li>
+              <li>Solve NCERT textbook examples immediately after.</li>
+              <li>Use #2–#5 slots for quick exam revision and practice.</li>
+            </ul>
+          </div>
+          <div class="note-box">
+            <h3>Class 9 & 10 Board Focus</h3>
+            <ul>
+              <li>Focus on NCERT definitions, diagrams, and step-wise proofs.</li>
+              <li>Maintain a chapter-wise mistake notebook for weak topics.</li>
+            </ul>
+          </div>
+          <div class="note-box">
+            <h3>Class 11 & 12 Stream Focus</h3>
+            <ul>
+              <li>Science: Derivations, formulas, and numericals daily.</li>
+              <li>Commerce & Humanities: Case studies, formats, and timelines.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Feedback Section -->
+    <section id="feedbackSection" class="section-block">
+      <div class="panel">
+        <span class="tag">STUDENT VOICE</span>
+        <h2>Share Your Feedback</h2>
+        <p class="card-desc">Tell us which chapter one-shot or feature you want next on STUDYVERSE.</p>
+
+        <form id="feedbackForm" class="form-grid">
+          <input id="fbName" class="field" type="text" placeholder="Your Name" required />
+          <input id="fbEmail" class="field" type="email" placeholder="Your Email" required />
+          <textarea id="fbMessage" class="field" placeholder="Write your feedback or chapter request..." required></textarea>
+          <div>
+            <button type="submit" class="btn btn-yellow">Submit Feedback</button>
+          </div>
+        </form>
+        <div id="fbStatus" class="status-msg" role="status"></div>
+        <div id="feedbackList" class="feedback-list"></div>
+      </div>
+    </section>
   </main>
 
   <footer>
-    STUDYVERSE WATCH — "Watch. Understand. Master." • Developed by Himanshu Sekhar Mallick & Team StudyVerse
+    <div>
+      Developed by <strong>Himanshu Sekhar Mallick</strong> & Team StudyVerse •
+      Email: <a href="mailto:himanshumallick.studyverse@gmail.com" style="color: var(--bright-blue);">himanshumallick.studyverse@gmail.com</a>
+    </div>
+    <div style="margin-top: 6px; font-size: 0.8rem;">
+      STUDYVERSE WATCH — "Watch. Understand. Master."
+    </div>
   </footer>
 
+  <!-- Login / Sign Up Modal -->
+  <div id="authModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="authTitle">Student Login / Sign Up</h3>
+        <button id="authCloseBtn" class="btn" type="button">✕</button>
+      </div>
+      <form id="authForm" class="form-grid" style="margin-top: 6px;">
+        <input id="authName" class="field" type="text" placeholder="Full Name" required />
+        <input id="authEmail" class="field" type="email" placeholder="Email Address" required />
+        <button type="submit" class="btn btn-yellow">Continue to STUDYVERSE</button>
+      </form>
+      <div id="authStatus" class="status-msg"></div>
+    </div>
+  </div>
+
   <script>
-    // Verified YouTube video IDs from search results only (no invented IDs)
     const VERIFIED_VIDEOS = {
       "Class 10|Social Science|Geography Ch 4: Agriculture": [
         { rank: 1, title: "Agriculture Class 10 Geography Full Chapter (Animation) One Shot", channel: "Sunlike Study", duration: "One Shot", id: "VgJ-zRAdvaE" }
@@ -519,7 +746,7 @@
       ]
     };
 
-    const RANK_LABELS = [
+    const RANK_CHANNELS = [
       "Sunlike Study / Top Pick",
       "Physics Wallah One Shot",
       "Next Toppers One Shot",
@@ -527,17 +754,17 @@
       "LearnoHub / Magnet Brains"
     ];
 
-    function makeChapterList(titles, className, subjectName) {
-      return titles.map((chapter) => {
-        const key = `${className}|${subjectName}|${chapter}`;
-        const verified = VERIFIED_VIDEOS[key] || [];
+    function buildChapters(list, clsName, subName) {
+      return list.map((chapter) => {
+        const key = `${clsName}|${subName}|${chapter}`;
+        const found = VERIFIED_VIDEOS[key] || [];
         const slots = [1, 2, 3, 4, 5].map((rank) => {
-          const match = verified.find((v) => v.rank === rank);
+          const match = found.find((v) => v.rank === rank);
           if (match) return match;
           return {
             rank,
             title: `${chapter} — #${rank} One-Shot Slot`,
-            channel: RANK_LABELS[rank - 1],
+            channel: RANK_CHANNELS[rank - 1],
             duration: "One Shot",
             id: null
           };
@@ -546,168 +773,544 @@
       });
     }
 
-    const SYLLABUS_DATA = {
+    const SYLLABUS = {
       "Class 9": {
         subjects: {
-          "Mathematics": makeChapterList([
-            "Ch 1: Number Systems",
-            "Ch 2: Polynomials",
-            "Ch 3: Coordinate Geometry",
-            "Ch 4: Linear Equations in Two Variables",
-            "Ch 5: Introduction to Euclid's Geometry",
-            "Ch 6: Lines and Angles",
-            "Ch 7: Triangles",
-            "Ch 8: Quadrilaterals",
-            "Ch 9: Circles",
-            "Ch 10: Heron's Formula",
-            "Ch 11: Surface Areas and Volumes",
-            "Ch 12: Statistics"
+          "Mathematics": buildChapters([
+            "Ch 1: Number Systems", "Ch 2: Polynomials", "Ch 3: Coordinate Geometry",
+            "Ch 4: Linear Equations in Two Variables", "Ch 5: Introduction to Euclid's Geometry",
+            "Ch 6: Lines and Angles", "Ch 7: Triangles", "Ch 8: Quadrilaterals",
+            "Ch 9: Circles", "Ch 10: Heron's Formula", "Ch 11: Surface Areas and Volumes", "Ch 12: Statistics"
           ], "Class 9", "Mathematics"),
-          "Science": makeChapterList([
-            "Ch 1: Matter in Our Surroundings",
-            "Ch 2: Is Matter Around Us Pure?",
-            "Ch 3: Atoms and Molecules",
-            "Ch 4: Structure of the Atom",
-            "Ch 5: The Fundamental Unit of Life",
-            "Ch 6: Tissues",
-            "Ch 7: Motion",
-            "Ch 8: Force and Laws of Motion",
-            "Ch 9: Gravitation",
-            "Ch 10: Work and Energy",
-            "Ch 11: Sound",
-            "Ch 12: Improvement in Food Resources"
+          "Science": buildChapters([
+            "Ch 1: Matter in Our Surroundings", "Ch 2: Is Matter Around Us Pure?",
+            "Ch 3: Atoms and Molecules", "Ch 4: Structure of the Atom",
+            "Ch 5: The Fundamental Unit of Life", "Ch 6: Tissues", "Ch 7: Motion",
+            "Ch 8: Force and Laws of Motion", "Ch 9: Gravitation", "Ch 10: Work and Energy",
+            "Ch 11: Sound", "Ch 12: Improvement in Food Resources"
           ], "Class 9", "Science"),
-          "Social Science": makeChapterList([
-            "History Ch 1: The French Revolution",
-            "History Ch 2: Socialism in Europe and the Russian Revolution",
-            "History Ch 3: Nazism and the Rise of Hitler",
-            "Geography Ch 1: India - Size and Location",
-            "Geography Ch 2: Physical Features of India",
-            "Geography Ch 3: Drainage",
-            "Geography Ch 4: Climate",
-            "Geography Ch 5: Natural Vegetation and Wildlife",
-            "Geography Ch 6: Population",
-            "Civics Ch 1: What is Democracy? Why Democracy?",
-            "Civics Ch 2: Constitutional Design",
-            "Civics Ch 3: Electoral Politics",
-            "Civics Ch 4: Working of Institutions",
-            "Civics Ch 5: Democratic Rights",
-            "Economics Ch 1: The Story of Village Palampur",
-            "Economics Ch 2: People as Resource",
-            "Economics Ch 3: Poverty as a Challenge",
-            "Economics Ch 4: Food Security in India"
+          "Social Science": buildChapters([
+            "History Ch 1: The French Revolution", "History Ch 2: Socialism in Europe and the Russian Revolution",
+            "History Ch 3: Nazism and the Rise of Hitler", "Geography Ch 1: India - Size and Location",
+            "Geography Ch 2: Physical Features of India", "Geography Ch 3: Drainage", "Geography Ch 4: Climate",
+            "Civics Ch 1: What is Democracy? Why Democracy?", "Civics Ch 2: Constitutional Design",
+            "Civics Ch 3: Electoral Politics", "Economics Ch 1: The Story of Village Palampur",
+            "Economics Ch 2: People as Resource", "Economics Ch 3: Poverty as a Challenge", "Economics Ch 4: Food Security in India"
           ], "Class 9", "Social Science")
         }
       },
       "Class 10": {
         subjects: {
-          "Mathematics": makeChapterList([
-            "Ch 1: Real Numbers",
-            "Ch 2: Polynomials",
-            "Ch 3: Pair of Linear Equations in Two Variables",
-            "Ch 4: Quadratic Equations",
-            "Ch 5: Arithmetic Progressions",
-            "Ch 6: Triangles",
-            "Ch 7: Coordinate Geometry",
-            "Ch 8: Introduction to Trigonometry",
-            "Ch 9: Some Applications of Trigonometry",
-            "Ch 10: Circles",
-            "Ch 11: Areas Related to Circles",
-            "Ch 12: Surface Areas and Volumes",
-            "Ch 13: Statistics",
-            "Ch 14: Probability"
+          "Mathematics": buildChapters([
+            "Ch 1: Real Numbers", "Ch 2: Polynomials", "Ch 3: Pair of Linear Equations in Two Variables",
+            "Ch 4: Quadratic Equations", "Ch 5: Arithmetic Progressions", "Ch 6: Triangles",
+            "Ch 7: Coordinate Geometry", "Ch 8: Introduction to Trigonometry",
+            "Ch 9: Some Applications of Trigonometry", "Ch 10: Circles", "Ch 11: Areas Related to Circles",
+            "Ch 12: Surface Areas and Volumes", "Ch 13: Statistics", "Ch 14: Probability"
           ], "Class 10", "Mathematics"),
-          "Science": makeChapterList([
-            "Ch 1: Chemical Reactions and Equations",
-            "Ch 2: Acids, Bases and Salts",
-            "Ch 3: Metals and Non-metals",
-            "Ch 4: Carbon and Its Compounds",
-            "Ch 5: Life Processes",
-            "Ch 6: Control and Coordination",
-            "Ch 7: How Do Organisms Reproduce?",
-            "Ch 8: Heredity",
-            "Ch 9: Light - Reflection and Refraction",
-            "Ch 10: The Human Eye and the Colourful World",
-            "Ch 11: Electricity",
-            "Ch 12: Magnetic Effects of Electric Current",
-            "Ch 13: Our Environment",
+          "Science": buildChapters([
+            "Ch 1: Chemical Reactions and Equations", "Ch 2: Acids, Bases and Salts",
+            "Ch 3: Metals and Non-metals", "Ch 4: Carbon and Its Compounds",
+            "Ch 5: Life Processes", "Ch 6: Control and Coordination", "Ch 7: How Do Organisms Reproduce?",
+            "Ch 8: Heredity", "Ch 9: Light - Reflection and Refraction",
+            "Ch 10: The Human Eye and the Colourful World", "Ch 11: Electricity",
+            "Ch 12: Magnetic Effects of Electric Current", "Ch 13: Our Environment",
             "Biology: Life Processes & Control"
           ], "Class 10", "Science"),
-          "Social Science": makeChapterList([
-            "History Ch 1: The Rise of Nationalism in Europe",
-            "History Ch 2: Nationalism in India",
-            "History Ch 3: The Making of a Global World",
-            "History Ch 4: The Age of Industrialisation",
-            "History Ch 5: Print Culture and the Modern World",
-            "Geography Ch 1: Resources and Development",
-            "Geography Ch 2: Forest and Wildlife Resources",
-            "Geography Ch 3: Water Resources",
-            "Geography Ch 4: Agriculture",
-            "Geography Ch 5: Minerals and Energy Resources",
-            "Geography Ch 6: Manufacturing Industries",
-            "Geography Ch 7: Lifelines of National Economy",
-            "Civics Ch 1: Power Sharing",
-            "Civics Ch 2: Federalism",
-            "Civics Ch 3: Gender, Religion and Caste",
-            "Civics Ch 4: Political Parties",
-            "Civics Ch 5: Outcomes of Democracy",
-            "Economics Ch 1: Development",
-            "Economics Ch 2: Sectors of the Indian Economy",
-            "Economics Ch 3: Money and Credit",
-            "Economics Ch 4: Globalisation and the Indian Economy"
+          "Social Science": buildChapters([
+            "History Ch 1: The Rise of Nationalism in Europe", "History Ch 2: Nationalism in India",
+            "History Ch 3: The Making of a Global World", "History Ch 4: The Age of Industrialisation",
+            "History Ch 5: Print Culture and the Modern World", "Geography Ch 1: Resources and Development",
+            "Geography Ch 2: Forest and Wildlife Resources", "Geography Ch 3: Water Resources",
+            "Geography Ch 4: Agriculture", "Geography Ch 5: Minerals and Energy Resources",
+            "Geography Ch 6: Manufacturing Industries", "Geography Ch 7: Lifelines of National Economy",
+            "Civics Ch 1: Power Sharing", "Civics Ch 2: Federalism", "Civics Ch 3: Gender, Religion and Caste",
+            "Civics Ch 4: Political Parties", "Civics Ch 5: Outcomes of Democracy",
+            "Economics Ch 1: Development", "Economics Ch 2: Sectors of the Indian Economy",
+            "Economics Ch 3: Money and Credit", "Economics Ch 4: Globalisation and the Indian Economy"
           ], "Class 10", "Social Science")
         }
       },
       "Class 11": {
         streams: {
           "Science": {
-            "Physics": makeChapterList([
-              "Ch 1: Units and Measurements",
-              "Ch 2: Motion in a Straight Line",
-              "Ch 3: Motion in a Plane",
-              "Ch 4: Laws of Motion",
-              "Ch 5: Work, Energy and Power",
-              "Ch 6: System of Particles and Rotational Motion",
-              "Ch 7: Gravitation",
-              "Ch 8: Mechanical Properties of Solids",
-              "Ch 9: Mechanical Properties of Fluids",
-              "Ch 10: Thermal Properties of Matter",
-              "Ch 11: Thermodynamics",
-              "Ch 12: Kinetic Theory",
-              "Ch 13: Oscillations",
-              "Ch 14: Waves"
+            "Physics": buildChapters([
+              "Ch 1: Units and Measurements", "Ch 2: Motion in a Straight Line", "Ch 3: Motion in a Plane",
+              "Ch 4: Laws of Motion", "Ch 5: Work, Energy and Power", "Ch 6: System of Particles and Rotational Motion",
+              "Ch 7: Gravitation", "Ch 8: Mechanical Properties of Solids", "Ch 9: Mechanical Properties of Fluids",
+              "Ch 10: Thermal Properties of Matter", "Ch 11: Thermodynamics", "Ch 12: Kinetic Theory",
+              "Ch 13: Oscillations", "Ch 14: Waves"
             ], "Class 11", "Physics"),
-            "Chemistry": makeChapterList([
-              "Ch 1: Some Basic Concepts of Chemistry",
-              "Ch 2: Structure of Atom",
+            "Chemistry": buildChapters([
+              "Ch 1: Some Basic Concepts of Chemistry", "Ch 2: Structure of Atom",
               "Ch 3: Classification of Elements and Periodicity in Properties",
-              "Ch 4: Chemical Bonding and Molecular Structure",
-              "Ch 5: Thermodynamics",
-              "Ch 6: Equilibrium",
-              "Ch 7: Redox Reactions",
-              "Ch 8: Organic Chemistry - Some Basic Principles and Techniques",
-              "Ch 9: Hydrocarbons"
+              "Ch 4: Chemical Bonding and Molecular Structure", "Ch 5: Thermodynamics",
+              "Ch 6: Equilibrium", "Ch 7: Redox Reactions",
+              "Ch 8: Organic Chemistry - Some Basic Principles and Techniques", "Ch 9: Hydrocarbons"
             ], "Class 11", "Chemistry"),
-            "Mathematics": makeChapterList([
-              "Ch 1: Sets",
-              "Ch 2: Relations and Functions",
-              "Ch 3: Trigonometric Functions",
-              "Ch 4: Complex Numbers and Quadratic Equations",
-              "Ch 5: Linear Inequalities",
-              "Ch 6: Permutations and Combinations",
-              "Ch 7: Binomial Theorem",
-              "Ch 8: Sequences and Series",
-              "Ch 9: Straight Lines",
-              "Ch 10: Conic Sections",
-              "Ch 11: Introduction to Three Dimensional Geometry",
-              "Ch 12: Limits and Derivatives",
-              "Ch 13: Statistics",
-              "Ch 14: Probability"
+            "Mathematics": buildChapters([
+              "Ch 1: Sets", "Ch 2: Relations and Functions", "Ch 3: Trigonometric Functions",
+              "Ch 4: Complex Numbers and Quadratic Equations", "Ch 5: Linear Inequalities",
+              "Ch 6: Permutations and Combinations", "Ch 7: Binomial Theorem", "Ch 8: Sequences and Series",
+              "Ch 9: Straight Lines", "Ch 10: Conic Sections", "Ch 11: Three Dimensional Geometry",
+              "Ch 12: Limits and Derivatives", "Ch 13: Statistics", "Ch 14: Probability"
             ], "Class 11", "Mathematics")
           },
           "Commerce": {
-            "Accountancy": makeChapterList([
-              "Ch 1: Introduction to Accounting",
-              "Ch 2: Basic Accounting Terms",
-              "Ch 3: Theory Base of Accounting",
-              "Ch 4
+            "Accountancy": buildChapters([
+              "Ch 1: Introduction to Accounting", "Ch 2: Basic Accounting Terms",
+              "Ch 3: Theory Base of Accounting", "Ch 4: Accounting Equation",
+              "Ch 5: Rules of Debit and Credit", "Ch 6: Journal", "Ch 7: Ledger",
+              "Ch 8: Trial Balance", "Ch 9: Financial Statements"
+            ], "Class 11", "Accountancy"),
+            "Business Studies": buildChapters([
+              "Ch 1: Nature and Purpose of Business", "Ch 2: Forms of Business Organisations",
+              "Ch 3: Private, Public and Global Enterprises", "Ch 4: Business Services",
+              "Ch 5: Emerging Modes of Business", "Ch 6: Social Responsibilities of Business",
+              "Ch 7: Sources of Business Finance", "Ch 8: Small Business",
+              "Ch 9: Internal Trade", "Ch 10: International Business"
+            ], "Class 11", "Business Studies"),
+            "Economics": buildChapters([
+              "Stats Ch 1: Introduction", "Stats Ch 2: Collection & Organisation of Data",
+              "Stats Ch 3: Measures of Central Tendency", "Stats Ch 4: Correlation & Index Numbers",
+              "Indian Eco Ch 1: Indian Economy on the Eve of Independence",
+              "Indian Eco Ch 2: Indian Economy (1950-1990)", "Indian Eco Ch 3: Liberalisation, Privatisation & Globalisation",
+              "Indian Eco Ch 4: Human Capital Formation", "Indian Eco Ch 5: Rural Development",
+              "Indian Eco Ch 6: Employment & Sustainable Development"
+            ], "Class 11", "Economics")
+          },
+          "Humanities / Arts": {
+            "History": buildChapters([
+              "Theme 1: Writing and City Life", "Theme 2: An Empire Across Three Continents",
+              "Theme 3: Nomadic Empires", "Theme 4: The Three Orders",
+              "Theme 5: Changing Cultural Traditions", "Theme 6: Displacing Indigenous Peoples",
+              "Theme 7: Paths to Modernisation"
+            ], "Class 11", "History"),
+            "Political Science": buildChapters([
+              "Ch 1: Constitution: Why and How?", "Ch 2: Rights in the Indian Constitution",
+              "Ch 3: Election and Representation", "Ch 4: Executive & Legislature",
+              "Ch 5: Judiciary", "Ch 6: Federalism & Local Governments",
+              "Ch 7: Political Theory", "Ch 8: Freedom, Equality & Social Justice"
+            ], "Class 11", "Political Science"),
+            "Geography": buildChapters([
+              "Ch 1: Geography as a Discipline", "Ch 2: Origin and Evolution of the Earth",
+              "Ch 3: Interior of the Earth", "Ch 4: Distribution of Oceans and Continents",
+              "Ch 5: Geomorphic Processes & Landforms", "Ch 6: Atmosphere & Weather Systems",
+              "Ch 7: Water in the Oceans", "Ch 8: Biodiversity and Conservation"
+            ], "Class 11", "Geography")
+          }
+        }
+      },
+      "Class 12": {
+        streams: {
+          "Science": {
+            "Physics": buildChapters([
+              "Ch 1: Electric Charges and Fields", "Ch 2: Electrostatic Potential and Capacitance",
+              "Ch 3: Current Electricity", "Ch 4: Moving Charges and Magnetism",
+              "Ch 5: Magnetism and Matter", "Ch 6: Electromagnetic Induction",
+              "Ch 7: Alternating Current", "Ch 8: Electromagnetic Waves",
+              "Ch 9: Ray Optics and Optical Instruments", "Ch 10: Wave Optics",
+              "Ch 11: Dual Nature of Radiation and Matter", "Ch 12: Atoms & Nuclei",
+              "Ch 13: Semiconductor Electronics"
+            ], "Class 12", "Physics"),
+            "Chemistry": buildChapters([
+              "Ch 1: Solutions", "Ch 2: Electrochemistry", "Ch 3: Chemical Kinetics",
+              "Ch 4: The d and f Block Elements", "Ch 5: Coordination Compounds",
+              "Ch 6: Haloalkanes and Haloarenes", "Ch 7: Alcohols, Phenols and Ethers",
+              "Ch 8: Aldehydes, Ketones and Carboxylic Acids", "Ch 9: Amines", "Ch 10: Biomolecules"
+            ], "Class 12", "Chemistry"),
+            "Mathematics": buildChapters([
+              "Ch 1: Relations and Functions", "Ch 2: Inverse Trigonometric Functions",
+              "Ch 3: Matrices", "Ch 4: Determinants", "Ch 5: Continuity and Differentiability",
+              "Ch 6: Application of Derivatives", "Ch 7: Integrals", "Ch 8: Application of Integrals",
+              "Ch 9: Differential Equations", "Ch 10: Vector Algebra",
+              "Ch 11: Three Dimensional Geometry", "Ch 12: Linear Programming", "Ch 13: Probability"
+            ], "Class 12", "Mathematics")
+          },
+          "Commerce": {
+            "Accountancy": buildChapters([
+              "Ch 1: Partnership Fundamentals", "Ch 2: Goodwill & Change in Profit Sharing Ratio",
+              "Ch 3: Admission of a Partner", "Ch 4: Retirement / Death of a Partner",
+              "Ch 5: Dissolution of a Partnership Firm", "Ch 6: Accounting for Share Capital",
+              "Ch 7: Issue and Redemption of Debentures", "Ch 8: Financial Statements of a Company",
+              "Ch 9: Accounting Ratios", "Ch 10: Cash Flow Statement"
+            ], "Class 12", "Accountancy"),
+            "Business Studies": buildChapters([
+              "Ch 1: Nature and Significance of Management", "Ch 2: Principles of Management",
+              "Ch 3: Business Environment", "Ch 4: Planning & Organising",
+              "Ch 5: Staffing, Directing & Controlling", "Ch 6: Financial Management",
+              "Ch 7: Financial Markets", "Ch 8: Marketing", "Ch 9: Consumer Protection"
+            ], "Class 12", "Business Studies"),
+            "Economics": buildChapters([
+              "Macro Ch 1: Introduction to Macroeconomics", "Macro Ch 2: National Income Accounting",
+              "Macro Ch 3: Money and Banking", "Macro Ch 4: Determination of Income and Employment",
+              "Macro Ch 5: Government Budget & Open Economy",
+              "Indian Eco Ch 1: Indian Economy on the Eve of Independence",
+              "Indian Eco Ch 2: Indian Economy (1950-1990) & LPG Reforms",
+              "Indian Eco Ch 3: Human Capital, Rural Development & Employment",
+              "Indian Eco Ch 4: Environment & India-Neighbours Comparison"
+            ], "Class 12", "Economics")
+          },
+          "Humanities / Arts": {
+            "History": buildChapters([
+              "Theme 1: Bricks, Beads and Bones", "Theme 2: Kings, Farmers and Towns",
+              "Theme 3: Kinship, Caste and Class", "Theme 4: Thinkers, Beliefs and Buildings",
+              "Theme 5: Through the Eyes of Travellers & Bhakti-Sufi",
+              "Theme 6: An Imperial Capital: Vijayanagara", "Theme 7: Peasants, Zamindars and the State",
+              "Theme 8: Colonialism, Rebels and the Raj", "Theme 9: Mahatma Gandhi & Nationalist Movement",
+              "Theme 10: Framing the Constitution"
+            ], "Class 12", "History"),
+            "Political Science": buildChapters([
+              "Ch 1: The End of Bipolarity", "Ch 2: Contemporary Centres of Power",
+              "Ch 3: Contemporary South Asia", "Ch 4: International Organisations & Security",
+              "Ch 5: Environment & Globalisation", "Ch 6: Challenges of Nation Building",
+              "Ch 7: Era of One-Party Dominance & Planned Development",
+              "Ch 8: India's External Relations & Congress System",
+              "Ch 9: Democratic Order, Regional Aspirations & Recent Developments"
+            ], "Class 12", "Political Science"),
+            "Geography": buildChapters([
+              "Book 1: Human Geography, Population, Development & Activities",
+              "Book 1: Transport, Communication & International Trade",
+              "Book 2: Population & Human Settlements in India",
+              "Book 2: Land Resources, Agriculture & Water Resources",
+              "Book 2: Mineral, Energy Resources & Planning in India",
+              "Book 2: Transport, Trade & Geographical Issues"
+            ], "Class 12", "Geography")
+          }
+        }
+      }
+    };
+
+    const state = { cls: null, stream: null, subject: null, chapterObj: null };
+
+    const stepClass = document.getElementById("stepClass");
+    const stepStream = document.getElementById("stepStream");
+    const stepSubject = document.getElementById("stepSubject");
+    const stepChapter = document.getElementById("stepChapter");
+    const stepVideos = document.getElementById("stepVideos");
+
+    const classGrid = document.getElementById("classGrid");
+    const streamGrid = document.getElementById("streamGrid");
+    const subjectGrid = document.getElementById("subjectGrid");
+    const chapterGrid = document.getElementById("chapterGrid");
+    const videoGrid = document.getElementById("videoGrid");
+    const videosTitle = document.getElementById("videosTitle");
+    const breadcrumb = document.getElementById("breadcrumb");
+    const backBtn = document.getElementById("backBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const watchNowBtn = document.getElementById("watchNowBtn");
+    const chapterSearch = document.getElementById("chapterSearch");
+    const scrollBar = document.getElementById("scrollBar");
+    const card3d = document.getElementById("card3d");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06 });
+
+    function revealIn(container) {
+      container.querySelectorAll(".sv-card, .video-card").forEach((el, i) => {
+        el.style.setProperty("--delay", `${Math.min(i * 55, 280)}ms`);
+        observer.observe(el);
+      });
+    }
+
+    function updateNav() {
+      const parts = ["Step 1: Class"];
+      if (state.cls) parts.push(state.cls);
+      if (state.stream) parts.push(state.stream);
+      if (state.subject) parts.push(state.subject);
+      if (state.chapterObj) parts.push(state.chapterObj.chapter);
+      breadcrumb.innerHTML = parts.map((p, idx) =>
+        idx === parts.length - 1 ? `<strong>${p}</strong>` : p
+      ).join(" → ");
+      backBtn.classList.toggle("hidden", !state.cls);
+    }
+
+    function showStep(sec) {
+      [stepClass, stepStream, stepSubject, stepChapter, stepVideos].forEach(s => s.classList.add("hidden"));
+      sec.classList.remove("hidden");
+      updateNav();
+      revealIn(sec);
+    }
+
+    function getSubjectsMap() {
+      const clsData = SYLLABUS[state.cls];
+      if (!clsData) return {};
+      if (clsData.streams) return clsData.streams[state.stream] || {};
+      return clsData.subjects || {};
+    }
+
+    function renderClasses() {
+      classGrid.innerHTML = "";
+      Object.keys(SYLLABUS).forEach((cls) => {
+        const hasStreams = Boolean(SYLLABUS[cls].streams);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${hasStreams ? "SCIENCE • COMMERCE • HUMANITIES" : "CBSE / NCERT SYLLABUS"}</span>
+          <div class="card-title">${cls}</div>
+          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + Top 5 one-shot slots"}</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.cls = cls;
+          state.stream = null;
+          state.subject = null;
+          state.chapterObj = null;
+          if (SYLLABUS[cls].streams) {
+            renderStreams();
+            showStep(stepStream);
+          } else {
+            renderSubjects();
+            showStep(stepSubject);
+          }
+        });
+        classGrid.appendChild(btn);
+      });
+      revealIn(stepClass);
+    }
+
+    function renderStreams() {
+      streamGrid.innerHTML = "";
+      const streams = Object.keys(SYLLABUS[state.cls].streams || {});
+      streams.forEach((st) => {
+        const subCount = Object.keys(SYLLABUS[state.cls].streams[st]).length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${state.cls} STREAM</span>
+          <div class="card-title">${st}</div>
+          <div class="card-desc">${subCount} main subjects with full chapters</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.stream = st;
+          state.subject = null;
+          state.chapterObj = null;
+          renderSubjects();
+          showStep(stepSubject);
+        });
+        streamGrid.appendChild(btn);
+      });
+    }
+
+    function renderSubjects() {
+      subjectGrid.innerHTML = "";
+      const subMap = getSubjectsMap();
+      Object.keys(subMap).forEach((subj) => {
+        const chCount = subMap[subj].length;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${state.stream ? state.stream : state.cls}</span>
+          <div class="card-title">${subj}</div>
+          <div class="card-desc">${chCount} chapters available</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.subject = subj;
+          state.chapterObj = null;
+          chapterSearch.value = "";
+          renderChapters();
+          showStep(stepChapter);
+        });
+        subjectGrid.appendChild(btn);
+      });
+    }
+
+    function renderChapters(filter = "") {
+      chapterGrid.innerHTML = "";
+      const list = getSubjectsMap()[state.subject] || [];
+      const filtered = list.filter(c => c.chapter.toLowerCase().includes(filter.trim().toLowerCase()));
+      if (!filtered.length) {
+        chapterGrid.innerHTML = `<div class="coming-box">No matching chapter found.</div>`;
+        return;
+      }
+      filtered.forEach((chObj) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sv-card";
+        btn.innerHTML = `
+          <span class="tag">${state.subject}</span>
+          <div class="card-title">${chObj.chapter}</div>
+          <div class="card-desc">Open Top 5 ranked one-shot list</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.chapterObj = chObj;
+          renderVideos();
+          showStep(stepVideos);
+        });
+        chapterGrid.appendChild(btn);
+      });
+      revealIn(stepChapter);
+    }
+
+    function renderVideos() {
+      videoGrid.innerHTML = "";
+      const chObj = state.chapterObj;
+      videosTitle.textContent = `Top 5 One-Shots — ${chObj.chapter}`;
+
+      (chObj.videos || []).slice(0, 5).forEach((vid) => {
+        const card = document.createElement("article");
+        card.className = "video-card";
+
+        if (vid.id) {
+          const thumb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+          const url = `https://www.youtube.com/watch?v=${vid.id}`;
+          card.innerHTML = `
+            <div class="thumb-wrap">
+              <img src="${thumb}" alt="${vid.title}" loading="lazy" />
+              <div class="thumb-sheen" aria-hidden="true"></div>
+              <span class="rank-badge">#${vid.rank} VERIFIED</span>
+            </div>
+            <div class="video-body">
+              <h3 class="card-title">${vid.title}</h3>
+              <div class="video-meta"><span>${vid.channel}</span> • ${vid.duration}</div>
+              <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
+            </div>
+          `;
+        } else {
+          card.innerHTML = `
+            <div class="video-body">
+              <span class="tag">#${vid.rank} ONE-SHOT SLOT</span>
+              <h3 class="card-title">${vid.title}</h3>
+              <div class="video-meta">Target Channel: <span>${vid.channel}</span></div>
+              <div class="coming-box">Verified one-shot link coming soon for this chapter.</div>
+            </div>
+          `;
+        }
+        videoGrid.appendChild(card);
+      });
+    }
+
+    // Login / Sign Up (localStorage)
+    const authModal = document.getElementById("authModal");
+    const authOpenBtn = document.getElementById("authOpenBtn");
+    const authCloseBtn = document.getElementById("authCloseBtn");
+    const authForm = document.getElementById("authForm");
+    const authStatus = document.getElementById("authStatus");
+    const userBanner = document.getElementById("userBanner");
+
+    function syncUserUI() {
+      const saved = localStorage.getItem("sv_student_user");
+      if (saved) {
+        const user = JSON.parse(saved);
+        authOpenBtn.textContent = user.name;
+        userBanner.textContent = `Signed in as ${user.name} (${user.email}) • Curated for students. Built for better learning.`;
+      }
+    }
+
+    authOpenBtn.addEventListener("click", () => authModal.classList.remove("hidden"));
+    authCloseBtn.addEventListener("click", () => authModal.classList.add("hidden"));
+    authModal.addEventListener("click", (e) => {
+      if (e.target === authModal) authModal.classList.add("hidden");
+    });
+
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("authName").value.trim();
+      const email = document.getElementById("authEmail").value.trim();
+      if (!name || !email) return;
+      localStorage.setItem("sv_student_user", JSON.stringify({ name, email }));
+      syncUserUI();
+      authStatus.textContent = "Saved! Welcome to STUDYVERSE WATCH.";
+      setTimeout(() => authModal.classList.add("hidden"), 650);
+    });
+
+    // Feedback (localStorage)
+    const feedbackForm = document.getElementById("feedbackForm");
+    const feedbackList = document.getElementById("feedbackList");
+    const fbStatus = document.getElementById("fbStatus");
+
+    function renderFeedback() {
+      const items = JSON.parse(localStorage.getItem("sv_feedback_items") || "[]");
+      feedbackList.innerHTML = items.slice(0, 5).map((item) => `
+        <div class="fb-item">
+          <div class="fb-meta">${item.name} • ${item.email}</div>
+          <div>${item.message}</div>
+        </div>
+      `).join("");
+    }
+
+    feedbackForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("fbName").value.trim();
+      const email = document.getElementById("fbEmail").value.trim();
+      const message = document.getElementById("fbMessage").value.trim();
+      if (!name || !email || !message) return;
+      const items = JSON.parse(localStorage.getItem("sv_feedback_items") || "[]");
+      items.unshift({ name, email, message });
+      localStorage.setItem("sv_feedback_items", JSON.stringify(items));
+      feedbackForm.reset();
+      fbStatus.textContent = "Thank you! Your feedback has been recorded.";
+      renderFeedback();
+    });
+
+    window.addEventListener("scroll", () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(Math.max(window.scrollY / h, 0), 1) : 0;
+      scrollBar.style.transform = `scaleX(${p})`;
+    }, { passive: true });
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced && card3d) {
+      card3d.addEventListener("pointermove", (e) => {
+        const r = card3d.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        card3d.style.setProperty("--rx", `${(nx * 14).toFixed(1)}deg`);
+        card3d.style.setProperty("--ry", `${(-ny * 12).toFixed(1)}deg`);
+      });
+      card3d.addEventListener("pointerleave", () => {
+        card3d.style.setProperty("--rx", "-8deg");
+        card3d.style.setProperty("--ry", "6deg");
+      });
+    }
+
+    backBtn.addEventListener("click", () => {
+      if (!stepVideos.classList.contains("hidden")) {
+        state.chapterObj = null;
+        showStep(stepChapter);
+      } else if (!stepChapter.classList.contains("hidden")) {
+        state.subject = null;
+        showStep(stepSubject);
+      } else if (!stepSubject.classList.contains("hidden")) {
+        if (SYLLABUS[state.cls].streams) {
+          state.stream = null;
+          showStep(stepStream);
+        } else {
+          state.cls = null;
+          showStep(stepClass);
+        }
+      } else if (!stepStream.classList.contains("hidden")) {
+        state.cls = null;
+        showStep(stepClass);
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      state.cls = null;
+      state.stream = null;
+      state.subject = null;
+      state.chapterObj = null;
+      showStep(stepClass);
+    });
+
+    watchNowBtn.addEventListener("click", () => {
+      stepClass.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+    });
+
+    chapterSearch.addEventListener("input", (e) => renderChapters(e.target.value));
+
+    renderClasses();
+    updateNav();
+    syncUserUI();
+    renderFeedback();
+  </script>
+</body>
+</html>
