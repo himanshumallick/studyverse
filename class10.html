@@ -1,374 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CBSE Class 10 Hub — STUDYVERSE</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBSE Class 10 Interactive Hub — STUDYVERSE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
-      --bg-primary: #030712;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --accent-cyan: #38bdf8;
-      --accent-indigo: #6366f1;
-      --border-subtle: rgba(99, 102, 241, 0.25);
-      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg: #030712;
+      --surface: rgba(11, 15, 25, 0.86);
+      --border: rgba(99, 102, 241, 0.25);
+      --cyan: #38bdf8;
+      --indigo: #6366f1;
+      --violet: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html, body {
-      background-color: var(--bg-primary) !important;
-      color: var(--text-primary) !important;
+    body {
+      background: var(--bg);
+      color: var(--text);
       font-family: var(--font-sans);
-      overflow-x: hidden;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    a { text-decoration: none; color: inherit; }
-
-    #bg-3d-canvas {
+    /* 21st.dev inspired subtle ambient grid + glow */
+    .ambient-bg {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      background-image:
+        radial-gradient(circle at 18% 15%, rgba(56, 189, 248, 0.14), transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(99, 102, 241, 0.16), transparent 42%),
+        linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
     }
 
-    .site-wrapper {
+    .container {
       position: relative;
       z-index: 10;
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 20px 80px;
     }
 
-    .site-header {
+    .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border-subtle);
-      margin-bottom: 40px;
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
     }
-    .brand-logo { font-weight: 800; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .brand-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo)); display: grid; place-items: center; color: #fff; }
-    .brand-logo span { color: var(--accent-cyan); }
 
-    .back-btn {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.15);
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
       color: #fff;
-      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
-      cursor: pointer;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      color: #fff;
+    }
+
+    .brand span {
+      color: var(--cyan);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
       font-weight: 600;
       font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: 0.2s;
     }
-    .back-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--accent-cyan); }
 
-    .page-header { margin-bottom: 40px; }
-    .page-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; margin-bottom: 10px; }
-    .gradient-text { background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .page-desc { color: var(--text-secondary); font-size: 1.05rem; }
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
 
-    /* Subjects Grid */
+    .grad {
+      background: linear-gradient(135deg, var(--cyan), #818cf8, var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 28px;
+    }
+
     .subjects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-bottom: 50px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
     }
+
     .subject-card {
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 24px;
-      padding: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(18px);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
+
+    .subject-card.active,
     .subject-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.18);
-    }
-    .subject-icon { font-size: 2.2rem; margin-bottom: 16px; display: block; }
-    .subject-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
-    .subject-sub { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px; }
-
-    /* Chapters Box */
-    .chapters-section {
-      display: none;
-      background: rgba(11, 15, 25, 0.92);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 28px;
-      padding: 36px;
-      animation: fadeIn 0.4s ease-out;
-    }
-    .chapters-section.active { display: block; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+      border-color: var(--cyan);
+      box-shadow: 0 14px 36px rgba(56, 189, 248, 0.14);
     }
 
-    .chapter-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 24px;
+    .chapters-panel {
+      background: var(--surface);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 24px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
     }
-    .chapter-item {
+
+    .chapter-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 18px 22px;
-      border-radius: 16px;
-      transition: 0.2s;
-    }
-    .chapter-item:hover {
-      background: rgba(56, 189, 248, 0.08);
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-    .chapter-name { font-weight: 700; font-size: 1rem; color: #fff; margin-top: 2px; }
-    
-    .download-btn {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
     }
-    .download-btn:hover { opacity: 0.9; transform: scale(1.03); box-shadow: 0 5px 15px rgba(56,189,248,0.3); }
+
+    .mod-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .chapter-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .pdf-pill {
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 10px;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .video-card {
+      background: rgba(3, 7, 18, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .thumb-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+      overflow: hidden;
+    }
+
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .rank-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(3, 7, 18, 0.86);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 99px;
+    }
+
+    .video-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .video-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.35;
+    }
+
+    .video-meta {
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-top: auto;
+    }
   </style>
 </head>
 <body>
+  <div class="ambient-bg"></div>
+  <div id="app"></div>
 
-  <canvas id="bg-3d-canvas"></canvas>
+  <script type="module">
+    import React, { useState } from "https://esm.sh/react@18.3.1";
+    import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
+    import { motion, AnimatePresence } from "https://esm.sh/framer-motion@11.11.11?deps=react@18.3.1,react-dom@18.3.1";
 
-  <div class="site-wrapper">
-    <header class="site-header">
-      <div class="brand-logo" onclick="window.location.href='index.html'">
-        <div class="brand-icon">⚡</div>
-        STUDY<span>VERSE</span>
-      </div>
-      <a href="index.html" class="back-btn">← Back to Home</a>
-    </header>
-
-    <main>
-      <div class="page-header">
-        <h1 class="page-title"><span class="gradient-text">CBSE Class 10</span> Hub</h1>
-        <p class="page-desc">Select a subject below to explore full board syllabus chapters and download notes.</p>
-      </div>
-
-      <!-- 3 Subjects Cards -->
-      <div class="subjects-grid" id="subjectsGrid">
-        
-        <div class="subject-card" onclick="openSubject('science')">
-          <span class="subject-icon">🧪</span>
-          <h2 class="subject-title">Science</h2>
-          <p class="subject-sub">Physics, Chemistry & Biology (All 13 Chapters)</p>
-          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
-        </div>
-
-        <div class="subject-card" onclick="openSubject('maths')">
-          <span class="subject-icon">📐</span>
-          <h2 class="subject-title">Mathematics</h2>
-          <p class="subject-sub">Standard & Basic (All 14 Chapters)</p>
-          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
-        </div>
-
-        <div class="subject-card" onclick="openSubject('sst')">
-          <span class="subject-icon">🌍</span>
-          <h2 class="subject-title">Social Science</h2>
-          <p class="subject-sub">History, Civics, Geography & Economics</p>
-          <span style="color:var(--accent-cyan); font-weight:700; font-size:0.88rem;">View Chapters →</span>
-        </div>
-
-      </div>
-
-      <!-- Dynamic Chapters Box -->
-      <div class="chapters-section" id="chaptersSection">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase; font-weight: 700;">Selected Subject</span>
-            <h2 id="subjectHeading" style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 4px;">Subject Name</h2>
-          </div>
-          <button class="back-btn" onclick="closeChapters()">← Back to Subjects</button>
-        </div>
-
-        <div class="chapter-list" id="chapterListContainer"></div>
-      </div>
-
-    </main>
-  </div>
-
-  <!-- Three.js Background Animation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-    const canvas = document.getElementById('bg-3d-canvas');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const group = new THREE.Group();
-    scene.add(group);
-
-    const geo = new THREE.BoxGeometry(1.2, 1.6, 0.25);
-    const materials = [
-      new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.3, metalness: 0.8 }),
-      new THREE.MeshStandardMaterial({ color: 0x0b0f19, roughness: 0.5 }),
-      new THREE.MeshStandardMaterial({ color: 0x6366f1, roughness: 0.2, metalness: 0.5 })
-    ];
-
-    const books = [];
-    for (let i = 0; i < 6; i++) {
-      const mesh = new THREE.Mesh(geo, materials);
-      mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 5 - 2);
-      mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-      group.add(mesh);
-      books.push(mesh);
-    }
-
-    scene.add(new THREE.AmbientLight(0xffffff, 1.3));
-    const pLight = new THREE.PointLight(0x38bdf8, 3, 50);
-    pLight.position.set(5, 5, 5);
-    scene.add(pLight);
-
-    camera.position.z = 6;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      books.forEach((b, idx) => {
-        b.rotation.x += 0.003 * (idx % 2 === 0 ? 1 : -1);
-        b.rotation.y += 0.004;
-      });
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Complete CBSE Class 10 Syllabus Chapters Data
-    const subjectData = {
+    // Curated Top CBSE Videos (ranked by latest syllabus & clarity, max 3 per chapter; 2 where top 2 are strongest)
+    const SYLLABUS_DATA = {
       science: {
-        title: "Science (Physics, Chemistry & Biology)",
+        label: "Science",
+        icon: "🧪",
+        tagline: "Latest CBSE Science chapters with ranked top videos & thumbnails",
         chapters: [
-          { name: "Chapter 1: Chemical Reactions and Equations", pdfUrl: "#" },
-          { name: "Chapter 2: Acids, Bases and Salts", pdfUrl: "#" },
-          { name: "Chapter 3: Metals and Non-metals", pdfUrl: "#" },
-          { name: "Chapter 4: Carbon and its Compounds", pdfUrl: "#" },
-          { name: "Chapter 5: Life Processes", pdfUrl: "#" },
-          { name: "Chapter 6: Control and Coordination", pdfUrl: "#" },
-          { name: "Chapter 7: How do Organisms Reproduce?", pdfUrl: "#" },
-          { name: "Chapter 8: Heredity", pdfUrl: "#" },
-          { name: "Chapter 9: Light – Reflection and Refraction", pdfUrl: "#" },
-          { name: "Chapter 10: Human Eye and Colourful World", pdfUrl: "#" },
-          { name: "Chapter 11: Electricity", pdfUrl: "#" },
-          { name: "Chapter 12: Magnetic Effects of Electric Current", pdfUrl: "#" },
-          { name: "Chapter 13: Our Environment", pdfUrl: "#" }
+          {
+            id: "sci-1",
+            name: "Chapter 1: Chemical Reactions and Equations",
+            pdfUrl: "#",
+            videos: [
+              {
+                rank: "#1 LATEST CBSE",
+                title: "Chemical Reactions & Equations L1 | Class 10 Chemistry | CBSE 2026",
+                channel: "Vedantu Master Tamil",
+                year: "2025",
+                videoId: "BuNa0DuhqJs",
+                url: "https://www.youtube.com/watch?v=BuNa0DuhqJs"
+              },
+              {
+                rank: "#2 ANIMATED NCERT",
+                title: "Chemical reactions and equations Full chapter in animation | CBSE Class 10",
+                channel: "Grade booster",
+                year: "2024",
+                videoId: "AEyJ0MpddzQ",
+                url: "https://www.youtube.com/watch?v=AEyJ0MpddzQ"
+              },
+              {
+                rank: "#3 VISUAL REVISION",
+                title: "Chemical reactions and equations Full chapter in animation | NCERT Ch-1",
+                channel: "Grade booster",
+                year: "2024",
+                videoId: "aWkVP_lk0DU",
+                url: "https://www.youtube.com/watch?v=aWkVP_lk0DU"
+              }
+            ]
+          },
+          {
+            id: "sci-9",
+            name: "Chapter 9: Light – Reflection and Refraction",
+            pdfUrl: "#",
+            videos: [
+              {
+                rank: "#1 QUICK ONE-SHOT",
+                title: "CBSE 10 Physics | Light Reflection & Refraction | Full Chapter In Just 15 Minutes",
+                channel: "Exam Winner: CBSE Class 10",
+                year: "2025",
+                videoId: "4YESpXn1i9I",
+                url: "https://www.youtube.com/watch?v=4YESpXn1i9I"
+              },
+              {
+                rank: "#2 CONCEPT & DIAGRAMS",
+                title: "Light - Reflection & Refraction FULL CHAPTER in Animation | NCERT Science",
+                channel: "Grade booster",
+                year: "2024",
+                videoId: "8iVoxtEYJeM",
+                url: "https://www.youtube.com/watch?v=8iVoxtEYJeM"
+              }
+            ]
+          }
         ]
       },
       maths: {
-        title: "Mathematics (Standard & Basic)",
+        label: "Mathematics",
+        icon: "📐",
+        tagline: "Board-focused Maths chapters with top 2-3 high-clarity videos",
         chapters: [
-          { name: "Chapter 1: Real Numbers", pdfUrl: "#" },
-          { name: "Chapter 2: Polynomials", pdfUrl: "#" },
-          { name: "Chapter 3: Pair of Linear Equations in Two Variables", pdfUrl: "#" },
-          { name: "Chapter 4: Quadratic Equations", pdfUrl: "#" },
-          { name: "Chapter 5: Arithmetic Progressions", pdfUrl: "#" },
-          { name: "Chapter 6: Triangles", pdfUrl: "#" },
-          { name: "Chapter 7: Coordinate Geometry", pdfUrl: "#" },
-          { name: "Chapter 8: Introduction to Trigonometry", pdfUrl: "#" },
-          { name: "Chapter 9: Some Applications of Trigonometry", pdfUrl: "#" },
-          { name: "Chapter 10: Circles", pdfUrl: "#" },
-          { name: "Chapter 11: Areas Related to Circles", pdfUrl: "#" },
-          { name: "Chapter 12: Surface Areas and Volumes", pdfUrl: "#" },
-          { name: "Chapter 13: Statistics", pdfUrl: "#" },
-          { name: "Chapter 14: Probability", pdfUrl: "#" }
+          {
+            id: "math-1",
+            name: "Chapter 1: Real Numbers",
+            pdfUrl: "#",
+            videos: [
+              {
+                rank: "#1 RAPID REVISION",
+                title: "Class 10th REAL NUMBERS in 20 Minutes! | Class 10 Maths Rapid Revision",
+                channel: "Physics Wallah Foundation",
+                year: "2026",
+                videoId: "ZCcVfJ8f32E",
+                url: "https://www.youtube.com/watch?v=ZCcVfJ8f32E"
+              },
+              {
+                rank: "#2 LATEST LECTURE",
+                title: "Real Numbers | Lecture 1 | Class 10 Maths | CBSE 2027",
+                channel: "Vedantu Master Tamil",
+                year: "2026",
+                videoId: "2aXOJnmK70c",
+                url: "https://www.youtube.com/watch?v=2aXOJnmK70c"
+              },
+              {
+                rank: "#3 FULL CHAPTER",
+                title: "Class 10 CBSE Mathematics | Real Numbers - Full Chapter Revision",
+                channel: "Xylem Class 10 CBSE",
+                year: "2026",
+                videoId: "UpErKfAkrEM",
+                url: "https://www.youtube.com/watch?v=UpErKfAkrEM"
+              }
+            ]
+          }
         ]
       },
       sst: {
-        title: "Social Science (History, Civics, Geography & Economics)",
+        label: "Social Science",
+        icon: "🌍",
+        tagline: "History, Civics, Geography & Economics with ranked CBSE videos",
         chapters: [
-          { name: "History Ch 1: The Rise of Nationalism in Europe", pdfUrl: "https://drive.google.com/file/d/1WTkFACKU-A6TiWa-BgjeRAnaOFH1sjtE/view?usp=drive_link" },
-          { name: "History Ch 2: Nationalism in India", pdfUrl: "https://drive.google.com/file/d/1d4Q8de9Y8fD7oXGdQRnbUMLhUk8jY-h0/view?usp=drive_link" },
-          { name: "History Ch 3: The Making of a Global World", pdfUrl: "https://drive.google.com/file/d/1rZo0NVkfKUJX9VcoY8rO0Ot91Lg9t2jr/view?usp=drive_link" },
-          { name: "History Ch 4: The Age of Industrialisation", pdfUrl: "https://drive.google.com/file/d/14ECrZvT4l2eL5JmSORUR9mud4XqXkfMj/view?usp=drive_link" },
-          { name: "History Ch 5: Print Culture and the Modern World", pdfUrl: "https://drive.google.com/file/d/1TdrB_pO9MXGCHvZWTp07ctmuMH8d9VZS/view?usp=drive_link" },
-          { name: "Geography Ch 1: Resources and Development", pdfUrl: "https://drive.google.com/file/d/1rtFOZG-uawlbsNY5KapSqkVQLosaVnYq/view?usp=drive_link" },
-          { name: "Geography Ch 2: Forest and Wildlife Resources", pdfUrl: "https://drive.google.com/file/d/1HUlwI7woV2uvCuHvi5hDzHiAusPNkvxi/view?usp=drive_link" },
-          { name: "Geography Ch 3: Water Resources", pdfUrl: "https://drive.google.com/file/d/1NllNb_AOUF3MLGAz2rWzkkkMEzUAEKlt/view?usp=drive_link" },
-          { name: "Geography Ch 4: Agriculture", pdfUrl: "https://drive.google.com/file/d/1SxJ0S_fNeJoivG13oP7YeuQPDPoMeP5v/view?usp=drive_link" },
-          { name: "Geography Ch 5: Minerals and Energy Resources", pdfUrl: "https://drive.google.com/file/d/1Zadku0y3t4E-0mxs9T1kIcotTJOid74c/view?usp=drive_link" },
-          { name: "Geography Ch 6: Manufacturing Industries", pdfUrl: "https://drive.google.com/file/d/11Q8ku4phXlQJqvVmdpDwGDxn3ziV3a_0/view?usp=drive_link" },
-          { name: "Geography Ch 7: Lifelines of National Economy", pdfUrl: "#" },
-          { name: "Civics Ch 1: Power Sharing", pdfUrl: "https://drive.google.com/file/d/1RWpfBksZHy4zqTVprHTWxpZc1cMd32o2/view?usp=drive_link" },
-          { name: "Civics Ch 2: Federalism", pdfUrl: "https://drive.google.com/file/d/1UySk9aD2ZtaFT5fY84Rr0k8J9zK61NQd/view?usp=drive_link" },
-          { name: "Civics Ch 3: Gender, Religion and Caste", pdfUrl: "https://drive.google.com/file/d/1sTt5buu7ZLPgvEoE6to0DHe8Rn2_FPG2/view?usp=drive_link" },
-          { name: "Civics Ch 4: Political Parties", pdfUrl: "https://drive.google.com/file/d/1_8pLHBBG4uzvW-kQqoAA6aKLetCv9o7E/view?usp=drive_link" },
-          { name: "Civics Ch 5: Outcomes of Democracy", pdfUrl: "https://drive.google.com/file/d/1Kbq5Sz39wv_ds5Psgk9Fa4sxUdMoWy1X/view?usp=drive_link" },
-          { name: "Economics Ch 1: Development", pdfUrl: "https://drive.google.com/file/d/1vSWbkKpkcMv08Kpu_gnF8E1g28lsmDpj/view?usp=drive_link" },
-          { name: "Economics Ch 2: Sectors of the Indian Economy", pdfUrl: "https://drive.google.com/file/d/1YfDo-eRvhMu1ckAEXt6sZQ9lCZ4oI19S/view?usp=drive_link" },
-          { name: "Economics Ch 3: Money and Credit", pdfUrl: "https://drive.google.com/file/d/1LLFGX4ZzviuoDlCw3RormytNBtqyPmOn/view?usp=drive_link" },
-          { name: "Economics Ch 4: Globalisation and the Indian Economy", pdfUrl: "https://drive.google.com/file/d/1-eYOXS72xtC_vv-RDwZswpRqur-NmveJ/view?usp=drive_link" }
+          {
+            id: "sst-his-1",
+            name: "History Ch 1: The Rise of Nationalism in Europe",
+            pdfUrl: "#",
+            videos: [
+              {
+                rank: "#1 ONE-SHOT REVISION",
+                title: "The Rise of Nationalism in Europe ONE SHOT | Class 10 SST Rapid Revision",
+                channel: "Physics Wallah Foundation",
+                year: "2026",
+                videoId: "xBF9CWzDNmE",
+                url: "https://www.youtube.com/watch?v=xBF9CWzDNmE"
+              },
+              {
+                rank: "#2 FULL CHAPTER",
+                title: "The Rise of Nationalism in Europe Class 10 Full Chapter",
+                channel: "Sunlike study",
+                year: "2025",
+                videoId: "ksTPzTWUb6o",
+                url: "https://www.youtube.com/watch?v=ksTPzTWUb6o"
+              },
+              {
+                rank: "#3 ANIMATED EXPLAINER",
+                title: "The Rise of Nationalism in Europe class 10 Full chapter in animation",
+                channel: "Grade booster",
+                year: "2024",
+                videoId: "tsharTRrGTE",
+                url: "https://www.youtube.com/watch?v=tsharTRrGTE"
+              }
+            ]
+          }
         ]
       }
     };
 
-    function openSubject(subjectKey) {
-      const data = subjectData[subjectKey];
-      document.getElementById('subjectHeading').textContent = data.title;
-      
-      const container = document.getElementById('chapterListContainer');
-      container.innerHTML = data.chapters.map((ch, idx) => `
-        <div class="chapter-item">
-          <div>
-            <span style="font-family: var(--font-mono); color: var(--accent-cyan); font-size: 0.75rem;">MODULE ${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
-            <div class="chapter-name">${ch.name}</div>
-          </div>
-          <a href="${ch.pdfUrl}" target="_blank" class="download-btn">
-            📥 Download PDF
-          </a>
-        </div>
-      `).join('');
+    function App() {
+      const [selectedSubject, setSelectedSubject] = useState("science");
+      const currentSubject = SYLLABUS_DATA[selectedSubject];
 
-      document.getElementById('subjectsGrid').style.display = 'none';
-      document.getElementById('chaptersSection').classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return React.createElement(
+        "div",
+        { className: "container" },
+        React.createElement(
+          "header",
+          { className: "topbar" },
+          React.createElement(
+            "a",
+            { href: "index.html", className: "brand" },
+            React.createElement("div", { className: "brand-badge" }, "⚡"),
+            React.createElement("div", null, "STUDY", React.createElement("span", null, "VERSE"))
+          ),
+          React.createElement("a", { href: "index.html", className: "btn-ghost" }, "← Back to Home")
+        ),
+
+        React.createElement(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 16 },
+            animate: { opacity: 1, y: 0 },
+            transition: { type: "spring", stiffness: 260, damping: 24 }
+          },
+          React.createElement(
+            "h1",
+            { className: "hero-title" },
+            "CBSE Class 10 ",
+            React.createElement("span", { className: "grad" }, "Framer Motion"),
+            " Hub"
+          ),
+          React.createElement(
+            "p",
+            { className: "subtitle" },
+            "Top 2–3 curated CBSE videos per chapter with thumbnails, spring motion & PDF notes."
+          )
+        ),
+
+        // 21st.dev inspired interactive subject selector cards
+        React.createElement(
+          "div",
+          { className: "subjects-grid" },
+          Object.entries(SYLLABUS_DATA).map(([key, item]) =>
+            React.createElement(
+              motion.div,
+              {
+                key,
+                layoutId: `subj-${key}`,
+                whileHover: { y: -5, scale: 1.015 },
+                whileTap: { scale: 0.98 },
+                transition: { type: "spring", stiffness: 380, damping: 26 },
+                onClick: () => setSelectedSubject(key),
+                className: `subject-card ${selectedSubject === key ? "active" : ""}`
+              },
+              React.createElement("div", { style: { fontSize: "1.8rem", marginBottom: "10px" } }, item.icon),
+              React.createElement("div", { style: { fontSize: "1.2rem", fontWeight: 700 } }, item.label),
+              React.createElement("div", { style: { fontSize: "0.86rem", color: "#94a3b8", marginTop: "6px" } }, item.tagline)
+            )
+          )
+        ),
+
+        // Animated chapters + ranked videos with thumbnails
+        React.createElement(
+          AnimatePresence,
+          { mode: "wait" },
+          React.createElement(
+            motion.section,
+            {
+              key: selectedSubject,
+              initial: { opacity: 0, y: 18 },
+              animate: { opacity: 1, y: 0 },
+              exit: { opacity: 0, y: -12 },
+              transition: { type: "spring", stiffness: 280, damping: 26 },
+              className: "chapters-panel"
+            },
+            React.createElement(
+              "h2",
+              { style: { fontSize: "1.4rem", fontWeight: 800, marginBottom: "18px" } },
+              `${currentSubject.icon} ${currentSubject.label} — Chapters & Top Videos`
+            ),
+            currentSubject.chapters.map((ch, idx) =>
+              React.createElement(
+                motion.div,
+                {
+                  key: ch.id,
+                  initial: { opacity: 0, y: 12 },
+                  animate: { opacity: 1, y: 0 },
+                  transition: { delay: idx * 0.05, type: "spring", stiffness: 300, damping: 24 },
+                  className: "chapter-card"
+                },
+                React.createElement(
+                  "div",
+                  { className: "chapter-top" },
+                  React.createElement(
+                    "div",
+                    null,
+                    React.createElement("div", { className: "mod-tag" }, `MODULE 0${idx + 1}`),
+                    React.createElement("div", { className: "chapter-title" }, ch.name)
+                  ),
+                  React.createElement(
+                    "a",
+                    {
+                      href: ch.pdfUrl,
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                      className: "pdf-pill"
+                    },
+                    "📥 PDF Notes"
+                  )
+                ),
+                React.createElement(
+                  "div",
+                  { className: "videos-grid" },
+                  ch.videos.slice(0, 3).map((vid) =>
+                    React.createElement(
+                      motion.a,
+                      {
+                        key: vid.videoId,
+                        href: vid.url,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        whileHover: { y: -4, scale: 1.015 },
+                        whileTap: { scale: 0.98 },
+                        transition: { type: "spring", stiffness: 400, damping: 25 },
+                        className: "video-card"
+                      },
+                      React.createElement(
+                        "div",
+                        { className: "thumb-wrap" },
+                        React.createElement("img", {
+                          src: `https://img.youtube.com/vi/${vid.videoId}/hqdefault.jpg`,
+                          alt: vid.title,
+                          loading: "lazy"
+                        }),
+                        React.createElement("span", { className: "rank-badge" }, vid.rank)
+                      ),
+                      React.createElement(
+                        "div",
+                        { className: "video-body" },
+                        React.createElement("div", { className: "video-title" }, vid.title),
+                        React.createElement("div", { className: "video-meta" }, `${vid.channel} • ${vid.year}`)
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
     }
 
-    function closeChapters() {
-      document.getElementById('chaptersSection').classList.remove('active');
-      document.getElementById('subjectsGrid').style.display = 'grid';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    createRoot(document.getElementById("app")).render(React.createElement(App));
   </script>
 </body>
 </html>
