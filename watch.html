@@ -117,6 +117,11 @@
       box-shadow: 0 10px 24px rgba(37, 99, 235, 0.26);
     }
 
+    .btn.active-filter {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
     .btn-yellow {
       background: linear-gradient(135deg, var(--yellow), var(--amber));
       color: var(--bg-black);
@@ -764,13 +769,18 @@
       { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#3–#5" }
     ];
 
-    // Verified YouTube IDs returned from search results
     const VERIFIED_VIDEOS = {
       "Class 9|Science|Ch 1: Matter in Our Surroundings": [
         { rank: 1, title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains", duration: "One Shot", id: "Wjfm25W4EV8" }
       ],
       "Class 9|Mathematics|Ch 2: Polynomials": [
         { rank: 1, title: "Polynomials - One Shot Revision (Part 1) | Class 9 Maths Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "-XawEiIVI44" }
+      ],
+      "Class 9|Social Science|History Ch 1: The French Revolution": [
+        { rank: 1, title: "Class 9 History Chapter 1 – The French Revolution One Shot", channel: "Sunlike Study", duration: "One Shot", id: "PJaUqX9KQW0" }
+      ],
+      "Class 9|Social Science|Geography Ch 1: India - Size and Location": [
+        { rank: 1, title: "India : Size and Location Class 9 Full Chapter (Animation)", channel: "Sunlike Study", duration: "One Shot", id: "I_EMHGuo7YA" }
       ],
       "Class 10|Mathematics|Ch 1: Real Numbers": [
         { rank: 1, title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah Foundation", duration: "One Shot", id: "ahZ-rb4cOvE" },
@@ -805,6 +815,9 @@
       "Class 10|Social Science|Geography Ch 4: Agriculture": [
         { rank: 1, title: "Agriculture Class 10 Geography Full Chapter (Animation) One Shot", channel: "Sunlike Study", duration: "One Shot", id: "VgJ-zRAdvaE" }
       ],
+      "Class 10|Social Science|Civics Ch 4: Political Parties": [
+        { rank: 1, title: "Political Parties Class 10 Full Chapter (Animation)", channel: "Sunlike Study", duration: "One Shot", id: "YYKmkrWPSi8" }
+      ],
       "Class 11|Science|Physics|Ch 1: Units and Measurements": [
         { rank: 1, title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "PW - JEE Wallah", duration: "One Shot", id: "wuI3MWvr0dY" },
         { rank: 2, title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "qEZklZNvjOs" },
@@ -825,6 +838,12 @@
       "Class 12|Science|Physics|Ch 1: Electric Charges and Fields": [
         { rank: 1, title: "ELECTRIC CHARGES AND FIELDS in One Shot - All Concepts & PYQs", channel: "Physics Wallah", duration: "One Shot", id: "iXHC9Qjl924" },
         { rank: 2, title: "Electric Charges And Fields One Shot | Physics | Class 12th Boards", channel: "NCERT Wallah", duration: "One Shot", id: "hgk8CxXZvjo" }
+      ],
+      "Class 12|Science|Physics|Ch 2: Electrostatic Potential and Capacitance": [
+        { rank: 1, title: "Electrostatic Potential & Capacitance in ONE SHOT | Class 12", channel: "Physics Wallah", duration: "One Shot", id: "4kKUKpvnUz0" }
+      ],
+      "Class 12|Science|Physics|Ch 6: Electromagnetic Induction": [
+        { rank: 1, title: "Electromagnetic Induction Class 12 One Shot | Physics Ch 6", channel: "NCERT Wallah", duration: "One Shot", id: "9OWhVAKzoig" }
       ],
       "Class 12|Science|Chemistry|Ch 1: Solutions": [
         { rank: 1, title: "Solutions Chemistry Class 12 One Shot | All Concepts + NCERT + PYQs", channel: "NCERT Wallah", duration: "One Shot", id: "MrQ5dvvNuVs" },
