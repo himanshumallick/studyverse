@@ -8,7 +8,7 @@
     :root {
       --bg-black: #05070d;
       --bg-navy: #0a1020;
-      --card: rgba(10, 16, 32, 0.86);
+      --card: rgba(10, 16, 32, 0.88);
       --blue: #2563eb;
       --bright-blue: #38bdf8;
       --cyan: #22d3ee;
@@ -292,6 +292,11 @@
       border-color: var(--yellow);
     }
 
+    .sv-card.selected-channel {
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.45);
+    }
+
     .tag {
       display: inline-block;
       font-size: 0.74rem;
@@ -300,8 +305,20 @@
       margin-bottom: 8px;
     }
 
+    .channel-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--cyan);
+      font-size: 0.78rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
     .card-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 6px;
     }
@@ -411,7 +428,6 @@
       font-size: 0.86rem;
     }
 
-    /* Quick Notes & Feedback Sections */
     .panel {
       background: var(--card);
       border: 1px solid var(--border);
@@ -495,7 +511,6 @@
       margin-bottom: 4px;
     }
 
-    /* Auth Modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -571,10 +586,11 @@
   <header class="topbar">
     <div class="brand">
       <span>STUDYVERSE WATCH</span>
-      <span class="brand-tag">INTERACTIVE HUB</span>
+      <span class="brand-tag">RANKED ONESHOTS</span>
     </div>
     <div class="nav-group">
       <a href="index.html" class="btn">Explore Classes</a>
+      <a href="#channelsSection" class="btn">Channels</a>
       <a href="#quickNotesSection" class="btn">Quick Notes</a>
       <a href="#feedbackSection" class="btn">Feedback</a>
       <button id="authOpenBtn" class="btn btn-blue" type="button">Login / Sign Up</button>
@@ -588,22 +604,33 @@
         <div class="tagline">Watch. Understand. Master.</div>
         <h1>LEARN BEYOND THE CLASSROOM.</h1>
         <p>
-          Explore Class 9 & 10 NCERT chapters plus Class 11 & 12 streams (Science, Commerce, Humanities) with Top 5 ranked one-shot slots and instant on-screen study notes—without touching your existing chapter PDF files.
+          Ranked Indian one-shot lectures across Classes 9–12 &amp; streams with instant on-screen notes—while keeping all your existing chapter PDF files untouched.
         </p>
         <div class="hero-actions">
           <button id="watchNowBtn" class="btn btn-yellow" type="button">▶ Best YouTube Videos</button>
-          <a href="index.html" class="btn">Explore Classes</a>
+          <a href="#channelsSection" class="btn">Browse Channels</a>
         </div>
         <span id="userBanner" class="hero-note">Curated for students. Built for better learning.</span>
       </div>
 
       <div class="stage-3d" aria-hidden="true">
         <div id="card3d" class="card-3d">
-          <span class="tag">CLASSES 9–12 • ALL STREAMS</span>
-          <h3>Top 5 Ranked One-Shots</h3>
-          <p class="card-desc">Sunlike Study, Physics Wallah, Next Toppers, BYJU'S & LearnoHub.</p>
+          <span class="tag">TOP CHANNELS • RANK #1–#5</span>
+          <h3>One-Shot Educators</h3>
+          <p class="card-desc">Sunlike Study • Physics Wallah • Next Toppers • Magnet Brains • Exphub</p>
         </div>
       </div>
+    </section>
+
+    <section id="channelsSection" class="section-block">
+      <div class="section-head">
+        <div>
+          <span class="tag">FEATURED CREATORS</span>
+          <h2>Top One-Shot YouTube Channels</h2>
+        </div>
+        <button id="clearChannelBtn" class="btn hidden" type="button">Show All Channels</button>
+      </div>
+      <div id="channelGrid" class="grid-cards"></div>
     </section>
 
     <div class="toolbar">
@@ -611,7 +638,6 @@
       <button id="resetBtn" class="btn" type="button">Reset Flow</button>
     </div>
 
-    <!-- Step 1: Class -->
     <section id="stepClass" class="section-block">
       <div class="section-head">
         <h2>Step 1 — Select Class</h2>
@@ -619,15 +645,13 @@
       <div id="classGrid" class="grid-cards"></div>
     </section>
 
-    <!-- Step 2A: Stream (Class 11 & 12) -->
     <section id="stepStream" class="section-block hidden">
       <div class="section-head">
-        <h2>Step 2 — Select Stream (Class 11 & 12)</h2>
+        <h2>Step 2 — Select Stream (Class 11 &amp; 12)</h2>
       </div>
       <div id="streamGrid" class="grid-cards"></div>
     </section>
 
-    <!-- Step 2B: Subject -->
     <section id="stepSubject" class="section-block hidden">
       <div class="section-head">
         <h2>Step 3 — Select Core Subject</h2>
@@ -635,7 +659,6 @@
       <div id="subjectGrid" class="grid-cards"></div>
     </section>
 
-    <!-- Step 3: Chapter -->
     <section id="stepChapter" class="section-block hidden">
       <div class="section-head">
         <h2>Step 4 — Select Chapter</h2>
@@ -644,7 +667,6 @@
       <div id="chapterGrid" class="grid-cards"></div>
     </section>
 
-    <!-- Step 4: Top 5 Videos -->
     <section id="stepVideos" class="section-block hidden">
       <div class="section-head">
         <h2 id="videosTitle">Step 5 — Top 5 One-Shot Recommendations</h2>
@@ -652,49 +674,47 @@
       <div id="videoGrid" class="grid-videos"></div>
     </section>
 
-    <!-- On-Screen Quick Notes (Preserves existing PDF files untouched) -->
     <section id="quickNotesSection" class="section-block">
       <div class="panel">
         <div class="section-head">
           <div>
             <span class="tag">INSTANT STUDY NOTES</span>
-            <h2>Quick Concept & Revision Notes</h2>
+            <h2>Quick Concept &amp; Revision Notes</h2>
           </div>
-          <span class="card-desc">Your existing chapter PDF notes remain untouched.</span>
+          <span class="card-desc">Your existing chapter PDF files remain untouched.</span>
         </div>
         <div class="notes-grid">
           <div class="note-box">
             <h3>Smart One-Shot Strategy</h3>
             <ul>
-              <li>Watch the #1 concept one-shot once with active notes.</li>
-              <li>Solve NCERT textbook examples immediately after.</li>
-              <li>Use #2–#5 slots for quick exam revision and practice.</li>
+              <li>Start with #1 ranked one-shot for full chapter clarity.</li>
+              <li>Practice NCERT examples and back exercises right away.</li>
+              <li>Use #2–#5 slots for fast revision before tests.</li>
             </ul>
           </div>
           <div class="note-box">
-            <h3>Class 9 & 10 Board Focus</h3>
+            <h3>Class 9 &amp; 10 Board Focus</h3>
             <ul>
-              <li>Focus on NCERT definitions, diagrams, and step-wise proofs.</li>
-              <li>Maintain a chapter-wise mistake notebook for weak topics.</li>
+              <li>Prioritize NCERT concepts, diagrams, and step marking.</li>
+              <li>Revise formulas and definitions weekly.</li>
             </ul>
           </div>
           <div class="note-box">
-            <h3>Class 11 & 12 Stream Focus</h3>
+            <h3>Class 11 &amp; 12 Stream Focus</h3>
             <ul>
-              <li>Science: Derivations, formulas, and numericals daily.</li>
-              <li>Commerce & Humanities: Case studies, formats, and timelines.</li>
+              <li>Science: Derivations, equations, and numericals.</li>
+              <li>Commerce &amp; Humanities: Case studies, formats, and timelines.</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Student Feedback Section -->
     <section id="feedbackSection" class="section-block">
       <div class="panel">
         <span class="tag">STUDENT VOICE</span>
         <h2>Share Your Feedback</h2>
-        <p class="card-desc">Tell us which chapter one-shot or feature you want next on STUDYVERSE.</p>
+        <p class="card-desc">Request a specific channel one-shot or share suggestions for STUDYVERSE.</p>
 
         <form id="feedbackForm" class="form-grid">
           <input id="fbName" class="field" type="text" placeholder="Your Name" required />
@@ -712,7 +732,7 @@
 
   <footer>
     <div>
-      Developed by <strong>Himanshu Sekhar Mallick</strong> & Team StudyVerse •
+      Developed by <strong>Himanshu Sekhar Mallick</strong> &amp; Team StudyVerse •
       Email: <a href="mailto:himanshumallick.studyverse@gmail.com" style="color: var(--bright-blue);">himanshumallick.studyverse@gmail.com</a>
     </div>
     <div style="margin-top: 6px; font-size: 0.8rem;">
@@ -720,7 +740,6 @@
     </div>
   </footer>
 
-  <!-- Login / Sign Up Modal -->
   <div id="authModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
     <div class="modal-card">
       <div class="modal-top">
@@ -737,26 +756,99 @@
   </div>
 
   <script>
+    const CHANNELS_LIST = [
+      { name: "Physics Wallah", focus: "Foundation, Udaan, Uday & NCERT Wallah One-Shots", rankSlot: "#1–#2" },
+      { name: "Next Toppers", focus: "Board & One-Shot Exam Sessions", rankSlot: "#2–#3" },
+      { name: "Sunlike Study", focus: "Animated Full Chapter Explainers", rankSlot: "#1–#3" },
+      { name: "Magnet Brains", focus: "Detailed NCERT & One-Shot Revisions", rankSlot: "#2–#4" },
+      { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#3–#5" }
+    ];
+
+    // Verified YouTube IDs returned from search results
     const VERIFIED_VIDEOS = {
+      "Class 9|Science|Ch 1: Matter in Our Surroundings": [
+        { rank: 1, title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains", duration: "One Shot", id: "Wjfm25W4EV8" }
+      ],
+      "Class 9|Mathematics|Ch 2: Polynomials": [
+        { rank: 1, title: "Polynomials - One Shot Revision (Part 1) | Class 9 Maths Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "-XawEiIVI44" }
+      ],
+      "Class 10|Mathematics|Ch 1: Real Numbers": [
+        { rank: 1, title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah Foundation", duration: "One Shot", id: "ahZ-rb4cOvE" },
+        { rank: 2, title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "PW Class 10 - UDAAN", duration: "One Shot", id: "tzEP4apfsO8" },
+        { rank: 3, title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah Foundation", duration: "One Shot", id: "eE1PyANrbIw" }
+      ],
+      "Class 10|Mathematics|Ch 2: Polynomials": [
+        { rank: 1, title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER (Theory + PYQs)", channel: "Physics Wallah Foundation", duration: "One Shot", id: "nvcaCkJ26Nw" },
+        { rank: 2, title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "PW Class 10 - UDAAN", duration: "One Shot", id: "dXr2bECuwCU" }
+      ],
+      "Class 10|Science|Ch 1: Chemical Reactions and Equations": [
+        { rank: 1, title: "Chemical Reactions and Equations | CLASS 10 Science", channel: "Exphub 9th & 10th", duration: "One Shot", id: "gQ-X9wV8TXQ" },
+        { rank: 2, title: "Aarambh 10th Science | Chemical Reactions & Equations", channel: "Next Toppers", duration: "One Shot", id: "ZoNhMe2uCQo" }
+      ],
+      "Class 10|Science|Ch 9: Light - Reflection and Refraction": [
+        { rank: 1, title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot: FULL CHAPTER", channel: "Physics Wallah Foundation", duration: "One Shot", id: "GYIGR2iCnto" },
+        { rank: 2, title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah Foundation", duration: "One Shot", id: "hUcRUM5ZEUU" },
+        { rank: 3, title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "PW Class 10 - UDAAN", duration: "One Shot", id: "EyYRPTAf9_c" }
+      ],
+      "Class 10|Science|Biology: Life Processes & Control": [
+        { rank: 1, title: "Class 10th Science - Complete Biology in One Shot", channel: "Next Toppers", duration: "One Shot", id: "SJvDo7yd1e4" }
+      ],
+      "Class 10|Social Science|History Ch 1: The Rise of Nationalism in Europe": [
+        { rank: 1, title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study", duration: "One Shot", id: "L8rINnMukoE" },
+        { rank: 2, title: "The Rise of Nationalism in Europe - Full Chapter", channel: "Magnet Brains", duration: "One Shot", id: "Mpr5ugcTYNw" },
+        { rank: 3, title: "The Rise of Nationalism in Europe - Introduction", channel: "Magnet Brains", duration: "One Shot", id: "GYrFttL_DGI" }
+      ],
+      "Class 10|Social Science|History Ch 2: Nationalism in India": [
+        { rank: 1, title: "Nationalism in India Full Chapter Class 10 History", channel: "Magnet Brains", duration: "One Shot", id: "dEbZhso1Zhk" },
+        { rank: 2, title: "Nationalism in India - One Shot Revision | Class 10 History Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "g17WyWsKE-E" }
+      ],
       "Class 10|Social Science|Geography Ch 4: Agriculture": [
         { rank: 1, title: "Agriculture Class 10 Geography Full Chapter (Animation) One Shot", channel: "Sunlike Study", duration: "One Shot", id: "VgJ-zRAdvaE" }
       ],
-      "Class 10|Science|Biology: Life Processes & Control": [
-        { rank: 1, title: "Class 10th Science - Complete Biology in One Shot", channel: "Next Toppers / Prashant Kirad", duration: "One Shot", id: "SJvDo7yd1e4" }
+      "Class 11|Science|Physics|Ch 1: Units and Measurements": [
+        { rank: 1, title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "PW - JEE Wallah", duration: "One Shot", id: "wuI3MWvr0dY" },
+        { rank: 2, title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "qEZklZNvjOs" },
+        { rank: 3, title: "UNITS AND MEASUREMENTS Full Chapter Covered | Class 11 Physics", channel: "Physics Wallah", duration: "One Shot", id: "hd1iIxXeDz4" }
+      ],
+      "Class 11|Science|Chemistry|Ch 1: Some Basic Concepts of Chemistry": [
+        { rank: 1, title: "Mole Concept in ONE SHOT | Basic to Advanced | Class 11", channel: "Physics Wallah", duration: "One Shot", id: "tMHrpmJH5I8" },
+        { rank: 2, title: "SOME BASIC CONCEPTS OF CHEMISTRY (Mole Concept) in One Shot", channel: "Physics Wallah", duration: "One Shot", id: "MfadB5RYDWY" }
+      ],
+      "Class 11|Commerce|Accountancy|Ch 1: Introduction to Accounting": [
+        { rank: 1, title: "Introduction to Accounting Full Chapter Explanation", channel: "Magnet Brains", duration: "One Shot", id: "IYTl9-T6K9k" },
+        { rank: 2, title: "Introduction to Accounting Full Chapter (Revision & NCERT)", channel: "Magnet Brains", duration: "One Shot", id: "Xcv_mDsQioA" }
+      ],
+      "Class 11|Commerce|Business Studies|Ch 1: Nature and Purpose of Business": [
+        { rank: 1, title: "Nature and Purpose of Business - NCERT Solutions | Class 11 BSt", channel: "Magnet Brains", duration: "One Shot", id: "UqUxEcZ7KNE" },
+        { rank: 2, title: "Nature & Purpose of Business | Class 11 Business Studies Ch 1", channel: "Magnet Brains", duration: "One Shot", id: "NvcEJN-wjzE" }
+      ],
+      "Class 12|Science|Physics|Ch 1: Electric Charges and Fields": [
+        { rank: 1, title: "ELECTRIC CHARGES AND FIELDS in One Shot - All Concepts & PYQs", channel: "Physics Wallah", duration: "One Shot", id: "iXHC9Qjl924" },
+        { rank: 2, title: "Electric Charges And Fields One Shot | Physics | Class 12th Boards", channel: "NCERT Wallah", duration: "One Shot", id: "hgk8CxXZvjo" }
+      ],
+      "Class 12|Science|Chemistry|Ch 1: Solutions": [
+        { rank: 1, title: "Solutions Chemistry Class 12 One Shot | All Concepts + NCERT + PYQs", channel: "NCERT Wallah", duration: "One Shot", id: "MrQ5dvvNuVs" },
+        { rank: 2, title: "SOLUTIONS in ONE SHOT || Full Chapter || Class 12 BOARDS", channel: "Physics Wallah", duration: "One Shot", id: "U_dJxj895Jw" }
+      ],
+      "Class 12|Commerce|Economics|Macro Ch 2: National Income Accounting": [
+        { rank: 1, title: "National Income Accounting | Class 12 Economics Crash Course Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "kc7d4zBYKeM" }
+      ],
+      "Class 12|Humanities / Arts|History|Theme 1: Bricks, Beads and Bones": [
+        { rank: 1, title: "Class 12 History Ch 1 - The Harappan Civilisation (Theme 1)", channel: "Magnet Brains", duration: "One Shot", id: "23B5oyUy9no" }
       ]
     };
 
     const RANK_CHANNELS = [
-      "Sunlike Study / Top Pick",
-      "Physics Wallah One Shot",
-      "Next Toppers One Shot",
-      "BYJU'S Concept Recap",
-      "LearnoHub / Magnet Brains"
+      "Physics Wallah",
+      "Next Toppers",
+      "Sunlike Study",
+      "Magnet Brains",
+      "Exphub 9th & 10th"
     ];
 
-    function buildChapters(list, clsName, subName) {
+    function buildChapters(list, scopePrefix) {
       return list.map((chapter) => {
-        const key = `${clsName}|${subName}|${chapter}`;
+        const key = `${scopePrefix}|${chapter}`;
         const found = VERIFIED_VIDEOS[key] || [];
         const slots = [1, 2, 3, 4, 5].map((rank) => {
           const match = found.find((v) => v.rank === rank);
@@ -781,14 +873,14 @@
             "Ch 4: Linear Equations in Two Variables", "Ch 5: Introduction to Euclid's Geometry",
             "Ch 6: Lines and Angles", "Ch 7: Triangles", "Ch 8: Quadrilaterals",
             "Ch 9: Circles", "Ch 10: Heron's Formula", "Ch 11: Surface Areas and Volumes", "Ch 12: Statistics"
-          ], "Class 9", "Mathematics"),
+          ], "Class 9|Mathematics"),
           "Science": buildChapters([
             "Ch 1: Matter in Our Surroundings", "Ch 2: Is Matter Around Us Pure?",
             "Ch 3: Atoms and Molecules", "Ch 4: Structure of the Atom",
             "Ch 5: The Fundamental Unit of Life", "Ch 6: Tissues", "Ch 7: Motion",
             "Ch 8: Force and Laws of Motion", "Ch 9: Gravitation", "Ch 10: Work and Energy",
             "Ch 11: Sound", "Ch 12: Improvement in Food Resources"
-          ], "Class 9", "Science"),
+          ], "Class 9|Science"),
           "Social Science": buildChapters([
             "History Ch 1: The French Revolution", "History Ch 2: Socialism in Europe and the Russian Revolution",
             "History Ch 3: Nazism and the Rise of Hitler", "Geography Ch 1: India - Size and Location",
@@ -796,7 +888,7 @@
             "Civics Ch 1: What is Democracy? Why Democracy?", "Civics Ch 2: Constitutional Design",
             "Civics Ch 3: Electoral Politics", "Economics Ch 1: The Story of Village Palampur",
             "Economics Ch 2: People as Resource", "Economics Ch 3: Poverty as a Challenge", "Economics Ch 4: Food Security in India"
-          ], "Class 9", "Social Science")
+          ], "Class 9|Social Science")
         }
       },
       "Class 10": {
@@ -807,7 +899,7 @@
             "Ch 7: Coordinate Geometry", "Ch 8: Introduction to Trigonometry",
             "Ch 9: Some Applications of Trigonometry", "Ch 10: Circles", "Ch 11: Areas Related to Circles",
             "Ch 12: Surface Areas and Volumes", "Ch 13: Statistics", "Ch 14: Probability"
-          ], "Class 10", "Mathematics"),
+          ], "Class 10|Mathematics"),
           "Science": buildChapters([
             "Ch 1: Chemical Reactions and Equations", "Ch 2: Acids, Bases and Salts",
             "Ch 3: Metals and Non-metals", "Ch 4: Carbon and Its Compounds",
@@ -816,7 +908,7 @@
             "Ch 10: The Human Eye and the Colourful World", "Ch 11: Electricity",
             "Ch 12: Magnetic Effects of Electric Current", "Ch 13: Our Environment",
             "Biology: Life Processes & Control"
-          ], "Class 10", "Science"),
+          ], "Class 10|Science"),
           "Social Science": buildChapters([
             "History Ch 1: The Rise of Nationalism in Europe", "History Ch 2: Nationalism in India",
             "History Ch 3: The Making of a Global World", "History Ch 4: The Age of Industrialisation",
@@ -828,7 +920,7 @@
             "Civics Ch 4: Political Parties", "Civics Ch 5: Outcomes of Democracy",
             "Economics Ch 1: Development", "Economics Ch 2: Sectors of the Indian Economy",
             "Economics Ch 3: Money and Credit", "Economics Ch 4: Globalisation and the Indian Economy"
-          ], "Class 10", "Social Science")
+          ], "Class 10|Social Science")
         }
       },
       "Class 11": {
@@ -840,21 +932,21 @@
               "Ch 7: Gravitation", "Ch 8: Mechanical Properties of Solids", "Ch 9: Mechanical Properties of Fluids",
               "Ch 10: Thermal Properties of Matter", "Ch 11: Thermodynamics", "Ch 12: Kinetic Theory",
               "Ch 13: Oscillations", "Ch 14: Waves"
-            ], "Class 11", "Physics"),
+            ], "Class 11|Science|Physics"),
             "Chemistry": buildChapters([
               "Ch 1: Some Basic Concepts of Chemistry", "Ch 2: Structure of Atom",
               "Ch 3: Classification of Elements and Periodicity in Properties",
               "Ch 4: Chemical Bonding and Molecular Structure", "Ch 5: Thermodynamics",
               "Ch 6: Equilibrium", "Ch 7: Redox Reactions",
               "Ch 8: Organic Chemistry - Some Basic Principles and Techniques", "Ch 9: Hydrocarbons"
-            ], "Class 11", "Chemistry"),
+            ], "Class 11|Science|Chemistry"),
             "Mathematics": buildChapters([
               "Ch 1: Sets", "Ch 2: Relations and Functions", "Ch 3: Trigonometric Functions",
               "Ch 4: Complex Numbers and Quadratic Equations", "Ch 5: Linear Inequalities",
               "Ch 6: Permutations and Combinations", "Ch 7: Binomial Theorem", "Ch 8: Sequences and Series",
               "Ch 9: Straight Lines", "Ch 10: Conic Sections", "Ch 11: Three Dimensional Geometry",
               "Ch 12: Limits and Derivatives", "Ch 13: Statistics", "Ch 14: Probability"
-            ], "Class 11", "Mathematics")
+            ], "Class 11|Science|Mathematics")
           },
           "Commerce": {
             "Accountancy": buildChapters([
@@ -862,14 +954,14 @@
               "Ch 3: Theory Base of Accounting", "Ch 4: Accounting Equation",
               "Ch 5: Rules of Debit and Credit", "Ch 6: Journal", "Ch 7: Ledger",
               "Ch 8: Trial Balance", "Ch 9: Financial Statements"
-            ], "Class 11", "Accountancy"),
+            ], "Class 11|Commerce|Accountancy"),
             "Business Studies": buildChapters([
               "Ch 1: Nature and Purpose of Business", "Ch 2: Forms of Business Organisations",
               "Ch 3: Private, Public and Global Enterprises", "Ch 4: Business Services",
               "Ch 5: Emerging Modes of Business", "Ch 6: Social Responsibilities of Business",
               "Ch 7: Sources of Business Finance", "Ch 8: Small Business",
               "Ch 9: Internal Trade", "Ch 10: International Business"
-            ], "Class 11", "Business Studies"),
+            ], "Class 11|Commerce|Business Studies"),
             "Economics": buildChapters([
               "Stats Ch 1: Introduction", "Stats Ch 2: Collection & Organisation of Data",
               "Stats Ch 3: Measures of Central Tendency", "Stats Ch 4: Correlation & Index Numbers",
@@ -877,7 +969,7 @@
               "Indian Eco Ch 2: Indian Economy (1950-1990)", "Indian Eco Ch 3: Liberalisation, Privatisation & Globalisation",
               "Indian Eco Ch 4: Human Capital Formation", "Indian Eco Ch 5: Rural Development",
               "Indian Eco Ch 6: Employment & Sustainable Development"
-            ], "Class 11", "Economics")
+            ], "Class 11|Commerce|Economics")
           },
           "Humanities / Arts": {
             "History": buildChapters([
@@ -885,19 +977,19 @@
               "Theme 3: Nomadic Empires", "Theme 4: The Three Orders",
               "Theme 5: Changing Cultural Traditions", "Theme 6: Displacing Indigenous Peoples",
               "Theme 7: Paths to Modernisation"
-            ], "Class 11", "History"),
+            ], "Class 11|Humanities / Arts|History"),
             "Political Science": buildChapters([
               "Ch 1: Constitution: Why and How?", "Ch 2: Rights in the Indian Constitution",
               "Ch 3: Election and Representation", "Ch 4: Executive & Legislature",
               "Ch 5: Judiciary", "Ch 6: Federalism & Local Governments",
               "Ch 7: Political Theory", "Ch 8: Freedom, Equality & Social Justice"
-            ], "Class 11", "Political Science"),
+            ], "Class 11|Humanities / Arts|Political Science"),
             "Geography": buildChapters([
               "Ch 1: Geography as a Discipline", "Ch 2: Origin and Evolution of the Earth",
               "Ch 3: Interior of the Earth", "Ch 4: Distribution of Oceans and Continents",
               "Ch 5: Geomorphic Processes & Landforms", "Ch 6: Atmosphere & Weather Systems",
               "Ch 7: Water in the Oceans", "Ch 8: Biodiversity and Conservation"
-            ], "Class 11", "Geography")
+            ], "Class 11|Humanities / Arts|Geography")
           }
         }
       },
@@ -912,20 +1004,20 @@
               "Ch 9: Ray Optics and Optical Instruments", "Ch 10: Wave Optics",
               "Ch 11: Dual Nature of Radiation and Matter", "Ch 12: Atoms & Nuclei",
               "Ch 13: Semiconductor Electronics"
-            ], "Class 12", "Physics"),
+            ], "Class 12|Science|Physics"),
             "Chemistry": buildChapters([
               "Ch 1: Solutions", "Ch 2: Electrochemistry", "Ch 3: Chemical Kinetics",
               "Ch 4: The d and f Block Elements", "Ch 5: Coordination Compounds",
               "Ch 6: Haloalkanes and Haloarenes", "Ch 7: Alcohols, Phenols and Ethers",
               "Ch 8: Aldehydes, Ketones and Carboxylic Acids", "Ch 9: Amines", "Ch 10: Biomolecules"
-            ], "Class 12", "Chemistry"),
+            ], "Class 12|Science|Chemistry"),
             "Mathematics": buildChapters([
               "Ch 1: Relations and Functions", "Ch 2: Inverse Trigonometric Functions",
               "Ch 3: Matrices", "Ch 4: Determinants", "Ch 5: Continuity and Differentiability",
               "Ch 6: Application of Derivatives", "Ch 7: Integrals", "Ch 8: Application of Integrals",
               "Ch 9: Differential Equations", "Ch 10: Vector Algebra",
               "Ch 11: Three Dimensional Geometry", "Ch 12: Linear Programming", "Ch 13: Probability"
-            ], "Class 12", "Mathematics")
+            ], "Class 12|Science|Mathematics")
           },
           "Commerce": {
             "Accountancy": buildChapters([
@@ -934,13 +1026,13 @@
               "Ch 5: Dissolution of a Partnership Firm", "Ch 6: Accounting for Share Capital",
               "Ch 7: Issue and Redemption of Debentures", "Ch 8: Financial Statements of a Company",
               "Ch 9: Accounting Ratios", "Ch 10: Cash Flow Statement"
-            ], "Class 12", "Accountancy"),
+            ], "Class 12|Commerce|Accountancy"),
             "Business Studies": buildChapters([
               "Ch 1: Nature and Significance of Management", "Ch 2: Principles of Management",
               "Ch 3: Business Environment", "Ch 4: Planning & Organising",
               "Ch 5: Staffing, Directing & Controlling", "Ch 6: Financial Management",
               "Ch 7: Financial Markets", "Ch 8: Marketing", "Ch 9: Consumer Protection"
-            ], "Class 12", "Business Studies"),
+            ], "Class 12|Commerce|Business Studies"),
             "Economics": buildChapters([
               "Macro Ch 1: Introduction to Macroeconomics", "Macro Ch 2: National Income Accounting",
               "Macro Ch 3: Money and Banking", "Macro Ch 4: Determination of Income and Employment",
@@ -949,7 +1041,7 @@
               "Indian Eco Ch 2: Indian Economy (1950-1990) & LPG Reforms",
               "Indian Eco Ch 3: Human Capital, Rural Development & Employment",
               "Indian Eco Ch 4: Environment & India-Neighbours Comparison"
-            ], "Class 12", "Economics")
+            ], "Class 12|Commerce|Economics")
           },
           "Humanities / Arts": {
             "History": buildChapters([
@@ -959,7 +1051,7 @@
               "Theme 6: An Imperial Capital: Vijayanagara", "Theme 7: Peasants, Zamindars and the State",
               "Theme 8: Colonialism, Rebels and the Raj", "Theme 9: Mahatma Gandhi & Nationalist Movement",
               "Theme 10: Framing the Constitution"
-            ], "Class 12", "History"),
+            ], "Class 12|Humanities / Arts|History"),
             "Political Science": buildChapters([
               "Ch 1: The End of Bipolarity", "Ch 2: Contemporary Centres of Power",
               "Ch 3: Contemporary South Asia", "Ch 4: International Organisations & Security",
@@ -967,7 +1059,7 @@
               "Ch 7: Era of One-Party Dominance & Planned Development",
               "Ch 8: India's External Relations & Congress System",
               "Ch 9: Democratic Order, Regional Aspirations & Recent Developments"
-            ], "Class 12", "Political Science"),
+            ], "Class 12|Humanities / Arts|Political Science"),
             "Geography": buildChapters([
               "Book 1: Human Geography, Population, Development & Activities",
               "Book 1: Transport, Communication & International Trade",
@@ -975,14 +1067,16 @@
               "Book 2: Land Resources, Agriculture & Water Resources",
               "Book 2: Mineral, Energy Resources & Planning in India",
               "Book 2: Transport, Trade & Geographical Issues"
-            ], "Class 12", "Geography")
+            ], "Class 12|Humanities / Arts|Geography")
           }
         }
       }
     };
 
-    const state = { cls: null, stream: null, subject: null, chapterObj: null };
+    const state = { cls: null, stream: null, subject: null, chapterObj: null, activeChannel: null };
 
+    const channelGrid = document.getElementById("channelGrid");
+    const clearChannelBtn = document.getElementById("clearChannelBtn");
     const stepClass = document.getElementById("stepClass");
     const stepStream = document.getElementById("stepStream");
     const stepSubject = document.getElementById("stepSubject");
@@ -1019,12 +1113,47 @@
       });
     }
 
+    function renderChannels() {
+      channelGrid.innerHTML = "";
+      CHANNELS_LIST.forEach((ch) => {
+        const isSelected = state.activeChannel === ch.name;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `sv-card ${isSelected ? "selected-channel" : ""}`;
+        btn.innerHTML = `
+          <span class="tag">RANK ${ch.rankSlot}</span>
+          <div class="card-title">${ch.name}</div>
+          <div class="card-desc">${ch.focus}</div>
+        `;
+        btn.addEventListener("click", () => {
+          state.activeChannel = isSelected ? null : ch.name;
+          clearChannelBtn.classList.toggle("hidden", !state.activeChannel);
+          renderChannels();
+          if (!stepVideos.classList.contains("hidden")) {
+            renderVideos();
+          }
+        });
+        channelGrid.appendChild(btn);
+      });
+      revealIn(document.getElementById("channelsSection"));
+    }
+
+    clearChannelBtn.addEventListener("click", () => {
+      state.activeChannel = null;
+      clearChannelBtn.classList.add("hidden");
+      renderChannels();
+      if (!stepVideos.classList.contains("hidden")) {
+        renderVideos();
+      }
+    });
+
     function updateNav() {
       const parts = ["Step 1: Class"];
       if (state.cls) parts.push(state.cls);
       if (state.stream) parts.push(state.stream);
       if (state.subject) parts.push(state.subject);
       if (state.chapterObj) parts.push(state.chapterObj.chapter);
+      if (state.activeChannel) parts.push(`Channel: ${state.activeChannel}`);
       breadcrumb.innerHTML = parts.map((p, idx) =>
         idx === parts.length - 1 ? `<strong>${p}</strong>` : p
       ).join(" → ");
@@ -1132,11 +1261,12 @@
         return;
       }
       filtered.forEach((chObj) => {
+        const liveCount = (chObj.videos || []).filter(v => Boolean(v.id)).length;
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "sv-card";
         btn.innerHTML = `
-          <span class="tag">${state.subject}</span>
+          <span class="tag">${liveCount > 0 ? `${liveCount} LIVE ONE-SHOTS` : state.subject}</span>
           <div class="card-title">${chObj.chapter}</div>
           <div class="card-desc">Open Top 5 ranked one-shot list</div>
         `;
@@ -1155,7 +1285,17 @@
       const chObj = state.chapterObj;
       videosTitle.textContent = `Top 5 One-Shots — ${chObj.chapter}`;
 
-      (chObj.videos || []).slice(0, 5).forEach((vid) => {
+      const list = (chObj.videos || []).slice(0, 5).filter((vid) => {
+        if (!state.activeChannel) return true;
+        return vid.channel.toLowerCase().includes(state.activeChannel.toLowerCase());
+      });
+
+      if (!list.length) {
+        videoGrid.innerHTML = `<div class="coming-box">No slot matches "${state.activeChannel}" for this chapter. Click "Show All Channels" above to view all Top 5 slots.</div>`;
+        return;
+      }
+
+      list.forEach((vid) => {
         const card = document.createElement("article");
         card.className = "video-card";
 
@@ -1166,9 +1306,10 @@
             <div class="thumb-wrap">
               <img src="${thumb}" alt="${vid.title}" loading="lazy" />
               <div class="thumb-sheen" aria-hidden="true"></div>
-              <span class="rank-badge">#${vid.rank} VERIFIED</span>
+              <span class="rank-badge">#${vid.rank} RANKED</span>
             </div>
             <div class="video-body">
+              <span class="channel-pill">Channel: ${vid.channel}</span>
               <h3 class="card-title">${vid.title}</h3>
               <div class="video-meta"><span>${vid.channel}</span> • ${vid.duration}</div>
               <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
@@ -1178,17 +1319,18 @@
           card.innerHTML = `
             <div class="video-body">
               <span class="tag">#${vid.rank} ONE-SHOT SLOT</span>
+              <span class="channel-pill">Channel: ${vid.channel}</span>
               <h3 class="card-title">${vid.title}</h3>
-              <div class="video-meta">Target Channel: <span>${vid.channel}</span></div>
-              <div class="coming-box">Verified one-shot link coming soon for this chapter.</div>
+              <div class="video-meta">Channel: <span>${vid.channel}</span></div>
+              <div class="coming-box">Additional one-shot link coming soon for this rank slot.</div>
             </div>
           `;
         }
         videoGrid.appendChild(card);
       });
+      revealIn(stepVideos);
     }
 
-    // Login / Sign Up (localStorage)
     const authModal = document.getElementById("authModal");
     const authOpenBtn = document.getElementById("authOpenBtn");
     const authCloseBtn = document.getElementById("authCloseBtn");
@@ -1222,7 +1364,6 @@
       setTimeout(() => authModal.classList.add("hidden"), 650);
     });
 
-    // Feedback (localStorage)
     const feedbackForm = document.getElementById("feedbackForm");
     const feedbackList = document.getElementById("feedbackList");
     const fbStatus = document.getElementById("fbStatus");
@@ -1298,6 +1439,9 @@
       state.stream = null;
       state.subject = null;
       state.chapterObj = null;
+      state.activeChannel = null;
+      clearChannelBtn.classList.add("hidden");
+      renderChannels();
       showStep(stepClass);
     });
 
@@ -1307,6 +1451,7 @@
 
     chapterSearch.addEventListener("input", (e) => renderChapters(e.target.value));
 
+    renderChannels();
     renderClasses();
     updateNav();
     syncUserUI();
