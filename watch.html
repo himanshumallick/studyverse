@@ -345,8 +345,11 @@
     .thumb-wrap {
       position: relative;
       aspect-ratio: 16 / 9;
-      background: #03040a;
+      background: linear-gradient(135deg, #0b1530, #060913);
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .thumb-wrap img {
@@ -354,6 +357,20 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .thumb-fallback {
+      text-align: center;
+      padding: 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .thumb-fallback strong {
+      display: block;
+      color: var(--yellow);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
     }
 
     .rank-badge {
@@ -721,7 +738,6 @@
       { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#3–#5" }
     ];
 
-    // Strict chapter-only video map: NO cross-chapter or cross-subject fallback
     const EXACT_CHAPTER_VIDEOS = {
       "Class 9|Science|Ch 1: Matter in Our Surroundings": [
         { rank: 1, title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains", duration: "One Shot", id: "Wjfm25W4EV8" }
@@ -793,16 +809,6 @@
       "Magnet Brains",
       "Exphub 9th & 10th"
     ];
-
-    function setExactChapterVideo(fullKey, rank, videoObj) {
-      if (!EXACT_CHAPTER_VIDEOS[fullKey]) {
-        EXACT_CHAPTER_VIDEOS[fullKey] = [];
-      }
-      const next = EXACT_CHAPTER_VIDEOS[fullKey].filter(v => v.rank !== rank);
-      next.push({ rank, duration: "One Shot", ...videoObj });
-      next.sort((a, b) => a.rank - b.rank);
-      EXACT_CHAPTER_VIDEOS[fullKey] = next;
-    }
 
     function buildChapters(list, scopePrefix) {
       return list.map((chapter) => {
@@ -1218,6 +1224,28 @@
       });
     }
 
+    function handleThumbError(imgEl, videoId, channelName) {
+      const candidates = [
+        `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+        `https://i.ytimg.com/vi/${videoId}/0.jpg`
+      ];
+      const nextStep = Number(imgEl.dataset.fallbackStep || "0");
+      if (nextStep < candidates.length) {
+        imgEl.dataset.fallbackStep = String(nextStep + 1);
+        imgEl.src = candidates[nextStep];
+        return;
+      }
+      const wrap = imgEl.parentElement;
+      if (wrap) {
+        imgEl.remove();
+        const fb = document.createElement("div");
+        fb.className = "thumb-fallback";
+        fb.innerHTML = `<strong>${channelName}</strong><span>One-Shot Preview Ready</span>`;
+        wrap.appendChild(fb);
+      }
+    }
+
     function renderVideos() {
       videoGrid.innerHTML = "";
       const chObj = state.chapterObj;
@@ -1242,7 +1270,7 @@
           const url = `https://www.youtube.com/watch?v=${vid.id}`;
           card.innerHTML = `
             <div class="thumb-wrap">
-              <img src="${thumb}" alt="${vid.title}" loading="lazy" />
+              <img src="${thumb}" alt="${vid.title}" data-fallback-step="0" />
               <span class="rank-badge">#${vid.rank} RANKED</span>
             </div>
             <div class="video-body">
@@ -1252,6 +1280,10 @@
               <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
             </div>
           `;
+          const img = card.querySelector("img");
+          if (img) {
+            img.addEventListener("error", () => handleThumbError(img, vid.id, vid.channel));
+          }
         } else {
           card.innerHTML = `
             <div class="video-body">
