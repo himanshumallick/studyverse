@@ -534,7 +534,7 @@
   <header class="topbar">
     <div class="brand">
       <span>STUDYVERSE WATCH</span>
-      <span class="brand-tag">TOP 5 ACTIVE</span>
+      <span class="brand-tag">SUBJECT RANKED</span>
     </div>
     <div class="nav-group">
       <a href="index.html" class="btn">Explore Classes</a>
@@ -552,7 +552,7 @@
         <div class="tagline">Watch. Understand. Master.</div>
         <h1>LEARN BEYOND THE CLASSROOM.</h1>
         <p>
-          Full Top 5 ranked one-shot video cards across Classes 9–12 & streams with instant on-screen notes—while keeping all your existing chapter PDF files untouched.
+          Subject-matched Top 5 ranked one-shot videos across Classes 9–12 & streams with instant on-screen notes—while keeping all your existing chapter PDF files untouched.
         </p>
         <div class="hero-actions">
           <button id="watchNowBtn" class="btn btn-yellow" type="button">▶ Best YouTube Videos</button>
@@ -563,7 +563,7 @@
 
       <div class="stage-3d" aria-hidden="true">
         <div id="card3d" class="card-3d">
-          <span class="tag">TOP CHANNELS • RANK #1–#5</span>
+          <span class="tag">SUBJECT MATCHED • RANK #1–#5</span>
           <h3>One-Shot Educators</h3>
           <p class="card-desc">Sunlike Study • Physics Wallah • Next Toppers • Magnet Brains • Exphub</p>
         </div>
@@ -712,46 +712,71 @@
       { name: "Exphub 9th & 10th", focus: "Prashant Kirad One-Shots & Rapid Revision", rankSlot: "#3–#5" }
     ];
 
-    const VERIFIED_POOL = [
-      { id: "ahZ-rb4cOvE", title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah" },
-      { id: "tzEP4apfsO8", title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" },
-      { id: "eE1PyANrbIw", title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah" },
-      { id: "nvcaCkJ26Nw", title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER", channel: "Physics Wallah" },
-      { id: "dXr2bECuwCU", title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" },
-      { id: "gQ-X9wV8TXQ", title: "Chemical Reactions and Equations | CLASS 10 Science", channel: "Exphub 9th & 10th" },
-      { id: "ZoNhMe2uCQo", title: "Aarambh 10th Science | Chemical Reactions & Equations", channel: "Next Toppers" },
-      { id: "GYIGR2iCnto", title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot", channel: "Physics Wallah" },
-      { id: "hUcRUM5ZEUU", title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah" },
-      { id: "EyYRPTAf9_c", title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "Physics Wallah" },
-      { id: "SJvDo7yd1e4", title: "Class 10th Science - Complete Biology in One Shot", channel: "Next Toppers" },
-      { id: "L8rINnMukoE", title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study" },
-      { id: "VgJ-zRAdvaE", title: "Agriculture Class 10 Geography Full Chapter One Shot", channel: "Sunlike Study" },
-      { id: "YYKmkrWPSi8", title: "Political Parties Class 10 Full Chapter (Animation)", channel: "Sunlike Study" },
-      { id: "PJaUqX9KQW0", title: "Class 9 History Chapter 1 – The French Revolution One Shot", channel: "Sunlike Study" },
-      { id: "I_EMHGuo7YA", title: "India : Size and Location Class 9 Full Chapter", channel: "Sunlike Study" },
-      { id: "Wjfm25W4EV8", title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains" },
-      { id: "-XawEiIVI44", title: "Polynomials - One Shot Revision | Class 9 Maths Ch 2", channel: "Magnet Brains" },
-      { id: "wuI3MWvr0dY", title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "Physics Wallah" },
-      { id: "qEZklZNvjOs", title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah" },
-      { id: "tMHrpmJH5I8", title: "Mole Concept in ONE SHOT | Basic to Advanced | Class 11", channel: "Physics Wallah" },
-      { id: "iXHC9Qjl924", title: "ELECTRIC CHARGES AND FIELDS in One Shot", channel: "Physics Wallah" },
-      { id: "MrQ5dvvNuVs", title: "Solutions Chemistry Class 12 One Shot", channel: "Physics Wallah" },
-      { id: "kc7d4zBYKeM", title: "National Income Accounting | Class 12 Economics", channel: "Magnet Brains" },
-      { id: "23B5oyUy9no", title: "Class 12 History Ch 1 - The Harappan Civilisation", channel: "Magnet Brains" }
-    ];
+    // Strict subject-wise verified video pools (zero cross-subject mixing)
+    const SUBJECT_POOLS = {
+      "Class 9|Mathematics": [
+        { id: "-XawEiIVI44", title: "Polynomials - One Shot Revision | Class 9 Maths Ch 2", channel: "Magnet Brains" }
+      ],
+      "Class 9|Science": [
+        { id: "Wjfm25W4EV8", title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains" }
+      ],
+      "Class 9|Social Science": [
+        { id: "PJaUqX9KQW0", title: "Class 9 History Chapter 1 – The French Revolution One Shot", channel: "Sunlike Study" },
+        { id: "I_EMHGuo7YA", title: "India : Size and Location Class 9 Full Chapter", channel: "Sunlike Study" }
+      ],
+      "Class 10|Mathematics": [
+        { id: "ahZ-rb4cOvE", title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah" },
+        { id: "tzEP4apfsO8", title: "Real Numbers | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" },
+        { id: "eE1PyANrbIw", title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah" },
+        { id: "nvcaCkJ26Nw", title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER", channel: "Physics Wallah" },
+        { id: "dXr2bECuwCU", title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah" }
+      ],
+      "Class 10|Science": [
+        { id: "gQ-X9wV8TXQ", title: "Chemical Reactions and Equations | CLASS 10 Science", channel: "Exphub 9th & 10th" },
+        { id: "ZoNhMe2uCQo", title: "Aarambh 10th Science | Chemical Reactions & Equations", channel: "Next Toppers" },
+        { id: "GYIGR2iCnto", title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot", channel: "Physics Wallah" },
+        { id: "hUcRUM5ZEUU", title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah" },
+        { id: "EyYRPTAf9_c", title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "Physics Wallah" },
+        { id: "SJvDo7yd1e4", title: "Class 10th Science - Complete Biology in One Shot", channel: "Next Toppers" }
+      ],
+      "Class 10|Social Science": [
+        { id: "L8rINnMukoE", title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study" },
+        { id: "VgJ-zRAdvaE", title: "Agriculture Class 10 Geography Full Chapter One Shot", channel: "Sunlike Study" },
+        { id: "YYKmkrWPSi8", title: "Political Parties Class 10 Full Chapter (Animation)", channel: "Sunlike Study" }
+      ],
+      "Class 11|Science|Physics": [
+        { id: "wuI3MWvr0dY", title: "Class 11 Physics - UNITS & MEASUREMENTS in One Shot", channel: "Physics Wallah" },
+        { id: "qEZklZNvjOs", title: "Mission 11th Comeback: UNITS AND MEASUREMENTS in One Shot", channel: "Physics Wallah" }
+      ],
+      "Class 11|Science|Chemistry": [
+        { id: "tMHrpmJH5I8", title: "Mole Concept in ONE SHOT | Basic to Advanced | Class 11", channel: "Physics Wallah" }
+      ],
+      "Class 12|Science|Physics": [
+        { id: "iXHC9Qjl924", title: "ELECTRIC CHARGES AND FIELDS in One Shot - All Concepts & PYQs", channel: "Physics Wallah" }
+      ],
+      "Class 12|Science|Chemistry": [
+        { id: "MrQ5dvvNuVs", title: "Solutions Chemistry Class 12 One Shot | All Concepts + NCERT + PYQs", channel: "Physics Wallah" }
+      ],
+      "Class 12|Commerce|Economics": [
+        { id: "kc7d4zBYKeM", title: "National Income Accounting | Class 12 Economics Crash Course Ch 2", channel: "Magnet Brains" }
+      ],
+      "Class 12|Humanities / Arts|History": [
+        { id: "23B5oyUy9no", title: "Class 12 History Ch 1 - The Harappan Civilisation (Theme 1)", channel: "Magnet Brains" }
+      ]
+    };
 
     const VERIFIED_VIDEOS = {
       "Class 9|Science|Ch 1: Matter in Our Surroundings": [
         { rank: 1, title: "Matter in Our Surroundings Class 9 One Shot Revision", channel: "Magnet Brains", duration: "One Shot", id: "Wjfm25W4EV8" }
       ],
       "Class 9|Mathematics|Ch 2: Polynomials": [
-        { rank: 1, title: "Polynomials - One Shot Revision (Part 1) | Class 9 Maths Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "-XawEiIVI44" }
+        { rank: 1, title: "Polynomials - One Shot Revision | Class 9 Maths Ch 2", channel: "Magnet Brains", duration: "One Shot", id: "-XawEiIVI44" }
       ],
       "Class 9|Social Science|History Ch 1: The French Revolution": [
         { rank: 1, title: "Class 9 History Chapter 1 – The French Revolution One Shot", channel: "Sunlike Study", duration: "One Shot", id: "PJaUqX9KQW0" }
       ],
       "Class 9|Social Science|Geography Ch 1: India - Size and Location": [
-        { rank: 1, title: "India : Size and Location Class 9 Full Chapter (Animation)", channel: "Sunlike Study", duration: "One Shot", id: "I_EMHGuo7YA" }
+        { rank: 1, title: "India : Size and Location Class 9 Full Chapter", channel: "Sunlike Study", duration: "One Shot", id: "I_EMHGuo7YA" }
       ],
       "Class 10|Mathematics|Ch 1: Real Numbers": [
         { rank: 1, title: "Real Numbers in 1 Shot || Class 10th Board Exams", channel: "Physics Wallah", duration: "One Shot", id: "ahZ-rb4cOvE" },
@@ -759,7 +784,7 @@
         { rank: 3, title: "REAL NUMBERS Class 10 Maths | Complete One Shot", channel: "Physics Wallah", duration: "One Shot", id: "eE1PyANrbIw" }
       ],
       "Class 10|Mathematics|Ch 2: Polynomials": [
-        { rank: 1, title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER (Theory + PYQs)", channel: "Physics Wallah", duration: "One Shot", id: "nvcaCkJ26Nw" },
+        { rank: 1, title: "WARRIOR: POLYNOMIALS in 1 Shot: FULL CHAPTER", channel: "Physics Wallah", duration: "One Shot", id: "nvcaCkJ26Nw" },
         { rank: 2, title: "Polynomials | Full Chapter in ONE SHOT | Class 10th Maths", channel: "Physics Wallah", duration: "One Shot", id: "dXr2bECuwCU" }
       ],
       "Class 10|Science|Ch 1: Chemical Reactions and Equations": [
@@ -767,7 +792,7 @@
         { rank: 2, title: "Aarambh 10th Science | Chemical Reactions & Equations", channel: "Next Toppers", duration: "One Shot", id: "ZoNhMe2uCQo" }
       ],
       "Class 10|Science|Ch 9: Light - Reflection and Refraction": [
-        { rank: 1, title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot: FULL CHAPTER", channel: "Physics Wallah", duration: "One Shot", id: "GYIGR2iCnto" },
+        { rank: 1, title: "LIGHT – REFLECTION AND REFRACTION in 1 Shot", channel: "Physics Wallah", duration: "One Shot", id: "GYIGR2iCnto" },
         { rank: 2, title: "Light - Reflection and Refraction in One Shot: Warrior", channel: "Physics Wallah", duration: "One Shot", id: "hUcRUM5ZEUU" },
         { rank: 3, title: "LIGHT - Reflection & Refraction | Complete Chapter in ONE SHOT", channel: "Physics Wallah", duration: "One Shot", id: "EyYRPTAf9_c" }
       ],
@@ -778,7 +803,7 @@
         { rank: 1, title: "The Rise of Nationalism in Europe Class 10 Full Chapter", channel: "Sunlike Study", duration: "One Shot", id: "L8rINnMukoE" }
       ],
       "Class 10|Social Science|Geography Ch 4: Agriculture": [
-        { rank: 1, title: "Agriculture Class 10 Geography Full Chapter (Animation) One Shot", channel: "Sunlike Study", duration: "One Shot", id: "VgJ-zRAdvaE" }
+        { rank: 1, title: "Agriculture Class 10 Geography Full Chapter One Shot", channel: "Sunlike Study", duration: "One Shot", id: "VgJ-zRAdvaE" }
       ],
       "Class 10|Social Science|Civics Ch 4: Political Parties": [
         { rank: 1, title: "Political Parties Class 10 Full Chapter (Animation)", channel: "Sunlike Study", duration: "One Shot", id: "YYKmkrWPSi8" }
@@ -805,21 +830,29 @@
     };
 
     function buildChapters(list, scopePrefix) {
+      const sameSubjectPool = SUBJECT_POOLS[scopePrefix] || [];
       return list.map((chapter, chIdx) => {
         const key = `${scopePrefix}|${chapter}`;
         const found = VERIFIED_VIDEOS[key] || [];
-        const slots = [1, 2, 3, 4, 5].map((rank, idx) => {
-          const explicit = found.find((v) => v.rank === rank);
-          if (explicit) return explicit;
-          const fallback = VERIFIED_POOL[(chIdx * 5 + idx) % VERIFIED_POOL.length];
-          return {
-            rank,
-            title: `${chapter} — ${fallback.title}`,
-            channel: fallback.channel,
-            duration: "One Shot",
-            id: fallback.id
-          };
-        });
+        const slots = [];
+
+        if (sameSubjectPool.length > 0) {
+          for (let rank = 1; rank <= 5; rank++) {
+            const explicit = found.find((v) => v.rank === rank);
+            if (explicit) {
+              slots.push(explicit);
+            } else {
+              const item = sameSubjectPool[(chIdx + rank - 1) % sameSubjectPool.length];
+              slots.push({
+                rank,
+                title: `${chapter} — ${item.title}`,
+                channel: item.channel,
+                duration: "One Shot",
+                id: item.id
+              });
+            }
+          }
+        }
         return { chapter, videos: slots };
       });
     }
@@ -1125,7 +1158,7 @@
         btn.innerHTML = `
           <span class="tag">${hasStreams ? "SCIENCE • COMMERCE • HUMANITIES" : "CBSE / NCERT SYLLABUS"}</span>
           <div class="card-title">${cls}</div>
-          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + Top 5 active videos"}</div>
+          <div class="card-desc">${hasStreams ? "Select stream & core subjects" : "Full chapters + subject-ranked videos"}</div>
         `;
         btn.addEventListener("click", () => {
           state.cls = cls;
@@ -1205,9 +1238,9 @@
         btn.type = "button";
         btn.className = "sv-card";
         btn.innerHTML = `
-          <span class="tag">TOP 5 RANKED</span>
+          <span class="tag">${state.subject} RANKED</span>
           <div class="card-title">${chObj.chapter}</div>
-          <div class="card-desc">Open all 5 ranked YouTube video cards</div>
+          <div class="card-desc">Open subject-matched ranked one-shots</div>
         `;
         btn.addEventListener("click", () => {
           state.chapterObj = chObj;
@@ -1221,16 +1254,19 @@
     function renderVideos() {
       videoGrid.innerHTML = "";
       const chObj = state.chapterObj;
-      videosTitle.textContent = `Top 5 One-Shots — ${chObj.chapter}`;
+      videosTitle.textContent = `${state.subject} One-Shots — ${chObj.chapter}`;
 
-      const list = (chObj.videos || []).slice(0, 5).filter((vid) => {
-        if (!state.activeChannel) return true;
-        return vid.channel.toLowerCase().includes(state.activeChannel.toLowerCase());
-      });
+      const baseList = chObj.videos || [];
+      const filtered = state.activeChannel
+        ? baseList.filter((vid) => vid.channel.toLowerCase().includes(state.activeChannel.toLowerCase()))
+        : baseList;
 
-      const finalCards = list.length ? list : (chObj.videos || []).slice(0, 5);
+      if (!filtered.length) {
+        videoGrid.innerHTML = `<div class="card-desc">No ${state.subject} video from "${state.activeChannel}" for this chapter yet. Click "Show All Channels" above.</div>`;
+        return;
+      }
 
-      finalCards.forEach((vid) => {
+      filtered.forEach((vid, idx) => {
         const thumb = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
         const url = `https://www.youtube.com/watch?v=${vid.id}`;
         const card = document.createElement("article");
@@ -1238,12 +1274,12 @@
         card.innerHTML = `
           <div class="thumb-wrap">
             <img src="${thumb}" alt="${vid.title}" loading="lazy" />
-            <span class="rank-badge">#${vid.rank} RANKED</span>
+            <span class="rank-badge">#${idx + 1} RANKED</span>
           </div>
           <div class="video-body">
             <span class="channel-pill">Channel: ${vid.channel}</span>
             <h3 class="card-title">${vid.title}</h3>
-            <div class="video-meta"><span>${vid.channel}</span> • ${vid.duration}</div>
+            <div class="video-meta"><span>${vid.channel}</span> • ${state.subject} • ${vid.duration}</div>
             <a class="btn btn-yellow" href="${url}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
           </div>
         `;
