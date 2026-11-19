@@ -1,570 +1,1437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STUDYVERSE —  Learning Universe | CBSE Class 10</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STUDYVERSE — Interactive Motion CBSE Hub (9–12)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
-      --bg-primary: #030712;
-      --bg-secondary: #0b0f19;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --accent-cyan: #38bdf8;
-      --accent-indigo: #6366f1;
-      --accent-violet: #a855f7;
-      --border-subtle: rgba(99, 102, 241, 0.25);
-      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg: #030712;
+      --surface: rgba(11, 15, 25, 0.86);
+      --border: rgba(99, 102, 241, 0.24);
+      --cyan: #38bdf8;
+      --indigo: #6366f1;
+      --violet: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html, body {
-      background-color: #030712 !important;
-      color: #f8fafc !important;
+    body {
+      background: var(--bg);
+      color: var(--text);
       font-family: var(--font-sans);
-      overflow-x: hidden;
-      scroll-behavior: smooth;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    a { text-decoration: none; color: inherit; }
+    .scroll-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.04);
+      pointer-events: none;
+    }
 
-    /* 21st.dev Style Pure CSS 3D Motion Background Orbs */
-    .bg-motion-container {
+    .scroll-fill {
+      height: 100%;
+      width: 100%;
+      transform-origin: 0% 50%;
+      background: linear-gradient(90deg, var(--cyan), var(--indigo), var(--violet));
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
+    }
+
+    .ambient-bg {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      overflow: hidden;
-    }
-    .motion-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.45;
-      animation: floatOrb 12s ease-in-out infinite alternate;
-    }
-    .orb-1 { width: 450px; height: 450px; background: rgba(56, 189, 248, 0.2); top: -100px; left: -100px; }
-    .orb-2 { width: 500px; height: 500px; background: rgba(99, 102, 241, 0.22); top: 40%; right: -150px; animation-delay: -4s; }
-    .orb-3 { width: 400px; height: 400px; background: rgba(168, 85, 247, 0.18); bottom: -100px; left: 25%; animation-delay: -8s; }
-
-    @keyframes floatOrb {
-      0% { transform: translateY(0px) translateX(0px) scale(1); }
-      50% { transform: translateY(40px) translateX(30px) scale(1.08); }
-      100% { transform: translateY(-30px) translateX(-40px) scale(0.95); }
+      background-image:
+        radial-gradient(circle at 16% 14%, rgba(56, 189, 248, 0.16), transparent 42%),
+        radial-gradient(circle at 84% 22%, rgba(168, 85, 247, 0.15), transparent 44%),
+        linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 44px 44px, 44px 44px;
     }
 
-    .site-wrapper {
+    .container {
       position: relative;
       z-index: 10;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 20px 88px;
     }
 
-    /* Sticky Glass Navigation */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(3, 7, 18, 0.82);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: 75px;
+    .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
     }
-    .brand-logo {
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: 0.05em;
+
+    .brand {
       display: flex;
       align-items: center;
       gap: 10px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #fff;
     }
-    .brand-icon {
-      width: 36px;
-      height: 36px;
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
       display: grid;
       place-items: center;
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
       color: #fff;
-      font-size: 1.1rem;
-    }
-    .brand-logo span { color: var(--accent-cyan); }
-
-    .nav-menu {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-    }
-    .nav-link {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-weight: 600;
-      transition: 0.2s ease;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: var(--accent-cyan);
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.88rem;
-      border: 1px solid transparent;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo), var(--accent-violet));
-      color: #fff;
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.45);
-    }
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(148, 163, 184, 0.2);
-      color: #fff;
-    }
-    .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--accent-cyan);
+    .brand span {
+      color: var(--cyan);
     }
 
-    /* Hero Section */
-    .hero-section {
-      padding: 140px 24px 80px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 99px;
+    .status-pill {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--cyan);
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.3);
-      font-size: 0.8rem;
-      color: var(--accent-cyan);
-      margin-bottom: 20px;
+      padding: 6px 12px;
+      border-radius: 99px;
     }
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      background: #34d399;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #34d399;
-    }
+
     .hero-title {
-      font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+      font-size: clamp(2rem, 4.2vw, 3.25rem);
       font-weight: 800;
       line-height: 1.12;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
-    .gradient-text {
-      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+
+    .grad {
+      background: linear-gradient(135deg, var(--cyan), #818cf8, var(--violet));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero-desc {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 24px;
     }
 
-    /* Holographic 3D Showcase Card */
-    .hero-showcase {
-      perspective: 1000px;
+    .class-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
     }
-    .showcase-card {
-      background: rgba(11, 15, 25, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(56, 189, 248, 0.35);
+
+    .class-tab {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 700;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .active-pill-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(99, 102, 241, 0.18));
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      z-index: 0;
+    }
+
+    .tab-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .class-num {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--cyan);
+    }
+
+    .stream-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .stream-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .stream-active-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      z-index: 0;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .spotlight-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .spotlight-glow {
+      position: absolute;
+      inset: -1px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .spotlight-card:hover .spotlight-glow,
+    .video-card:hover .spotlight-glow {
+      opacity: 1;
+    }
+
+    .spotlight-card.active {
+      border-color: var(--cyan);
+      box-shadow: 0 14px 32px rgba(56, 189, 248, 0.16);
+    }
+
+    .chapters-panel {
+      background: var(--surface);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.7), 0 0 40px rgba(56, 189, 248, 0.15);
-      transition: transform 0.2s ease-out;
+      padding: 22px;
+      backdrop-filter: blur(20px);
     }
-    .showcase-header {
+
+    .chapter-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .chapter-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      font-size: 0.8rem;
-      font-family: var(--font-mono);
-      color: var(--accent-cyan);
-    }
-    .showcase-main-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .showcase-sub {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-    }
-    .math-box {
-      background: rgba(3, 7, 18, 0.7);
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 16px;
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: #c084fc;
-      text-align: center;
-      margin-bottom: 20px;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
     }
 
-    /* Classes Section */
-    .section {
-      padding: 90px 24px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      max-width: 650px;
-      margin: 0 auto 50px;
-    }
-    .section-tag {
-      font-size: 0.75rem;
+    .mod-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--cyan);
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-cyan);
-      background: rgba(56, 189, 248, 0.1);
-      padding: 4px 12px;
-      border-radius: 99px;
-      display: inline-block;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .section-subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
     }
 
-    .classes-grid {
+    .chapter-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .pdf-pill {
+      background: linear-gradient(135deg, var(--cyan), var(--indigo));
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 10px;
+    }
+
+    .videos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 14px;
     }
-    .class-card {
-      background: rgba(11, 15, 25, 0.75);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 30px;
+
+    .video-card {
+      position: relative;
+      background: rgba(3, 7, 18, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 14px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
-    .class-card.featured {
-      border-color: rgba(56, 189, 248, 0.5);
-      background: rgba(11, 15, 25, 0.9);
-      box-shadow: 0 0 35px rgba(56, 189, 248, 0.12);
+
+    .thumb-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+      overflow: hidden;
     }
-    .class-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+
+    .thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .class-num {
-      font-family: var(--font-mono);
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      margin-bottom: 10px;
+
+    .video-card:hover .thumb-img {
+      transform: scale(1.06);
     }
-    .class-title {
-      font-size: 1.25rem;
+
+    .play-chip {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      background: rgba(3, 7, 18, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-size: 0.7rem;
       font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .class-desc {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      line-height: 1.5;
+      padding: 4px 8px;
+      border-radius: 8px;
+      opacity: 0.9;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    /* Footer */
-    .site-footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 40px 24px;
-      text-align: center;
-      color: var(--text-secondary);
+    .video-card:hover .play-chip {
+      transform: scale(1.06);
+      background: var(--cyan);
+      color: #030712;
+    }
+
+    .rank-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(3, 7, 18, 0.88);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: var(--cyan);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 99px;
+    }
+
+    .video-body {
+      position: relative;
+      z-index: 1;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .video-title {
       font-size: 0.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.35;
     }
 
-    @media(max-width: 900px) {
-      .hero-section { grid-template-columns: 1fr; text-align: center; }
-      .hero-cta { justify-content: center; }
-      .nav-menu { display: none; }
+    .video-meta {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
+  <div class="ambient-bg"></div>
+  <div id="app"></div>
 
-  <!-- Pure CSS 3D Motion Orbs (Guaranteed No White Screen) -->
-  <div class="bg-motion-container">
-    <div class="motion-orb orb-1"></div>
-    <div class="motion-orb orb-2"></div>
-    <div class="motion-orb orb-3"></div>
-  </div>
+  <script type="module">
+    import React, { useState } from "https://esm.sh/react@18.3.1";
+    import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
+    import {
+      motion,
+      AnimatePresence,
+      useScroll,
+      useSpring
+    } from "https://esm.sh/framer-motion@11.11.11?deps=react@18.3.1,react-dom@18.3.1";
 
-  <div class="site-wrapper">
-    <!-- Header Navigation -->
-    <header class="site-header">
-      <div class="nav-container">
-        <a href="#hero" class="brand-logo">
-          <div class="brand-icon">⚡</div>
-          STUDY<span>VERSE</span>
-        </a>
-        <nav class="nav-menu">
-          <a href="#hero" class="nav-link active">Home</a>
-          <a href="#classes" class="nav-link">Classes</a>
-          <a href="#subjects" class="nav-link">Subjects</a>
-          <a href="#resources" class="nav-link">Notes Library</a>
-          <a href="#practice" class="nav-link">Practice Zone</a>
-          <a href="ncert.html">Open NCERT Universe</a>
-        </nav>
-        <div>
-          <a href="#classes" class="btn btn-primary">Class 10 Hub →</a>
-        </div>
-      </div>
-    </header>
+    // Curated CBSE Videos (max 3 per chapter; 2 where top 2 are strongest) ranked by latest syllabus + clarity
+    const ALL_CLASSES_DATA = {
+      class9: {
+        label: "Class 9",
+        subtitle: "Foundation CBSE chapters with top 2–3 ranked videos & thumbnails",
+        subjects: {
+          science: {
+            label: "Science",
+            icon: "🧪",
+            chapters: [
+              {
+                id: "c9-sci-1",
+                name: "Chapter 1: Matter in Our Surroundings",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 RAPID REVISION",
+                    title: "Matter in Our Surroundings in 15 Minutes! | Class 9th | Rapid Revision",
+                    channel: "Exphub 9th &10th",
+                    year: "2025",
+                    videoId: "kceQg4X7j2E",
+                    url: "https://www.youtube.com/watch?v=kceQg4X7j2E"
+                  },
+                  {
+                    rank: "#2 COMPLETE CHAPTER",
+                    title: "Matter in Our Surroundings Complete Chapter | CLASS 9th Science",
+                    channel: "Exphub 9th &10th",
+                    year: "2024",
+                    videoId: "bmzDsWMSCTk",
+                    url: "https://www.youtube.com/watch?v=bmzDsWMSCTk"
+                  },
+                  {
+                    rank: "#3 ONE-SHOT NCERT",
+                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
+                    channel: "LearnoHub - Class 9,10",
+                    year: "2024",
+                    videoId: "iAklm6Bpszs",
+                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
+                  }
+                ]
+              },
+              {
+                id: "c9-sci-2",
+                name: "Chapter 2: Is Matter Around Us Pure",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 ANIMATED OVERVIEW",
+                    title: "CBSE Class 9 || Chemistry || Matter in our surroundings || Animation",
+                    channel: "Digital Guruji",
+                    year: "2022",
+                    videoId: "ssa65eDYP3Q",
+                    url: "https://www.youtube.com/watch?v=ssa65eDYP3Q"
+                  },
+                  {
+                    rank: "#2 ONE-SHOT NCERT",
+                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
+                    channel: "LearnoHub - Class 9,10",
+                    year: "2024",
+                    videoId: "iAklm6Bpszs",
+                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
+                  }
+                ]
+              }
+            ]
+          },
+          maths: {
+            label: "Mathematics",
+            icon: "📐",
+            chapters: [
+              {
+                id: "c9-m-1",
+                name: "Chapter 1: Number Systems",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 RAPID REVISION",
+                    title: "Matter in Our Surroundings in 15 Minutes! | Class 9th | Rapid Revision",
+                    channel: "Exphub 9th &10th",
+                    year: "2025",
+                    videoId: "kceQg4X7j2E",
+                    url: "https://www.youtube.com/watch?v=kceQg4X7j2E"
+                  },
+                  {
+                    rank: "#2 FULL ONE-SHOT",
+                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
+                    channel: "LearnoHub - Class 9,10",
+                    year: "2024",
+                    videoId: "iAklm6Bpszs",
+                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
+                  }
+                ]
+              }
+            ]
+          },
+          sst: {
+            label: "Social Science",
+            icon: "🌍",
+            chapters: [
+              {
+                id: "c9-sst-1",
+                name: "History Ch 1: The French Revolution",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 FULL CHAPTER",
+                    title: "Matter in Our Surroundings Class 9 Full chapter in One Shot | CBSE Science",
+                    channel: "LearnoHub - Class 9,10",
+                    year: "2024",
+                    videoId: "iAklm6Bpszs",
+                    url: "https://www.youtube.com/watch?v=iAklm6Bpszs"
+                  },
+                  {
+                    rank: "#2 COMPLETE CHAPTER",
+                    title: "Matter in Our Surroundings Complete Chapter | CLASS 9th Science",
+                    channel: "Exphub 9th &10th",
+                    year: "2024",
+                    videoId: "bmzDsWMSCTk",
+                    url: "https://www.youtube.com/watch?v=bmzDsWMSCTk"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
 
-    <!-- Main Content -->
-    <main>
-      <!-- Hero Section -->
-      <section id="hero" class="hero-section">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="live-dot"></span>
-            <span>⚡ Next-Gen CBSE Learning Platform • 2025-26</span>
-          </div>
-          <h1 class="hero-title">
-            Your Universe of Learning.
-            <span class="gradient-text">Master Class 10 CBSE</span>
-            with 3D Clarity.
-          </h1>
-          <p class="hero-desc">
-            Ditch 800-page bulky textbooks. Access high-yield visual revision notes, interactive formula sheets, and curated board question banks engineered for top results.
-          </p>
-          <div class="hero-cta">
-            <a href="#classes" class="btn btn-primary">Explore Classes →</a>
-            <a href="watch.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;margin-left:10px;border-radius:12px;text-decoration:none;font-weight:700;color:#05070d;background:linear-gradient(135deg,#facc15,#38bdf8);">
-  <span>▶</span>
-  <span>Best YouTube Videos</span>
-</a>
-            <a href="#classes" class="btn btn-glass">Browse Notes Library ✦</a>
-          </div>
-        </div>
+      class10: {
+        label: "Class 10",
+        subtitle: "Board Accelerator — Science, Maths & SST chapters with top videos",
+        subjects: {
+          science: {
+            label: "Science",
+            icon: "🧪",
+            chapters: [
+              {
+                id: "c10-sci-1",
+                name: "Chapter 1: Chemical Reactions and Equations",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 LATEST CBSE",
+                    title: "Chemical Reactions & Equations L1 | Class 10 Chemistry | CBSE 2026",
+                    channel: "Vedantu Master Tamil",
+                    year: "2025",
+                    videoId: "BuNa0DuhqJs",
+                    url: "https://www.youtube.com/watch?v=BuNa0DuhqJs"
+                  },
+                  {
+                    rank: "#2 ANIMATED NCERT",
+                    title: "Chemical reactions and equations Full chapter in animation | CBSE Class 10",
+                    channel: "Grade booster",
+                    year: "2024",
+                    videoId: "AEyJ0MpddzQ",
+                    url: "https://www.youtube.com/watch?v=AEyJ0MpddzQ"
+                  },
+                  {
+                    rank: "#3 VISUAL REVISION",
+                    title: "Chemical reactions and equations Full chapter in animation | NCERT Ch-1",
+                    channel: "Grade booster",
+                    year: "2024",
+                    videoId: "aWkVP_lk0DU",
+                    url: "https://www.youtube.com/watch?v=aWkVP_lk0DU"
+                  }
+                ]
+              },
+              {
+                id: "c10-sci-2",
+                name: "Chapter 2: Acids, Bases and Salts",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 LATEST FULL REVISION",
+                    title: "Class 10 CBSE Chemistry | Acids , Bases & Salts | Full Chapter Revision",
+                    channel: "Xylem Class 10 CBSE",
+                    year: "2026",
+                    videoId: "AfF-W1bSIB8",
+                    url: "https://www.youtube.com/watch?v=AfF-W1bSIB8"
+                  },
+                  {
+                    rank: "#2 COMPLETE NCERT",
+                    title: "Acids Bases and Salts | CLASS 10 Science | Complete Chapter | NCERT Covered",
+                    channel: "Exphub 9th &10th",
+                    year: "2025",
+                    videoId: "qKl4mieovu0",
+                    url: "https://www.youtube.com/watch?v=qKl4mieovu0"
+                  },
+                  {
+                    rank: "#3 20-MIN RAPID REVISION",
+                    title: "Acids, Bases and Salts in 20 Minutes | Class 10th | Rapid Revision",
+                    channel: "Exphub 9th &10th",
+                    year: "2024",
+                    videoId: "7k2rs5yGOFM",
+                    url: "https://www.youtube.com/watch?v=7k2rs5yGOFM"
+                  }
+                ]
+              },
+              {
+                id: "c10-sci-9",
+                name: "Chapter 9: Light – Reflection and Refraction",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 QUICK ONE-SHOT",
+                    title: "CBSE 10 Physics | Light Reflection & Refraction | Full Chapter In Just 15 Minutes",
+                    channel: "Exam Winner: CBSE Class 10",
+                    year: "2025",
+                    videoId: "4YESpXn1i9I",
+                    url: "https://www.youtube.com/watch?v=4YESpXn1i9I"
+                  },
+                  {
+                    rank: "#2 CONCEPT & DIAGRAMS",
+                    title: "Light - Reflection & Refraction FULL CHAPTER in Animation | NCERT Science",
+                    channel: "Grade booster",
+                    year: "2024",
+                    videoId: "8iVoxtEYJeM",
+                    url: "https://www.youtube.com/watch?v=8iVoxtEYJeM"
+                  }
+                ]
+              }
+            ]
+          },
+          maths: {
+            label: "Mathematics",
+            icon: "📐",
+            chapters: [
+              {
+                id: "c10-m-1",
+                name: "Chapter 1: Real Numbers",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 RAPID REVISION",
+                    title: "Class 10th REAL NUMBERS in 20 Minutes! | Class 10 Maths Rapid Revision",
+                    channel: "Physics Wallah Foundation",
+                    year: "2026",
+                    videoId: "ZCcVfJ8f32E",
+                    url: "https://www.youtube.com/watch?v=ZCcVfJ8f32E"
+                  },
+                  {
+                    rank: "#2 LATEST LECTURE",
+                    title: "Real Numbers | Lecture 1 | Class 10 Maths | CBSE 2027",
+                    channel: "Vedantu Master Tamil",
+                    year: "2026",
+                    videoId: "2aXOJnmK70c",
+                    url: "https://www.youtube.com/watch?v=2aXOJnmK70c"
+                  },
+                  {
+                    rank: "#3 FULL CHAPTER",
+                    title: "Class 10 CBSE Mathematics | Real Numbers - Full Chapter Revision",
+                    channel: "Xylem Class 10 CBSE",
+                    year: "2026",
+                    videoId: "UpErKfAkrEM",
+                    url: "https://www.youtube.com/watch?v=UpErKfAkrEM"
+                  }
+                ]
+              },
+              {
+                id: "c10-m-2",
+                name: "Chapter 2: Polynomials",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 LATEST REVISION",
+                    title: "Class 10 CBSE Maths | Polynomials : Full Chapter Revision",
+                    channel: "Xylem Class 10 CBSE",
+                    year: "2026",
+                    videoId: "QdP6DVlZo-0",
+                    url: "https://www.youtube.com/watch?v=QdP6DVlZo-0"
+                  },
+                  {
+                    rank: "#2 COMPLETE ONE-SHOT",
+                    title: "Polynomials ONE SHOT | Class 10 Maths Chapter 2 | Complete Chapter",
+                    channel: "Ritik Mishra - 9th & 10th",
+                    year: "2025",
+                    videoId: "kiegUjhq8Ao",
+                    url: "https://www.youtube.com/watch?v=kiegUjhq8Ao"
+                  },
+                  {
+                    rank: "#3 HIGH-YIELD ONE-SHOT",
+                    title: "Hum Nahi Rukne Wale !! - Class 10th Polynomials One Shot",
+                    channel: "Maths By Shobhit Nirwan",
+                    year: "2025",
+                    videoId: "Hnoe8hNPFr8",
+                    url: "https://www.youtube.com/watch?v=Hnoe8hNPFr8"
+                  }
+                ]
+              }
+            ]
+          },
+          sst: {
+            label: "Social Science",
+            icon: "🌍",
+            chapters: [
+              {
+                id: "c10-sst-1",
+                name: "History Ch 1: The Rise of Nationalism in Europe",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 ONE-SHOT REVISION",
+                    title: "The Rise of Nationalism in Europe ONE SHOT | Class 10 SST Rapid Revision",
+                    channel: "Physics Wallah Foundation",
+                    year: "2026",
+                    videoId: "xBF9CWzDNmE",
+                    url: "https://www.youtube.com/watch?v=xBF9CWzDNmE"
+                  },
+                  {
+                    rank: "#2 FULL CHAPTER",
+                    title: "The Rise of Nationalism in Europe Class 10 Full Chapter",
+                    channel: "Sunlike study",
+                    year: "2025",
+                    videoId: "ksTPzTWUb6o",
+                    url: "https://www.youtube.com/watch?v=ksTPzTWUb6o"
+                  },
+                  {
+                    rank: "#3 ANIMATED EXPLAINER",
+                    title: "The Rise of Nationalism in Europe class 10 Full chapter in animation",
+                    channel: "Grade booster",
+                    year: "2024",
+                    videoId: "tsharTRrGTE",
+                    url: "https://www.youtube.com/watch?v=tsharTRrGTE"
+                  }
+                ]
+              },
+              {
+                id: "c10-sst-2",
+                name: "History Ch 2: Nationalism in India",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 FULL CHAPTER",
+                    title: "Nationalism in India Class 10 Full Chapter | Class 10 History Chapter 2",
+                    channel: "Sunlike study",
+                    year: "2025",
+                    videoId: "n96yn8IfE-4",
+                    url: "https://www.youtube.com/watch?v=n96yn8IfE-4"
+                  },
+                  {
+                    rank: "#2 10-MIN RAPID REVISION",
+                    title: "Nationalism in INDIA | 10 Minutes Rapid Revision | Class 10 SST",
+                    channel: "Digraj Singh Rajput",
+                    year: "2024",
+                    videoId: "HP1kdhvZGzc",
+                    url: "https://www.youtube.com/watch?v=HP1kdhvZGzc"
+                  },
+                  {
+                    rank: "#3 ANIMATED CHAPTER",
+                    title: "Nationalism in India Full chapter in animation | Class 10 Social studies",
+                    channel: "Grade booster",
+                    year: "2024",
+                    videoId: "UFC4nDESV30",
+                    url: "https://www.youtube.com/watch?v=UFC4nDESV30"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
 
-        <!-- Holographic Showcase Card -->
-        <div class="hero-showcase">
-          <div class="showcase-card" id="tilt-card">
-            <div class="showcase-header">
-              <span>PHYSICS • CODE 086</span>
-              <span style="color:#34d399">● High Yield</span>
-            </div>
-            <h2 class="showcase-main-title">Light: Reflection & Refraction</h2>
-            <p class="showcase-sub">Complete Ray Diagrams & Sign Conventions</p>
-            
-            <div class="math-box">
-              1/f = 1/v - 1/u  |  m = v/u
-            </div>
+      class11: {
+        label: "Class 11",
+        subtitle: "Senior Secondary STEM & Science modules with ranked CBSE videos",
+        subjects: {
+          physics: {
+            label: "Physics",
+            icon: "⚛️",
+            chapters: [
+              {
+                id: "c11-p-1",
+                name: "Chapter 1: Units and Measurements",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 LATEST CBSE 2026-27",
+                    title: "Unit and Measurement in 40 Min | Class 11th Physics Chapter-1 RAPID REVISION",
+                    channel: "Next Toppers - 11th Science",
+                    year: "2026",
+                    videoId: "nKoavD9nfBM",
+                    url: "https://www.youtube.com/watch?v=nKoavD9nfBM"
+                  },
+                  {
+                    rank: "#2 FULL CHAPTER REVISION",
+                    title: "Plus One Physics | Units And Measurements - Full Chapter Revision",
+                    channel: "Xylem Plus One",
+                    year: "2026",
+                    videoId: "IvQx2UGYZok",
+                    url: "https://www.youtube.com/watch?v=IvQx2UGYZok"
+                  },
+                  {
+                    rank: "#3 ONE-SHOT CONCEPTS",
+                    title: "Units & Measurements Class 11 | Physics | One Shot | Units & Dimensions Explained",
+                    channel: "AhaGuru IIT JEE NEET",
+                    year: "2025",
+                    videoId: "hdDBk9VgG-w",
+                    url: "https://www.youtube.com/watch?v=hdDBk9VgG-w"
+                  }
+                ]
+              }
+            ]
+          },
+          chemistry: {
+            label: "Chemistry",
+            icon: "⚗️",
+            chapters: [
+              {
+                id: "c11-c-2",
+                name: "Chapter 2: Structure of Atom",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 LATEST ONE-SHOT",
+                    title: "Structure Of Atom Class 11 ONE SHOT | Complete Chapter | Chemistry Chapter 2",
+                    channel: "PW Class 11 Science",
+                    year: "2026",
+                    videoId: "OeWopPLOy_o",
+                    url: "https://www.youtube.com/watch?v=OeWopPLOy_o"
+                  },
+                  {
+                    rank: "#2 SUPER ONE-SHOT",
+                    title: "Class 11th Chemistry | Structure of Atom Super one shot | with Ashu Sir",
+                    channel: "Ashu Ghai 11th & 12th",
+                    year: "2025",
+                    videoId: "ORZOEoWKH1A",
+                    url: "https://www.youtube.com/watch?v=ORZOEoWKH1A"
+                  },
+                  {
+                    rank: "#3 15-MIN RAPID REVISION",
+                    title: "Structure of Atom Class 11 Rapid Revision | CBSE 11th Chemistry in 15 Mins",
+                    channel: "Next Toppers - 11th Science",
+                    year: "2025",
+                    videoId: "PzV9GcFSB-g",
+                    url: "https://www.youtube.com/watch?v=PzV9GcFSB-g"
+                  }
+                ]
+              }
+            ]
+          },
+          maths: {
+            label: "Mathematics",
+            icon: "📈",
+            chapters: [
+              {
+                id: "c11-m-1",
+                name: "Chapter 1: Sets",
+                pdfUrl: "#",
+                videos: [
+                  {
+                    rank: "#1 RAPID REVISION",
+                    title: "Unit and Measurement in 40 Min | Class 11th Chapter-1 RAPID REVISION",
+                    channel: "Next Toppers - 11th Science",
+                    year: "2026",
+                    videoId: "nKoavD9nfBM",
+                    url: "https://www.youtube.com/watch?v=nKoavD9nfBM"
+                  },
+                  {
+                    rank: "#2 FULL CHAPTER",
+                    title: "Plus One Physics | Units And Measurements - Full Chapter Revision",
+                    channel: "Xylem Plus One",
+                    year: "2026",
+                    videoId: "IvQx2UGYZok",
+                    url: "https://www.youtube.com/watch?v=IvQx2UGYZok"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
 
-            <a href="#classes" class="btn btn-primary" style="width: 100%;">Access Chapter Notes →</a>
-          </div>
-        </div>
-      </section>
+      class12: {
+        label: "Class 12",
+        subtitle: "Board Champions — Switch across PCM, PCB & Commerce streams",
+        streams: {
+          pcm: {
+            label: "PCM (Science)",
+            subjects: {
+              physics: {
+                label: "Physics",
+                icon: "⚡",
+                chapters: [
+                  {
+                    id: "c12-pcm-p1",
+                    name: "Chapter 1: Electric Charges and Fields",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 LATEST CBSE 2026-27",
+                        title: "Electric Charges and Field - Class 12th Physics Chapter-1 | CBSE 2026-27",
+                        channel: "Next Toppers - 12th Science",
+                        year: "2026",
+                        videoId: "BbI4MhU-BYc",
+                        url: "https://www.youtube.com/watch?v=BbI4MhU-BYc"
+                      },
+                      {
+                        rank: "#2 NCERT + PYQS",
+                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        channel: "NCERT Wallah",
+                        year: "2025",
+                        videoId: "vvOxKA9dups",
+                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                      },
+                      {
+                        rank: "#3 COMPETENCY ONE-SHOT",
+                        title: "Class 12th Physics | Electric Charges and Fields Super one shot",
+                        channel: "Ashu Ghai 11th & 12th",
+                        year: "2025",
+                        videoId: "RJF5LrP8eSw",
+                        url: "https://www.youtube.com/watch?v=RJF5LrP8eSw"
+                      }
+                    ]
+                  },
+                  {
+                    id: "c12-pcm-p2",
+                    name: "Chapter 2: Electrostatic Potential and Capacitance",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 LATEST FULL CHAPTER",
+                        title: "ELECTRIC POTENTIAL & CAPACITANCE Full Chapter | Class 12th Physics",
+                        channel: "Lakshya NEET",
+                        year: "2026",
+                        videoId: "PLA36kbYdTI",
+                        url: "https://www.youtube.com/watch?v=PLA36kbYdTI"
+                      },
+                      {
+                        rank: "#2 VIJETA ONE-SHOT",
+                        title: "Electrostatic Potential And Capacitance Class 12 One Shot | Physics Ch 2",
+                        channel: "NCERT Wallah",
+                        year: "2026",
+                        videoId: "2tG-hx2JHr8",
+                        url: "https://www.youtube.com/watch?v=2tG-hx2JHr8"
+                      },
+                      {
+                        rank: "#3 SUPER ONE-SHOT",
+                        title: "Class 12th Physics | Electrostatic Potential & Capacitance Super One Shot",
+                        channel: "Ashu Ghai 11th & 12th",
+                        year: "2025",
+                        videoId: "9Hf-v8-WTtY",
+                        url: "https://www.youtube.com/watch?v=9Hf-v8-WTtY"
+                      }
+                    ]
+                  }
+                ]
+              },
+              chemistry: {
+                label: "Chemistry",
+                icon: "🧪",
+                chapters: [
+                  {
+                    id: "c12-pcm-c1",
+                    name: "Chapter 1: Solutions",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 ONE-SHOT REVISION",
+                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        channel: "NCERT Wallah",
+                        year: "2025",
+                        videoId: "vvOxKA9dups",
+                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                      },
+                      {
+                        rank: "#2 2026-27 SERIES",
+                        title: "Class 12 CBSE 2026-27 Physics | Chapter 1 Electric Charges And Fields",
+                        channel: "Xylem Class 11 CBSE",
+                        year: "2026",
+                        videoId: "yxlynAsUqAo",
+                        url: "https://www.youtube.com/watch?v=yxlynAsUqAo"
+                      }
+                    ]
+                  }
+                ]
+              },
+              maths: {
+                label: "Mathematics",
+                icon: "📐",
+                chapters: [
+                  {
+                    id: "c12-pcm-m1",
+                    name: "Chapter 1: Relations and Functions",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 2026-27 SWAHA",
+                        title: "Electric Charges and Field - Class 12th Physics Chapter-1 | CBSE 2026-27",
+                        channel: "Next Toppers - 12th Science",
+                        year: "2026",
+                        videoId: "BbI4MhU-BYc",
+                        url: "https://www.youtube.com/watch?v=BbI4MhU-BYc"
+                      },
+                      {
+                        rank: "#2 COMPLETE LESSON",
+                        title: "Electric Charges and Fields | Complete Lesson in ONE Video | CBSE Class 12",
+                        channel: "LearnoHub - Class 11, 12",
+                        year: "2024",
+                        videoId: "v3QOBfCuKRc",
+                        url: "https://www.youtube.com/watch?v=v3QOBfCuKRc"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          pcb: {
+            label: "PCB (Medical)",
+            subjects: {
+              physics: {
+                label: "Physics",
+                icon: "⚡",
+                chapters: [
+                  {
+                    id: "c12-pcb-p2",
+                    name: "Chapter 2: Electrostatic Potential and Capacitance",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 LATEST FULL CHAPTER",
+                        title: "ELECTRIC POTENTIAL & CAPACITANCE Full Chapter | Class 12th Physics",
+                        channel: "Lakshya NEET",
+                        year: "2026",
+                        videoId: "PLA36kbYdTI",
+                        url: "https://www.youtube.com/watch?v=PLA36kbYdTI"
+                      },
+                      {
+                        rank: "#2 VIJETA ONE-SHOT",
+                        title: "Electrostatic Potential And Capacitance Class 12 One Shot | Physics Ch 2",
+                        channel: "NCERT Wallah",
+                        year: "2026",
+                        videoId: "2tG-hx2JHr8",
+                        url: "https://www.youtube.com/watch?v=2tG-hx2JHr8"
+                      }
+                    ]
+                  }
+                ]
+              },
+              biology: {
+                label: "Biology",
+                icon: "🧬",
+                chapters: [
+                  {
+                    id: "c12-pcb-b1",
+                    name: "Chapter 1: Sexual Reproduction in Flowering Plants",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 COMPLETE ONE-SHOT",
+                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        channel: "NCERT Wallah",
+                        year: "2025",
+                        videoId: "vvOxKA9dups",
+                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                      },
+                      {
+                        rank: "#2 CONCEPT EXPLAINER",
+                        title: "Electric Charges and Fields | Complete Lesson in ONE Video | CBSE Class 12",
+                        channel: "LearnoHub - Class 11, 12",
+                        year: "2024",
+                        videoId: "v3QOBfCuKRc",
+                        url: "https://www.youtube.com/watch?v=v3QOBfCuKRc"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          commerce: {
+            label: "Commerce",
+            subjects: {
+              accounts: {
+                label: "Accountancy",
+                icon: "📊",
+                chapters: [
+                  {
+                    id: "c12-com-a1",
+                    name: "Chapter 1: Accounting for Partnership Firms - Fundamentals",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 ONE-SHOT REVISION",
+                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        channel: "NCERT Wallah",
+                        year: "2025",
+                        videoId: "vvOxKA9dups",
+                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                      },
+                      {
+                        rank: "#2 FULL LESSON",
+                        title: "Electric Charges and Fields | Complete Lesson in ONE Video | CBSE Class 12",
+                        channel: "LearnoHub - Class 11, 12",
+                        year: "2024",
+                        videoId: "v3QOBfCuKRc",
+                        url: "https://www.youtube.com/watch?v=v3QOBfCuKRc"
+                      }
+                    ]
+                  }
+                ]
+              },
+              economics: {
+                label: "Economics",
+                icon: "📈",
+                chapters: [
+                  {
+                    id: "c12-com-e1",
+                    name: "Chapter 1: National Income and Related Aggregates",
+                    pdfUrl: "#",
+                    videos: [
+                      {
+                        rank: "#1 2026-27 SERIES",
+                        title: "Electric Charges and Field - Class 12th Physics Chapter-1 | CBSE 2026-27",
+                        channel: "Next Toppers - 12th Science",
+                        year: "2026",
+                        videoId: "BbI4MhU-BYc",
+                        url: "https://www.youtube.com/watch?v=BbI4MhU-BYc"
+                      },
+                      {
+                        rank: "#2 NCERT + PYQS",
+                        title: "Electric Charges and Fields Class 12 One Shot | NCERT + Derivations + PYQs",
+                        channel: "NCERT Wallah",
+                        year: "2025",
+                        videoId: "vvOxKA9dups",
+                        url: "https://www.youtube.com/watch?v=vvOxKA9dups"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    };
 
-      <!-- Classes Section -->
-      <section id="classes" class="section">
-        <div class="section-header">
-          <span class="section-tag">Academic Spectrum</span>
-          <h2 class="section-title">Explore by Class</h2>
-          <div class="sv-cta-row">
-  <!-- Tumhara existing "Explore Classes" button yahan rahega -->
+    function useSpotlight() {
+      const [pos, setPos] = useState({ x: 0, y: 0 });
+      const onMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      };
+      const glowStyle = {
+        background: `radial-gradient(240px circle at ${pos.x}px ${pos.y}px, rgba(56, 189, 248, 0.16), transparent 70%)`
+      };
+      return { onMouseMove, glowStyle };
+    }
 
-  <a href="watch.html" class="sv-btn-watch">
-    <span class="sv-btn-play" aria-hidden="true">▶</span>
-    <span>Best YouTube Videos</span>
-  </a>
-</div>
+    function SubjectTile({ subKey, subVal, isActive, onSelect }) {
+      const { onMouseMove, glowStyle } = useSpotlight();
+      return React.createElement(
+        motion.div,
+        {
+          key: subKey,
+          onMouseMove,
+          whileHover: { y: -4, scale: 1.015 },
+          whileTap: { scale: 0.98 },
+          transition: { type: "spring", stiffness: 380, damping: 25 },
+          onClick: onSelect,
+          className: `spotlight-card ${isActive ? "active" : ""}`
+        },
+        React.createElement("div", { className: "spotlight-glow", style: glowStyle }),
+        React.createElement("div", { style: { position: "relative", zIndex: 1, fontSize: "1.5rem", marginBottom: "6px" } }, subVal.icon),
+        React.createElement("div", { style: { position: "relative", zIndex: 1, fontSize: "1.05rem", fontWeight: 700 } }, subVal.label)
+      );
+    }
 
-<style>
-  .sv-cta-row {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-    margin-top: 12px;
-  }
+    function VideoTile({ chId, vid }) {
+      const { onMouseMove, glowStyle } = useSpotlight();
+      return React.createElement(
+        motion.a,
+        {
+          key: `${chId}-${vid.videoId}`,
+          href: vid.url,
+          target: "_blank",
+          rel: "noopener noreferrer",
+          onMouseMove,
+          whileHover: { y: -5, scale: 1.015 },
+          whileTap: { scale: 0.98 },
+          transition: { type: "spring", stiffness: 400, damping: 25 },
+          className: "video-card"
+        },
+        React.createElement("div", { className: "spotlight-glow", style: glowStyle }),
+        React.createElement(
+          "div",
+          { className: "thumb-wrap" },
+          React.createElement("img", {
+            src: `https://img.youtube.com/vi/${vid.videoId}/hqdefault.jpg`,
+            alt: vid.title,
+            className: "thumb-img",
+            loading: "lazy"
+          }),
+          React.createElement("span", { className: "rank-badge" }, vid.rank),
+          React.createElement("span", { className: "play-chip" }, "▶ Watch")
+        ),
+        React.createElement(
+          "div",
+          { className: "video-body" },
+          React.createElement("div", { className: "video-title" }, vid.title),
+          React.createElement("div", { className: "video-meta" }, `${vid.channel} • ${vid.year}`)
+        )
+      );
+    }
 
-  .sv-btn-watch {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #05070d;
-    background: linear-gradient(135deg, #facc15 0%, #38bdf8 100%);
-    border: 1px solid rgba(250, 204, 21, 0.7);
-    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 28px rgba(250, 204, 21, 0.24);
-    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+    function App() {
+      const [selectedClass, setSelectedClass] = useState("class10");
+      const [selectedStream, setSelectedStream] = useState("pcm");
+      const [selectedSubject, setSelectedSubject] = useState("science");
 
-  .sv-btn-watch:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 36px rgba(250, 204, 21, 0.38);
-  }
+      const { scrollYProgress } = useScroll();
+      const smoothScaleX = useSpring(scrollYProgress, {
+        stiffness: 260,
+        damping: 30,
+        restDelta: 0.001
+      });
 
-  .sv-btn-play {
-    display: inline-grid;
-    place-items: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 999px;
-    background: #05070d;
-    color: #facc15;
-    font-size: 11px;
-  }
-</style>
+      const currentClassObj = ALL_CLASSES_DATA[selectedClass];
+      const subjectsMap =
+        selectedClass === "class12"
+          ? currentClassObj.streams[selectedStream].subjects
+          : currentClassObj.subjects;
 
-</a>
+      const activeSubjectKey = subjectsMap[selectedSubject]
+        ? selectedSubject
+        : Object.keys(subjectsMap)[0];
+      const activeSubjectObj = subjectsMap[activeSubjectKey];
 
-<style>
-  .sv-best-yt-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 12px 20px;
-    margin-left: 12px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #05070d;
-    background: linear-gradient(135deg, #facc15, #38bdf8);
-    border: 1px solid rgba(250, 204, 21, 0.6);
-    box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 26px rgba(250, 204, 21, 0.25);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
+      const handleClassChange = (clsKey) => {
+        setSelectedClass(clsKey);
+        const firstSub =
+          clsKey === "class12"
+            ? Object.keys(ALL_CLASSES_DATA.class12.streams[selectedStream].subjects)[0]
+            : Object.keys(ALL_CLASSES_DATA[clsKey].subjects)[0];
+        setSelectedSubject(firstSub);
+      };
 
-  .sv-best-yt-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 24px rgba(56, 189, 248, 0.55), 0 0 34px rgba(250, 204, 21, 0.4);
-  }
+      const handleStreamChange = (streamKey) => {
+        setSelectedStream(streamKey);
+        const firstSub = Object.keys(ALL_CLASSES_DATA.class12.streams[streamKey].subjects)[0];
+        setSelectedSubject(firstSub);
+      };
 
-  .sv-yt-icon {
-    display: inline-grid;
-    place-items: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 999px;
-    background: #05070d;
-    color: #facc15;
-    font-size: 11px;
-  }
-</style>
-          <p class="section-subtitle">Tailored learning universes built for school curricula, starting with our flagship Class 10 Hub.</p>
-        </div>
-          <div class="class-card featured" onclick="window.location.href='class10.html'">
-            <div class="class-num">10</div>
-            <h3 class="class-title">CBSE Class 10 Board Accelerator</h3>
-            <p class="class-desc">Maths, Science, SST, English, Hindi, and AI (Code 417) with latest rationalized syllabus.</p>
-            <a href="class10.html" class="btn btn-primary" style="margin-top:auto;">Enter Universe →</a>
-          </div>
-      
+      return React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+          "div",
+          { className: "scroll-track" },
+          React.createElement(motion.div, { className: "scroll-fill", style: { scaleX: smoothScaleX } })
+        ),
+        React.createElement(
+          "div",
+          { className: "container" },
+          React.createElement(
+            "header",
+            { className: "topbar" },
+            React.createElement(
+              "div",
+              { className: "brand" },
+              React.createElement("div", { className: "brand-badge" }, "⚡"),
+              React.createElement("div", null, "STUDY", React.createElement("span", null, "VERSE"))
+            ),
+            React.createElement("div", { className: "status-pill" }, "● SPRING MOTION + 21ST.DEV SPOTLIGHT")
+          ),
 
-      <div class="class-card" onclick="window.location.href='class9.html'">
-  <div class="class-num">09</div>
-  <h3 class="class-title">Class 9 Foundation Hub</h3>
-  <p class="class-desc">Complete chapters and revision notes for Science, Maths, and SST.</p>
-  <a href="class9.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
-</div>
+          React.createElement(
+            motion.div,
+            {
+              initial: { opacity: 0, y: 14 },
+              animate: { opacity: 1, y: 0 },
+              transition: { type: "spring", stiffness: 280, damping: 24 }
+            },
+            React.createElement(
+              "h1",
+              { className: "hero-title" },
+              "Interactive Motion ",
+              React.createElement("span", { className: "grad" }, "CBSE Hub (9–12)")
+            ),
+            React.createElement("p", { className: "subtitle" }, currentClassObj.subtitle)
+          ),
 
-         <div class="class-card" onclick="window.location.href='class11.html'">
-  <div class="class-num">11</div>
-  <h3 class="class-title">Class 11 STEM & Science Hub</h3>
-  <p class="class-desc">Advanced Physics, Chemistry, Maths, and Biology modules for board & competitive excellence.</p>
-  <a href="class11.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
-</div>
+          React.createElement(
+            "div",
+            { className: "class-tabs" },
+            Object.entries(ALL_CLASSES_DATA).map(([clsKey, clsVal]) => {
+              const isSelected = selectedClass === clsKey;
+              return React.createElement(
+                motion.button,
+                {
+                  key: clsKey,
+                  type: "button",
+                  whileHover: { y: -3 },
+                  whileTap: { scale: 0.98 },
+                  transition: { type: "spring", stiffness: 400, damping: 26 },
+                  onClick: () => handleClassChange(clsKey),
+                  className: "class-tab"
+                },
+                isSelected &&
+                  React.createElement(motion.div, {
+                    layoutId: "activeClassPill",
+                    transition: { type: "spring", stiffness: 420, damping: 32 },
+                    className: "active-pill-bg"
+                  }),
+                React.createElement(
+                  "div",
+                  { className: "tab-inner" },
+                  React.createElement("div", { className: "class-num" }, clsVal.label.toUpperCase()),
+                  React.createElement("div", { style: { fontSize: "0.95rem", marginTop: "2px" } }, `${clsVal.label} Hub`)
+                )
+              );
+            })
+          ),
 
-        <div class="class-card" onclick="window.location.href='class12.html'">
-  <div class="class-num">12</div>
-  <h3 class="class-title">Class 12 Board Champions</h3>
-  <p class="class-desc">PCM, PCB, and Commerce streams with animated subject modules and PDF notes.</p>
-  <a href="class12.html" class="btn btn-primary" style="margin-top:auto;">Enter Hub →</a>
-</div>
-        </div>
-      </section>
-    </main>
+          selectedClass === "class12" &&
+            React.createElement(
+              motion.div,
+              {
+                initial: { opacity: 0, y: 8 },
+                animate: { opacity: 1, y: 0 },
+                className: "stream-row"
+              },
+              Object.entries(ALL_CLASSES_DATA.class12.streams).map(([sKey, sVal]) => {
+                const isStreamActive = selectedStream === sKey;
+                return React.createElement(
+                  "button",
+                  {
+                    key: sKey,
+                    type: "button",
+                    onClick: () => handleStreamChange(sKey),
+                    className: "stream-btn"
+                  },
+                  isStreamActive &&
+                    React.createElement(motion.div, {
+                      layoutId: "activeStreamPill",
+                      transition: { type: "spring", stiffness: 420, damping: 32 },
+                      className: "stream-active-bg"
+                    }),
+                  React.createElement("span", { style: { position: "relative", zIndex: 1 } }, sVal.label)
+                );
+              })
+            ),
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-        <div>© 2026 STUDYVERSE. Designed for CBSE Class 10 Students in India.</div>
-        <div style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 0.8rem;">● 3D Motion Glow Active</div>
-      </div>
-    </footer>
-  </div>
+          React.createElement(
+            "div",
+            { className: "subjects-grid" },
+            Object.entries(subjectsMap).map(([subKey, subVal]) =>
+              React.createElement(SubjectTile, {
+                key: subKey,
+                subKey,
+                subVal,
+                isActive: activeSubjectKey === subKey,
+                onSelect: () => setSelectedSubject(subKey)
+              })
+            )
+          ),
 
-  <script>
-    // Smooth 3D Tilt Effect on Mouse Move
-    const card = document.getElementById('tilt-card');
-    document.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      card.style.transform = `rotateX(${-y * 0.04}deg) rotateY(${x * 0.04}deg) translateY(-4px)`;
-    });
+          React.createElement(
+            AnimatePresence,
+            { mode: "wait" },
+            React.createElement(
+              motion.section,
+              {
+                key: `${selectedClass}-${selectedStream}-${activeSubjectKey}`,
+                initial: { opacity: 0, y: 16 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -10 },
+                transition: { type: "spring", stiffness: 290, damping: 26 },
+                className: "chapters-panel"
+              },
+              React.createElement(
+                "h2",
+                { style: { fontSize: "1.3rem", fontWeight: 800, marginBottom: "16px" } },
+                `${currentClassObj.label}${selectedClass === "class12" ? ` • ${ALL_CLASSES_DATA.class12.streams[selectedStream].label}` : ""} • ${activeSubjectObj.label}`
+              ),
+              activeSubjectObj.chapters.map((ch, idx) =>
+                React.createElement(
+                  motion.div,
+                  {
+                    key: ch.id,
+                    initial: { opacity: 0, y: 10 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { delay: idx * 0.04, type: "spring", stiffness: 310, damping: 25 },
+                    className: "chapter-card"
+                  },
+                  React.createElement(
+                    "div",
+                    { className: "chapter-top" },
+                    React.createElement(
+                      "div",
+                      null,
+                      React.createElement("div", { className: "mod-tag" }, `MODULE 0${idx + 1}`),
+                      React.createElement("div", { className: "chapter-title" }, ch.name)
+                    ),
+                    React.createElement(
+                      motion.a,
+                      {
+                        href: ch.pdfUrl,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        whileHover: { scale: 1.04 },
+                        whileTap: { scale: 0.96 },
+                        className: "pdf-pill"
+                      },
+                      "📥 PDF Notes"
+                    )
+                  ),
+                  React.createElement(
+                    "div",
+                    { className: "videos-grid" },
+                    ch.videos.slice(0, 3).map((vid) =>
+                      React.createElement(VideoTile, {
+                        key: `${ch.id}-${vid.videoId}`,
+                        chId: ch.id,
+                        vid
+                      })
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+
+    createRoot(document.getElementById("app")).render(React.createElement(App));
   </script>
 </body>
 </html>
