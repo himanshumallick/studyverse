@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STUDYVERSE — CBSE Class 10 Academic Studio</title>
+  <title>STUDYVERSE — Best Made for Class 10 CBSE Student</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,11 +14,10 @@
 
   <style>
     :root {
-      --bg-obsidian: #06080f;
-      --bg-elevated: rgba(13, 18, 30, 0.78);
-      --bg-card: rgba(17, 24, 39, 0.72);
+      --bg-obsidian: #05070d;
+      --bg-card: rgba(13, 19, 32, 0.78);
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-gold: rgba(212, 175, 55, 0.35);
+      --border-gold: rgba(229, 193, 88, 0.38);
       --gold: #e5c158;
       --gold-soft: rgba(229, 193, 88, 0.14);
       --maths-blue: #3b82f6;
@@ -44,9 +43,9 @@
     body {
       background-color: var(--bg-obsidian);
       background-image:
-        radial-gradient(circle at 18% 15%, rgba(59, 130, 246, 0.08), transparent 42%),
-        radial-gradient(circle at 82% 25%, rgba(229, 193, 88, 0.07), transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.07), transparent 50%);
+        radial-gradient(circle at 15% 18%, rgba(59, 130, 246, 0.08), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(229, 193, 88, 0.08), transparent 48%),
+        radial-gradient(circle at 50% 88%, rgba(16, 185, 129, 0.07), transparent 52%);
       color: var(--text-primary);
       font-family: var(--font-sans);
       min-height: 100vh;
@@ -54,25 +53,25 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Fullscreen Clean 3D Canvas */
-    #three-stage {
+    /* Clean 3D Stage Canvas */
+    #three-bag-canvas {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
     }
 
-    /* Subtle Film Vignette for Clear Background Depth */
-    .ambient-vignette {
+    /* Clean Edge Vignette */
+    .clean-vignette {
       position: fixed;
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: radial-gradient(circle at center, transparent 45%, rgba(6, 8, 15, 0.78) 100%);
+      background: radial-gradient(circle at 65% 45%, transparent 38%, rgba(5, 7, 13, 0.82) 100%);
     }
 
-    /* Top Scroll Progress Bar */
-    .scroll-progress-track {
+    /* Top Scroll Progress Indicator */
+    .progress-rail {
       position: fixed;
       top: 0;
       left: 0;
@@ -82,15 +81,59 @@
       background: rgba(255, 255, 255, 0.04);
     }
 
-    .scroll-progress-fill {
+    .progress-bar-top {
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, var(--maths-blue), var(--gold), var(--science-emerald));
-      box-shadow: 0 0 12px rgba(229, 193, 88, 0.65);
+      box-shadow: 0 0 12px rgba(229, 193, 88, 0.7);
     }
 
-    /* Opening Cinematic Video/Sequence Curtain */
-    .cinema-curtain {
+    /* Side Rail Badge: BEST MADE FOR CLASS 10 CBSE STUDENT */
+    .side-cbse-rail {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 45;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 8px;
+      border-radius: 999px;
+      background: rgba(9, 13, 24, 0.72);
+      border: 1px solid var(--border-gold);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    @media (max-width: 1024px) {
+      .side-cbse-rail {
+        display: none;
+      }
+    }
+
+    .side-rail-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .side-rail-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+    }
+
+    /* Opening Cinematic Curtain */
+    .opening-curtain {
       position: fixed;
       inset: 0;
       z-index: 100;
@@ -102,54 +145,43 @@
       overflow: hidden;
     }
 
-    .cinema-grid-lines {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(229, 193, 88, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(229, 193, 88, 0.04) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(circle at center, black 30%, transparent 75%);
-    }
-
-    .cinema-orb {
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(229, 193, 88, 0.16), rgba(59, 130, 246, 0.08) 45%, transparent 70%);
-      filter: blur(40px);
-    }
-
-    .cinema-letterbox-top,
-    .cinema-letterbox-bottom {
+    .cinema-bar-top,
+    .cinema-bar-bottom {
       position: absolute;
       left: 0;
       right: 0;
       height: 11vh;
       background: #020306;
-      z-index: 2;
     }
-    .cinema-letterbox-top { top: 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .cinema-letterbox-bottom { bottom: 0; border-top: 1px solid rgba(255,255,255,0.05); }
+    .cinema-bar-top { top: 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .cinema-bar-bottom { bottom: 0; border-top: 1px solid rgba(255,255,255,0.05); }
 
-    /* Main Content Shell */
-    .shell {
+    .cinema-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(229, 193, 88, 0.18), rgba(59, 130, 246, 0.08) 48%, transparent 72%);
+      filter: blur(42px);
+    }
+
+    /* Main Container */
+    .container {
       position: relative;
       z-index: 10;
-      max-width: 1220px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 24px 24px 120px;
     }
 
-    /* Editorial Top Navigation */
-    .navbar {
+    /* Navigation Bar */
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       padding: 14px 22px;
-      background: rgba(10, 14, 24, 0.72);
+      background: rgba(9, 13, 24, 0.72);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: 18px;
@@ -159,81 +191,80 @@
       z-index: 50;
     }
 
-    .brand-mark {
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
       cursor: pointer;
     }
 
-    .brand-emblem {
+    .brand-badge {
       width: 38px;
       height: 38px;
       border-radius: 11px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
+      background: linear-gradient(135deg, #161f33, #0b101b);
       border: 1px solid var(--border-gold);
       display: grid;
       place-items: center;
-      color: var(--gold);
       font-family: var(--font-serif);
       font-weight: 700;
-      font-size: 1.25rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      font-size: 1.3rem;
+      color: var(--gold);
     }
 
-    .brand-name {
+    .brand-title {
       font-weight: 800;
       font-size: 1.15rem;
       letter-spacing: 0.04em;
     }
 
-    .brand-tag {
+    .cbse-pill {
       font-family: var(--font-mono);
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       color: var(--gold);
       background: var(--gold-soft);
       border: 1px solid var(--border-gold);
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 99px;
       letter-spacing: 0.06em;
     }
 
-    .nav-links {
+    .nav-actions {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .nav-btn {
+    .nav-item {
+      position: relative;
       background: transparent;
-      border: 1px solid transparent;
+      border: none;
       color: var(--text-secondary);
-      font-family: var(--font-sans);
       font-size: 0.85rem;
       font-weight: 600;
       padding: 8px 14px;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: color 0.25s ease;
     }
 
-    .nav-btn:hover {
+    .nav-item:hover,
+    .nav-item.active {
       color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.04);
     }
 
-    .nav-btn.active {
-      color: var(--text-primary);
+    .nav-indicator {
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.06);
-      border-color: var(--border-gold);
+      border: 1px solid var(--border-gold);
+      z-index: -1;
     }
 
-    .auth-pill {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, rgba(229, 193, 88, 0.16), rgba(229, 193, 88, 0.05));
+    .account-btn {
+      background: linear-gradient(135deg, rgba(229, 193, 88, 0.18), rgba(229, 193, 88, 0.05));
       border: 1px solid var(--border-gold);
       color: var(--gold);
       font-size: 0.82rem;
@@ -241,61 +272,46 @@
       padding: 9px 16px;
       border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .auth-pill:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(229, 193, 88, 0.18);
-    }
-
-    /* Hero Section paired with 3D Backpack Stage */
-    .hero-section {
+    /* Hero Stage */
+    .hero-grid {
       min-height: 78vh;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.12fr 0.88fr;
       align-items: center;
       gap: 32px;
-      padding: 20px 0 60px;
+      padding: 16px 0 64px;
     }
 
     @media (max-width: 920px) {
-      .hero-section {
+      .hero-grid {
         grid-template-columns: 1fr;
         min-height: auto;
-        padding-top: 10px;
       }
     }
 
-    .eyebrow {
+    .kicker-row {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 18px;
     }
 
-    .eyebrow-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 10px var(--gold);
-    }
-
-    .hero-title {
-      font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+    .hero-h1 {
+      font-size: clamp(2.5rem, 5.2vw, 4.35rem);
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -0.03em;
       margin-bottom: 20px;
     }
 
-    .hero-title .serif-accent {
+    .hero-h1 .italic-gold {
       font-family: var(--font-serif);
       font-style: italic;
       font-weight: 700;
@@ -303,24 +319,17 @@
       font-size: 1.08em;
     }
 
-    .hero-desc {
-      font-size: 1.05rem;
+    .hero-p {
+      font-size: 1.04rem;
       line-height: 1.65;
       color: var(--text-secondary);
-      max-width: 560px;
+      max-width: 550px;
       margin-bottom: 30px;
     }
 
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary-lux {
-      background: linear-gradient(135deg, #f3d06b, #c99e2e);
-      color: #090b10;
+    .btn-gold {
+      background: linear-gradient(135deg, #f3d06b, #c89d2c);
+      color: #07090f;
       border: none;
       padding: 14px 26px;
       border-radius: 14px;
@@ -330,11 +339,11 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 12px 30px rgba(229, 193, 88, 0.25);
+      box-shadow: 0 12px 28px rgba(229, 193, 88, 0.25);
     }
 
-    .btn-ghost-lux {
-      background: rgba(15, 23, 42, 0.65);
+    .btn-outline {
+      background: rgba(13, 19, 32, 0.65);
       color: var(--text-primary);
       border: 1px solid var(--border-subtle);
       padding: 14px 22px;
@@ -345,51 +354,72 @@
       backdrop-filter: blur(12px);
     }
 
-    /* 3D Backpack Stage Callout Hint */
-    .stage-telemetry {
-      background: rgba(10, 14, 24, 0.62);
+    /* Interactive Bag & Reference Preview Dock */
+    .bag-dock-card {
+      background: rgba(10, 15, 26, 0.68);
       border: 1px solid var(--border-subtle);
       backdrop-filter: blur(18px);
-      border-radius: 22px;
+      border-radius: 24px;
       padding: 22px;
-      align-self: end;
     }
 
-    .telemetry-label {
+    .ref-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+
+    .ref-thumb-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .ref-thumb-box img {
+      width: 100%;
+      height: 86px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 4px;
+    }
+
+    .ref-thumb-caption {
       font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
     }
 
-    .book-legend {
+    .subject-switch-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
+      gap: 9px;
     }
 
-    .legend-item {
+    .subject-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.84rem;
       cursor: pointer;
       transition: all 0.25s ease;
+      font-size: 0.85rem;
+      font-weight: 700;
     }
 
-    .legend-item:hover {
-      border-color: rgba(255, 255, 255, 0.18);
+    .subject-row:hover {
+      border-color: rgba(255, 255, 255, 0.2);
       transform: translateX(4px);
     }
 
-    .color-swatch {
+    .dot-swatch {
       width: 10px;
       height: 10px;
       border-radius: 3px;
@@ -398,7 +428,7 @@
     }
 
     /* 21st.dev Spotlight Flash Cards */
-    .section-header {
+    .sec-head {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -407,7 +437,7 @@
       margin-bottom: 24px;
     }
 
-    .section-kicker {
+    .sec-kicker {
       font-family: var(--font-mono);
       font-size: 0.72rem;
       color: var(--gold);
@@ -416,20 +446,20 @@
       margin-bottom: 6px;
     }
 
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.25rem);
+    .sec-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
       font-weight: 800;
       letter-spacing: -0.02em;
     }
 
-    .spotlight-grid {
+    .flash-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
       gap: 18px;
       margin-bottom: 72px;
     }
 
-    .spotlight-card {
+    .spotlight-tile {
       position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -438,16 +468,15 @@
       overflow: hidden;
       backdrop-filter: blur(18px);
       cursor: pointer;
-      transition: border-color 0.3s ease;
     }
 
-    .spotlight-card::before {
+    .spotlight-tile::before {
       content: "";
       position: absolute;
       inset: 0;
       background: radial-gradient(
-        420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(229, 193, 88, 0.14),
+        400px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(229, 193, 88, 0.15),
         transparent 45%
       );
       opacity: 0;
@@ -455,15 +484,15 @@
       pointer-events: none;
     }
 
-    .spotlight-card:hover::before {
+    .spotlight-tile:hover::before {
       opacity: 1;
     }
 
-    .spotlight-card:hover {
+    .spotlight-tile:hover {
       border-color: var(--border-gold);
     }
 
-    .card-status {
+    .badge-live {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -471,33 +500,38 @@
       font-size: 0.68rem;
       padding: 4px 10px;
       border-radius: 99px;
-      margin-bottom: 16px;
-    }
-
-    .status-live {
       background: rgba(16, 185, 129, 0.14);
       color: #34d399;
       border: 1px solid rgba(16, 185, 129, 0.32);
+      margin-bottom: 14px;
     }
 
-    .status-soon {
+    .badge-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 4px 10px;
+      border-radius: 99px;
       background: rgba(148, 163, 184, 0.1);
       color: #cbd5e1;
       border: 1px solid rgba(148, 163, 184, 0.22);
+      margin-bottom: 14px;
     }
 
-    /* Interactive 3-Book Shelf (Maths, Science, SST) */
-    .books-vault {
-      background: rgba(9, 13, 22, 0.82);
+    /* Interactive 3 Colored Books Vault */
+    .vault-box {
+      background: rgba(9, 13, 23, 0.84);
       border: 1px solid var(--border-subtle);
       border-radius: 28px;
       padding: 32px;
       backdrop-filter: blur(24px);
       margin-bottom: 72px;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
     }
 
-    .books-trio {
+    .three-books-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
@@ -505,25 +539,24 @@
     }
 
     @media (max-width: 820px) {
-      .books-trio {
+      .three-books-row {
         grid-template-columns: 1fr;
       }
     }
 
-    .book-tome {
+    .colored-book-card {
       position: relative;
       border-radius: 20px;
       padding: 24px;
       text-align: left;
       cursor: pointer;
-      background: rgba(15, 22, 36, 0.85);
+      background: rgba(15, 22, 36, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-primary);
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .book-tome .spine-bar {
+    .book-spine-strip {
       position: absolute;
       left: 0;
       top: 0;
@@ -531,42 +564,27 @@
       width: 6px;
     }
 
-    .book-tome.active {
-      transform: translateY(-4px);
-      background: rgba(20, 29, 48, 0.96);
-    }
-
-    .book-tome-meta {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+    .book-gold-corner {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--gold);
+      font-size: 0.92rem;
       opacity: 0.85;
     }
 
-    .book-tome-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .book-tome-sub {
-      font-size: 0.84rem;
-      color: var(--text-secondary);
-      line-height: 1.45;
-    }
-
-    /* Chapters Grid inside Open Book */
-    .chapters-grid {
+    /* Chapters Grid */
+    .chapters-wrap {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 14px;
       margin-bottom: 28px;
     }
 
-    .chapter-pill-card {
-      background: rgba(13, 19, 32, 0.9);
+    .chapter-card {
+      background: rgba(13, 19, 32, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 16px;
       padding: 18px;
@@ -575,29 +593,22 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
-      transition: all 0.25s ease;
     }
 
-    .chapter-pill-card:hover {
-      border-color: rgba(255, 255, 255, 0.22);
-      transform: translateY(-2px);
-    }
-
-    .chapter-pill-card.selected {
+    .chapter-card.selected {
       border-color: var(--gold);
-      background: linear-gradient(145deg, rgba(229, 193, 88, 0.12), rgba(15, 23, 42, 0.95));
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      background: linear-gradient(145deg, rgba(229, 193, 88, 0.12), rgba(15, 23, 42, 0.96));
     }
 
-    /* Curated 3 Videos Showcase */
-    .videos-theatre {
-      background: rgba(5, 8, 15, 0.88);
+    /* 3 Curated Videos Grid */
+    .video-stage {
+      background: rgba(5, 8, 15, 0.9);
       border: 1px solid var(--border-gold);
       border-radius: 22px;
       padding: 24px;
     }
 
-    .videos-grid-3 {
+    .videos-3-col {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
@@ -605,56 +616,49 @@
     }
 
     @media (max-width: 900px) {
-      .videos-grid-3 {
+      .videos-3-col {
         grid-template-columns: 1fr;
       }
     }
 
-    .lecture-card {
+    .video-card {
       background: rgba(14, 20, 34, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s ease, border-color 0.25s ease;
     }
 
-    .lecture-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--gold);
-    }
-
-    .thumb-frame {
+    .thumb-wrap {
       position: relative;
       aspect-ratio: 16 / 9;
       background: #0b1120;
       overflow: hidden;
     }
 
-    .thumb-frame img {
+    .thumb-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .channel-chip {
+    .creator-badge {
       position: absolute;
       top: 10px;
       left: 10px;
       background: rgba(4, 6, 12, 0.88);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(229, 193, 88, 0.4);
+      border: 1px solid rgba(229, 193, 88, 0.45);
       color: var(--gold);
       font-family: var(--font-mono);
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 99px;
     }
 
-    .lecture-body {
+    .video-body {
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -662,31 +666,23 @@
       flex: 1;
     }
 
-    .lecture-title {
-      font-size: 0.92rem;
-      font-weight: 700;
-      line-height: 1.4;
-      color: var(--text-primary);
-    }
-
-    .lecture-actions {
+    .video-footer {
       margin-top: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
       padding-top: 10px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .watch-link {
+    .watch-btn {
       font-size: 0.8rem;
       font-weight: 700;
       color: var(--gold);
       text-decoration: none;
     }
 
-    .mark-done-btn {
+    .watched-toggle {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--text-primary);
@@ -697,14 +693,14 @@
       cursor: pointer;
     }
 
-    .mark-done-btn.completed {
+    .watched-toggle.done {
       background: rgba(16, 185, 129, 0.18);
       border-color: rgba(16, 185, 129, 0.45);
       color: #34d399;
     }
 
-    /* Modal for Auth & Personal Growth Dashboard */
-    .modal-backdrop {
+    /* Modal */
+    .modal-bg {
       position: fixed;
       inset: 0;
       z-index: 90;
@@ -716,17 +712,16 @@
       padding: 20px;
     }
 
-    .modal-sheet {
+    .modal-card {
       width: 100%;
-      max-width: 540px;
+      max-width: 530px;
       background: #0c111e;
       border: 1px solid var(--border-gold);
       border-radius: 24px;
       padding: 28px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
     }
 
-    .input-field {
+    .field-input {
       width: 100%;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -734,17 +729,12 @@
       padding: 12px 14px;
       color: #fff;
       font-family: var(--font-sans);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       margin-top: 6px;
       margin-bottom: 14px;
     }
 
-    .input-field:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-
-    .progress-bar-bg {
+    .meter-track {
       width: 100%;
       height: 8px;
       background: rgba(255, 255, 255, 0.08);
@@ -753,17 +743,25 @@
       margin-top: 6px;
     }
 
-    .progress-bar-fill {
+    .meter-fill {
       height: 100%;
       border-radius: 99px;
-      transition: width 0.4s ease;
+      transition: width 0.35s ease;
     }
   </style>
 </head>
 <body>
-  <canvas id="three-stage"></canvas>
-  <div class="ambient-vignette"></div>
-  <div class="scroll-progress-track"><div class="scroll-progress-fill" id="topScrollFill"></div></div>
+  <canvas id="three-bag-canvas"></canvas>
+  <div class="clean-vignette"></div>
+  <div class="progress-rail"><div class="progress-bar-top" id="topBarFill"></div></div>
+
+  <!-- Side Rail Callout: BEST MADE FOR CLASS 10 CBSE STUDENT -->
+  <aside class="side-cbse-rail" aria-label="Best made for Class 10 CBSE student">
+    <span class="side-rail-pulse"></span>
+    <span class="side-rail-text">BEST MADE FOR CLASS 10 CBSE STUDENT</span>
+    <span class="side-rail-pulse"></span>
+  </aside>
+
   <div id="root"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -774,71 +772,68 @@
       motion,
       AnimatePresence,
       useScroll,
-      useTransform,
       useSpring
     } from "https://esm.sh/framer-motion@11.11.11?deps=react@18.3.1,react-dom@18.3.1";
 
-    // Curated CBSE Class 10 Syllabus + Top 3 Chapter-Specific Lectures
-    // Channels: Sunlike Study, Physics Wallah (PW), Shobhit Nirwan, Next Toppers, Exphub
-    const CLASS_10_BOOKS = {
+    const CLASS_10_SUBJECTS = {
       maths: {
         id: "maths",
         title: "Mathematics",
-        code: "NCERT CLASS X • CODE 041",
+        code: "NCERT CLASS X • 041",
         color: "#3b82f6",
         glow: "rgba(59, 130, 246, 0.25)",
-        tagline: "Concept clarity, NCERT exemplar mastery & board problem-solving",
+        summary: "Core chapters, board question patterns, and step-by-step problem solving",
         chapters: [
           {
             id: "m1",
-            number: "Chapter 01",
+            num: "Chapter 01",
             name: "Real Numbers",
             videos: [
               {
                 channel: "Maths By Shobhit Nirwan",
-                tag: "ONE-SHOT MASTERCLASS",
+                badge: "ONE-SHOT",
                 title: "Real Numbers Class 10th Full Chapter One Shot | NCERT + Board Questions",
                 videoId: "fW7H8k2_5rU",
                 url: "https://www.youtube.com/results?search_query=Real+Numbers+Class+10+Shobhit+Nirwan+One+Shot"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "RAPID REVISION",
+                badge: "RAPID REVISION",
                 title: "Class 10th REAL NUMBERS in 20 Minutes! | Class 10 Maths Rapid Revision",
                 videoId: "ZCcVfJ8f32E",
                 url: "https://www.youtube.com/watch?v=ZCcVfJ8f32E"
               },
               {
                 channel: "Next Toppers",
-                tag: "CONCEPT + PYQs",
+                badge: "CONCEPT + PYQs",
                 title: "Real Numbers Complete Chapter | Class 10 Maths Board Booster",
                 videoId: "2aXOJnmK70c",
-                url: "https://www.youtube.com/results?search_query=Real+Numbers+Class+10+Next+Toppers+Ritik+Mishra"
+                url: "https://www.youtube.com/results?search_query=Real+Numbers+Class+10+Next+Toppers"
               }
             ]
           },
           {
             id: "m2",
-            number: "Chapter 02",
+            num: "Chapter 02",
             name: "Polynomials",
             videos: [
               {
                 channel: "Maths By Shobhit Nirwan",
-                tag: "BOARD ONE-SHOT",
+                badge: "BOARD ONE-SHOT",
                 title: "Hum Nahi Rukne Wale !! - Class 10th Polynomials One Shot",
                 videoId: "Hnoe8hNPFr8",
                 url: "https://www.youtube.com/watch?v=Hnoe8hNPFr8"
               },
               {
-                channel: "Next Toppers (Ritik Mishra)",
-                tag: "COMPLETE NCERT",
+                channel: "Next Toppers",
+                badge: "COMPLETE NCERT",
                 title: "Polynomials ONE SHOT | Class 10 Maths Chapter 2 | Complete Chapter",
                 videoId: "kiegUjhq8Ao",
                 url: "https://www.youtube.com/watch?v=kiegUjhq8Ao"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "MIND MAP REVISION",
+                badge: "MIND MAP",
                 title: "Polynomials in 25 Minutes | Class 10 Maths Board Revision",
                 videoId: "QdP6DVlZo-0",
                 url: "https://www.youtube.com/results?search_query=Polynomials+Class+10+Physics+Wallah+Foundation"
@@ -846,86 +841,30 @@
             ]
           },
           {
-            id: "m3",
-            number: "Chapter 03",
-            name: "Pair of Linear Equations in Two Variables",
-            videos: [
-              {
-                channel: "Maths By Shobhit Nirwan",
-                tag: "FULL CHAPTER",
-                title: "Pair of Linear Equations in Two Variables One Shot | Class 10 Maths",
-                videoId: "t8fUmrKnvEM",
-                url: "https://www.youtube.com/results?search_query=Pair+of+Linear+Equations+Class+10+Shobhit+Nirwan"
-              },
-              {
-                channel: "Next Toppers (Ritik Mishra)",
-                tag: "NCERT + EXEMPLAR",
-                title: "Linear Equations in Two Variables Complete Chapter | Class 10th",
-                videoId: "hayFtYnAB-Q",
-                url: "https://www.youtube.com/results?search_query=Linear+Equations+in+Two+Variables+Class+10+Ritik+Mishra"
-              },
-              {
-                channel: "Physics Wallah Foundation",
-                tag: "RAPID REVISION",
-                title: "Linear Equations in Two Variables in 30 Minutes | Class 10 Maths",
-                videoId: "KcH4jhNg_fA",
-                url: "https://www.youtube.com/results?search_query=Linear+Equations+Class+10+Physics+Wallah"
-              }
-            ]
-          },
-          {
             id: "m4",
-            number: "Chapter 04",
+            num: "Chapter 04",
             name: "Quadratic Equations",
             videos: [
               {
                 channel: "Maths By Shobhit Nirwan",
-                tag: "BOARD ONE-SHOT",
+                badge: "BOARD ONE-SHOT",
                 title: "Class 10th Quadratic Equations One Shot | Class 10 Maths Chapter 4",
                 videoId: "t8fUmrKnvEM",
                 url: "https://www.youtube.com/watch?v=t8fUmrKnvEM"
               },
               {
-                channel: "Next Toppers (Ritik Mishra)",
-                tag: "COMPLETE ONE-SHOT",
+                channel: "Next Toppers",
+                badge: "COMPLETE ONE-SHOT",
                 title: "Quadratic Equations ONE SHOT | Class 10 Maths Chapter 4",
                 videoId: "hayFtYnAB-Q",
                 url: "https://www.youtube.com/watch?v=hayFtYnAB-Q"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "CONCEPT + WORD PROBLEMS",
+                badge: "WORD PROBLEMS",
                 title: "Quadratic Equations Complete Chapter | Class 10 Maths",
                 videoId: "KcH4jhNg_fA",
                 url: "https://www.youtube.com/results?search_query=Quadratic+Equations+Class+10+Physics+Wallah"
-              }
-            ]
-          },
-          {
-            id: "m8",
-            number: "Chapter 08",
-            name: "Introduction to Trigonometry",
-            videos: [
-              {
-                channel: "Maths By Shobhit Nirwan",
-                tag: "IDENTITIES SPECIAL",
-                title: "Introduction to Trigonometry Full Chapter One Shot | Class 10 Maths",
-                videoId: "Hnoe8hNPFr8",
-                url: "https://www.youtube.com/results?search_query=Introduction+to+Trigonometry+Class+10+Shobhit+Nirwan"
-              },
-              {
-                channel: "Next Toppers (Ritik Mishra)",
-                tag: "COMPLETE ONE-SHOT",
-                title: "Trigonometry ONE SHOT | All Identities & Proof Questions | Class 10th",
-                videoId: "kiegUjhq8Ao",
-                url: "https://www.youtube.com/results?search_query=Trigonometry+Class+10+Ritik+Mishra+Next+Toppers"
-              },
-              {
-                channel: "Physics Wallah Foundation",
-                tag: "RAPID REVISION",
-                title: "Trigonometry in 35 Minutes | Class 10 Maths Board Revision",
-                videoId: "ZCcVfJ8f32E",
-                url: "https://www.youtube.com/results?search_query=Trigonometry+Class+10+Physics+Wallah+Foundation"
               }
             ]
           }
@@ -935,33 +874,33 @@
       science: {
         id: "science",
         title: "Science",
-        code: "NCERT CLASS X • CODE 086",
+        code: "NCERT CLASS X • 086",
         color: "#10b981",
         glow: "rgba(16, 185, 129, 0.25)",
-        tagline: "Physics, Chemistry & Biology with visual animations & NCERT line-by-line coverage",
+        summary: "Visual animations, NCERT concepts, and rapid revision for Physics, Chemistry & Bio",
         chapters: [
           {
             id: "s1",
-            number: "Chapter 01",
+            num: "Chapter 01",
             name: "Chemical Reactions and Equations",
             videos: [
               {
-                channel: "Exphub 9th & 10th (Prashant Kirad)",
-                tag: "COMPLETE NCERT",
+                channel: "Exphub 9th & 10th",
+                badge: "COMPLETE NCERT",
                 title: "Chemical Reactions and Equations Complete Chapter | Class 10 Science",
                 videoId: "qKl4mieovu0",
                 url: "https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Exphub+Class+10"
               },
               {
                 channel: "Sunlike Study Science",
-                tag: "ANIMATED VISUALS",
+                badge: "ANIMATED VISUALS",
                 title: "Chemical Reactions and Equations Class 10 Full Chapter | Animated",
                 videoId: "PqXvVt-MOlo",
                 url: "https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Sunlike+Study"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "ONE-SHOT REVISION",
+                badge: "ONE-SHOT REVISION",
                 title: "Chemical Reactions & Equations in 30 Minutes | Class 10 Chemistry",
                 videoId: "BuNa0DuhqJs",
                 url: "https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Physics+Wallah+Class+10"
@@ -969,55 +908,27 @@
             ]
           },
           {
-            id: "s2",
-            number: "Chapter 02",
-            name: "Acids, Bases and Salts",
-            videos: [
-              {
-                channel: "Exphub 9th & 10th",
-                tag: "COMPLETE NCERT",
-                title: "Acids Bases and Salts | CLASS 10 Science | Complete Chapter | NCERT Covered",
-                videoId: "qKl4mieovu0",
-                url: "https://www.youtube.com/watch?v=qKl4mieovu0"
-              },
-              {
-                channel: "Sunlike Study Science",
-                tag: "ANIMATED EXPLAINER",
-                title: "Acids, Bases and Salts Class 10 Full Chapter | CBSE Science",
-                videoId: "AfF-W1bSIB8",
-                url: "https://www.youtube.com/results?search_query=Acids+Bases+and+Salts+Sunlike+Study+Class+10"
-              },
-              {
-                channel: "Exphub 9th & 10th",
-                tag: "20-MIN RAPID",
-                title: "Acids, Bases and Salts in 20 Minutes | Class 10th | Rapid Revision",
-                videoId: "7k2rs5yGOFM",
-                url: "https://www.youtube.com/watch?v=7k2rs5yGOFM"
-              }
-            ]
-          },
-          {
             id: "s5",
-            number: "Chapter 05",
+            num: "Chapter 05",
             name: "Life Processes",
             videos: [
               {
                 channel: "Sunlike Study Science",
-                tag: "3D ANIMATED CHAPTER",
+                badge: "3D ANIMATION",
                 title: "Life Processes | Class 10 Science Chapter 5 | Full Chapter | CBSE",
                 videoId: "PqXvVt-MOlo",
                 url: "https://www.youtube.com/watch?v=PqXvVt-MOlo"
               },
               {
                 channel: "Exphub 9th & 10th",
-                tag: "COMPLETE NCERT",
+                badge: "COMPLETE NCERT",
                 title: "Life Processes Complete Chapter | CLASS 10 Science | NCERT Covered",
                 videoId: "2anxgj0TUgQ",
                 url: "https://www.youtube.com/watch?v=2anxgj0TUgQ"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "DIAGRAMS + REVISION",
+                badge: "RAPID REVISION",
                 title: "Life Processes in 30 Minutes | Class 10 Biology Rapid Revision",
                 videoId: "5YOf-Rm4B7I",
                 url: "https://www.youtube.com/results?search_query=Life+Processes+Class+10+Physics+Wallah"
@@ -1026,57 +937,29 @@
           },
           {
             id: "s9",
-            number: "Chapter 09",
+            num: "Chapter 09",
             name: "Light – Reflection and Refraction",
             videos: [
               {
                 channel: "Exphub 9th & 10th",
-                tag: "NUMERICALS + RAY DIAGRAMS",
+                badge: "RAY DIAGRAMS",
                 title: "Light Reflection and Refraction Complete Chapter | Class 10 Physics",
                 videoId: "4YESpXn1i9I",
                 url: "https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Exphub+Class+10"
               },
               {
                 channel: "Sunlike Study Science",
-                tag: "VISUAL OPTICS",
+                badge: "VISUAL OPTICS",
                 title: "Light Reflection and Refraction Class 10 Full Chapter | Animated",
                 videoId: "8iVoxtEYJeM",
                 url: "https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Sunlike+Study"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "ONE-SHOT PHYSICS",
+                badge: "ONE-SHOT PHYSICS",
                 title: "Light Reflection & Refraction Complete Chapter | Class 10 Science",
                 videoId: "4YESpXn1i9I",
                 url: "https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Physics+Wallah+Class+10"
-              }
-            ]
-          },
-          {
-            id: "s11",
-            number: "Chapter 11",
-            name: "Electricity",
-            videos: [
-              {
-                channel: "Exphub 9th & 10th",
-                tag: "COMPLETE CHAPTER",
-                title: "Electricity Complete Chapter | Class 10 Physics | NCERT + Numericals",
-                videoId: "2anxgj0TUgQ",
-                url: "https://www.youtube.com/results?search_query=Electricity+Class+10+Exphub+Prashant+Kirad"
-              },
-              {
-                channel: "Sunlike Study Science",
-                tag: "ANIMATED CONCEPTS",
-                title: "Electricity Class 10 Full Chapter | CBSE Physics Animation",
-                videoId: "PqXvVt-MOlo",
-                url: "https://www.youtube.com/results?search_query=Electricity+Class+10+Sunlike+Study"
-              },
-              {
-                channel: "Physics Wallah Foundation",
-                tag: "CIRCUIT NUMERICALS",
-                title: "Electricity in 30 Minutes | Class 10 Physics Board Revision",
-                videoId: "8iVoxtEYJeM",
-                url: "https://www.youtube.com/results?search_query=Electricity+Class+10+Physics+Wallah"
               }
             ]
           }
@@ -1086,33 +969,33 @@
       sst: {
         id: "sst",
         title: "Social Science",
-        code: "NCERT CLASS X • CODE 087",
+        code: "NCERT CLASS X • 087",
         color: "#f59e0b",
         glow: "rgba(245, 158, 11, 0.25)",
-        tagline: "History, Geography, Civics & Economics explained like cinema",
+        summary: "History, Geography, Civics & Economics explained clearly for board answers",
         chapters: [
           {
             id: "sst1",
-            number: "History • Ch 01",
+            num: "History • Ch 01",
             name: "The Rise of Nationalism in Europe",
             videos: [
               {
                 channel: "Sunlike Study",
-                tag: "STORYTELLING ANIMATION",
+                badge: "ANIMATED STORY",
                 title: "The Rise of Nationalism in Europe Class 10 Full Chapter",
                 videoId: "ksTPzTWUb6o",
                 url: "https://www.youtube.com/watch?v=ksTPzTWUb6o"
               },
               {
-                channel: "Next Toppers (Digraj Singh Rajput)",
-                tag: "NCERT LINE BY LINE",
+                channel: "Next Toppers",
+                badge: "NCERT LINE BY LINE",
                 title: "The Rise of Nationalism in Europe Complete Chapter | Class 10 History",
                 videoId: "HP1kdhvZGzc",
-                url: "https://www.youtube.com/results?search_query=Rise+of+Nationalism+in+Europe+Digraj+Singh+Rajput+Next+Toppers"
+                url: "https://www.youtube.com/results?search_query=Rise+of+Nationalism+in+Europe+Next+Toppers"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "ONE-SHOT REVISION",
+                badge: "ONE-SHOT REVISION",
                 title: "The Rise of Nationalism in Europe ONE SHOT | Class 10 SST Rapid Revision",
                 videoId: "xBF9CWzDNmE",
                 url: "https://www.youtube.com/watch?v=xBF9CWzDNmE"
@@ -1121,85 +1004,29 @@
           },
           {
             id: "sst2",
-            number: "History • Ch 02",
+            num: "History • Ch 02",
             name: "Nationalism in India",
             videos: [
               {
                 channel: "Sunlike Study",
-                tag: "FULL ANIMATED CHAPTER",
+                badge: "FULL ANIMATED",
                 title: "Nationalism in India Class 10 Full Chapter | Class 10 History Chapter 2",
                 videoId: "n96yn8IfE-4",
                 url: "https://www.youtube.com/watch?v=n96yn8IfE-4"
               },
               {
-                channel: "Next Toppers (Digraj Singh Rajput)",
-                tag: "10-MIN RAPID REVISION",
+                channel: "Next Toppers",
+                badge: "10-MIN RAPID",
                 title: "Nationalism in INDIA | 10 Minutes Rapid Revision | Class 10 SST",
                 videoId: "HP1kdhvZGzc",
                 url: "https://www.youtube.com/watch?v=HP1kdhvZGzc"
               },
               {
                 channel: "Physics Wallah Foundation",
-                tag: "MAP + TIMELINE",
+                badge: "TIMELINE + MAP",
                 title: "Nationalism in India Complete Chapter | Class 10 History",
                 videoId: "UFC4nDESV30",
                 url: "https://www.youtube.com/results?search_query=Nationalism+in+India+Physics+Wallah+Class+10"
-              }
-            ]
-          },
-          {
-            id: "sst3",
-            number: "Civics • Ch 01",
-            name: "Power Sharing",
-            videos: [
-              {
-                channel: "Sunlike Study",
-                tag: "ANIMATED CIVICS",
-                title: "Power Sharing Class 10 Full Chapter | Civics Chapter 1",
-                videoId: "ksTPzTWUb6o",
-                url: "https://www.youtube.com/results?search_query=Power+Sharing+Class+10+Sunlike+Study"
-              },
-              {
-                channel: "Next Toppers (Digraj Singh Rajput)",
-                tag: "ONE-SHOT REVISION",
-                title: "Power Sharing Complete Chapter | Class 10 Political Science",
-                videoId: "HP1kdhvZGzc",
-                url: "https://www.youtube.com/results?search_query=Power+Sharing+Class+10+Digraj+Singh+Rajput"
-              },
-              {
-                channel: "Physics Wallah Foundation",
-                tag: "BOARD BOOSTER",
-                title: "Power Sharing in 20 Minutes | Class 10 SST Rapid Revision",
-                videoId: "xBF9CWzDNmE",
-                url: "https://www.youtube.com/results?search_query=Power+Sharing+Class+10+Physics+Wallah"
-              }
-            ]
-          },
-          {
-            id: "sst4",
-            number: "Economics • Ch 01",
-            name: "Development",
-            videos: [
-              {
-                channel: "Sunlike Study",
-                tag: "FULL CHAPTER",
-                title: "Development Class 10 Economics Chapter 1 | Full Animated Explanation",
-                videoId: "n96yn8IfE-4",
-                url: "https://www.youtube.com/results?search_query=Development+Class+10+Economics+Sunlike+Study"
-              },
-              {
-                channel: "Next Toppers (Digraj Singh Rajput)",
-                tag: "CONCEPT + PYQs",
-                title: "Development Complete Chapter | Class 10 Economics",
-                videoId: "HP1kdhvZGzc",
-                url: "https://www.youtube.com/results?search_query=Development+Class+10+Economics+Digraj+Singh+Rajput"
-              },
-              {
-                channel: "Physics Wallah Foundation",
-                tag: "RAPID REVISION",
-                title: "Development in 20 Minutes | Class 10 Economics One Shot",
-                videoId: "xBF9CWzDNmE",
-                url: "https://www.youtube.com/results?search_query=Development+Class+10+Economics+Physics+Wallah"
               }
             ]
           }
@@ -1207,151 +1034,141 @@
       }
     };
 
-    // 21st.dev-inspired Spotlight Card Component
-    function SpotlightCard({ children, onClick, className = "" }) {
-      const cardRef = useRef(null);
-
-      const handleMouseMove = (e) => {
-        if (!cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
-        cardRef.current.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
-        cardRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    // 21st.dev Spotlight Card
+    function SpotlightCard({ children, onClick }) {
+      const ref = useRef(null);
+      const onMove = (e) => {
+        if (!ref.current) return;
+        const r = ref.current.getBoundingClientRect();
+        ref.current.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        ref.current.style.setProperty("--my", `${e.clientY - r.top}px`);
       };
-
       return React.createElement(
         motion.div,
         {
-          ref: cardRef,
-          onMouseMove: handleMouseMove,
+          ref,
+          onMouseMove: onMove,
           onClick,
           whileHover: { y: -5, scale: 1.01 },
           whileTap: { scale: 0.99 },
-          transition: { type: "spring", stiffness: 280, damping: 24 },
-          className: `spotlight-card ${className}`
+          transition: { type: "spring", stiffness: 290, damping: 24 },
+          className: "spotlight-tile"
         },
         children
       );
     }
 
     function StudyVerseApp() {
-      const [showIntro, setShowIntro] = useState(true);
-      const [activeBookKey, setActiveBookKey] = useState("maths");
-      const [selectedChapterId, setSelectedChapterId] = useState("m1");
-      const [authModalOpen, setAuthModalOpen] = useState(false);
-      const [authMode, setAuthMode] = useState("login"); // login | signup | dashboard
-      const [studentUser, setStudentUser] = useState(() => {
-        const saved = localStorage.getItem("sv_class10_user");
-        return saved ? JSON.parse(saved) : null;
+      const [introDone, setIntroDone] = useState(false);
+      const [activeTab, setActiveTab] = useState("videos");
+      const [activeSubject, setActiveSubject] = useState("maths");
+      const [activeChapterId, setActiveChapterId] = useState("m1");
+      const [modalOpen, setModalOpen] = useState(false);
+      const [authView, setAuthView] = useState("login");
+      const [userProfile, setUserProfile] = useState(() => {
+        const raw = localStorage.getItem("sv_c10_profile");
+        return raw ? JSON.parse(raw) : null;
       });
-      const [completedVideos, setCompletedVideos] = useState(() => {
-        const saved = localStorage.getItem("sv_class10_progress");
-        return saved ? JSON.parse(saved) : [];
+      const [watchedList, setWatchedList] = useState(() => {
+        const raw = localStorage.getItem("sv_c10_watched");
+        return raw ? JSON.parse(raw) : [];
       });
 
-      const [formName, setFormName] = useState("");
-      const [formEmail, setFormEmail] = useState("");
-      const [formTarget, setFormTarget] = useState("95%+ Board Target");
+      const [nameInput, setNameInput] = useState("");
+      const [emailInput, setEmailInput] = useState("");
+      const [goalInput, setGoalInput] = useState("CBSE Class 10 Board Excellence");
 
       const { scrollYProgress } = useScroll();
-      const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 28 });
+      const springScroll = useSpring(scrollYProgress, { stiffness: 130, damping: 28 });
 
-      // Update top progress bar & dispatch scroll progress to 3D Backpack Stage
       useEffect(() => {
-        const unsubscribe = smoothProgress.on("change", (latest) => {
-          const bar = document.getElementById("topScrollFill");
-          if (bar) bar.style.width = `${latest * 100}%`;
-          window.__SV_SCROLL__ = latest;
+        const unsub = springScroll.on("change", (val) => {
+          const fill = document.getElementById("topBarFill");
+          if (fill) fill.style.width = `${val * 100}%`;
+          window.__BAG_SCROLL__ = val;
         });
-        return () => unsubscribe();
-      }, [smoothProgress]);
+        return () => unsub();
+      }, [springScroll]);
 
-      // Sync active book to 3D Scene so the corresponding book glows & elevates
       useEffect(() => {
-        window.__SV_ACTIVE_BOOK__ = activeBookKey;
-      }, [activeBookKey]);
+        window.__ACTIVE_BOOK__ = activeSubject;
+      }, [activeSubject]);
 
-      // Opening Cinematic Intro Auto-Transition
       useEffect(() => {
-        const timer = setTimeout(() => setShowIntro(false), 2600);
-        return () => clearTimeout(timer);
+        const t = setTimeout(() => setIntroDone(true), 2500);
+        return () => clearTimeout(t);
       }, []);
 
-      const handleSelectBook = (bookKey) => {
-        setActiveBookKey(bookKey);
-        const firstChapter = CLASS_10_BOOKS[bookKey].chapters[0];
-        if (firstChapter) setSelectedChapterId(firstChapter.id);
+      const chooseSubject = (key) => {
+        setActiveSubject(key);
+        const first = CLASS_10_SUBJECTS[key].chapters[0];
+        if (first) setActiveChapterId(first.id);
       };
 
-      const toggleVideoComplete = (videoKey) => {
-        setCompletedVideos((prev) => {
-          const next = prev.includes(videoKey)
-            ? prev.filter((item) => item !== videoKey)
-            : [...prev, videoKey];
-          localStorage.setItem("sv_class10_progress", JSON.stringify(next));
+      const toggleWatched = (vidKey) => {
+        setWatchedList((prev) => {
+          const next = prev.includes(vidKey)
+            ? prev.filter((item) => item !== vidKey)
+            : [...prev, vidKey];
+          localStorage.setItem("sv_c10_watched", JSON.stringify(next));
           return next;
         });
       };
 
-      const handleAuthSubmit = (e) => {
+      const saveAccount = (e) => {
         e.preventDefault();
         const profile = {
-          name: formName.trim() || "Class 10 Scholar",
-          email: formEmail.trim() || "scholar@studyverse.in",
-          target: formTarget,
-          joined: new Date().toLocaleDateString("en-IN", { month: "short", year: "numeric" })
+          name: nameInput.trim() || "CBSE Class 10 Student",
+          email: emailInput.trim() || "student@studyverse.in",
+          goal: goalInput
         };
-        setStudentUser(profile);
-        localStorage.setItem("sv_class10_user", JSON.stringify(profile));
-        setAuthMode("dashboard");
+        setUserProfile(profile);
+        localStorage.setItem("sv_c10_profile", JSON.stringify(profile));
+        setAuthView("dashboard");
       };
 
-      const handleLogout = () => {
-        localStorage.removeItem("sv_class10_user");
-        setStudentUser(null);
-        setAuthMode("login");
+      const signOut = () => {
+        localStorage.removeItem("sv_c10_profile");
+        setUserProfile(null);
+        setAuthView("login");
       };
 
-      const currentBook = CLASS_10_BOOKS[activeBookKey];
-      const currentChapter =
-        currentBook.chapters.find((c) => c.id === selectedChapterId) || currentBook.chapters[0];
+      const subjectObj = CLASS_10_SUBJECTS[activeSubject];
+      const chapterObj =
+        subjectObj.chapters.find((c) => c.id === activeChapterId) || subjectObj.chapters[0];
 
-      // Compute real user growth metrics (0% initially, grows only as user marks videos complete)
-      const totalChapters = Object.values(CLASS_10_BOOKS).reduce(
-        (acc, b) => acc + b.chapters.length,
-        0
-      );
-      const totalLectures = totalChapters * 3;
-      const completionPercent = Math.round((completedVideos.length / totalLectures) * 100);
+      const totalVideos =
+        Object.values(CLASS_10_SUBJECTS).reduce((sum, s) => sum + s.chapters.length, 0) * 3;
+      const overallPct = Math.round((watchedList.length / totalVideos) * 100);
 
       return React.createElement(
         React.Fragment,
         null,
 
-        // 1. CINEMATIC OPENING SEQUENCE
+        // 1. CINEMATIC OPENING INTRO
         React.createElement(
           AnimatePresence,
           null,
-          showIntro &&
+          !introDone &&
             React.createElement(
               motion.div,
               {
-                key: "cinema-intro",
-                className: "cinema-curtain",
+                key: "intro-curtain",
+                className: "opening-curtain",
                 initial: { opacity: 1 },
                 exit: {
                   opacity: 0,
                   scale: 1.04,
-                  filter: "blur(12px)",
-                  transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] }
+                  filter: "blur(10px)",
+                  transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
                 }
               },
-              React.createElement("div", { className: "cinema-letterbox-top" }),
-              React.createElement("div", { className: "cinema-letterbox-bottom" }),
-              React.createElement("div", { className: "cinema-grid-lines" }),
+              React.createElement("div", { className: "cinema-bar-top" }),
+              React.createElement("div", { className: "cinema-bar-bottom" }),
               React.createElement(motion.div, {
-                className: "cinema-orb",
-                animate: { scale: [0.9, 1.15, 1], opacity: [0.5, 0.9, 0.7] },
-                transition: { duration: 2.4, ease: "easeInOut" }
+                className: "cinema-glow",
+                animate: { scale: [0.92, 1.12, 1], opacity: [0.55, 0.9, 0.75] },
+                transition: { duration: 2.3, ease: "easeInOut" }
               }),
               React.createElement(
                 motion.div,
@@ -1359,26 +1176,26 @@
                   initial: { opacity: 0, y: 18 },
                   animate: { opacity: 1, y: 0 },
                   transition: { duration: 0.7, delay: 0.2 },
-                  style: { zIndex: 3, textAlign: "center", padding: "0 20px" }
+                  style: { zIndex: 2, textAlign: "center", padding: "0 20px" }
                 },
                 React.createElement(
                   "div",
                   {
                     style: {
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.24em",
+                      fontSize: "0.72rem",
+                      letterSpacing: "0.22em",
                       color: "var(--gold)",
-                      marginBottom: "14px"
+                      marginBottom: "12px"
                     }
                   },
-                  "CBSE CLASS X • ACADEMIC STUDIO"
+                  "BEST MADE FOR CLASS 10 CBSE STUDENT"
                 ),
                 React.createElement(
-                  "h1",
+                  "div",
                   {
                     style: {
-                      fontSize: "clamp(2.6rem, 7vw, 5.2rem)",
+                      fontSize: "clamp(2.5rem, 7vw, 5rem)",
                       fontWeight: 800,
                       letterSpacing: "-0.03em",
                       lineHeight: 1
@@ -1391,8 +1208,7 @@
                       style: {
                         fontFamily: "var(--font-serif)",
                         fontStyle: "italic",
-                        color: "var(--gold)",
-                        fontWeight: 700
+                        color: "var(--gold)"
                       }
                     },
                     "VERSE"
@@ -1403,11 +1219,11 @@
                   {
                     initial: { scaleX: 0 },
                     animate: { scaleX: 1 },
-                    transition: { duration: 1.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] },
+                    transition: { duration: 1.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] },
                     style: {
                       height: "2px",
-                      width: "220px",
-                      margin: "22px auto 18px",
+                      width: "210px",
+                      margin: "20px auto 16px",
                       background: "linear-gradient(90deg, transparent, var(--gold), transparent)"
                     }
                   }
@@ -1415,180 +1231,232 @@
                 React.createElement(
                   "button",
                   {
-                    onClick: () => setShowIntro(false),
+                    onClick: () => setIntroDone(true),
                     style: {
                       background: "transparent",
                       border: "1px solid rgba(255,255,255,0.16)",
                       color: "var(--text-secondary)",
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.72rem",
-                      padding: "7px 16px",
+                      fontSize: "0.7rem",
+                      padding: "6px 14px",
                       borderRadius: "99px",
                       cursor: "pointer"
                     }
                   },
-                  "ENTER WORKSPACE →"
+                  "SKIP INTRO →"
                 )
               )
             )
         ),
 
-        // 2. MAIN APPLICATION SHELL
+        // 2. MAIN WORKSPACE
         React.createElement(
           motion.div,
           {
-            className: "shell",
-            initial: { opacity: 0, y: 20 },
-            animate: { opacity: showIntro ? 0 : 1, y: showIntro ? 20 : 0 },
-            transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] }
+            className: "container",
+            initial: { opacity: 0, y: 18 },
+            animate: { opacity: introDone ? 1 : 0, y: introDone ? 0 : 18 },
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
           },
 
-          // Editorial Sticky Header
+          // Header
           React.createElement(
             "header",
-            { className: "navbar" },
+            { className: "topbar" },
             React.createElement(
               "div",
               {
-                className: "brand-mark",
+                className: "brand",
                 onClick: () => window.scrollTo({ top: 0, behavior: "smooth" })
               },
-              React.createElement("div", { className: "brand-emblem" }, "S"),
-              React.createElement("span", { className: "brand-name" }, "STUDYVERSE"),
-              React.createElement("span", { className: "brand-tag" }, "CLASS 10")
+              React.createElement("div", { className: "brand-badge" }, "S"),
+              React.createElement("span", { className: "brand-title" }, "STUDYVERSE"),
+              React.createElement("span", { className: "cbse-pill" }, "CBSE CLASS 10")
             ),
+
             React.createElement(
               "nav",
-              { className: "nav-links" },
+              { className: "nav-actions" },
               React.createElement(
                 "button",
                 {
-                  className: "nav-btn active",
-                  onClick: () =>
-                    document.getElementById("books-section")?.scrollIntoView({ behavior: "smooth" })
-                },
-                "Video Library"
-              ),
-              React.createElement(
-                "button",
-                {
-                  className: "nav-btn",
-                  onClick: () =>
-                    document.getElementById("roadmap-section")?.scrollIntoView({ behavior: "smooth" })
-                },
-                "Coming Soon"
-              ),
-              React.createElement(
-                "button",
-                {
-                  className: "auth-pill",
+                  className: `nav-item ${activeTab === "videos" ? "active" : ""}`,
                   onClick: () => {
-                    setAuthMode(studentUser ? "dashboard" : "login");
-                    setAuthModalOpen(true);
+                    setActiveTab("videos");
+                    document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" });
                   }
                 },
-                studentUser ? `📊 ${studentUser.name}` : "Sign In / Dashboard"
+                activeTab === "videos" &&
+                  React.createElement(motion.span, {
+                    layoutId: "activeNavPill",
+                    className: "nav-indicator",
+                    transition: { type: "spring", stiffness: 360, damping: 28 }
+                  }),
+                "Videos"
+              ),
+              React.createElement(
+                "button",
+                {
+                  className: `nav-item ${activeTab === "soon" ? "active" : ""}`,
+                  onClick: () => {
+                    setActiveTab("soon");
+                    document.getElementById("coming-soon")?.scrollIntoView({ behavior: "smooth" });
+                  }
+                },
+                activeTab === "soon" &&
+                  React.createElement(motion.span, {
+                    layoutId: "activeNavPill",
+                    className: "nav-indicator",
+                    transition: { type: "spring", stiffness: 360, damping: 28 }
+                  }),
+                "More Coming Soon"
+              ),
+              React.createElement(
+                "button",
+                {
+                  className: "account-btn",
+                  onClick: () => {
+                    setAuthView(userProfile ? "dashboard" : "login");
+                    setModalOpen(true);
+                  }
+                },
+                userProfile ? `📊 ${userProfile.name}` : "Login / Sign Up"
               )
             )
           ),
 
-          // HERO SECTION (Synced with 3D Backpack & Emerging Colored Books)
+          // HERO SECTION
           React.createElement(
             "section",
-            { className: "hero-section" },
+            { className: "hero-grid" },
             React.createElement(
               motion.div,
               {
-                initial: { opacity: 0, y: 26 },
+                initial: { opacity: 0, y: 24 },
                 animate: { opacity: 1, y: 0 },
-                transition: { duration: 0.8, delay: 0.15 }
+                transition: { duration: 0.75, delay: 0.12 }
               },
               React.createElement(
                 "div",
-                { className: "eyebrow" },
-                React.createElement("span", { className: "eyebrow-dot" }),
-                "DEDICATED TO CBSE CLASS 10 BOARD PREPARATIONS"
+                { className: "kicker-row" },
+                React.createElement("span", {
+                  style: {
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: "var(--gold)",
+                    boxShadow: "0 0 8px var(--gold)"
+                  }
+                }),
+                "BEST MADE FOR CLASS 10 CBSE STUDENT"
               ),
               React.createElement(
                 "h1",
-                { className: "hero-title" },
-                "One Focused Sanctuary for ",
-                React.createElement("span", { className: "serif-accent" }, "Class 10"),
-                " Mastery."
+                { className: "hero-h1" },
+                "Unpack Your ",
+                React.createElement("span", { className: "italic-gold" }, "Class 10"),
+                " Study Bag."
               ),
               React.createElement(
                 "p",
-                { className: "hero-desc" },
-                "Scroll down to unpack your 3D study bag into Mathematics, Science, and Social Science. Open any book to explore chapter-wise top lectures from India's finest educators—with Sample Papers, PDF Notes, and Growth Analytics arriving next."
+                { className: "hero-p" },
+                "Scroll down as your 3D bag opens to reveal three distinct subject books—Mathematics, Science, and Social Science. Pick any book to open its chapters and watch top-rated videos."
               ),
               React.createElement(
                 "div",
-                { className: "hero-actions" },
+                { style: { display: "flex", gap: "12px", flexWrap: "wrap" } },
                 React.createElement(
                   motion.button,
                   {
                     whileHover: { scale: 1.03 },
                     whileTap: { scale: 0.98 },
-                    className: "btn-primary-lux",
+                    className: "btn-gold",
                     onClick: () =>
-                      document.getElementById("books-section")?.scrollIntoView({ behavior: "smooth" })
+                      document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" })
                   },
-                  "Open Subject Books",
-                  React.createElement("span", null, "↓")
+                  "Explore Books & Videos ↓"
                 ),
                 React.createElement(
                   motion.button,
                   {
                     whileHover: { scale: 1.02 },
                     whileTap: { scale: 0.98 },
-                    className: "btn-ghost-lux",
+                    className: "btn-outline",
                     onClick: () => {
-                      setAuthMode(studentUser ? "dashboard" : "signup");
-                      setAuthModalOpen(true);
+                      setAuthView(userProfile ? "dashboard" : "signup");
+                      setModalOpen(true);
                     }
                   },
-                  studentUser ? "View Growth Dashboard" : "Create Student Account"
+                  userProfile ? "Growth Dashboard" : "Student Login / Sign Up"
                 )
               )
             ),
 
-            // Right Side: Interactive 3D Backpack Legend Card
+            // Right Interactive Card: Bag + Book Style Reference & Subject Quick Switcher
             React.createElement(
               motion.div,
               {
-                className: "stage-telemetry",
+                className: "bag-dock-card",
                 initial: { opacity: 0, x: 24 },
                 animate: { opacity: 1, x: 0 },
-                transition: { duration: 0.85, delay: 0.3 }
+                transition: { duration: 0.8, delay: 0.25 }
               },
-              React.createElement("div", { className: "telemetry-label" }, "3D STUDY BAG • INTERACTIVE"),
               React.createElement(
-                "p",
-                { style: { fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.5 } },
-                "As you scroll, the three subject editions emerge from the 3D bag in the background. Select a book below to inspect its chapters:"
+                "div",
+                {
+                  style: {
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.7rem",
+                    color: "var(--gold)",
+                    letterSpacing: "0.1em"
+                  }
+                },
+                "3D BAG & BOOK REFERENCE"
               ),
               React.createElement(
                 "div",
-                { className: "book-legend" },
-                Object.values(CLASS_10_BOOKS).map((book) =>
+                { className: "ref-pair" },
+                React.createElement(
+                  "div",
+                  { className: "ref-thumb-box" },
+                  React.createElement("img", {
+                    src: "ed2b3f958aa56928f5b1512b5e040bfe.jpg",
+                    alt: "Backpack reference"
+                  }),
+                  React.createElement("div", { className: "ref-thumb-caption" }, "BAG INSPIRATION")
+                ),
+                React.createElement(
+                  "div",
+                  { className: "ref-thumb-box" },
+                  React.createElement("img", {
+                    src: "images.jfif",
+                    alt: "Classic books reference"
+                  }),
+                  React.createElement("div", { className: "ref-thumb-caption" }, "GOLD BOOK TRIM")
+                )
+              ),
+              React.createElement(
+                "div",
+                { className: "subject-switch-list" },
+                Object.values(CLASS_10_SUBJECTS).map((subj) =>
                   React.createElement(
                     "div",
                     {
-                      key: book.id,
-                      className: "legend-item",
+                      key: subj.id,
+                      className: "subject-row",
                       onClick: () => {
-                        handleSelectBook(book.id);
-                        document.getElementById("books-section")?.scrollIntoView({ behavior: "smooth" });
+                        chooseSubject(subj.id);
+                        document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" });
                       }
                     },
                     React.createElement(
-                      "div",
-                      { style: { display: "flex", alignItems: "center", fontWeight: 700 } },
+                      "span",
+                      { style: { display: "flex", alignItems: "center" } },
                       React.createElement("span", {
-                        className: "color-swatch",
-                        style: { background: book.color, boxShadow: `0 0 10px ${book.color}` }
+                        className: "dot-swatch",
+                        style: { background: subj.color, boxShadow: `0 0 10px ${subj.color}` }
                       }),
-                      book.title
+                      subj.title
                     ),
                     React.createElement(
                       "span",
@@ -1599,7 +1467,7 @@
                           color: "var(--text-secondary)"
                         }
                       },
-                      `${book.chapters.length} Chapters →`
+                      `${subj.chapters.length} Chapters →`
                     )
                   )
                 )
@@ -1607,214 +1475,228 @@
             )
           ),
 
-          // SECTION 2: 21ST.DEV SPOTLIGHT FLASH CARDS (LIVE VIDEO VAULT + COMING SOON MODULES)
+          // SECTION 2: 21ST.DEV FLASH CARDS (VIDEOS LIVE + MORE COMING SOON)
           React.createElement(
             "section",
-            { id: "roadmap-section" },
+            { id: "coming-soon" },
             React.createElement(
               "div",
-              { className: "section-header" },
+              { className: "sec-head" },
               React.createElement(
                 "div",
                 null,
-                React.createElement("div", { className: "section-kicker" }, "PLATFORM ARCHITECTURE"),
-                React.createElement("h2", { className: "section-title" }, "Class 10 Ecosystem")
+                React.createElement("div", { className: "sec-kicker" }, "CLASS 10 WORKSPACE"),
+                React.createElement("h2", { className: "sec-title" }, "Videos Live • More Coming Soon")
               ),
               React.createElement(
                 "span",
                 {
                   style: {
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.76rem",
+                    fontSize: "0.74rem",
                     color: "var(--text-secondary)"
                   }
                 },
-                "PHASE 01 LIVE • MORE MODULES IN PRODUCTION"
+                "STEP 1: VIDEO SECTION ACTIVE"
               )
             ),
 
             React.createElement(
               "div",
-              { className: "spotlight-grid" },
-              // Card 1: Live Video Vault
+              { className: "flash-grid" },
               React.createElement(
                 SpotlightCard,
                 {
                   onClick: () =>
-                    document.getElementById("books-section")?.scrollIntoView({ behavior: "smooth" })
+                    document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" })
                 },
-                React.createElement("span", { className: "card-status status-live" }, "● LIVE NOW"),
+                React.createElement("span", { className: "badge-live" }, "● AVAILABLE NOW"),
                 React.createElement(
                   "h3",
                   { style: { fontSize: "1.12rem", fontWeight: 800, marginBottom: "8px" } },
-                  "Curated Chapter Videos"
+                  "Chapter Video Library"
                 ),
                 React.createElement(
                   "p",
-                  { style: { fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Handpicked top 3 chapter-specific lectures from Sunlike Study, PW, Shobhit Nirwan, Next Toppers & Exphub."
+                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
+                  "Pick a book, open a chapter, and watch 3 curated videos from Sunlike Study, PW, Shobhit Nirwan, Next Toppers & Exphub."
                 )
               ),
 
-              // Card 2: Sample Papers (Coming Soon)
               React.createElement(
                 SpotlightCard,
                 null,
-                React.createElement("span", { className: "card-status status-soon" }, "COMING SOON"),
+                React.createElement("span", { className: "badge-soon" }, "COMING SOON"),
                 React.createElement(
                   "h3",
                   { style: { fontSize: "1.12rem", fontWeight: 800, marginBottom: "8px" } },
-                  "CBSE Sample Papers"
+                  "Sample Papers"
                 ),
                 React.createElement(
                   "p",
-                  { style: { fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Latest pattern board sample papers with step-by-step marking schemes and timed exam mode."
+                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
+                  "CBSE Class 10 sample papers and practice sets arriving in upcoming updates."
                 )
               ),
 
-              // Card 3: PDF Notes (Coming Soon)
               React.createElement(
                 SpotlightCard,
                 null,
-                React.createElement("span", { className: "card-status status-soon" }, "COMING SOON"),
+                React.createElement("span", { className: "badge-soon" }, "COMING SOON"),
                 React.createElement(
                   "h3",
                   { style: { fontSize: "1.12rem", fontWeight: 800, marginBottom: "8px" } },
-                  "Revision PDF Notes"
+                  "PDF Notes"
                 ),
                 React.createElement(
                   "p",
-                  { style: { fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Crisp formula sheets, NCERT reaction charts, and structured summary notes downloadable offline."
+                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
+                  "Structured revision notes and formula sheets coming soon for quick review."
                 )
               ),
 
-              // Card 4: Chapter Quizzes & Growth Analytics (Coming Soon)
               React.createElement(
                 SpotlightCard,
                 {
                   onClick: () => {
-                    setAuthMode(studentUser ? "dashboard" : "login");
-                    setAuthModalOpen(true);
+                    setAuthView(userProfile ? "dashboard" : "login");
+                    setModalOpen(true);
                   }
                 },
-                React.createElement("span", { className: "card-status status-soon" }, "COMING SOON • DASHBOARD LIVE"),
+                React.createElement("span", { className: "badge-soon" }, "QUIZZES SOON • DASHBOARD READY"),
                 React.createElement(
                   "h3",
                   { style: { fontSize: "1.12rem", fontWeight: 800, marginBottom: "8px" } },
-                  "Quizzes & Growth Tracker"
+                  "Quizzes & Growth"
                 ),
                 React.createElement(
                   "p",
-                  { style: { fontSize: "0.86rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Chapter-end competency quizzes synced directly with your personal Student Growth Dashboard."
+                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
+                  "Track your lecture completion in your dashboard now; chapter quizzes coming soon."
                 )
               )
             )
           ),
 
-          // SECTION 3: OPEN THE 3 COLORED BOOKS -> CHAPTERS -> TOP 3 CURATED VIDEOS
+          // SECTION 3: 3 DISTINCT COLORED BOOKS -> CHAPTERS -> 3 CURATED VIDEOS
           React.createElement(
             "section",
-            { id: "books-section", className: "books-vault" },
+            { id: "books-vault", className: "vault-box" },
             React.createElement(
               "div",
-              { className: "section-header" },
+              { className: "sec-head" },
               React.createElement(
                 "div",
                 null,
-                React.createElement("div", { className: "section-kicker" }, "STEP 01 • CHOOSE YOUR BOOK"),
-                React.createElement("h2", { className: "section-title" }, "Open a Subject Edition")
+                React.createElement("div", { className: "sec-kicker" }, "OPEN A BOOK FROM YOUR BAG"),
+                React.createElement("h2", { className: "sec-title" }, "Maths, Science & Social Science")
               ),
               React.createElement(
                 "span",
                 {
                   style: {
                     fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    color: currentBook.color
+                    fontSize: "0.74rem",
+                    color: subjectObj.color
                   }
                 },
-                `ACTIVE EDITION: ${currentBook.title.toUpperCase()}`
+                `OPENED BOOK: ${subjectObj.title.toUpperCase()}`
               )
             ),
 
-            // 3 Colored Book Cards
+            // 3 Distinctly Colored Subject Books
             React.createElement(
               "div",
-              { className: "books-trio" },
-              Object.values(CLASS_10_BOOKS).map((book) => {
-                const isSelected = book.id === activeBookKey;
+              { className: "three-books-row" },
+              Object.values(CLASS_10_SUBJECTS).map((book) => {
+                const selected = book.id === activeSubject;
                 return React.createElement(
                   motion.button,
                   {
                     key: book.id,
-                    onClick: () => handleSelectBook(book.id),
-                    whileHover: { y: -4 },
+                    onClick: () => chooseSubject(book.id),
+                    whileHover: { y: -5, rotateY: 3 },
                     whileTap: { scale: 0.99 },
-                    className: `book-tome ${isSelected ? "active" : ""}`,
+                    transition: { type: "spring", stiffness: 300, damping: 24 },
+                    className: "colored-book-card",
                     style: {
-                      borderColor: isSelected ? book.color : "rgba(255,255,255,0.08)",
-                      boxShadow: isSelected ? `0 18px 40px ${book.glow}` : "none"
+                      borderColor: selected ? book.color : "rgba(255,255,255,0.08)",
+                      boxShadow: selected ? `0 18px 40px ${book.glow}` : "none"
                     }
                   },
                   React.createElement("span", {
-                    className: "spine-bar",
+                    className: "book-spine-strip",
                     style: { background: book.color }
                   }),
+                  React.createElement("span", { className: "book-gold-corner" }, "✦ NCERT"),
                   React.createElement(
                     "div",
-                    { className: "book-tome-meta", style: { color: book.color } },
+                    {
+                      style: {
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "0.68rem",
+                        color: book.color,
+                        marginBottom: "8px"
+                      }
+                    },
                     book.code
                   ),
-                  React.createElement("div", { className: "book-tome-title" }, book.title),
-                  React.createElement("div", { className: "book-tome-sub" }, book.tagline)
+                  React.createElement(
+                    "div",
+                    { style: { fontSize: "1.32rem", fontWeight: 800, marginBottom: "6px" } },
+                    book.title
+                  ),
+                  React.createElement(
+                    "div",
+                    { style: { fontSize: "0.83rem", color: "var(--text-secondary)", lineHeight: 1.45 } },
+                    book.summary
+                  )
                 );
               })
             ),
 
-            // Animated Book Page Transition for Chapters & Videos
+            // Animated Book Open Transition -> Chapters -> 3 Videos
             React.createElement(
               AnimatePresence,
               { mode: "wait" },
               React.createElement(
                 motion.div,
                 {
-                  key: currentBook.id,
-                  initial: { opacity: 0, y: 18, rotateX: -6 },
+                  key: subjectObj.id,
+                  initial: { opacity: 0, y: 16, rotateX: -5 },
                   animate: { opacity: 1, y: 0, rotateX: 0 },
-                  exit: { opacity: 0, y: -14, rotateX: 6 },
-                  transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
+                  exit: { opacity: 0, y: -12, rotateX: 5 },
+                  transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] }
                 },
 
-                // Step 2: Chapters List
+                // Chapters List
                 React.createElement(
                   "div",
                   {
                     style: {
                       fontFamily: "var(--font-mono)",
-                      fontSize: "0.72rem",
+                      fontSize: "0.7rem",
                       color: "var(--text-secondary)",
                       letterSpacing: "0.1em",
                       marginBottom: "12px"
                     }
                   },
-                  `STEP 02 • SELECT A ${currentBook.title.toUpperCase()} CHAPTER`
+                  `CHAPTERS IN ${subjectObj.title.toUpperCase()} — CLICK TO LOAD 3 TOP VIDEOS`
                 ),
+
                 React.createElement(
                   "div",
-                  { className: "chapters-grid" },
-                  currentBook.chapters.map((chapter) => {
-                    const isChapterSelected = chapter.id === currentChapter.id;
+                  { className: "chapters-wrap" },
+                  subjectObj.chapters.map((ch) => {
+                    const isChSelected = ch.id === chapterObj.id;
                     return React.createElement(
                       motion.div,
                       {
-                        key: chapter.id,
+                        key: ch.id,
                         whileHover: { scale: 1.015 },
                         whileTap: { scale: 0.99 },
-                        onClick: () => setSelectedChapterId(chapter.id),
-                        className: `chapter-pill-card ${isChapterSelected ? "selected" : ""}`
+                        onClick: () => setActiveChapterId(ch.id),
+                        className: `chapter-card ${isChSelected ? "selected" : ""}`
                       },
                       React.createElement(
                         "div",
@@ -1824,49 +1706,49 @@
                           {
                             style: {
                               fontFamily: "var(--font-mono)",
-                              fontSize: "0.7rem",
-                              color: isChapterSelected ? "var(--gold)" : currentBook.color,
+                              fontSize: "0.68rem",
+                              color: isChSelected ? "var(--gold)" : subjectObj.color,
                               marginBottom: "4px"
                             }
                           },
-                          chapter.number
+                          ch.num
                         ),
                         React.createElement(
                           "div",
-                          { style: { fontWeight: 700, fontSize: "0.98rem", lineHeight: 1.35 } },
-                          chapter.name
+                          { style: { fontWeight: 700, fontSize: "0.96rem", lineHeight: 1.35 } },
+                          ch.name
                         )
                       ),
                       React.createElement(
                         "div",
                         {
                           style: {
-                            fontSize: "0.75rem",
+                            fontSize: "0.74rem",
                             color: "var(--text-secondary)",
                             display: "flex",
                             justifyContent: "space-between"
                           }
                         },
-                        React.createElement("span", null, "3 Top-Rated Lectures"),
-                        React.createElement("span", { style: { color: "var(--gold)" } }, "Open →")
+                        React.createElement("span", null, "3 Chapter Videos"),
+                        React.createElement("span", { style: { color: "var(--gold)" } }, "Select →")
                       )
                     );
                   })
                 ),
 
-                // Step 3: Curated 3 Videos for the Selected Chapter
+                // 3 Videos for Selected Chapter
                 React.createElement(
                   AnimatePresence,
                   { mode: "wait" },
                   React.createElement(
                     motion.div,
                     {
-                      key: currentChapter.id,
-                      className: "videos-theatre",
-                      initial: { opacity: 0, y: 14 },
+                      key: chapterObj.id,
+                      className: "video-stage",
+                      initial: { opacity: 0, y: 12 },
                       animate: { opacity: 1, y: 0 },
                       exit: { opacity: 0, y: -10 },
-                      transition: { duration: 0.35 }
+                      transition: { duration: 0.32 }
                     },
                     React.createElement(
                       "div",
@@ -1891,12 +1773,12 @@
                               color: "var(--gold)"
                             }
                           },
-                          `STEP 03 • CURATED LECTURES FOR ${currentChapter.number.toUpperCase()}`
+                          `${chapterObj.num.toUpperCase()} • TOP 3 CURATED VIDEOS`
                         ),
                         React.createElement(
                           "h3",
-                          { style: { fontSize: "1.25rem", fontWeight: 800, marginTop: "2px" } },
-                          currentChapter.name
+                          { style: { fontSize: "1.22rem", fontWeight: 800, marginTop: "2px" } },
+                          chapterObj.name
                         )
                       ),
                       React.createElement(
@@ -1904,7 +1786,7 @@
                         {
                           style: {
                             fontFamily: "var(--font-mono)",
-                            fontSize: "0.72rem",
+                            fontSize: "0.7rem",
                             color: "var(--text-secondary)"
                           }
                         },
@@ -1914,15 +1796,15 @@
 
                     React.createElement(
                       "div",
-                      { className: "videos-grid-3" },
-                      currentChapter.videos.map((vid, idx) => {
-                        const uniqueKey = `${currentChapter.id}-${idx}`;
-                        const isDone = completedVideos.includes(uniqueKey);
+                      { className: "videos-3-col" },
+                      chapterObj.videos.map((vid, idx) => {
+                        const key = `${chapterObj.id}-${idx}`;
+                        const done = watchedList.includes(key);
                         return React.createElement(
                           motion.div,
                           {
-                            key: uniqueKey,
-                            className: "lecture-card",
+                            key,
+                            className: "video-card",
                             initial: { opacity: 0, y: 12 },
                             animate: { opacity: 1, y: 0 },
                             transition: { delay: idx * 0.08 }
@@ -1933,51 +1815,55 @@
                               href: vid.url,
                               target: "_blank",
                               rel: "noopener noreferrer",
-                              className: "thumb-frame"
+                              className: "thumb-wrap"
                             },
                             React.createElement("img", {
                               src: `https://i.ytimg.com/vi/${vid.videoId}/hqdefault.jpg`,
                               alt: vid.title,
                               loading: "lazy"
                             }),
-                            React.createElement("span", { className: "channel-chip" }, vid.channel)
+                            React.createElement("span", { className: "creator-badge" }, vid.channel)
                           ),
                           React.createElement(
                             "div",
-                            { className: "lecture-body" },
+                            { className: "video-body" },
                             React.createElement(
                               "div",
                               {
                                 style: {
                                   fontFamily: "var(--font-mono)",
                                   fontSize: "0.66rem",
-                                  color: currentBook.color,
+                                  color: subjectObj.color,
                                   fontWeight: 700
                                 }
                               },
-                              vid.tag
+                              vid.badge
                             ),
-                            React.createElement("div", { className: "lecture-title" }, vid.title),
                             React.createElement(
                               "div",
-                              { className: "lecture-actions" },
+                              { style: { fontSize: "0.9rem", fontWeight: 700, lineHeight: 1.4 } },
+                              vid.title
+                            ),
+                            React.createElement(
+                              "div",
+                              { className: "video-footer" },
                               React.createElement(
                                 "a",
                                 {
                                   href: vid.url,
                                   target: "_blank",
                                   rel: "noopener noreferrer",
-                                  className: "watch-link"
+                                  className: "watch-btn"
                                 },
-                                "Watch Lecture ↗"
+                                "Watch on YouTube ↗"
                               ),
                               React.createElement(
                                 "button",
                                 {
-                                  onClick: () => toggleVideoComplete(uniqueKey),
-                                  className: `mark-done-btn ${isDone ? "completed" : ""}`
+                                  onClick: () => toggleWatched(key),
+                                  className: `watched-toggle ${done ? "done" : ""}`
                                 },
-                                isDone ? "✓ Watched" : "Mark Watched"
+                                done ? "✓ Watched" : "Mark Watched"
                               )
                             )
                           )
@@ -1991,30 +1877,29 @@
           )
         ),
 
-        // 3. LOGIN / SIGN UP & AUTHENTIC GROWTH DASHBOARD MODAL (ZERO FAKE RANKS)
+        // 3. LOGIN / SIGN UP & PERSONAL GROWTH DASHBOARD MODAL (ZERO FAKE RANKS)
         React.createElement(
           AnimatePresence,
           null,
-          authModalOpen &&
+          modalOpen &&
             React.createElement(
               motion.div,
               {
-                className: "modal-backdrop",
+                className: "modal-bg",
                 initial: { opacity: 0 },
                 animate: { opacity: 1 },
                 exit: { opacity: 0 },
                 onClick: (e) => {
-                  if (e.target === e.currentTarget) setAuthModalOpen(false);
+                  if (e.target === e.currentTarget) setModalOpen(false);
                 }
               },
               React.createElement(
                 motion.div,
                 {
-                  className: "modal-sheet",
-                  initial: { opacity: 0, scale: 0.94, y: 18 },
+                  className: "modal-card",
+                  initial: { opacity: 0, scale: 0.94, y: 16 },
                   animate: { opacity: 1, scale: 1, y: 0 },
-                  exit: { opacity: 0, scale: 0.94, y: 18 },
-                  transition: { type: "spring", stiffness: 300, damping: 26 }
+                  exit: { opacity: 0, scale: 0.94, y: 16 }
                 },
                 React.createElement(
                   "div",
@@ -2034,26 +1919,26 @@
                       {
                         style: {
                           fontFamily: "var(--font-mono)",
-                          fontSize: "0.7rem",
+                          fontSize: "0.68rem",
                           color: "var(--gold)"
                         }
                       },
-                      "STUDYVERSE CLASS 10 PORTAL"
+                      "CLASS 10 CBSE PORTAL"
                     ),
                     React.createElement(
                       "h3",
-                      { style: { fontSize: "1.4rem", fontWeight: 800 } },
-                      authMode === "dashboard" && studentUser
-                        ? "Personal Growth Dashboard"
-                        : authMode === "signup"
-                        ? "Create Student Account"
-                        : "Student Sign In"
+                      { style: { fontSize: "1.35rem", fontWeight: 800 } },
+                      authView === "dashboard" && userProfile
+                        ? "Your Growth Dashboard"
+                        : authView === "signup"
+                        ? "Create Account"
+                        : "Sign In"
                     )
                   ),
                   React.createElement(
                     "button",
                     {
-                      onClick: () => setAuthModalOpen(false),
+                      onClick: () => setModalOpen(false),
                       style: {
                         background: "rgba(255,255,255,0.06)",
                         border: "none",
@@ -2068,7 +1953,7 @@
                   )
                 ),
 
-                authMode === "dashboard" && studentUser
+                authView === "dashboard" && userProfile
                   ? React.createElement(
                       "div",
                       null,
@@ -2076,115 +1961,93 @@
                         "div",
                         {
                           style: {
-                            padding: "16px",
-                            borderRadius: "16px",
+                            padding: "14px 16px",
+                            borderRadius: "14px",
                             background: "rgba(255,255,255,0.03)",
                             border: "1px solid rgba(255,255,255,0.08)",
                             marginBottom: "18px"
                           }
                         },
+                        React.createElement("div", { style: { fontWeight: 800 } }, userProfile.name),
                         React.createElement(
                           "div",
-                          { style: { fontWeight: 800, fontSize: "1.1rem" } },
-                          studentUser.name
-                        ),
-                        React.createElement(
-                          "div",
-                          { style: { fontSize: "0.82rem", color: "var(--text-secondary)", marginTop: "2px" } },
-                          `${studentUser.email} • ${studentUser.target}`
+                          { style: { fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "2px" } },
+                          `${userProfile.email} • ${userProfile.goal}`
                         )
                       ),
-
-                      // Real Personal Growth Progress (No fake ranks or fake leaderboard)
                       React.createElement(
                         "div",
-                        { style: { marginBottom: "18px" } },
+                        { style: { marginBottom: "16px" } },
                         React.createElement(
                           "div",
                           {
                             style: {
                               display: "flex",
                               justifyContent: "space-between",
-                              fontSize: "0.85rem",
+                              fontSize: "0.84rem",
                               fontWeight: 700
                             }
                           },
-                          React.createElement("span", null, "Overall Syllabus Lectures Watched"),
+                          React.createElement("span", null, "Lectures Completed"),
                           React.createElement(
                             "span",
                             { style: { color: "var(--gold)" } },
-                            `${completedVideos.length} / ${totalLectures} (${completionPercent}%)`
+                            `${watchedList.length}/${totalVideos} (${overallPct}%)`
                           )
                         ),
                         React.createElement(
                           "div",
-                          { className: "progress-bar-bg" },
+                          { className: "meter-track" },
                           React.createElement("div", {
-                            className: "progress-bar-fill",
-                            style: { width: `${completionPercent}%`, background: "var(--gold)" }
+                            className: "meter-fill",
+                            style: { width: `${overallPct}%`, background: "var(--gold)" }
                           })
                         )
                       ),
-
-                      // Subject-by-Subject Real Breakdown
-                      Object.values(CLASS_10_BOOKS).map((book) => {
-                        const bookTotal = book.chapters.length * 3;
-                        const bookDone = completedVideos.filter((k) =>
-                          book.chapters.some((c) => k.startsWith(`${c.id}-`))
+                      Object.values(CLASS_10_SUBJECTS).map((s) => {
+                        const subTotal = s.chapters.length * 3;
+                        const subDone = watchedList.filter((k) =>
+                          s.chapters.some((c) => k.startsWith(`${c.id}-`))
                         ).length;
-                        const pct = Math.round((bookDone / bookTotal) * 100);
+                        const subPct = Math.round((subDone / subTotal) * 100);
                         return React.createElement(
                           "div",
-                          { key: book.id, style: { marginBottom: "12px" } },
+                          { key: s.id, style: { marginBottom: "12px" } },
                           React.createElement(
                             "div",
                             {
                               style: {
                                 display: "flex",
                                 justifyContent: "space-between",
-                                fontSize: "0.8rem",
+                                fontSize: "0.78rem",
                                 color: "var(--text-secondary)"
                               }
                             },
-                            React.createElement("span", null, book.title),
-                            React.createElement("span", null, `${bookDone}/${bookTotal} lectures`)
+                            React.createElement("span", null, s.title),
+                            React.createElement("span", null, `${subDone}/${subTotal}`)
                           ),
                           React.createElement(
                             "div",
-                            { className: "progress-bar-bg" },
+                            { className: "meter-track" },
                             React.createElement("div", {
-                              className: "progress-bar-fill",
-                              style: { width: `${pct}%`, background: book.color }
+                              className: "meter-fill",
+                              style: { width: `${subPct}%`, background: s.color }
                             })
                           )
                         );
                       }),
-
-                      React.createElement(
-                        "p",
-                        {
-                          style: {
-                            fontSize: "0.78rem",
-                            color: "var(--text-secondary)",
-                            marginTop: "16px",
-                            lineHeight: 1.5
-                          }
-                        },
-                        "Your progress updates automatically whenever you click 'Mark Watched' on any chapter lecture. Quiz scores and sample paper analytics will appear here once unlocked."
-                      ),
-
                       React.createElement(
                         "button",
                         {
-                          onClick: handleLogout,
+                          onClick: signOut,
                           style: {
-                            marginTop: "18px",
+                            marginTop: "14px",
                             background: "transparent",
                             border: "1px solid rgba(255,255,255,0.16)",
                             color: "var(--text-secondary)",
-                            padding: "9px 16px",
+                            padding: "8px 14px",
                             borderRadius: "10px",
-                            fontSize: "0.8rem",
+                            fontSize: "0.78rem",
                             cursor: "pointer"
                           }
                         },
@@ -2193,62 +2056,62 @@
                     )
                   : React.createElement(
                       "form",
-                      { onSubmit: handleAuthSubmit },
-                      authMode === "signup" &&
+                      { onSubmit: saveAccount },
+                      authView === "signup" &&
                         React.createElement(
                           React.Fragment,
                           null,
                           React.createElement(
                             "label",
-                            { style: { fontSize: "0.8rem", color: "var(--text-secondary)" } },
-                            "Full Name"
+                            { style: { fontSize: "0.78rem", color: "var(--text-secondary)" } },
+                            "Student Name"
                           ),
                           React.createElement("input", {
                             type: "text",
                             required: true,
                             placeholder: "Enter your name",
-                            value: formName,
-                            onChange: (e) => setFormName(e.target.value),
-                            className: "input-field"
+                            value: nameInput,
+                            onChange: (e) => setNameInput(e.target.value),
+                            className: "field-input"
                           })
                         ),
                       React.createElement(
                         "label",
-                        { style: { fontSize: "0.8rem", color: "var(--text-secondary)" } },
-                        "Email Address"
+                        { style: { fontSize: "0.78rem", color: "var(--text-secondary)" } },
+                        "Email"
                       ),
                       React.createElement("input", {
                         type: "email",
                         required: true,
-                        placeholder: "you@example.com",
-                        value: formEmail,
-                        onChange: (e) => setFormEmail(e.target.value),
-                        className: "input-field"
+                        placeholder: "student@example.com",
+                        value: emailInput,
+                        onChange: (e) => setEmailInput(e.target.value),
+                        className: "field-input"
                       }),
-                      authMode === "signup" &&
+                      authView === "signup" &&
                         React.createElement(
                           React.Fragment,
                           null,
                           React.createElement(
                             "label",
-                            { style: { fontSize: "0.8rem", color: "var(--text-secondary)" } },
-                            "Class 10 Board Goal"
+                            { style: { fontSize: "0.78rem", color: "var(--text-secondary)" } },
+                            "Target Focus"
                           ),
                           React.createElement("input", {
                             type: "text",
-                            value: formTarget,
-                            onChange: (e) => setFormTarget(e.target.value),
-                            className: "input-field"
+                            value: goalInput,
+                            onChange: (e) => setGoalInput(e.target.value),
+                            className: "field-input"
                           })
                         ),
                       React.createElement(
                         "button",
                         {
                           type: "submit",
-                          className: "btn-primary-lux",
-                          style: { width: "100%", justifyContent: "center", marginTop: "6px" }
+                          className: "btn-gold",
+                          style: { width: "100%", justifyContent: "center" }
                         },
-                        authMode === "signup" ? "Create Account & Open Dashboard" : "Sign In to Dashboard"
+                        authView === "signup" ? "Create Account & Open Dashboard" : "Sign In"
                       ),
                       React.createElement(
                         "div",
@@ -2256,16 +2119,16 @@
                           style: {
                             marginTop: "14px",
                             textAlign: "center",
-                            fontSize: "0.82rem",
+                            fontSize: "0.8rem",
                             color: "var(--text-secondary)"
                           }
                         },
-                        authMode === "signup" ? "Already have an account? " : "New to StudyVerse? ",
+                        authView === "signup" ? "Already have an account? " : "Need an account? ",
                         React.createElement(
                           "button",
                           {
                             type: "button",
-                            onClick: () => setAuthMode(authMode === "signup" ? "login" : "signup"),
+                            onClick: () => setAuthView(authView === "signup" ? "login" : "signup"),
                             style: {
                               background: "none",
                               border: "none",
@@ -2274,7 +2137,7 @@
                               cursor: "pointer"
                             }
                           },
-                          authMode === "signup" ? "Sign In" : "Sign Up"
+                          authView === "signup" ? "Sign In" : "Sign Up"
                         )
                       )
                     )
@@ -2287,173 +2150,176 @@
     createRoot(document.getElementById("root")).render(React.createElement(StudyVerseApp));
 
     // =========================================================================
-    // THREE.JS: LUXURY 3D STUDY BAG + 3 EMERGING COLORED BOOKS (CLEAN BACKGROUND)
+    // THREE.JS: EYE-CATCHING 3D BAG + 3 COLORED BOOKS WITH GOLD TRIM
     // =========================================================================
-    (function initThreeBackpackStage() {
-      const canvas = document.getElementById("three-stage");
+    (function initClean3DBagBooks() {
+      const canvas = document.getElementById("three-bag-canvas");
       if (!canvas || !window.THREE) return;
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.set(0, 0.4, 9.5);
+      const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0.35, 9.6);
 
       const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      // Studio Lighting
-      const ambient = new THREE.AmbientLight(0xffffff, 0.65);
-      scene.add(ambient);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.72));
 
-      const keyLight = new THREE.DirectionalLight(0xffe8a3, 1.35);
-      keyLight.position.set(5, 8, 7);
-      scene.add(keyLight);
+      const goldKeyLight = new THREE.DirectionalLight(0xffe7a0, 1.45);
+      goldKeyLight.position.set(5, 7, 8);
+      scene.add(goldKeyLight);
 
-      const rimLight = new THREE.DirectionalLight(0x3b82f6, 0.85);
-      rimLight.position.set(-6, 3, -5);
-      scene.add(rimLight);
+      const coolRimLight = new THREE.DirectionalLight(0x60a5fa, 0.85);
+      coolRimLight.position.set(-6, 2, -4);
+      scene.add(coolRimLight);
 
-      // Master Group positioned cleanly on the right side of the hero
       const stageGroup = new THREE.Group();
-      stageGroup.position.set(2.3, -0.3, 0);
+      stageGroup.position.set(2.3, -0.35, 0);
       scene.add(stageGroup);
 
-      // 1. Minimalist Luxury 3D Study Bag (Obsidian Leather + Champagne Gold Clasp)
+      // Bag inspired by reference #1 (Black body + Yellow accent zip + Gold clasp)[cite: 1]
       const bagGroup = new THREE.Group();
       stageGroup.add(bagGroup);
 
-      const leatherMat = new THREE.MeshStandardMaterial({
-        color: 0x111726,
-        roughness: 0.42,
-        metalness: 0.25
+      const blackPackMat = new THREE.MeshStandardMaterial({
+        color: 0x0e131f,
+        roughness: 0.45,
+        metalness: 0.22
       });
-
-      const trimGoldMat = new THREE.MeshStandardMaterial({
+      const yellowZipMat = new THREE.MeshStandardMaterial({
+        color: 0xfacc15,
+        roughness: 0.35,
+        metalness: 0.15
+      });
+      const goldTrimMat = new THREE.MeshStandardMaterial({
         color: 0xe5c158,
-        roughness: 0.25,
-        metalness: 0.85
+        roughness: 0.24,
+        metalness: 0.86
       });
 
-      // Main Bag Body
-      const bodyGeo = new THREE.BoxGeometry(2.7, 3.1, 1.35);
-      const bagBody = new THREE.Mesh(bodyGeo, leatherMat);
-      bagBody.position.y = -0.35;
-      bagGroup.add(bagBody);
+      const packBody = new THREE.Mesh(new THREE.BoxGeometry(2.75, 3.15, 1.35), blackPackMat);
+      packBody.position.y = -0.35;
+      bagGroup.add(packBody);
 
-      // Front Pocket
-      const pocketGeo = new THREE.BoxGeometry(2.1, 1.45, 0.35);
-      const bagPocket = new THREE.Mesh(pocketGeo, leatherMat);
-      bagPocket.position.set(0, -0.95, 0.78);
-      bagGroup.add(bagPocket);
+      const frontPocket = new THREE.Mesh(new THREE.BoxGeometry(2.15, 1.4, 0.36), blackPackMat);
+      frontPocket.position.set(0, -0.95, 0.78);
+      bagGroup.add(frontPocket);
 
-      // Gold Zipper / Trim Bar
-      const zipGeo = new THREE.BoxGeometry(2.14, 0.07, 0.38);
-      const bagZip = new THREE.Mesh(zipGeo, trimGoldMat);
-      bagZip.position.set(0, -0.25, 0.78);
-      bagGroup.add(bagZip);
+      const yellowAccentStrip = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.12, 0.4), yellowZipMat);
+      yellowAccentStrip.position.set(0, -0.22, 0.78);
+      bagGroup.add(yellowAccentStrip);
 
-      // Top Handle
-      const handleGeo = new THREE.TorusGeometry(0.45, 0.07, 12, 32, Math.PI);
-      const handle = new THREE.Mesh(handleGeo, trimGoldMat);
-      handle.position.set(0, 1.2, -0.15);
-      bagGroup.add(handle);
+      const topGrabLoop = new THREE.Mesh(
+        new THREE.TorusGeometry(0.46, 0.075, 12, 32, Math.PI),
+        goldTrimMat
+      );
+      topGrabLoop.position.set(0, 1.22, -0.15);
+      bagGroup.add(topGrabLoop);
 
-      // 2. Three Distinct Colored Books (Maths = Blue, Science = Emerald, SST = Amber)
-      function createLuxuryBook(coverHex, xOffset) {
+      // 3 Colored Books with Gold Filigree Trim inspired by reference #2[cite: 2]
+      function buildColoredBook(hexColor, startX) {
         const book = new THREE.Group();
-
         const coverMat = new THREE.MeshStandardMaterial({
-          color: coverHex,
-          roughness: 0.32,
-          metalness: 0.2
+          color: hexColor,
+          roughness: 0.3,
+          metalness: 0.22
         });
-
-        const pagesMat = new THREE.MeshStandardMaterial({
+        const pageMat = new THREE.MeshStandardMaterial({
           color: 0xf8fafc,
           roughness: 0.75
         });
 
-        // Back & Front Covers
-        const coverGeo = new THREE.BoxGeometry(1.55, 2.1, 0.08);
-        const frontCover = new THREE.Mesh(coverGeo, coverMat);
-        frontCover.position.z = 0.16;
+        const front = new THREE.Mesh(new THREE.BoxGeometry(1.52, 2.08, 0.08), coverMat);
+        front.position.z = 0.16;
 
-        const backCover = new THREE.Mesh(coverGeo, coverMat);
-        backCover.position.z = -0.16;
+        const back = new THREE.Mesh(new THREE.BoxGeometry(1.52, 2.08, 0.08), coverMat);
+        back.position.z = -0.16;
 
-        // Spine
-        const spineGeo = new THREE.BoxGeometry(0.1, 2.1, 0.38);
-        const spine = new THREE.Mesh(spineGeo, coverMat);
-        spine.position.x = -0.75;
+        const spine = new THREE.Mesh(new THREE.BoxGeometry(0.1, 2.08, 0.38), coverMat);
+        spine.position.x = -0.73;
 
-        // Gold Foil Band on Spine
-        const foilGeo = new THREE.BoxGeometry(0.11, 0.25, 0.39);
-        const foil = new THREE.Mesh(foilGeo, trimGoldMat);
-        foil.position.set(-0.75, 0.55, 0);
+        const goldBorderTop = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.03, 0.09), goldTrimMat);
+        goldBorderTop.position.set(0.05, 0.85, 0.2);
 
-        // Cream Paper Block
-        const pagesGeo = new THREE.BoxGeometry(1.46, 2.0, 0.26);
-        const pages = new THREE.Mesh(pagesGeo, pagesMat);
+        const goldBorderBottom = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.03, 0.09), goldTrimMat);
+        goldBorderBottom.position.set(0.05, -0.85, 0.2);
 
-        book.add(frontCover, backCover, spine, foil, pages);
-        book.position.set(xOffset, 0.2, 0);
+        const pages = new THREE.Mesh(new THREE.BoxGeometry(1.44, 1.98, 0.26), pageMat);
+
+        book.add(front, back, spine, goldBorderTop, goldBorderBottom, pages);
+        book.position.set(startX, 0.15, 0);
         return book;
       }
 
-      const booksMap = {
-        maths: createLuxuryBook(0x3b82f6, -0.55),
-        science: createLuxuryBook(0x10b981, 0.0),
-        sst: createLuxuryBook(0xf59e0b, 0.55)
+      const subjectBooks = {
+        maths: buildColoredBook(0x3b82f6, -0.55),
+        science: buildColoredBook(0x10b981, 0.0),
+        sst: buildColoredBook(0xf59e0b, 0.55)
       };
 
-      Object.values(booksMap).forEach((b) => stageGroup.add(b));
+      Object.values(subjectBooks).forEach((b) => stageGroup.add(b));
 
-      window.__SV_SCROLL__ = 0;
-      window.__SV_ACTIVE_BOOK__ = "maths";
+      window.__BAG_SCROLL__ = 0;
+      window.__ACTIVE_BOOK__ = "maths";
 
       const clock = new THREE.Clock();
 
-      function animate() {
-        requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
-        const scroll = window.__SV_SCROLL__ || 0;
-        const activeKey = window.__SV_ACTIVE_BOOK__ || "maths";
+      function renderLoop() {
+        requestAnimationFrame(renderLoop);
+        const elapsed = clock.getElapsedTime();
+        const scrollVal = window.__BAG_SCROLL__ || 0;
+        const selectedKey = window.__ACTIVE_BOOK__ || "maths";
 
-        // Responsive positioning for mobile vs desktop
-        const isMobile = window.innerWidth < 920;
-        stageGroup.position.x = isMobile ? 0 : THREE.MathUtils.lerp(2.35, 0, Math.min(scroll * 1.6, 1));
-        stageGroup.position.y = isMobile ? -1.4 : -0.25;
-        stageGroup.scale.setScalar(isMobile ? 0.72 : 1);
+        const isCompact = window.innerWidth < 920;
+        stageGroup.position.x = isCompact
+          ? 0
+          : THREE.MathUtils.lerp(2.35, 0, Math.min(scrollVal * 1.6, 1));
+        stageGroup.position.y = isCompact ? -1.4 : -0.3;
+        stageGroup.scale.setScalar(isCompact ? 0.72 : 1);
 
-        // Gentle floating motion
-        stageGroup.rotation.y = Math.sin(t * 0.45) * 0.22 + scroll * 0.6;
-        stageGroup.rotation.x = Math.cos(t * 0.35) * 0.06;
+        stageGroup.rotation.y = Math.sin(elapsed * 0.45) * 0.22 + scrollVal * 0.55;
+        stageGroup.rotation.x = Math.cos(elapsed * 0.35) * 0.05;
 
-        // As user scrolls, the 3 books emerge smoothly out of the bag and fan apart
-        const emerge = Math.min(scroll * 2.4, 1);
+        const emergeFactor = Math.min(scrollVal * 2.4, 1);
 
-        const configs = [
-          { key: "maths", targetX: -0.55 - emerge * 1.45, targetY: 0.2 + emerge * 1.55, rotZ: 0.12 + emerge * 0.16 },
-          { key: "science", targetX: 0, targetY: 0.25 + emerge * 1.85, rotZ: 0 },
-          { key: "sst", targetX: 0.55 + emerge * 1.45, targetY: 0.2 + emerge * 1.55, rotZ: -0.12 - emerge * 0.16 }
+        const targets = [
+          {
+            key: "maths",
+            x: -0.55 - emergeFactor * 1.5,
+            y: 0.15 + emergeFactor * 1.6,
+            zRot: 0.12 + emergeFactor * 0.16
+          },
+          {
+            key: "science",
+            x: 0,
+            y: 0.22 + emergeFactor * 1.9,
+            zRot: 0
+          },
+          {
+            key: "sst",
+            x: 0.55 + emergeFactor * 1.5,
+            y: 0.15 + emergeFactor * 1.6,
+            zRot: -0.12 - emergeFactor * 0.16
+          }
         ];
 
-        configs.forEach(({ key, targetX, targetY, rotZ }) => {
-          const mesh = booksMap[key];
-          const isSelected = key === activeKey;
-          const highlightBoost = isSelected ? 0.35 : 0;
+        targets.forEach(({ key, x, y, zRot }) => {
+          const mesh = subjectBooks[key];
+          const isCurrent = key === selectedKey;
+          const lift = isCurrent ? 0.35 : 0;
 
-          mesh.position.x = THREE.MathUtils.lerp(mesh.position.x, targetX, 0.08);
-          mesh.position.y = THREE.MathUtils.lerp(mesh.position.y, targetY + highlightBoost, 0.08);
-          mesh.position.z = THREE.MathUtils.lerp(mesh.position.z, isSelected ? 0.55 : 0.05, 0.08);
-          mesh.rotation.z = THREE.MathUtils.lerp(mesh.rotation.z, rotZ, 0.08);
-          mesh.rotation.y = isSelected ? Math.sin(t * 1.4) * 0.25 : 0;
+          mesh.position.x = THREE.MathUtils.lerp(mesh.position.x, x, 0.08);
+          mesh.position.y = THREE.MathUtils.lerp(mesh.position.y, y + lift, 0.08);
+          mesh.position.z = THREE.MathUtils.lerp(mesh.position.z, isCurrent ? 0.55 : 0.05, 0.08);
+          mesh.rotation.z = THREE.MathUtils.lerp(mesh.rotation.z, zRot, 0.08);
+          mesh.rotation.y = isCurrent ? Math.sin(elapsed * 1.4) * 0.22 : 0;
         });
 
         renderer.render(scene, camera);
       }
 
-      animate();
+      renderLoop();
 
       window.addEventListener("resize", () => {
         camera.aspect = window.innerWidth / window.innerHeight;
