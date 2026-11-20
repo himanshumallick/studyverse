@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STUDYVERSE — CBSE Class 10</title>
+  <title>STUDYVERSE — CBSE Class 10 Academic Studio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,14 +15,15 @@
   <style>
     :root {
       --bg-obsidian: #05070d;
-      --bg-card: rgba(12, 18, 30, 0.78);
+      --bg-panel: rgba(11, 16, 28, 0.82);
+      --bg-card: rgba(16, 23, 39, 0.78);
       --border-subtle: rgba(255, 255, 255, 0.08);
       --border-gold: rgba(229, 193, 88, 0.36);
       --gold: #e5c158;
       --gold-soft: rgba(229, 193, 88, 0.14);
-      --maths-color: #3b82f6;
-      --science-color: #10b981;
-      --sst-color: #f59e0b;
+      --maths-blue: #3b82f6;
+      --science-emerald: #10b981;
+      --sst-amber: #f59e0b;
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -43,9 +44,9 @@
     body {
       background-color: var(--bg-obsidian);
       background-image:
-        radial-gradient(circle at 20% 18%, rgba(59, 130, 246, 0.07), transparent 44%),
-        radial-gradient(circle at 80% 24%, rgba(229, 193, 88, 0.08), transparent 46%),
-        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.06), transparent 50%);
+        radial-gradient(circle at 18% 15%, rgba(59, 130, 246, 0.07), transparent 44%),
+        radial-gradient(circle at 82% 24%, rgba(229, 193, 88, 0.08), transparent 46%),
+        radial-gradient(circle at 50% 86%, rgba(16, 185, 129, 0.06), transparent 52%);
       color: var(--text-primary);
       font-family: var(--font-sans);
       min-height: 100vh;
@@ -53,25 +54,24 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Clean Fullscreen 3D Canvas */
-    #three-center-stage {
+    /* Fullscreen Interactive 3D Stage */
+    #three-stage {
       position: fixed;
       inset: 0;
       z-index: 0;
       pointer-events: none;
     }
 
-    /* Clean Subtle Vignette */
     .stage-vignette {
       position: fixed;
       inset: 0;
       z-index: 1;
       pointer-events: none;
-      background: radial-gradient(circle at 50% 48%, transparent 36%, rgba(5, 7, 13, 0.84) 100%);
+      background: radial-gradient(circle at 50% 48%, transparent 36%, rgba(5, 7, 13, 0.85) 100%);
     }
 
-    /* Top Scroll Progress Line */
-    .scroll-track {
+    /* Top Scroll Progress Rail */
+    .scroll-rail {
       position: fixed;
       top: 0;
       left: 0;
@@ -84,12 +84,12 @@
     .scroll-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, var(--maths-color), var(--gold), var(--science-color));
+      background: linear-gradient(90deg, var(--maths-blue), var(--gold), var(--science-emerald));
       box-shadow: 0 0 12px rgba(229, 193, 88, 0.65);
     }
 
-    /* Side Rail Label: BEST MADE FOR CLASS 10 CBSE STUDENT */
-    .side-badge {
+    /* Side Vertical Callout */
+    .side-rail-badge {
       position: fixed;
       right: 16px;
       top: 50%;
@@ -101,18 +101,18 @@
       gap: 10px;
       padding: 14px 8px;
       border-radius: 999px;
-      background: rgba(9, 13, 24, 0.72);
+      background: rgba(9, 13, 24, 0.74);
       border: 1px solid var(--border-gold);
       backdrop-filter: blur(16px);
     }
 
     @media (max-width: 1024px) {
-      .side-badge {
+      .side-rail-badge {
         display: none;
       }
     }
 
-    .side-badge-text {
+    .side-rail-text {
       writing-mode: vertical-rl;
       text-orientation: mixed;
       font-family: var(--font-mono);
@@ -123,7 +123,7 @@
       color: var(--gold);
     }
 
-    .side-dot {
+    .side-rail-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
@@ -131,23 +131,23 @@
       box-shadow: 0 0 8px var(--gold);
     }
 
-    /* Layout Container */
-    .page-container {
+    /* Page Container */
+    .app-shell {
       position: relative;
       z-index: 10;
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 20px 22px 120px;
     }
 
-    /* Top Navigation Bar */
-    .nav-bar {
+    /* Sticky Glass Header */
+    .top-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
       padding: 13px 20px;
-      background: rgba(9, 13, 24, 0.74);
+      background: rgba(9, 13, 24, 0.76);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: 18px;
@@ -157,14 +157,14 @@
       z-index: 50;
     }
 
-    .brand-group {
+    .brand-wrap {
       display: flex;
       align-items: center;
       gap: 11px;
       cursor: pointer;
     }
 
-    .brand-logo-box {
+    .brand-icon {
       width: 36px;
       height: 36px;
       border-radius: 10px;
@@ -178,13 +178,13 @@
       color: var(--gold);
     }
 
-    .brand-name {
+    .brand-title {
       font-weight: 800;
       font-size: 1.12rem;
       letter-spacing: 0.04em;
     }
 
-    .class-chip {
+    .class-badge {
       font-family: var(--font-mono);
       font-size: 0.66rem;
       color: var(--gold);
@@ -194,14 +194,14 @@
       border-radius: 99px;
     }
 
-    .nav-menu {
+    .nav-items {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .nav-link-btn {
+    .nav-btn {
       position: relative;
       background: transparent;
       border: none;
@@ -214,12 +214,12 @@
       transition: color 0.25s ease;
     }
 
-    .nav-link-btn:hover,
-    .nav-link-btn.active {
+    .nav-btn:hover,
+    .nav-btn.active {
       color: var(--text-primary);
     }
 
-    .nav-pill-bg {
+    .nav-active-bg {
       position: absolute;
       inset: 0;
       border-radius: 10px;
@@ -228,7 +228,7 @@
       z-index: -1;
     }
 
-    .auth-action-btn {
+    .dashboard-trigger {
       background: linear-gradient(135deg, rgba(229, 193, 88, 0.18), rgba(229, 193, 88, 0.05));
       border: 1px solid var(--border-gold);
       color: var(--gold);
@@ -239,23 +239,22 @@
       cursor: pointer;
     }
 
-    /* Centerpiece Hero with Bag in Middle */
-    .center-hero {
+    /* Hero Section with 3D Bag in Center */
+    .hero-stage {
       min-height: 76vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       text-align: center;
-      padding: 18px 0 42px;
+      padding: 16px 0 44px;
     }
 
-    .hero-top-copy {
-      max-width: 720px;
-      z-index: 2;
+    .hero-copy {
+      max-width: 740px;
     }
 
-    .hero-kicker {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -267,15 +266,15 @@
       margin-bottom: 14px;
     }
 
-    .hero-headline {
-      font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+    .hero-title {
+      font-size: clamp(2.4rem, 5.2vw, 4.15rem);
       font-weight: 800;
       line-height: 1.06;
       letter-spacing: -0.03em;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
-    .hero-headline .gold-serif {
+    .hero-title .serif-gold {
       font-family: var(--font-serif);
       font-style: italic;
       font-weight: 700;
@@ -283,59 +282,52 @@
       font-size: 1.08em;
     }
 
-    .hero-subtitle {
+    .hero-desc {
       font-size: 1rem;
       color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 560px;
+      line-height: 1.62;
+      max-width: 580px;
       margin: 0 auto;
     }
 
-    /* Middle Interactive Bag & Reference Strip */
-    .middle-bag-dock {
-      margin-top: 26px;
-      background: rgba(9, 14, 25, 0.72);
+    .hero-dock {
+      margin-top: 24px;
+      background: rgba(9, 14, 25, 0.74);
       border: 1px solid var(--border-subtle);
       backdrop-filter: blur(18px);
-      border-radius: 22px;
-      padding: 16px 20px;
+      border-radius: 20px;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 18px;
       flex-wrap: wrap;
-      z-index: 2;
     }
 
-    .mini-ref-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .mini-ref-img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.94);
-      padding: 3px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .scroll-cue-btn {
+    .btn-gold {
       background: linear-gradient(135deg, #f3d06b, #c89d2c);
       color: #07090f;
       border: none;
-      padding: 11px 20px;
+      padding: 12px 22px;
       border-radius: 12px;
       font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       cursor: pointer;
       box-shadow: 0 10px 24px rgba(229, 193, 88, 0.24);
     }
 
-    /* 21st.dev Spotlight Cards (More Features Coming Soon + Videos Live) */
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.86rem;
+      cursor: pointer;
+    }
+
+    /* Section Containers */
     .section-block {
       margin-bottom: 76px;
     }
@@ -349,7 +341,7 @@
       margin-bottom: 22px;
     }
 
-    .sec-tag {
+    .sec-kicker {
       font-family: var(--font-mono);
       font-size: 0.7rem;
       color: var(--gold);
@@ -358,78 +350,15 @@
       margin-bottom: 5px;
     }
 
-    .sec-heading {
+    .sec-title {
       font-size: clamp(1.55rem, 3vw, 2.15rem);
       font-weight: 800;
       letter-spacing: -0.02em;
     }
 
-    .spotlight-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-
-    .spotlight-box {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 22px;
-      padding: 22px;
-      overflow: hidden;
-      backdrop-filter: blur(18px);
-      cursor: pointer;
-    }
-
-    .spotlight-box::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        380px circle at var(--x, 50%) var(--y, 50%),
-        rgba(229, 193, 88, 0.15),
-        transparent 46%
-      );
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-    }
-
-    .spotlight-box:hover::before {
-      opacity: 1;
-    }
-
-    .spotlight-box:hover {
-      border-color: var(--border-gold);
-    }
-
-    .pill-live {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      margin-bottom: 12px;
-    }
-
-    .pill-soon {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      padding: 4px 10px;
-      border-radius: 99px;
-      background: rgba(148, 163, 184, 0.1);
-      color: #cbd5e1;
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      margin-bottom: 12px;
-    }
-
-    /* 3 Books Emerged From Bag -> Chapters -> 3 Videos */
-    .bag-books-panel {
-      background: rgba(9, 13, 23, 0.84);
+    /* 3 Subject Books -> Chapters -> Videos & Quiz Vault */
+    .study-vault {
+      background: var(--bg-panel);
       border: 1px solid var(--border-subtle);
       border-radius: 28px;
       padding: 30px;
@@ -437,7 +366,7 @@
       box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
     }
 
-    .books-3-grid {
+    .subjects-trio {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
@@ -445,12 +374,12 @@
     }
 
     @media (max-width: 820px) {
-      .books-3-grid {
+      .subjects-trio {
         grid-template-columns: 1fr;
       }
     }
 
-    .subject-book-btn {
+    .subject-book-card {
       position: relative;
       border-radius: 20px;
       padding: 24px;
@@ -462,7 +391,7 @@
       overflow: hidden;
     }
 
-    .left-color-bar {
+    .spine-accent {
       position: absolute;
       left: 0;
       top: 0;
@@ -470,14 +399,15 @@
       width: 6px;
     }
 
-    .chapters-reveal-grid {
+    /* Chapters Grid */
+    .chapters-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
       gap: 14px;
       margin-bottom: 26px;
     }
 
-    .chapter-tile {
+    .chapter-card {
       background: rgba(13, 19, 32, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 16px;
@@ -489,32 +419,34 @@
       gap: 10px;
     }
 
-    .chapter-tile.active-ch {
+    .chapter-card.selected {
       border-color: var(--gold);
       background: linear-gradient(145deg, rgba(229, 193, 88, 0.13), rgba(15, 23, 42, 0.96));
     }
 
-    .videos-panel {
+    /* Chapter Workspace: Videos + Post-Watch Quiz */
+    .chapter-workspace {
       background: rgba(5, 8, 15, 0.92);
       border: 1px solid var(--border-gold);
       border-radius: 22px;
       padding: 24px;
     }
 
-    .videos-grid {
+    .videos-3-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       margin-top: 18px;
+      margin-bottom: 28px;
     }
 
     @media (max-width: 900px) {
-      .videos-grid {
+      .videos-3-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .vid-card {
+    .video-item {
       background: rgba(14, 20, 34, 0.94);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
@@ -523,21 +455,21 @@
       flex-direction: column;
     }
 
-    .vid-thumb-box {
+    .thumb-box {
       position: relative;
       aspect-ratio: 16 / 9;
       background: #0b1120;
       overflow: hidden;
     }
 
-    .vid-thumb-box img {
+    .thumb-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .vid-channel-tag {
+    .channel-pill {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -551,7 +483,7 @@
       border-radius: 99px;
     }
 
-    .vid-card-body {
+    .video-content {
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -559,7 +491,7 @@
       flex: 1;
     }
 
-    .vid-card-foot {
+    .video-actions {
       margin-top: auto;
       display: flex;
       align-items: center;
@@ -568,14 +500,14 @@
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .yt-link {
+    .watch-anchor {
       font-size: 0.8rem;
       font-weight: 700;
       color: var(--gold);
       text-decoration: none;
     }
 
-    .done-btn {
+    .watch-check-btn {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--text-primary);
@@ -586,14 +518,132 @@
       cursor: pointer;
     }
 
-    .done-btn.watched {
+    .watch-check-btn.done {
       background: rgba(16, 185, 129, 0.18);
       border-color: rgba(16, 185, 129, 0.45);
       color: #34d399;
     }
 
-    /* Modal */
-    .modal-overlay {
+    /* Post-Watch Chapter Quiz Box */
+    .quiz-panel {
+      background: rgba(12, 18, 32, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .quiz-q-block {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .quiz-opt-btn {
+      text-align: left;
+      padding: 11px 14px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-opt-btn:hover {
+      border-color: rgba(229, 193, 88, 0.45);
+    }
+
+    .quiz-opt-btn.picked {
+      border-color: var(--gold);
+      background: rgba(229, 193, 88, 0.14);
+    }
+
+    .quiz-opt-btn.correct {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.18);
+      color: #6ee7b7;
+    }
+
+    .quiz-opt-btn.wrong {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.16);
+      color: #fca5a5;
+    }
+
+    /* 21st.dev Spotlight Feature Cards */
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .spotlight-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 22px;
+      padding: 22px;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      cursor: pointer;
+    }
+
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        380px circle at var(--x, 50%) var(--y, 50%),
+        rgba(229, 193, 88, 0.15),
+        transparent 46%
+      );
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    .spotlight-card:hover {
+      border-color: var(--border-gold);
+    }
+
+    .tag-live {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .tag-soon {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(148, 163, 184, 0.1);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      margin-bottom: 12px;
+    }
+
+    /* Modal: Login / Sign Up & Genuine Standing Dashboard */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
       z-index: 90;
@@ -605,16 +655,18 @@
       padding: 20px;
     }
 
-    .modal-box {
+    .modal-sheet {
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       background: #0c111e;
       border: 1px solid var(--border-gold);
       border-radius: 24px;
       padding: 28px;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .modal-input {
+    .text-input {
       width: 100%;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -627,7 +679,22 @@
       margin-bottom: 14px;
     }
 
-    .bar-bg {
+    .stat-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .progress-bg {
       width: 100%;
       height: 8px;
       background: rgba(255, 255, 255, 0.08);
@@ -636,7 +703,7 @@
       margin-top: 6px;
     }
 
-    .bar-fill {
+    .progress-fill {
       height: 100%;
       border-radius: 99px;
       transition: width 0.35s ease;
@@ -644,14 +711,14 @@
   </style>
 </head>
 <body>
-  <canvas id="three-center-stage"></canvas>
+  <canvas id="three-stage"></canvas>
   <div class="stage-vignette"></div>
-  <div class="scroll-track"><div class="scroll-fill" id="scrollProgressFill"></div></div>
+  <div class="scroll-rail"><div class="scroll-fill" id="topScrollBar"></div></div>
 
-  <aside class="side-badge" aria-label="Best made for Class 10 CBSE student">
-    <span class="side-dot"></span>
-    <span class="side-badge-text">BEST MADE FOR CLASS 10 CBSE STUDENT</span>
-    <span class="side-dot"></span>
+  <aside class="side-rail-badge" aria-label="Best made for Class 10 CBSE student">
+    <span class="side-rail-dot"></span>
+    <span class="side-rail-text">BEST MADE FOR CLASS 10 CBSE STUDENT</span>
+    <span class="side-rail-dot"></span>
   </aside>
 
   <div id="root"></div>
@@ -667,96 +734,133 @@
       useSpring
     } from "https://esm.sh/framer-motion@11.11.11?deps=react@18.3.1,react-dom@18.3.1";
 
-    const SUBJECTS_DATA = {
+    // Genuine CBSE Class 10 Curriculum: 3 Main Subjects, Top 3 Curated Videos per Chapter + Post-Watch Quiz
+    const SYLLABUS_DATA = {
       maths: {
         id: "maths",
-        title: "Maths",
-        fullTitle: "Mathematics",
+        title: "Mathematics",
+        code: "CBSE CLASS 10 • CODE 041",
         color: "#3b82f6",
         glow: "rgba(59, 130, 246, 0.25)",
-        desc: "NCERT Class 10 chapters, board problem solving & key formulas",
+        desc: "NCERT chapters, board problem-solving lectures, and post-watch concept quizzes",
         chapters: [
           {
             id: "m1",
-            code: "CH 01",
+            code: "CHAPTER 01",
             name: "Real Numbers",
             videos: [
               {
                 channel: "Maths By Shobhit Nirwan",
-                label: "ONE-SHOT",
+                tag: "ONE-SHOT",
                 title: "Real Numbers Class 10th Full Chapter One Shot | NCERT + Board Questions",
                 videoId: "fW7H8k2_5rU",
                 url: "https://www.youtube.com/results?search_query=Real+Numbers+Class+10+Shobhit+Nirwan+One+Shot"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "RAPID REVISION",
+                tag: "RAPID REVISION",
                 title: "Class 10th REAL NUMBERS in 20 Minutes! | Class 10 Maths Rapid Revision",
                 videoId: "ZCcVfJ8f32E",
                 url: "https://www.youtube.com/watch?v=ZCcVfJ8f32E"
               },
               {
                 channel: "Next Toppers",
-                label: "CONCEPT + PYQs",
+                tag: "CONCEPT + PYQs",
                 title: "Real Numbers Complete Chapter | Class 10 Maths Board Booster",
                 videoId: "2aXOJnmK70c",
                 url: "https://www.youtube.com/results?search_query=Real+Numbers+Class+10+Next+Toppers"
+              }
+            ],
+            quiz: [
+              {
+                q: "If HCF(26, 91) = 13, what is LCM(26, 91)?",
+                options: ["182", "2366", "91", "26"],
+                answer: 0
+              },
+              {
+                q: "The decimal expansion of a rational number with denominator 2³ × 5² terminates after how many decimal places?",
+                options: ["2 places", "3 places", "5 places", "Non-terminating"],
+                answer: 1
               }
             ]
           },
           {
             id: "m2",
-            code: "CH 02",
+            code: "CHAPTER 02",
             name: "Polynomials",
             videos: [
               {
                 channel: "Maths By Shobhit Nirwan",
-                label: "BOARD ONE-SHOT",
+                tag: "BOARD ONE-SHOT",
                 title: "Hum Nahi Rukne Wale !! - Class 10th Polynomials One Shot",
                 videoId: "Hnoe8hNPFr8",
                 url: "https://www.youtube.com/watch?v=Hnoe8hNPFr8"
               },
               {
                 channel: "Next Toppers",
-                label: "COMPLETE NCERT",
+                tag: "COMPLETE NCERT",
                 title: "Polynomials ONE SHOT | Class 10 Maths Chapter 2 | Complete Chapter",
                 videoId: "kiegUjhq8Ao",
                 url: "https://www.youtube.com/watch?v=kiegUjhq8Ao"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "MIND MAP",
+                tag: "MIND MAP",
                 title: "Polynomials in 25 Minutes | Class 10 Maths Board Revision",
                 videoId: "QdP6DVlZo-0",
                 url: "https://www.youtube.com/results?search_query=Polynomials+Class+10+Physics+Wallah+Foundation"
+              }
+            ],
+            quiz: [
+              {
+                q: "For a quadratic polynomial ax² + bx + c (a ≠ 0), the sum of zeroes α + β equals:",
+                options: ["c / a", "-b / a", "b / a", "-c / a"],
+                answer: 1
+              },
+              {
+                q: "What is the maximum number of zeroes a quadratic polynomial can have?",
+                options: ["1", "2", "3", "Infinite"],
+                answer: 1
               }
             ]
           },
           {
             id: "m4",
-            code: "CH 04",
+            code: "CHAPTER 04",
             name: "Quadratic Equations",
             videos: [
               {
                 channel: "Maths By Shobhit Nirwan",
-                label: "BOARD ONE-SHOT",
+                tag: "BOARD ONE-SHOT",
                 title: "Class 10th Quadratic Equations One Shot | Class 10 Maths Chapter 4",
                 videoId: "t8fUmrKnvEM",
                 url: "https://www.youtube.com/watch?v=t8fUmrKnvEM"
               },
               {
                 channel: "Next Toppers",
-                label: "COMPLETE ONE-SHOT",
+                tag: "COMPLETE ONE-SHOT",
                 title: "Quadratic Equations ONE SHOT | Class 10 Maths Chapter 4",
                 videoId: "hayFtYnAB-Q",
                 url: "https://www.youtube.com/watch?v=hayFtYnAB-Q"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "WORD PROBLEMS",
+                tag: "WORD PROBLEMS",
                 title: "Quadratic Equations Complete Chapter | Class 10 Maths",
                 videoId: "KcH4jhNg_fA",
                 url: "https://www.youtube.com/results?search_query=Quadratic+Equations+Class+10+Physics+Wallah"
+              }
+            ],
+            quiz: [
+              {
+                q: "A quadratic equation ax² + bx + c = 0 has two equal real roots when:",
+                options: ["b² - 4ac > 0", "b² - 4ac = 0", "b² - 4ac < 0", "b = 0"],
+                answer: 1
+              },
+              {
+                q: "What are the roots of x² - 5x + 6 = 0?",
+                options: ["2 and 3", "-2 and -3", "1 and 6", "-1 and -6"],
+                answer: 0
               }
             ]
           }
@@ -766,92 +870,128 @@
       science: {
         id: "science",
         title: "Science",
-        fullTitle: "Science",
+        code: "CBSE CLASS 10 • CODE 086",
         color: "#10b981",
         glow: "rgba(16, 185, 129, 0.25)",
-        desc: "Physics, Chemistry & Biology chapters with clear visual explanations",
+        desc: "Physics, Chemistry & Biology lectures followed by NCERT concept quizzes",
         chapters: [
           {
             id: "s1",
-            code: "CH 01",
+            code: "CHAPTER 01",
             name: "Chemical Reactions and Equations",
             videos: [
               {
                 channel: "Exphub 9th & 10th",
-                label: "COMPLETE NCERT",
+                tag: "COMPLETE NCERT",
                 title: "Chemical Reactions and Equations Complete Chapter | Class 10 Science",
                 videoId: "qKl4mieovu0",
                 url: "https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Exphub+Class+10"
               },
               {
                 channel: "Sunlike Study Science",
-                label: "ANIMATED VISUALS",
+                tag: "ANIMATED VISUALS",
                 title: "Chemical Reactions and Equations Class 10 Full Chapter | Animated",
                 videoId: "PqXvVt-MOlo",
                 url: "https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Sunlike+Study"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "ONE-SHOT REVISION",
+                tag: "ONE-SHOT REVISION",
                 title: "Chemical Reactions & Equations in 30 Minutes | Class 10 Chemistry",
                 videoId: "BuNa0DuhqJs",
                 url: "https://www.youtube.com/results?search_query=Chemical+Reactions+and+Equations+Physics+Wallah+Class+10"
+              }
+            ],
+            quiz: [
+              {
+                q: "When magnesium ribbon burns in air with a dazzling white flame, it forms:",
+                options: ["Magnesium nitride", "Magnesium oxide", "Magnesium carbonate", "Magnesium hydroxide"],
+                answer: 1
+              },
+              {
+                q: "Which type of reaction occurs when calcium oxide reacts vigorously with water to form slaked lime?",
+                options: ["Endothermic decomposition", "Exothermic combination", "Double displacement", "Reduction"],
+                answer: 1
               }
             ]
           },
           {
             id: "s5",
-            code: "CH 05",
+            code: "CHAPTER 05",
             name: "Life Processes",
             videos: [
               {
                 channel: "Sunlike Study Science",
-                label: "ANIMATED CHAPTER",
+                tag: "ANIMATED CHAPTER",
                 title: "Life Processes | Class 10 Science Chapter 5 | Full Chapter | CBSE",
                 videoId: "PqXvVt-MOlo",
                 url: "https://www.youtube.com/watch?v=PqXvVt-MOlo"
               },
               {
                 channel: "Exphub 9th & 10th",
-                label: "COMPLETE NCERT",
+                tag: "COMPLETE NCERT",
                 title: "Life Processes Complete Chapter | CLASS 10 Science | NCERT Covered",
                 videoId: "2anxgj0TUgQ",
                 url: "https://www.youtube.com/watch?v=2anxgj0TUgQ"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "RAPID REVISION",
+                tag: "RAPID REVISION",
                 title: "Life Processes in 30 Minutes | Class 10 Biology Rapid Revision",
                 videoId: "5YOf-Rm4B7I",
                 url: "https://www.youtube.com/results?search_query=Life+Processes+Class+10+Physics+Wallah"
+              }
+            ],
+            quiz: [
+              {
+                q: "The breakdown of pyruvate to give carbon dioxide, water and energy takes place in:",
+                options: ["Cytoplasm", "Mitochondria", "Chloroplast", "Nucleus"],
+                answer: 1
+              },
+              {
+                q: "Which vessels transport water and minerals from roots to aerial parts of a plant?",
+                options: ["Phloem", "Xylem", "Sieve tubes", "Companion cells"],
+                answer: 1
               }
             ]
           },
           {
             id: "s9",
-            code: "CH 09",
+            code: "CHAPTER 09",
             name: "Light – Reflection and Refraction",
             videos: [
               {
                 channel: "Exphub 9th & 10th",
-                label: "RAY DIAGRAMS",
+                tag: "RAY DIAGRAMS",
                 title: "Light Reflection and Refraction Complete Chapter | Class 10 Physics",
                 videoId: "4YESpXn1i9I",
                 url: "https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Exphub+Class+10"
               },
               {
                 channel: "Sunlike Study Science",
-                label: "VISUAL OPTICS",
+                tag: "VISUAL OPTICS",
                 title: "Light Reflection and Refraction Class 10 Full Chapter | Animated",
                 videoId: "8iVoxtEYJeM",
                 url: "https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Sunlike+Study"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "ONE-SHOT PHYSICS",
+                tag: "ONE-SHOT PHYSICS",
                 title: "Light Reflection & Refraction Complete Chapter | Class 10 Science",
                 videoId: "4YESpXn1i9I",
                 url: "https://www.youtube.com/results?search_query=Light+Reflection+and+Refraction+Physics+Wallah+Class+10"
+              }
+            ],
+            quiz: [
+              {
+                q: "What is the SI unit of power of a lens?",
+                options: ["Watt", "Dioptre", "Meter", "Hertz"],
+                answer: 1
+              },
+              {
+                q: "Which mirror is used by dentists to see a large image of a patient's teeth?",
+                options: ["Convex mirror", "Plane mirror", "Concave mirror", "Parabolic convex mirror"],
+                answer: 2
               }
             ]
           }
@@ -861,64 +1001,88 @@
       sst: {
         id: "sst",
         title: "Social Science",
-        fullTitle: "Social Science",
+        code: "CBSE CLASS 10 • CODE 087",
         color: "#f59e0b",
         glow: "rgba(245, 158, 11, 0.25)",
-        desc: "History, Geography, Civics & Economics chapters for Class 10",
+        desc: "History, Geography, Civics & Economics chapters with post-watch quizzes",
         chapters: [
           {
             id: "sst1",
-            code: "HIST • CH 01",
+            code: "HISTORY • CH 01",
             name: "The Rise of Nationalism in Europe",
             videos: [
               {
                 channel: "Sunlike Study",
-                label: "FULL CHAPTER",
+                tag: "FULL CHAPTER",
                 title: "The Rise of Nationalism in Europe Class 10 Full Chapter",
                 videoId: "ksTPzTWUb6o",
                 url: "https://www.youtube.com/watch?v=ksTPzTWUb6o"
               },
               {
                 channel: "Next Toppers",
-                label: "NCERT LINE BY LINE",
+                tag: "NCERT LINE BY LINE",
                 title: "The Rise of Nationalism in Europe Complete Chapter | Class 10 History",
                 videoId: "HP1kdhvZGzc",
                 url: "https://www.youtube.com/results?search_query=Rise+of+Nationalism+in+Europe+Next+Toppers"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "ONE-SHOT REVISION",
+                tag: "ONE-SHOT REVISION",
                 title: "The Rise of Nationalism in Europe ONE SHOT | Class 10 SST Rapid Revision",
                 videoId: "xBF9CWzDNmE",
                 url: "https://www.youtube.com/watch?v=xBF9CWzDNmE"
+              }
+            ],
+            quiz: [
+              {
+                q: "Who prepared a series of four prints visualising a world of 'democratic and social Republics' in 1848?",
+                options: ["Giuseppe Mazzini", "Frédéric Sorrieu", "Otto von Bismarck", "Duke Metternich"],
+                answer: 1
+              },
+              {
+                q: "Which treaty recognized Greece as an independent nation in 1832?",
+                options: ["Treaty of Vienna", "Treaty of Constantinople", "Treaty of Versailles", "Treaty of Paris"],
+                answer: 1
               }
             ]
           },
           {
             id: "sst2",
-            code: "HIST • CH 02",
+            code: "HISTORY • CH 02",
             name: "Nationalism in India",
             videos: [
               {
                 channel: "Sunlike Study",
-                label: "FULL CHAPTER",
+                tag: "FULL CHAPTER",
                 title: "Nationalism in India Class 10 Full Chapter | Class 10 History Chapter 2",
                 videoId: "n96yn8IfE-4",
                 url: "https://www.youtube.com/watch?v=n96yn8IfE-4"
               },
               {
                 channel: "Next Toppers",
-                label: "10-MIN RAPID",
+                tag: "10-MIN RAPID",
                 title: "Nationalism in INDIA | 10 Minutes Rapid Revision | Class 10 SST",
                 videoId: "HP1kdhvZGzc",
                 url: "https://www.youtube.com/watch?v=HP1kdhvZGzc"
               },
               {
                 channel: "Physics Wallah Foundation",
-                label: "TIMELINE + MAP",
+                tag: "TIMELINE + MAP",
                 title: "Nationalism in India Complete Chapter | Class 10 History",
                 videoId: "UFC4nDESV30",
                 url: "https://www.youtube.com/results?search_query=Nationalism+in+India+Physics+Wallah+Class+10"
+              }
+            ],
+            quiz: [
+              {
+                q: "In which year did Mahatma Gandhi launch the Non-Cooperation-Khilafat Movement?",
+                options: ["January 1921", "April 1919", "March 1930", "August 1942"],
+                answer: 0
+              },
+              {
+                q: "Where did the Jallianwala Bagh incident take place on 13 April 1919?",
+                options: ["Lahore", "Amritsar", "Champaran", "Kheda"],
+                answer: 1
               }
             ]
           }
@@ -926,29 +1090,29 @@
       }
     };
 
-    // 21st.dev Spotlight Card with scroll-triggered reveal motion
+    // 21st.dev Spotlight Card with Scroll Reveal
     function SpotlightCard({ children, onClick, index = 0 }) {
       const ref = useRef(null);
-      const onPointerMove = (e) => {
+      const handleMove = (e) => {
         if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        ref.current.style.setProperty("--x", `${e.clientX - rect.left}px`);
-        ref.current.style.setProperty("--y", `${e.clientY - rect.top}px`);
+        const r = ref.current.getBoundingClientRect();
+        ref.current.style.setProperty("--x", `${e.clientX - r.left}px`);
+        ref.current.style.setProperty("--y", `${e.clientY - r.top}px`);
       };
 
       return React.createElement(
         motion.div,
         {
           ref,
-          onPointerMove,
+          onPointerMove: handleMove,
           onClick,
-          initial: { opacity: 0, y: 28, scale: 0.97 },
+          initial: { opacity: 0, y: 26, scale: 0.97 },
           whileInView: { opacity: 1, y: 0, scale: 1 },
           viewport: { once: true, amount: "some" },
           transition: { duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] },
           whileHover: { y: -5, scale: 1.015 },
           whileTap: { scale: 0.985 },
-          className: "spotlight-box"
+          className: "spotlight-card"
         },
         children
       );
@@ -958,28 +1122,39 @@
       const [activeNav, setActiveNav] = useState("videos");
       const [selectedSubject, setSelectedSubject] = useState("maths");
       const [selectedChapterId, setSelectedChapterId] = useState("m1");
-      const [modalOpen, setModalOpen] = useState(false);
-      const [modalMode, setModalMode] = useState("login");
-      const [user, setUser] = useState(() => {
-        const stored = localStorage.getItem("sv_c10_user");
-        return stored ? JSON.parse(stored) : null;
-      });
+
+      // Persistent user progress (zero fake data)
       const [watchedVideos, setWatchedVideos] = useState(() => {
-        const stored = localStorage.getItem("sv_c10_watched");
-        return stored ? JSON.parse(stored) : [];
+        const raw = localStorage.getItem("sv_c10_watched_v2");
+        return raw ? JSON.parse(raw) : [];
+      });
+      const [quizAnswers, setQuizAnswers] = useState(() => {
+        const raw = localStorage.getItem("sv_c10_quiz_v2");
+        return raw ? JSON.parse(raw) : {};
+      });
+      const [quizSubmitted, setQuizSubmitted] = useState(() => {
+        const raw = localStorage.getItem("sv_c10_quiz_sub_v2");
+        return raw ? JSON.parse(raw) : {};
       });
 
-      const [nameVal, setNameVal] = useState("");
-      const [emailVal, setEmailVal] = useState("");
-      const [goalVal, setGoalVal] = useState("CBSE Class 10 Boards");
+      // Auth & Dashboard Modal State
+      const [modalOpen, setModalOpen] = useState(false);
+      const [modalMode, setModalMode] = useState("login");
+      const [studentAccount, setStudentAccount] = useState(() => {
+        const raw = localStorage.getItem("sv_c10_account_v2");
+        return raw ? JSON.parse(raw) : null;
+      });
+      const [nameInput, setNameInput] = useState("");
+      const [emailInput, setEmailInput] = useState("");
+      const [targetInput, setTargetInput] = useState("CBSE Class 10 Boards");
 
       const { scrollYProgress } = useScroll();
       const smoothScroll = useSpring(scrollYProgress, { stiffness: 135, damping: 28 });
 
       useEffect(() => {
         const unsub = smoothScroll.on("change", (val) => {
-          const el = document.getElementById("scrollProgressFill");
-          if (el) el.style.width = `${val * 100}%`;
+          const bar = document.getElementById("topScrollBar");
+          if (bar) bar.style.width = `${val * 100}%`;
           window.__CENTER_BAG_SCROLL__ = val;
         });
         return () => unsub();
@@ -989,16 +1164,42 @@
         window.__SELECTED_BOOK__ = selectedSubject;
       }, [selectedSubject]);
 
-      const openBookAndRevealChapters = (subjKey) => {
+      const selectSubjectBook = (subjKey) => {
         setSelectedSubject(subjKey);
-        const firstCh = SUBJECTS_DATA[subjKey].chapters[0];
-        if (firstCh) setSelectedChapterId(firstCh.id);
+        const first = SYLLABUS_DATA[subjKey].chapters[0];
+        if (first) setSelectedChapterId(first.id);
       };
 
-      const toggleVideoWatched = (key) => {
+      const toggleWatched = (vidKey) => {
         setWatchedVideos((prev) => {
-          const next = prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key];
-          localStorage.setItem("sv_c10_watched", JSON.stringify(next));
+          const next = prev.includes(vidKey) ? prev.filter((x) => x !== vidKey) : [...prev, vidKey];
+          localStorage.setItem("sv_c10_watched_v2", JSON.stringify(next));
+          return next;
+        });
+      };
+
+      const pickQuizOption = (chapterId, qIndex, optIndex) => {
+        if (quizSubmitted[chapterId]) return;
+        setQuizAnswers((prev) => {
+          const next = { ...prev, [`${chapterId}-${qIndex}`]: optIndex };
+          localStorage.setItem("sv_c10_quiz_v2", JSON.stringify(next));
+          return next;
+        });
+      };
+
+      const submitChapterQuiz = (chapterId) => {
+        setQuizSubmitted((prev) => {
+          const next = { ...prev, [chapterId]: true };
+          localStorage.setItem("sv_c10_quiz_sub_v2", JSON.stringify(next));
+          return next;
+        });
+      };
+
+      const resetChapterQuiz = (chapterId) => {
+        setQuizSubmitted((prev) => {
+          const next = { ...prev };
+          delete next[chapterId];
+          localStorage.setItem("sv_c10_quiz_sub_v2", JSON.stringify(next));
           return next;
         });
       };
@@ -1006,28 +1207,52 @@
       const handleAuthSubmit = (e) => {
         e.preventDefault();
         const profile = {
-          name: nameVal.trim() || "Class 10 Student",
-          email: emailVal.trim() || "student@studyverse.in",
-          goal: goalVal
+          name: nameInput.trim() || "Class 10 Student",
+          email: emailInput.trim() || "student@studyverse.in",
+          target: targetInput
         };
-        setUser(profile);
-        localStorage.setItem("sv_c10_user", JSON.stringify(profile));
+        setStudentAccount(profile);
+        localStorage.setItem("sv_c10_account_v2", JSON.stringify(profile));
         setModalMode("dashboard");
       };
 
-      const handleLogout = () => {
-        localStorage.removeItem("sv_c10_user");
-        setUser(null);
+      const handleSignOut = () => {
+        localStorage.removeItem("sv_c10_account_v2");
+        setStudentAccount(null);
         setModalMode("login");
       };
 
-      const activeSubjObj = SUBJECTS_DATA[selectedSubject];
-      const activeChObj =
-        activeSubjObj.chapters.find((c) => c.id === selectedChapterId) || activeSubjObj.chapters[0];
+      const subjectObj = SYLLABUS_DATA[selectedSubject];
+      const chapterObj =
+        subjectObj.chapters.find((c) => c.id === selectedChapterId) || subjectObj.chapters[0];
 
-      const totalVids =
-        Object.values(SUBJECTS_DATA).reduce((acc, s) => acc + s.chapters.length, 0) * 3;
-      const totalPct = Math.round((watchedVideos.length / totalVids) * 100);
+      // Genuine Personal Metrics Calculation (no fake users or dummy leaderboards)
+      const allChapters = Object.values(SYLLABUS_DATA).flatMap((s) => s.chapters);
+      const totalVideos = allChapters.length * 3;
+      const totalQuizQuestions = allChapters.reduce((sum, ch) => sum + ch.quiz.length, 0);
+
+      let correctQuizCount = 0;
+      allChapters.forEach((ch) => {
+        if (quizSubmitted[ch.id]) {
+          ch.quiz.forEach((item, idx) => {
+            if (quizAnswers[`${ch.id}-${idx}`] === item.answer) correctQuizCount++;
+          });
+        }
+      });
+
+      const masteryPoints = watchedVideos.length * 10 + correctQuizCount * 15;
+      const maxPoints = totalVideos * 10 + totalQuizQuestions * 15;
+      const masteryPct = maxPoints > 0 ? Math.round((masteryPoints / maxPoints) * 100) : 0;
+
+      // Authentic Standing Tier based strictly on the student's own real completion
+      const standingTier =
+        masteryPct >= 80
+          ? "Board Vanguard (Tier I)"
+          : masteryPct >= 50
+          ? "Concept Scholar (Tier II)"
+          : masteryPct >= 20
+          ? "Active Learner (Tier III)"
+          : "Starter Cohort (Unranked — Complete lessons to build standing)";
 
       return React.createElement(
         React.Fragment,
@@ -1035,13 +1260,13 @@
 
         React.createElement(
           "div",
-          { className: "page-container" },
+          { className: "app-shell" },
 
-          // TOP NAVIGATION BAR
+          // TOP NAVIGATION
           React.createElement(
             motion.header,
             {
-              className: "nav-bar",
+              className: "top-nav",
               initial: { opacity: 0, y: -14 },
               animate: { opacity: 1, y: 0 },
               transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
@@ -1049,47 +1274,47 @@
             React.createElement(
               "div",
               {
-                className: "brand-group",
+                className: "brand-wrap",
                 onClick: () => window.scrollTo({ top: 0, behavior: "smooth" })
               },
-              React.createElement("div", { className: "brand-logo-box" }, "S"),
-              React.createElement("span", { className: "brand-name" }, "STUDYVERSE"),
-              React.createElement("span", { className: "class-chip" }, "CLASS 10")
+              React.createElement("div", { className: "brand-icon" }, "S"),
+              React.createElement("span", { className: "brand-title" }, "STUDYVERSE"),
+              React.createElement("span", { className: "class-badge" }, "CLASS 10 CBSE")
             ),
 
             React.createElement(
               "nav",
-              { className: "nav-menu" },
+              { className: "nav-items" },
               React.createElement(
                 "button",
                 {
-                  className: `nav-link-btn ${activeNav === "videos" ? "active" : ""}`,
+                  className: `nav-btn ${activeNav === "videos" ? "active" : ""}`,
                   onClick: () => {
                     setActiveNav("videos");
-                    document.getElementById("books-stage")?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" });
                   }
                 },
                 activeNav === "videos" &&
                   React.createElement(motion.span, {
-                    layoutId: "navActiveBg",
-                    className: "nav-pill-bg",
+                    layoutId: "activeNavPill",
+                    className: "nav-active-bg",
                     transition: { type: "spring", stiffness: 360, damping: 28 }
                   }),
-                "Videos"
+                "Videos & Quizzes"
               ),
               React.createElement(
                 "button",
                 {
-                  className: `nav-link-btn ${activeNav === "more" ? "active" : ""}`,
+                  className: `nav-btn ${activeNav === "more" ? "active" : ""}`,
                   onClick: () => {
                     setActiveNav("more");
-                    document.getElementById("more-features")?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("roadmap-features")?.scrollIntoView({ behavior: "smooth" });
                   }
                 },
                 activeNav === "more" &&
                   React.createElement(motion.span, {
-                    layoutId: "navActiveBg",
-                    className: "nav-pill-bg",
+                    layoutId: "activeNavPill",
+                    className: "nav-active-bg",
                     transition: { type: "spring", stiffness: 360, damping: 28 }
                   }),
                 "More Features"
@@ -1097,32 +1322,32 @@
               React.createElement(
                 "button",
                 {
-                  className: "auth-action-btn",
+                  className: "dashboard-trigger",
                   onClick: () => {
-                    setModalMode(user ? "dashboard" : "login");
+                    setModalMode(studentAccount ? "dashboard" : "login");
                     setModalOpen(true);
                   }
                 },
-                user ? `📊 ${user.name}` : "Login / Sign Up"
+                studentAccount ? `📊 ${studentAccount.name}` : "Login / Sign Up"
               )
             )
           ),
 
-          // CENTER HERO STAGE (BAG IN MIDDLE -> BOOKS EMERGE ON SCROLL)
+          // HERO STAGE WITH 3D BAG IN CENTER
           React.createElement(
             "section",
-            { className: "center-hero" },
+            { className: "hero-stage" },
             React.createElement(
               motion.div,
               {
-                className: "hero-top-copy",
+                className: "hero-copy",
                 initial: { opacity: 0, y: 22 },
                 animate: { opacity: 1, y: 0 },
                 transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] }
               },
               React.createElement(
                 "div",
-                { className: "hero-kicker" },
+                { className: "hero-eyebrow" },
                 React.createElement("span", {
                   style: {
                     width: 6,
@@ -1136,75 +1361,60 @@
               ),
               React.createElement(
                 "h1",
-                { className: "hero-headline" },
-                "Your ",
-                React.createElement("span", { className: "gold-serif" }, "Class 10"),
-                " Study Bag at the Center."
+                { className: "hero-title" },
+                "Unpack Your ",
+                React.createElement("span", { className: "serif-gold" }, "Class 10"),
+                " Curriculum in 3D."
               ),
               React.createElement(
                 "p",
-                { className: "hero-subtitle" },
-                "Scroll down to bring out the three colored books from the center bag—tap any book to reveal its chapters and open chapter-wise videos."
+                { className: "hero-desc" },
+                "Scroll to reveal Mathematics, Science, and Social Science from the center study bag. Open any book for top 3 chapter-specific lectures, take the post-watch quiz, and track your real standing."
               )
             ),
 
             React.createElement(
               motion.div,
               {
-                className: "middle-bag-dock",
+                className: "hero-dock",
                 initial: { opacity: 0, y: 20 },
                 animate: { opacity: 1, y: 0 },
-                transition: { duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }
+                transition: { duration: 0.7, delay: 0.14 }
               },
-              React.createElement(
-                "div",
-                { className: "mini-ref-group" },
-                React.createElement("img", {
-                  src: "ed2b3f958aa56928f5b1512b5e040bfe.jpg",
-                  alt: "Bag reference",
-                  className: "mini-ref-img"
-                }),
-                React.createElement("img", {
-                  src: "images.jfif",
-                  alt: "Book reference",
-                  className: "mini-ref-img"
-                }),
-                React.createElement(
-                  "div",
-                  { style: { textAlign: "left" } },
-                  React.createElement(
-                    "div",
-                    { style: { fontSize: "0.84rem", fontWeight: 700 } },
-                    "Center Bag + 3 Books"
-                  ),
-                  React.createElement(
-                    "div",
-                    { style: { fontSize: "0.74rem", color: "var(--text-secondary)" } },
-                    "Scroll to unpack • Click book to reveal chapters"
-                  )
-                )
-              ),
               React.createElement(
                 motion.button,
                 {
                   whileHover: { scale: 1.03 },
                   whileTap: { scale: 0.98 },
-                  className: "scroll-cue-btn",
+                  className: "btn-gold",
                   onClick: () =>
-                    document.getElementById("books-stage")?.scrollIntoView({ behavior: "smooth" })
+                    document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" })
                 },
-                "Scroll & Open Books ↓"
+                "Open Subject Books ↓"
+              ),
+              React.createElement(
+                motion.button,
+                {
+                  whileHover: { scale: 1.02 },
+                  whileTap: { scale: 0.98 },
+                  className: "btn-ghost",
+                  onClick: () => {
+                    setModalMode(studentAccount ? "dashboard" : "signup");
+                    setModalOpen(true);
+                  }
+                },
+                studentAccount ? "View Standing Dashboard" : "Create Account & Track Standing"
               )
             )
           ),
 
-          // SECTION 2: 3 BOOKS FROM BAG -> REVEAL CHAPTERS -> 3 VIDEOS
+          // INTERACTIVE 3-BOOK VAULT -> CHAPTERS -> TOP 3 VIDEOS -> POST-WATCH QUIZ
           React.createElement(
             motion.section,
             {
-              id: "books-stage",
-              className: "section-block bag-books-panel",
-              initial: { opacity: 0, y: 36 },
+              id: "books-vault",
+              className: "section-block study-vault",
+              initial: { opacity: 0, y: 34 },
               whileInView: { opacity: 1, y: 0 },
               viewport: { once: true, amount: "some" },
               transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] }
@@ -1215,8 +1425,8 @@
               React.createElement(
                 "div",
                 null,
-                React.createElement("div", { className: "sec-tag" }, "THREE BOOKS FROM THE BAG"),
-                React.createElement("h2", { className: "sec-heading" }, "Select a Book to Reveal Chapters")
+                React.createElement("div", { className: "sec-kicker" }, "THREE CORE SUBJECTS"),
+                React.createElement("h2", { className: "sec-title" }, "Touch a Book to Reveal Chapters")
               ),
               React.createElement(
                 "span",
@@ -1224,38 +1434,38 @@
                   style: {
                     fontFamily: "var(--font-mono)",
                     fontSize: "0.74rem",
-                    color: activeSubjObj.color
+                    color: subjectObj.color
                   }
                 },
-                `SELECTED: ${activeSubjObj.fullTitle.toUpperCase()}`
+                `OPENED: ${subjectObj.title.toUpperCase()}`
               )
             ),
 
-            // 3 Colored Books (Maths, Science, Social Science)
+            // 3 Distinct Colored Subject Books
             React.createElement(
               "div",
-              { className: "books-3-grid" },
-              Object.values(SUBJECTS_DATA).map((book, bIdx) => {
-                const isActive = book.id === selectedSubject;
+              { className: "subjects-trio" },
+              Object.values(SYLLABUS_DATA).map((book, idx) => {
+                const isSelected = book.id === selectedSubject;
                 return React.createElement(
                   motion.button,
                   {
                     key: book.id,
-                    onClick: () => openBookAndRevealChapters(book.id),
-                    initial: { opacity: 0, y: 32, scale: 0.94 },
+                    onClick: () => selectSubjectBook(book.id),
+                    initial: { opacity: 0, y: 28, scale: 0.95 },
                     whileInView: { opacity: 1, y: 0, scale: 1 },
                     viewport: { once: true, amount: "some" },
-                    transition: { duration: 0.55, delay: bIdx * 0.1, ease: [0.22, 1, 0.36, 1] },
-                    whileHover: { y: -6, scale: 1.015 },
+                    transition: { duration: 0.5, delay: idx * 0.09 },
+                    whileHover: { y: -5, scale: 1.015 },
                     whileTap: { scale: 0.985 },
-                    className: "subject-book-btn",
+                    className: "subject-book-card",
                     style: {
-                      borderColor: isActive ? book.color : "rgba(255,255,255,0.08)",
-                      boxShadow: isActive ? `0 20px 44px ${book.glow}` : "none"
+                      borderColor: isSelected ? book.color : "rgba(255,255,255,0.08)",
+                      boxShadow: isSelected ? `0 20px 44px ${book.glow}` : "none"
                     }
                   },
                   React.createElement("span", {
-                    className: "left-color-bar",
+                    className: "spine-accent",
                     style: { background: book.color }
                   }),
                   React.createElement(
@@ -1268,11 +1478,11 @@
                         marginBottom: "8px"
                       }
                     },
-                    `CBSE CLASS 10 • ${book.chapters.length} CHAPTERS`
+                    book.code
                   ),
                   React.createElement(
                     "div",
-                    { style: { fontSize: "1.4rem", fontWeight: 800, marginBottom: "6px" } },
+                    { style: { fontSize: "1.38rem", fontWeight: 800, marginBottom: "6px" } },
                     book.title
                   ),
                   React.createElement(
@@ -1284,33 +1494,30 @@
               })
             ),
 
-            // Cinematic Unveil Reveal of Chapters When a Book is Touched/Clicked
+            // Unveil Reveal Transition for Chapters + Videos + Quiz
             React.createElement(
               AnimatePresence,
               { mode: "wait" },
               React.createElement(
                 motion.div,
                 {
-                  key: activeSubjObj.id,
+                  key: subjectObj.id,
                   initial: {
                     opacity: 0,
-                    y: 24,
-                    scale: 0.97,
+                    y: 22,
                     clipPath: "inset(0% 0% 100% 0% round 18px)"
                   },
                   animate: {
                     opacity: 1,
                     y: 0,
-                    scale: 1,
                     clipPath: "inset(0% 0% 0% 0% round 18px)"
                   },
                   exit: {
                     opacity: 0,
-                    y: -16,
-                    scale: 0.98,
+                    y: -14,
                     clipPath: "inset(0% 0% 100% 0% round 18px)"
                   },
-                  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+                  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
                 },
 
                 React.createElement(
@@ -1324,25 +1531,25 @@
                       marginBottom: "12px"
                     }
                   },
-                  `${activeSubjObj.fullTitle.toUpperCase()} CHAPTERS — TAP A CHAPTER FOR TOP 3 VIDEOS`
+                  `SELECT A ${subjectObj.title.toUpperCase()} CHAPTER`
                 ),
 
                 React.createElement(
                   "div",
-                  { className: "chapters-reveal-grid" },
-                  activeSubjObj.chapters.map((ch, idx) => {
-                    const isChActive = ch.id === activeChObj.id;
+                  { className: "chapters-grid" },
+                  subjectObj.chapters.map((ch, idx) => {
+                    const isChSelected = ch.id === chapterObj.id;
                     return React.createElement(
                       motion.div,
                       {
                         key: ch.id,
-                        initial: { opacity: 0, y: 16 },
+                        initial: { opacity: 0, y: 14 },
                         animate: { opacity: 1, y: 0 },
                         transition: { duration: 0.35, delay: idx * 0.06 },
                         whileHover: { scale: 1.02 },
                         whileTap: { scale: 0.99 },
                         onClick: () => setSelectedChapterId(ch.id),
-                        className: `chapter-tile ${isChActive ? "active-ch" : ""}`
+                        className: `chapter-card ${isChSelected ? "selected" : ""}`
                       },
                       React.createElement(
                         "div",
@@ -1353,7 +1560,7 @@
                             style: {
                               fontFamily: "var(--font-mono)",
                               fontSize: "0.68rem",
-                              color: isChActive ? "var(--gold)" : activeSubjObj.color,
+                              color: isChSelected ? "var(--gold)" : subjectObj.color,
                               marginBottom: "4px"
                             }
                           },
@@ -1375,25 +1582,25 @@
                             justifyContent: "space-between"
                           }
                         },
-                        React.createElement("span", null, "3 Videos"),
+                        React.createElement("span", null, "3 Lectures + Quiz"),
                         React.createElement("span", { style: { color: "var(--gold)" } }, "Open →")
                       )
                     );
                   })
                 ),
 
-                // Top 3 Curated Videos for Selected Chapter
+                // Chapter Workspace: 3 Curated Videos + Post-Watch Quiz
                 React.createElement(
                   AnimatePresence,
                   { mode: "wait" },
                   React.createElement(
                     motion.div,
                     {
-                      key: activeChObj.id,
-                      className: "videos-panel",
-                      initial: { opacity: 0, y: 16 },
+                      key: chapterObj.id,
+                      className: "chapter-workspace",
+                      initial: { opacity: 0, y: 14 },
                       animate: { opacity: 1, y: 0 },
-                      exit: { opacity: 0, y: -12 },
+                      exit: { opacity: 0, y: -10 },
                       transition: { duration: 0.35 }
                     },
                     React.createElement(
@@ -1419,12 +1626,12 @@
                               color: "var(--gold)"
                             }
                           },
-                          `${activeChObj.code} • TOP 3 CHAPTER VIDEOS`
+                          `${chapterObj.code} • TOP 3 CURATED LECTURES`
                         ),
                         React.createElement(
                           "h3",
-                          { style: { fontSize: "1.2rem", fontWeight: 800, marginTop: "2px" } },
-                          activeChObj.name
+                          { style: { fontSize: "1.22rem", fontWeight: 800, marginTop: "2px" } },
+                          chapterObj.name
                         )
                       ),
                       React.createElement(
@@ -1440,20 +1647,21 @@
                       )
                     ),
 
+                    // Top 3 Chapter Videos
                     React.createElement(
                       "div",
-                      { className: "videos-grid" },
-                      activeChObj.videos.map((vid, idx) => {
-                        const vKey = `${activeChObj.id}-${idx}`;
-                        const isWatched = watchedVideos.includes(vKey);
+                      { className: "videos-3-grid" },
+                      chapterObj.videos.map((vid, idx) => {
+                        const vidKey = `${chapterObj.id}-${idx}`;
+                        const done = watchedVideos.includes(vidKey);
                         return React.createElement(
                           motion.div,
                           {
-                            key: vKey,
-                            className: "vid-card",
-                            initial: { opacity: 0, y: 14 },
+                            key: vidKey,
+                            className: "video-item",
+                            initial: { opacity: 0, y: 12 },
                             animate: { opacity: 1, y: 0 },
-                            transition: { duration: 0.35, delay: idx * 0.08 }
+                            transition: { delay: idx * 0.08 }
                           },
                           React.createElement(
                             "a",
@@ -1461,29 +1669,29 @@
                               href: vid.url,
                               target: "_blank",
                               rel: "noopener noreferrer",
-                              className: "vid-thumb-box"
+                              className: "thumb-box"
                             },
                             React.createElement("img", {
                               src: `https://i.ytimg.com/vi/${vid.videoId}/hqdefault.jpg`,
                               alt: vid.title,
                               loading: "lazy"
                             }),
-                            React.createElement("span", { className: "vid-channel-tag" }, vid.channel)
+                            React.createElement("span", { className: "channel-pill" }, vid.channel)
                           ),
                           React.createElement(
                             "div",
-                            { className: "vid-card-body" },
+                            { className: "video-content" },
                             React.createElement(
                               "div",
                               {
                                 style: {
                                   fontFamily: "var(--font-mono)",
                                   fontSize: "0.66rem",
-                                  color: activeSubjObj.color,
+                                  color: subjectObj.color,
                                   fontWeight: 700
                                 }
                               },
-                              vid.label
+                              vid.tag
                             ),
                             React.createElement(
                               "div",
@@ -1492,26 +1700,119 @@
                             ),
                             React.createElement(
                               "div",
-                              { className: "vid-card-foot" },
+                              { className: "video-actions" },
                               React.createElement(
                                 "a",
                                 {
                                   href: vid.url,
                                   target: "_blank",
                                   rel: "noopener noreferrer",
-                                  className: "yt-link"
+                                  className: "watch-anchor"
                                 },
-                                "Watch Video ↗"
+                                "Watch Lecture ↗"
                               ),
                               React.createElement(
                                 "button",
                                 {
-                                  onClick: () => toggleVideoWatched(vKey),
-                                  className: `done-btn ${isWatched ? "watched" : ""}`
+                                  onClick: () => toggleWatched(vidKey),
+                                  className: `watch-check-btn ${done ? "done" : ""}`
                                 },
-                                isWatched ? "✓ Watched" : "Mark Watched"
+                                done ? "✓ Watched" : "Mark Watched"
                               )
                             )
+                          )
+                        );
+                      })
+                    ),
+
+                    // POST-WATCH CHAPTER QUIZ SECTION
+                    React.createElement(
+                      "div",
+                      { className: "quiz-panel" },
+                      React.createElement(
+                        "div",
+                        {
+                          style: {
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            flexWrap: "wrap",
+                            gap: "10px"
+                          }
+                        },
+                        React.createElement(
+                          "div",
+                          null,
+                          React.createElement(
+                            "div",
+                            {
+                              style: {
+                                fontFamily: "var(--font-mono)",
+                                fontSize: "0.7rem",
+                                color: "var(--gold)"
+                              }
+                            },
+                            "AFTER-WATCH PRACTICE QUIZ"
+                          ),
+                          React.createElement(
+                            "h4",
+                            { style: { fontSize: "1.06rem", fontWeight: 800, marginTop: "2px" } },
+                            `Check Your Understanding: ${chapterObj.name}`
+                          )
+                        ),
+                        quizSubmitted[chapterObj.id]
+                          ? React.createElement(
+                              "button",
+                              {
+                                className: "btn-ghost",
+                                style: { padding: "7px 14px", fontSize: "0.78rem" },
+                                onClick: () => resetChapterQuiz(chapterObj.id)
+                              },
+                              "Retake Quiz"
+                            )
+                          : React.createElement(
+                              "button",
+                              {
+                                className: "btn-gold",
+                                style: { padding: "8px 16px", fontSize: "0.8rem" },
+                                onClick: () => submitChapterQuiz(chapterObj.id)
+                              },
+                              "Submit Quiz"
+                            )
+                      ),
+
+                      chapterObj.quiz.map((qObj, qIdx) => {
+                        const selectedOpt = quizAnswers[`${chapterObj.id}-${qIdx}`];
+                        const isSubmitted = Boolean(quizSubmitted[chapterObj.id]);
+                        return React.createElement(
+                          "div",
+                          { key: qIdx, className: "quiz-q-block" },
+                          React.createElement(
+                            "div",
+                            { style: { fontSize: "0.9rem", fontWeight: 700 } },
+                            `Q${qIdx + 1}. ${qObj.q}`
+                          ),
+                          React.createElement(
+                            "div",
+                            { className: "quiz-options-grid" },
+                            qObj.options.map((optText, oIdx) => {
+                              let cls = "quiz-opt-btn";
+                              if (isSubmitted) {
+                                if (oIdx === qObj.answer) cls += " correct";
+                                else if (selectedOpt === oIdx) cls += " wrong";
+                              } else if (selectedOpt === oIdx) {
+                                cls += " picked";
+                              }
+                              return React.createElement(
+                                "button",
+                                {
+                                  key: oIdx,
+                                  className: cls,
+                                  onClick: () => pickQuizOption(chapterObj.id, qIdx, oIdx)
+                                },
+                                optText
+                              );
+                            })
                           )
                         );
                       })
@@ -1522,10 +1823,10 @@
             )
           ),
 
-          // SECTION 3: MORE FEATURES COMING SOON (21ST.DEV SPOTLIGHT CARDS + SCROLL REVEAL)
+          // ROADMAP SECTION (21st.dev Spotlight Cards)
           React.createElement(
             "section",
-            { id: "more-features", className: "section-block" },
+            { id: "roadmap-features", className: "section-block" },
             React.createElement(
               motion.div,
               {
@@ -1538,100 +1839,87 @@
               React.createElement(
                 "div",
                 null,
-                React.createElement("div", { className: "sec-tag" }, "CLASS 10 ROADMAP"),
-                React.createElement("h2", { className: "sec-heading" }, "More Features Coming Soon")
-              ),
-              React.createElement(
-                "span",
-                {
-                  style: {
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.74rem",
-                    color: "var(--text-secondary)"
-                  }
-                },
-                "VIDEOS ACTIVE • MORE UPDATING SOON"
+                React.createElement("div", { className: "sec-kicker" }, "PLATFORM MODULES"),
+                React.createElement("h2", { className: "sec-title" }, "Active Tools & Upcoming Releases")
               )
             ),
 
             React.createElement(
               "div",
-              { className: "spotlight-cards-grid" },
+              { className: "spotlight-grid" },
               React.createElement(
                 SpotlightCard,
                 {
                   index: 0,
                   onClick: () =>
-                    document.getElementById("books-stage")?.scrollIntoView({ behavior: "smooth" })
+                    document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" })
                 },
-                React.createElement("span", { className: "pill-live" }, "● LIVE NOW"),
+                React.createElement("span", { className: "tag-live" }, "● LIVE NOW"),
                 React.createElement(
                   "h3",
                   { style: { fontSize: "1.1rem", fontWeight: 800, marginBottom: "8px" } },
-                  "Chapter Video Section"
+                  "Top 3 Chapter Videos"
                 ),
                 React.createElement(
                   "p",
                   { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Chapter-wise curated videos across Class 10 Maths, Science & Social Science."
-                )
-              ),
-              React.createElement(
-                SpotlightCard,
-                { index: 1 },
-                React.createElement("span", { className: "pill-soon" }, "COMING SOON"),
-                React.createElement(
-                  "h3",
-                  { style: { fontSize: "1.1rem", fontWeight: 800, marginBottom: "8px" } },
-                  "Sample Papers"
-                ),
-                React.createElement(
-                  "p",
-                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "CBSE Class 10 sample papers and practice sets coming soon."
-                )
-              ),
-              React.createElement(
-                SpotlightCard,
-                { index: 2 },
-                React.createElement("span", { className: "pill-soon" }, "COMING SOON"),
-                React.createElement(
-                  "h3",
-                  { style: { fontSize: "1.1rem", fontWeight: 800, marginBottom: "8px" } },
-                  "PDF Notes"
-                ),
-                React.createElement(
-                  "p",
-                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Chapter revision PDF notes and formula sheets coming soon."
+                  "Curated lectures across Class 10 Maths, Science & Social Science with zero fake ratings."
                 )
               ),
               React.createElement(
                 SpotlightCard,
                 {
-                  index: 3,
-                  onClick: () => {
-                    setModalMode(user ? "dashboard" : "login");
-                    setModalOpen(true);
-                  }
+                  index: 1,
+                  onClick: () =>
+                    document.getElementById("books-vault")?.scrollIntoView({ behavior: "smooth" })
                 },
-                React.createElement("span", { className: "pill-soon" }, "QUIZZES SOON • DASHBOARD READY"),
+                React.createElement("span", { className: "tag-live" }, "● LIVE NOW"),
                 React.createElement(
                   "h3",
                   { style: { fontSize: "1.1rem", fontWeight: 800, marginBottom: "8px" } },
-                  "Quizzes & Growth"
+                  "After-Watch Quizzes"
                 ),
                 React.createElement(
                   "p",
                   { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
-                  "Track your real lecture completion in your dashboard; chapter quizzes coming soon."
+                  "Test your concepts immediately after watching a chapter lecture and save your score."
+                )
+              ),
+              React.createElement(
+                SpotlightCard,
+                { index: 2 },
+                React.createElement("span", { className: "tag-soon" }, "COMING SOON"),
+                React.createElement(
+                  "h3",
+                  { style: { fontSize: "1.1rem", fontWeight: 800, marginBottom: "8px" } },
+                  "CBSE Sample Papers"
+                ),
+                React.createElement(
+                  "p",
+                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
+                  "Board-pattern sample papers and timed mock tests arriving in the next update."
+                )
+              ),
+              React.createElement(
+                SpotlightCard,
+                { index: 3 },
+                React.createElement("span", { className: "tag-soon" }, "COMING SOON"),
+                React.createElement(
+                  "h3",
+                  { style: { fontSize: "1.1rem", fontWeight: 800, marginBottom: "8px" } },
+                  "Revision PDF Notes"
+                ),
+                React.createElement(
+                  "p",
+                  { style: { fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 } },
+                  "Formula sheets and concise chapter PDF notes coming soon."
                 )
               )
             )
           )
         ),
 
-        // LOGIN / SIGN UP & PERSONAL GROWTH DASHBOARD MODAL (NO FAKE RANKS)
+        // LOGIN / SIGN UP & GENUINE STANDING DASHBOARD MODAL
         React.createElement(
           AnimatePresence,
           null,
@@ -1639,7 +1927,7 @@
             React.createElement(
               motion.div,
               {
-                className: "modal-overlay",
+                className: "modal-backdrop",
                 initial: { opacity: 0 },
                 animate: { opacity: 1 },
                 exit: { opacity: 0 },
@@ -1650,7 +1938,7 @@
               React.createElement(
                 motion.div,
                 {
-                  className: "modal-box",
+                  className: "modal-sheet",
                   initial: { opacity: 0, scale: 0.94, y: 16 },
                   animate: { opacity: 1, scale: 1, y: 0 },
                   exit: { opacity: 0, scale: 0.94, y: 16 }
@@ -1677,16 +1965,16 @@
                           color: "var(--gold)"
                         }
                       },
-                      "STUDYVERSE CLASS 10"
+                      "STUDYVERSE CLASS 10 PORTAL"
                     ),
                     React.createElement(
                       "h3",
                       { style: { fontSize: "1.32rem", fontWeight: 800 } },
-                      modalMode === "dashboard" && user
-                        ? "Growth Dashboard"
+                      modalMode === "dashboard" && studentAccount
+                        ? "Standing & Growth Dashboard"
                         : modalMode === "signup"
-                        ? "Sign Up"
-                        : "Login"
+                        ? "Create Student Account"
+                        : "Student Login"
                     )
                   ),
                   React.createElement(
@@ -1707,7 +1995,7 @@
                   )
                 ),
 
-                modalMode === "dashboard" && user
+                modalMode === "dashboard" && studentAccount
                   ? React.createElement(
                       "div",
                       null,
@@ -1719,46 +2007,78 @@
                             borderRadius: "14px",
                             background: "rgba(255,255,255,0.03)",
                             border: "1px solid rgba(255,255,255,0.08)",
-                            marginBottom: "18px"
+                            marginBottom: "16px"
                           }
                         },
-                        React.createElement("div", { style: { fontWeight: 800 } }, user.name),
+                        React.createElement("div", { style: { fontWeight: 800 } }, studentAccount.name),
                         React.createElement(
                           "div",
                           { style: { fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "2px" } },
-                          `${user.email} • ${user.goal}`
-                        )
-                      ),
-                      React.createElement(
-                        "div",
-                        { style: { marginBottom: "16px" } },
+                          `${studentAccount.email} • ${studentAccount.target}`
+                        ),
                         React.createElement(
                           "div",
                           {
                             style: {
-                              display: "flex",
-                              justifyContent: "space-between",
-                              fontSize: "0.84rem",
-                              fontWeight: 700
+                              marginTop: "8px",
+                              fontFamily: "var(--font-mono)",
+                              fontSize: "0.74rem",
+                              color: "var(--gold)"
                             }
                           },
-                          React.createElement("span", null, "Watched Chapter Videos"),
+                          `Current Standing: ${standingTier}`
+                        )
+                      ),
+
+                      React.createElement(
+                        "div",
+                        { className: "stat-tiles" },
+                        React.createElement(
+                          "div",
+                          { className: "stat-box" },
                           React.createElement(
-                            "span",
-                            { style: { color: "var(--gold)" } },
-                            `${watchedVideos.length}/${totalVids} (${totalPct}%)`
+                            "div",
+                            { style: { fontSize: "1.25rem", fontWeight: 800, color: "var(--gold)" } },
+                            masteryPoints
+                          ),
+                          React.createElement(
+                            "div",
+                            { style: { fontSize: "0.72rem", color: "var(--text-secondary)" } },
+                            "Mastery XP"
                           )
                         ),
                         React.createElement(
                           "div",
-                          { className: "bar-bg" },
-                          React.createElement("div", {
-                            className: "bar-fill",
-                            style: { width: `${totalPct}%`, background: "var(--gold)" }
-                          })
+                          { className: "stat-box" },
+                          React.createElement(
+                            "div",
+                            { style: { fontSize: "1.25rem", fontWeight: 800 } },
+                            `${watchedVideos.length}/${totalVideos}`
+                          ),
+                          React.createElement(
+                            "div",
+                            { style: { fontSize: "0.72rem", color: "var(--text-secondary)" } },
+                            "Videos Watched"
+                          )
+                        ),
+                        React.createElement(
+                          "div",
+                          { className: "stat-box" },
+                          React.createElement(
+                            "div",
+                            { style: { fontSize: "1.25rem", fontWeight: 800, color: "#34d399" } },
+                            `${correctQuizCount}/${totalQuizQuestions}`
+                          ),
+                          React.createElement(
+                            "div",
+                            { style: { fontSize: "0.72rem", color: "var(--text-secondary)" } },
+                            "Quiz Score"
+                          )
                         )
                       ),
-                      Object.values(SUBJECTS_DATA).map((s) => {
+
+                      // Subject-wise Real Progress Bars
+                      Object.values(SYLLABUS_DATA).map((s) => {
                         const sTot = s.chapters.length * 3;
                         const sDone = watchedVideos.filter((k) =>
                           s.chapters.some((c) => k.startsWith(`${c.id}-`))
@@ -1777,23 +2097,37 @@
                                 color: "var(--text-secondary)"
                               }
                             },
-                            React.createElement("span", null, s.fullTitle),
-                            React.createElement("span", null, `${sDone}/${sTot}`)
+                            React.createElement("span", null, s.title),
+                            React.createElement("span", null, `${sDone}/${sTot} lectures`)
                           ),
                           React.createElement(
                             "div",
-                            { className: "bar-bg" },
+                            { className: "progress-bg" },
                             React.createElement("div", {
-                              className: "bar-fill",
+                              className: "progress-fill",
                               style: { width: `${sPct}%`, background: s.color }
                             })
                           )
                         );
                       }),
+
+                      React.createElement(
+                        "p",
+                        {
+                          style: {
+                            fontSize: "0.76rem",
+                            color: "var(--text-secondary)",
+                            marginTop: "14px",
+                            lineHeight: 1.5
+                          }
+                        },
+                        "All metrics on this dashboard are calculated strictly from your own watched lectures and submitted chapter quizzes."
+                      ),
+
                       React.createElement(
                         "button",
                         {
-                          onClick: handleLogout,
+                          onClick: handleSignOut,
                           style: {
                             marginTop: "14px",
                             background: "transparent",
@@ -1805,7 +2139,7 @@
                             cursor: "pointer"
                           }
                         },
-                        "Logout"
+                        "Sign Out"
                       )
                     )
                   : React.createElement(
@@ -1818,15 +2152,15 @@
                           React.createElement(
                             "label",
                             { style: { fontSize: "0.78rem", color: "var(--text-secondary)" } },
-                            "Name"
+                            "Student Name"
                           ),
                           React.createElement("input", {
                             type: "text",
                             required: true,
-                            placeholder: "Your name",
-                            value: nameVal,
-                            onChange: (e) => setNameVal(e.target.value),
-                            className: "modal-input"
+                            placeholder: "Enter your name",
+                            value: nameInput,
+                            onChange: (e) => setNameInput(e.target.value),
+                            className: "text-input"
                           })
                         ),
                       React.createElement(
@@ -1838,9 +2172,9 @@
                         type: "email",
                         required: true,
                         placeholder: "you@example.com",
-                        value: emailVal,
-                        onChange: (e) => setEmailVal(e.target.value),
-                        className: "modal-input"
+                        value: emailInput,
+                        onChange: (e) => setEmailInput(e.target.value),
+                        className: "text-input"
                       }),
                       modalMode === "signup" &&
                         React.createElement(
@@ -1849,23 +2183,23 @@
                           React.createElement(
                             "label",
                             { style: { fontSize: "0.78rem", color: "var(--text-secondary)" } },
-                            "Target"
+                            "Academic Goal"
                           ),
                           React.createElement("input", {
                             type: "text",
-                            value: goalVal,
-                            onChange: (e) => setGoalVal(e.target.value),
-                            className: "modal-input"
+                            value: targetInput,
+                            onChange: (e) => setTargetInput(e.target.value),
+                            className: "text-input"
                           })
                         ),
                       React.createElement(
                         "button",
                         {
                           type: "submit",
-                          className: "scroll-cue-btn",
-                          style: { width: "100%", padding: "13px" }
+                          className: "btn-gold",
+                          style: { width: "100%", justifyContent: "center" }
                         },
-                        modalMode === "signup" ? "Sign Up & Open Dashboard" : "Login to Dashboard"
+                        modalMode === "signup" ? "Create Account & Open Dashboard" : "Login to Dashboard"
                       ),
                       React.createElement(
                         "div",
@@ -1877,7 +2211,7 @@
                             color: "var(--text-secondary)"
                           }
                         },
-                        modalMode === "signup" ? "Already registered? " : "New student? ",
+                        modalMode === "signup" ? "Already have an account? " : "New student? ",
                         React.createElement(
                           "button",
                           {
@@ -1904,10 +2238,10 @@
     createRoot(document.getElementById("root")).render(React.createElement(StudyVerseApp));
 
     // =========================================================================
-    // THREE.JS: CENTER BAG + 3 COLORED BOOKS EMERGING ON SCROLL (CLEAN STAGE)
+    // THREE.JS: 3D INTERACTIVE CENTER BAG + 3 EMERGING SUBJECT BOOKS
     // =========================================================================
-    (function initMiddleBagStage() {
-      const canvas = document.getElementById("three-center-stage");
+    (function initThreeCenterStage() {
+      const canvas = document.getElementById("three-stage");
       if (!canvas || !window.THREE) return;
 
       const scene = new THREE.Scene();
@@ -1920,15 +2254,14 @@
 
       scene.add(new THREE.AmbientLight(0xffffff, 0.72));
 
-      const goldLight = new THREE.DirectionalLight(0xffe69c, 1.45);
-      goldLight.position.set(4, 7, 8);
-      scene.add(goldLight);
+      const keyLight = new THREE.DirectionalLight(0xffe69c, 1.45);
+      keyLight.position.set(4, 7, 8);
+      scene.add(keyLight);
 
       const rimLight = new THREE.DirectionalLight(0x60a5fa, 0.8);
       rimLight.position.set(-5, 2, -4);
       scene.add(rimLight);
 
-      // Center Bag Group right in the middle of the stage
       const centerGroup = new THREE.Group();
       centerGroup.position.set(0, -0.35, 0);
       scene.add(centerGroup);
@@ -1968,7 +2301,7 @@
       topHandle.position.set(0, 1.18, -0.15);
       centerGroup.add(topHandle);
 
-      function makeBook(hex, startX) {
+      function buildSubjectBook(hex, startX) {
         const g = new THREE.Group();
         const cover = new THREE.MeshStandardMaterial({ color: hex, roughness: 0.3, metalness: 0.22 });
         const page = new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.75 });
@@ -1996,9 +2329,9 @@
       }
 
       const books = {
-        maths: makeBook(0x3b82f6, -0.52),
-        science: makeBook(0x10b981, 0),
-        sst: makeBook(0xf59e0b, 0.52)
+        maths: buildSubjectBook(0x3b82f6, -0.52),
+        science: buildSubjectBook(0x10b981, 0),
+        sst: buildSubjectBook(0xf59e0b, 0.52)
       };
 
       Object.values(books).forEach((b) => centerGroup.add(b));
@@ -2018,11 +2351,9 @@
         centerGroup.scale.setScalar(isSmall ? 0.68 : 0.95);
         centerGroup.position.y = THREE.MathUtils.lerp(-0.35, 0.25, Math.min(s * 1.4, 1));
 
-        // Gentle centered sway + scroll rotation
         centerGroup.rotation.y = Math.sin(t * 0.45) * 0.16 + s * 0.45;
         centerGroup.rotation.x = Math.cos(t * 0.35) * 0.04;
 
-        // Scroll brings the 3 books up and out from the center bag
         const emerge = Math.min(s * 2.5, 1);
 
         const bookTargets = [
